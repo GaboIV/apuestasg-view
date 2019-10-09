@@ -1,0 +1,42 @@
+<app-menu-caballos></app-menu-caballos>
+
+<div class="planilla_hrs">
+    <div class="caption_hrs">Agregar una carrera</div>
+    <div class="c_planilla_hrs">
+
+        <div class="codigo_planilla">Código:</div>
+        <input [(ngModel)]="carrera.codigo" type="text" name="cod_car" class="ipt_planilla_hrs" id="codigo_car" readonly>
+
+        <div class="codigo_planilla">Número:</div>
+        <input type="text" name="general_car" value="100" class="date_planilla anyo cod_hrs" style="border-right: 1px solid #cfcfcf; " id="nro_gral">
+        <input type="text" name="numero_car" [(ngModel)]="carrera.numero" id="numero_car" class="date_planilla cod_hrs" id="nro_carrera">
+        <input type="text" name="valida_hrs" [(ngModel)]="carrera.valida" class="date_planilla cod_hrs" style="border-right: none;" id="nro_valida">
+        <div class="codigo_planilla">Descripción:</div><textarea [(ngModel)]="carrera.descripcion" name="desc_car" class="ipt_planilla_hrs" id="desc_car" style="margin-bottom: 5px; "></textarea>
+        <div class="codigo_planilla">Título:</div>
+        <input type="text" [(ngModel)]="carrera.titulo" name="title_car" class="ipt_planilla_hrs" id="title_car">
+        <div class="codigo_planilla">Participantes:</div>
+        <input type="number" [(ngModel)]="carrera.inscritos" name="ins_car" class="ipt_planilla_hrs" id="ins_carr">
+        <div class="codigo_planilla">Hipódromo:</div>
+        <select name="hipodromo_car" [(ngModel)]="carrera.id_hipodromo" id="hipodromo_car" class="ipt_planilla_hrs hipodromo_car">
+          <option *ngFor="let hipo of hipodromos" value="{{hipo.id_hipodromo}}">{{ hipo.descripcion }} </option>
+				</select>
+        <div class="codigo_planilla">Distancia:</div><input [(ngModel)]="carrera.distancia" type="text" name="dis_hrs" class="date_planilla unida_hrs"><select name="med_hrs" class="date_planilla anyo">
+					<option value="1">mts.</option>					
+				</select>
+        <div class="codigo_planilla">Fecha:</div><input id="fechaDia" value="{{ hoy | date:'dd' }}" type="text" name="dia_hrs" class="date_planilla cod_hrs"><input type="text" id="fechaMes" name="mes_hrs" class="date_planilla cod_hrs" value="{{ hoy | date:'MM' }}"><input type="text"
+            id="fechaAnio" value="{{ hoy | date:'yyyy' }}" name="anio_hrs" class="date_planilla anyo cod_hrs">
+        <div class="codigo_planilla">Hora:</div><input type="text" id="fechaHora" name="hor_hrs" class="date_planilla cod_hrs" value="{{ hoy | date:'h' }}"><input type="text" name="min_hrs" id="fechaMinuto" class="date_planilla cod_hrs" value="{{ hoy | date:'mm' }}">
+        <select name="pm_hrs" class="date_planilla anyo hipodromo_car" id="fechaAMP">
+					<option value="PM">P.M.</option>
+					<option value="AM">A.M.</option>
+				</select>
+        <div class="codigo_planilla ">Superficie:</div><select [(ngModel)]="carrera.superficie" name="sup_hrs " class="ipt_planilla_hrs ">
+					<option value="1">Arena</option>
+					<option value="2">Grama</option>
+				</select>
+    </div>
+    <div class="botones_hrs ">
+        <div class="cancelar_hrs btn_hrs " id="can_hrs ">Cancelar</div>
+        <div class="aceptar_hrs btn_hrs " id="acp_hrs " (click)="enviarDatos( carrera )">Aceptar</div>
+    </div>
+</div>

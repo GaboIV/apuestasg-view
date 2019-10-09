@@ -1,0 +1,64 @@
+<app-menu-caballos></app-menu-caballos>
+<div>
+    <div class='cada_hrs pan_hrs' style="text-align: center;">
+        <input type="text" placeholder="Buscar un ejemplar" (keyup)="buscarCaballo( $event.target.value )" class="inpiut"><br><br>
+        <div class="upd_act" routerLink="/nuevoCaballo">
+            <i class="far fa-plus-square" style="font-size: 3em;"></i><br>Agregar Caballo
+        </div>
+        <div class="upd_act" (click)="cargarCaballos()">
+            <i id="spinact" class="fas fa-sync" style="font-size: 3em;"></i><br>Actualizar lista
+        </div>
+
+    </div>
+
+    <ng-container *ngIf="caballio?.length === 0">
+        <div class='cada_hrs' *ngFor="let caballo of caballos; let i = index">
+            <div class='name_hrs' contenteditable="true" [textContent]="caballo.nombre" style="width: 100%;" id="N_{{caballo.id_caballo}}" (input)="caballo.nombre=$event.target.textContent" (blur)="actualizarCaballo( caballo )">{{caballo.nombre}}</div><br>
+            <div class='des_hrs'>{{caballo.sexo}} de {{caballo.edad}}</div>
+            <div class='fecha_hrs' contenteditable="true" [textContent]="caballo.nacimiento" (input)="caballo.nacimiento=$event.target.textContent" (blur)="actualizarCaballo( caballo )">{{caballo.nacimiento}}</div>
+            <div class='d_padre_hrs'>Padre: </div>
+            <div class='padre_hrs' contenteditable="true" (keyup)="buscarPadrillos( $event.target.textContent, caballo.id_caballo, i )" id="pd-{{caballo.id_caballo}}" tabindex="0" (blur)="revisarPadre( $event.target.textContent, caballo )"><span *ngIf="caballo.padre?.nombre !== undefined">{{caballo.padre.nombre}}</span></div>
+            <div *ngIf="ins_pad === caballo.id_caballo" class="busc_div bpad" id="bpad-{{caballo.id_caballo}}" style="display: none; margin: 0px; margin-left: 30%; width: 70%;">
+                <div *ngFor="let pads of padrillosui | slice: 0:12" (click)="selPad(caballo, pads, caballo.id_caballo)">{{pads.nombre}}</div>
+            </div>
+            <div class='d_padre_hrs'>Madre: </div>
+            <div class='padre_hrs' contenteditable="true" (keyup)="buscarMadrillas( $event.target.textContent, caballo.id_caballo, i )" id="md-{{caballo.id_caballo}}" tabindex="0" (blur)="revisarMadre( $event.target.textContent, caballo )"><span *ngIf="caballo.madre?.nombre !== undefined">{{caballo.madre.nombre}}</span></div>
+            <div *ngIf="ins_mad === caballo.id_caballo" class="busc_div bmad" id="bmad-{{caballo.id_caballo}}" style="display:; margin: 0px; margin-left: 30%; width: 70%;">
+                <div *ngFor="let mads of madrillasui | slice: 0:12" (click)="selMad(caballo, mads, caballo.id_caballo)">{{mads.nombre}}</div>
+            </div>
+            <div class='d_padre_hrs'>Haras: </div>
+            <div class='padre_hrs' contenteditable="true" (keyup)="buscarHaras( $event.target.textContent, caballo.id_caballo, i )" id="hr-{{caballo.id_caballo}}"><span *ngIf="caballo.id_haras?.descripcion !== undefined">{{caballo.id_haras.descripcion}}</span></div>
+            <div *ngIf="ins_har === caballo.id_caballo" class="busc_div bhar" id="bhar-{{caballo.id_caballo}}" style="display: none; margin: 0px; margin-left: 30%; width: 70%;">
+                <div *ngFor="let hars of harass | slice: 0:12" (click)="selHar(caballo, hars, caballo.id_caballo)">{{hars.descripcion}}</div>
+            </div>
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="caballio?.length > 0">
+        <div class='cada_hrs' *ngFor="let caballo of caballio; let i = index">
+            <div class='name_hrs' contenteditable="true" [textContent]="caballo.nombre" style="width: 100%;" id="N_{{caballo.id_caballo}}" (input)="caballo.nombre=$event.target.textContent" (blur)="actualizarCaballo( caballo )">{{caballo.nombre}}</div><br>
+            <div class='des_hrs'>{{caballo.sexo}} de {{caballo.edad}}</div>
+            <div class='fecha_hrs' contenteditable="true" [textContent]="caballo.nacimiento" (input)="caballo.nacimiento=$event.target.textContent" (blur)="actualizarCaballo( caballo )">{{caballo.nacimiento}}</div>
+            <div class='d_padre_hrs'>Padre: </div>
+            <div class='padre_hrs' contenteditable="true" (keyup)="buscarPadrillos( $event.target.textContent, caballo.id_caballo, i )" tabindex="0" (blur)="revisarPadre( $event.target.textContent, caballo )" id="pd-{{caballo.id_caballo}}"><span *ngIf="caballo.padre?.nombre !== undefined">{{caballo.padre.nombre}}</span></div>
+            <div *ngIf="ins_pad === caballo.id_caballo" class="busc_div bpad" id="bpad-{{caballo.id_caballo}}" style="display: none; margin: 0px; margin-left: 30%; width: 70%;">
+                <div *ngFor="let pads of padrillosui | slice: 0:12" (click)="selPad(caballo, pads, caballo.id_caballo)">{{pads.nombre}}</div>
+            </div>
+            <div class='d_padre_hrs'>Madre: </div>
+            <div class='padre_hrs' contenteditable="true" (keyup)="buscarMadrillas( $event.target.textContent, caballo.id_caballo, i )" tabindex="1" (blur)="revisarMadre( $event.target.textContent, caballo )" id="md-{{caballo.id_caballo}}"><span *ngIf="caballo.madre?.nombre !== undefined">{{caballo.madre.nombre}}</span></div>
+            <div *ngIf="ins_mad === caballo.id_caballo" class="busc_div bmad" id="bmad-{{caballo.id_caballo}}" style="display:; margin: 0px; margin-left: 30%; width: 70%;">
+                <div *ngFor="let mads of madrillasui | slice: 0:12" (click)="selMad(caballo, mads, caballo.id_caballo)">{{mads.nombre}}</div>
+            </div>
+            <div class='d_padre_hrs'>Haras: </div>
+            <div class='padre_hrs' contenteditable="true" (keyup)="buscarHaras( $event.target.textContent, caballo.id_caballo, i )" id="hr-{{caballo.id_caballo}}"><span *ngIf="caballo.id_haras?.descripcion !== undefined">{{caballo.id_haras.descripcion}}</span></div>
+            <div *ngIf="ins_har === caballo.id_caballo" class="busc_div bhar" id="bhar-{{caballo.id_caballo}}" style="margin: 0px; margin-left: 30%; width: 70%;">
+                <div *ngFor="let hars of harass | slice: 0:12" (click)="selHar(caballo, hars, caballo.id_caballo)">{{hars.descripcion}}</div>
+            </div>
+        </div>
+    </ng-container>
+
+
+
+
+
+</div>

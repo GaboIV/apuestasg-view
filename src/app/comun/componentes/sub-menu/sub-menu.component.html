@@ -1,0 +1,32 @@
+<div class="main_nav">
+
+    <div>
+
+    </div>
+
+    <div routerLink="/importantes/21" style="cursor: pointer;" class="ico_now">
+        <i class="fa fa-home" aria-hidden="true"></i>
+        <span id="toolOpt2" style="font-size: 0.8em; margin-left: 10px;">Ir a Página Principal</span>
+    </div>
+
+
+
+    <div class="other_icos">
+        <div id="toolOpt"></div>
+
+        <!-- <div id="resultados" routerLink="/resultados" class="tooloption" data-role="Ir a Resultados"><i class="fas fa-flag-checkered"></i></div>
+        <div id="caballos" routerLink="/caballos" class="tooloption" data-role="Ir a <b>Caballos</b>"><i class="fas fa-chess-knight"></i></div>
+        <div routerLink="/partidos" id="partidos" class="tooloption" data-role="Ir a <b>Partidos</b>"><i class="fab fa-patreon"></i></div>
+        <div routerLink="/actualizaciones" id="actualizaciones" class="tooloption" data-role="Ir a <b>Actualizaciones</b>"><i class="fas fa-redo"></i></div>
+        <div routerLink="/tipoApuestas" id="vw_tipo_a" class="tooloption" data-role="Ir a <b>Tipos de Apuestas</b>"><i class="fas fa-list-ul"></i></div>
+        <div routerLink="/nacionalidades" id="vw_paises" class="tooloption" data-role="Ir a <b>Paises</b>"><i class="far fa-flag"></i></div>
+        <div routerLink="/ligas" id="vw_ligas" class="tooloption" data-role="Ir a <b>Ligas</b>"><i class="fas fa-trophy"></i></div>
+        <div routerLink="/equipos" class="tooloption" data-role="Ir a <b>Equipos</b>"><i class="fab fa-first-order"></i></div>
+        <div class="tooloption" data-role="Ir a <b>Estadísiticas</b>"><i class="fas fa-percent"></i></div>
+        <div class="tooloption" data-role="Ir a <b>Bancos</b>"><i class="fa fa-university" aria-hidden="true"></i></div>
+        <div class="tooloption" data-role="Ir a <b>Noticias</b>"><i class="far fa-newspaper"></i></div> -->
+
+        <div *ngFor="let menu of _inicioSesion.menu" (mouseout)="mostrarAlert('')" (mouseover)="mostrarAlert( menu.data )" routerLink="/{{menu.link}}" class='tooloption'><i class='{{menu.icono}}'></i></div>
+    </div>
+
+</div>

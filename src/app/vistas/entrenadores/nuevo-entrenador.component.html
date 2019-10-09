@@ -1,0 +1,22 @@
+<app-menu-caballos></app-menu-caballos>
+
+<div class="planilla_hrs">
+    <div class="caption_hrs">Agregar un entrenador</div>
+    <div class="c_planilla_hrs">
+        <form name="invfrm" id="invfrm" action="" method="post" enctype="multipart/form-data">
+            <div class="codigo_planilla">Nombre:</div><input type="text" id="name_hrs" name="name_hrs" class="ipt_planilla_hrs" style="text-transform: capitalize;" [(ngModel)]="entrenador.nombre">
+
+            <div class="codigo_planilla">Nacionalidad:</div>
+            <select name="nacionalidad" id="nacionalidad" class="ipt_planilla_hrs" [(ngModel)]="entrenador.nacionalidad">
+                <option value="231">Venezuela</option>
+            </select>
+
+            <div class="mensajeError" *ngIf="mostrarError === true">Entrenador ya existente</div>
+
+        </form>
+    </div>
+    <div class="botones_hrs">
+        <div class="cancelar_hrs btn_hrs" id="can_hrs" [routerLink]="['/entrenadores']">Cancelar</div>
+        <div class="aceptar_hrs btn_hrs" id="acp_hrs" (click)="enviarDatos()">Aceptar</div>
+    </div>
+</div>

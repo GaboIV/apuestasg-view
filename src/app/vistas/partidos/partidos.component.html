@@ -1,0 +1,106 @@
+<div class="equipos">
+    <div class="buscador_it_001">
+        <input #caja type="text" name="search_eq" placeholder="Buscar un equipo" class="search_eq" (change)="cargarPartidos('1', $event.target.value)">
+        <div class="add_lig" routerLink="/agregarPartido">Crear un partido</div>
+        <select name="seleccionDeporte" id="seleccionDeporte" (change)="seleccionDeporte($event.target.value)" class="seleccional">
+            <option value="0">Seleccione un deporte</option>
+            <option *ngFor="let deporte of deportes " value={{deporte.id_categoria}}>{{ deporte.descripcion }}</option>
+        </select>
+        <ng-container *ngIf="ligas?.length > 0 && ligas[0].nombre_liga">
+            <select name="seleccionLiga" id="seleccionLiga" (change)="seleccionLiga($event.target.value)" class="seleccional" style="margin-left: 10px;">
+                    <option value="0">Seleccione una liga</option>
+                    <option *ngFor="let liga of ligas " value={{liga.id_liga}}>{{ liga.nombre_liga }}</option>      
+                </select>
+        </ng-container>
+
+        <ng-container *ngIf="ligas?.length > 0 && ligas[0].descripcion">
+            <select name="seleccionHipodromo" id="seleccionHipodromo" (change)="seleccionHipodromo($event.target.value)" *ngIf="ligas?.length > 0" class="seleccional" style="margin-left: 10px;">           
+                    <option value="0">Seleccione un hipódromo</option>
+                    <option *ngFor="let liga of ligas " value={{liga.id_hipodromo}}>{{ liga.descripcion }}</option>  
+                </select>
+        </ng-container>
+    </div>
+
+    <br>
+    <div class=" ">
+        <div class="normal_table" cellspacing="0" border="0">
+            <div class="thead_nt">
+                <div class="tr_th_nt trthnt_id">
+                    ID
+                </div>
+                <div class="tr_th_nt trthnt_name">
+                    Equipos
+                </div>
+                <div class="tr_th_nt trthnt_nombre_wh">
+                    Datos
+                </div>
+                <div class="tr_th_nt trthnt_ligas">
+                    Fecha
+                </div>
+                <div class="tr_th_nt trthnt_acronimo">
+                    Cuotas
+                </div>
+                <div class="tr_th_nt trthnt_imagen">
+                    Imágen
+                </div>
+                <div class="tr_th_nt trthnt_nacionalidad">
+                    Texto
+                </div>
+                <div class="tr_th_nt trthnt_ciudad">
+                    Puntos
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <table width="100%" id="tabla_equipos">
+        <tbody>
+            <tr class="par_th_nt" *ngFor="let partido of partidos ">
+                <td width="5%" style="cursor: pointer" align="center" [routerLink]="['/partido', partido.id_partido ]">{{ partido.id_partido }}</td>
+                <td width="15%">
+                    <div class='cada_liga_nt' *ngFor="let equipo of partido.equipos ">{{equipo.nombre}}</div>
+                </td>
+                <td contenteditable="false" width="15%" class="ch_dv_nt">
+                    <div class='cada_liga_nt'>{{ partido.fecha_inicio | date:'d/MM/yyyy'}}</div>
+                    <div class='cada_liga_nt'>{{ partido.fecha_inicio | date:'shortTime'}}</div>
+                </td>
+                <td width="17%">
+                    <div class='cada_liga_nt' *ngFor="let cat of partido.id_categoria ">{{cat.descripcion}}</div>
+                    <div class='cada_liga_nt'>{{partido.nombre_liga}}</div>
+                </td>
+                <td width="7%">
+                    <div class='cada_liga_nt' *ngFor="let equipo of partido.equipos ">{{equipo.dividendo | cuota:'decimal'}}</div>
+                </td>
+                <td width="17%">
+                    <label style="cursor: pointer; position: relative; height: 60px;">
+                        <img [src]="partido.img | imagen:'partido'" alt="" height="50px;">
+                        <br>
+                        <input type="file" name="imagenSubir" (change)="subirImagen($event, partido)" style="display: none">
+                    </label>
+                </td>
+                <td width="11%" style="text-align: center">
+                    <label>En vivo <input type="checkbox" (change)="cambiarLive(partido)" [(ngModel)]="partido.status_lid" [checked]="partido.status_lid" name="status_lid" id="cbox_{{partido.id_partido}}"></label>
+
+                    <input type="text" class="datetime" value="{{partido.live_id}}" [(ngModel)]="partido.live_id" style="width: 90%;">
+                </td>
+                <td width="13%">
+                    <select class="ch_slc_nt" (change)="cambiarEstado(partido)" [(ngModel)]="partido.destacado">
+                        <option value="0">Sin características</option>     
+                        <option value="1">Zona 'Destacados'</option>                    	  
+                    </select>
+                    <div>
+                        <div (click)="anularPartido( partido )" class=" botonera activo" *ngIf="partido.eventos[0] === 'Activo'">Activo</div>
+                        <div class=" botonera cancelado" *ngIf="partido.eventos[0] === 'Cancelado'">Cancelado</div>
+                        <div *ngIf="partido.eventos[0] === 'Activo'" class="botonera" [class.poriniciar]="partido.eventos[1] === 'Por iniciar'" [class.iniciado]="partido.eventos[1] === 'Iniciado'">{{partido.eventos[1]}}</div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul class="pagination pagination-large">
+        <li style="cursor: pointer" class='{{desactivar}}' (click)="cambiarPagina('b')"><span>&lsaquo; Anterior</span></li>
+        <li style="cursor: pointer">
+            <span class='color_gray' (click)="cambiarPagina('a')">Siguiente &rsaquo;</span>
+        </li>
+    </ul>

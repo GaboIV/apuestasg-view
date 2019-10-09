@@ -1,0 +1,19 @@
+<app-menu-caballos></app-menu-caballos>
+<div class="planilla_hrs">
+    <div class="caption_hrs">Agregar un stud</div>
+    <div class="c_planilla_hrs">
+        <form name="invfrm" id="invfrm" action="" method="post" enctype="multipart/form-data">
+            <div class="codigo_planilla">Nombre:</div><input id="name_hrs" type="text" name="name_hrs" class="ipt_planilla_hrs" style="text-transform: capitalize;" [(ngModel)]="stud.descripcion">
+
+            <div class="codigo_planilla">Ubicación:</div>
+            <input name="nacionalidad" id="nacionalidad" class="ipt_planilla_hrs" [(ngModel)]="stud.ubicacion">
+
+            <div class="mensajeError" *ngIf="mostrarError === true">Haras ya existente</div>
+
+        </form>
+    </div>
+    <div class="botones_hrs">
+        <div class="cancelar_hrs btn_hrs" id="can_hrs" [routerLink]="['/studs']">Cancelar</div>
+        <div class="aceptar_hrs btn_hrs" id="acp_hrs" (click)="enviarDatos()">Aceptar</div>
+    </div>
+</div>

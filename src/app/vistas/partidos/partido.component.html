@@ -1,0 +1,81 @@
+<ng-container *ngFor="let part of partido">
+    <div class="main_nav">
+        <div routerLink="/partidos" style="cursor: pointer;" class="ico_now">
+            <i class="fas fa-angle-left"></i>
+        </div>
+        <span>{{part.id_categoria[0].descripcion}} / {{part.id_pais}} / {{part.nombre_liga}}  </span>
+        <input class="datetime" type="datetime-local" value="{{part.fecha_inicio}}" [ngModel]="part.fecha_inicio | date:'yyyy-MM-ddTHH:mm'" (ngModelChange)="part.fecha_inicio = $event">
+    </div>
+
+    <div class="main_nav">
+        <div class="menu_menu_nav" style="color: yellow">Datos Principales</div>
+        <div class="menu_menu_nav">Crear Apuesta</div>
+    </div>
+
+    <div class="main_nav" style="text-align: center; padding-top: 3px;">
+        <input type="text" class="datetime" value="{{part.url}}" [(ngModel)]="part.url" style="width: 85%;">
+    </div>
+
+    <div style="text-align: center">
+        <div class="elemes" *ngIf="part.equipos.length === 2">
+            <div class="elementos el50" *ngFor="let eq of part.equipos; let i = index">
+                <div class="elimg">
+                    <img *ngIf="eq.nombre !== 'Empate'" [src]="eq.img | imagen:'equipo'" height=75px class='ep_logo'>
+                </div>
+                <div class="eldatos">
+                    <div style="font-size: 1.2em;">{{eq.nombre}}</div>
+                    <div>
+                        <input type="text" id="p{{i}}" *ngIf="part.id_categoria[0].id_categoria === '22'" class="namepit">
+                        <input type="text" id="e{{i}}" *ngIf="part.id_categoria[0].id_categoria === '22'" style="width: 80px;" placeholder="ERA" class="erapit">
+                    </div>
+                </div>
+                <div class="eldiv">
+                    <input type="text" name="divi{{eq.id_equipo}}" class="elcuotas" value="{{eq.dividendo}}" [(ngModel)]="eq.dividendo" id="fq-{{eq.id_equipo}}">
+                    <input type="text" (keyup)="cuotaFraq(eq.id_equipo, $event.target.value, i)" class="elcuotas" value="{{eq.dividendo | cuota:'decimal'}}" id="de-{{eq.id_equipo}}">
+                </div>
+            </div>
+        </div>
+
+        <div class="elemes" *ngIf="part.equipos.length === 3">
+            <ng-container *ngFor="let eq of part.equipos; let i = index">
+                <div *ngIf="eq.nombre !== 'Empate'" class="elementos el40">
+                    <div class="elimg">
+                        <img *ngIf="eq.nombre !== 'Empate'" [src]="eq.img | imagen:'equipo'" height=75px class='ep_logo'>
+                    </div>
+                    <div class="eldatos">
+                        <div style="font-size: 1.2em;">{{eq.nombre}}</div>
+                        <div>
+                            <input type="text" id="p1" *ngIf="part.id_categoria[0].id_categoria === '22'" class="namepit">
+                            <input type="text" id="e1" *ngIf="part.id_categoria[0].id_categoria === '22'" style="width: 80px;" placeholder="ERA" class="erapit">
+                        </div>
+                    </div>
+                    <div class="eldiv">
+                        <input type="text" name="divi{{eq.id_equipo}}" class="elcuotas" value="{{eq.dividendo}}" [(ngModel)]="eq.dividendo" id="fq-{{eq.id_equipo}}">
+                        <input type="text" (keyup)="cuotaFraq(eq.id_equipo, $event.target.value, i)" class="elcuotas" value="{{eq.dividendo | cuota:'decimal'}}" id="de-{{eq.id_equipo}}">
+                    </div>
+                </div>
+                <div *ngIf="eq.nombre === 'Empate'" class="elementos el20" style="border-right: #272727 solid 1px;">
+                    <div class="eldatos">
+                        <div style="font-size: 1.2em;">{{eq.nombre}}</div>
+                        <div>
+                            <input type="text" id="p1" *ngIf="part.id_categoria[0].id_categoria === '22'" class="namepit">
+                            <input type="text" id="e1" *ngIf="part.id_categoria[0].id_categoria === '22'" style="width: 80px;" placeholder="ERA" class="erapit">
+                        </div>
+                    </div>
+                    <div class="eldiv" style="width: 50%;">
+                        <input type="text" name="divi{{eq.id_equipo}}" class="elcuotas" value="{{eq.dividendo}}" id="fq-{{eq.id_equipo}}" [(ngModel)]="eq.dividendo">
+                        <input type="text" (keyup)="cuotaFraq(eq.id_equipo, $event.target.value, i)" class="elcuotas" value="{{eq.dividendo | cuota:'decimal'}}" id="de-{{eq.id_equipo}}">
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+
+        <div *ngIf="part.equipos.length > 3">
+            Ciao
+        </div>
+        <br>
+        <div *ngIf="enviando === true">Enviando datos</div>
+        <button class="boton guardar ef_slice" (click)="guardarInfo()" *ngIf="enviando === false">Guardar</button>
+    </div>
+
+</ng-container>

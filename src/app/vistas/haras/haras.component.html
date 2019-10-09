@@ -1,0 +1,33 @@
+<app-menu-caballos></app-menu-caballos>
+
+<div>
+    <div class='cada_hrs pan_hrs' style="text-align: center; height: 75px;">
+        <div style="width: 50%; display: inline-block; vertical-align: middle">
+            <input type="text" placeholder="Buscar un haras" (keyup)="buscarHaras( $event.target.value )" class="inpiut">
+        </div>
+        <div style="width: 50%; display: inline-block; vertical-align: middle; text-align: left;">
+            <div style="margin-bottom: 5px;" routerLink="/nuevoHaras" class="update">
+                <i class="far fa-plus-square" style="font-size: 1.7em; vertical-align: sub; padding-right: 6px;"></i>Agregar
+            </div>
+            <div class="update" (click)="cargarHaras()">
+                <i id="spinact" class="fas fa-sync" style="font-size: 1.5em; vertical-align: sub; padding-right: 6px;"></i>Actualizar
+            </div>
+        </div>
+    </div>
+
+    <ng-container *ngIf="harias?.length === 0">
+        <div class='cada_hrs' style="height: 75px;" *ngFor="let hara of haras">
+            <div class='name_hrs'>{{hara.descripcion}}</div><br>
+            <div class='d_padre_hrs'>Ubicación: </div>
+            <div class='padre_hrs'>{{hara.ubicacion}}</div>
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="harias?.length > 0">
+        <div class='cada_hrs' style="height: 75px;" *ngFor="let hara of harias">
+            <div class='name_hrs'>{{hara.descripcion}}</div><br>
+            <div class='d_padre_hrs'>Ubicación: </div>
+            <div class='padre_hrs'>{{hara.ubicacion}}</div>
+        </div>
+    </ng-container>
+</div>

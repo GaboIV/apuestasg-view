@@ -1,0 +1,53 @@
+<div class="total_hrs">
+    <div class="barra_nav_hrs">
+        <div class="c_m_hrs" id="id_caballos" routerLink="/caballos" routerLinkActive="activadisimo">
+            <div>Caballos</div>
+            <div style="font-size: 10px;">
+                <span *ngIf="_caballoService.act_caballos !== 'No se ha actualizado'">{{ _caballoService.act_caballos | date:'dd/MM/yyyy'}} {{ _caballoService.act_caballos | date:'shortTime'}}</span>
+                <span *ngIf="_caballoService.act_caballos === 'No se ha actualizado'">{{_caballoService.act_caballos}}</span>
+            </div>
+        </div>
+        <div class="c_m_hrs" id="ir_jinetes" routerLink="/jinetes" routerLinkActive="activadisimo">
+            <div>Jinetes</div>
+            <div style="font-size: 10px;">
+                <span *ngIf="_caballoService.act_jinetes !== 'No se ha actualizado'">{{ _caballoService.act_jinetes | date:'dd/MM/yyyy'}} {{ _caballoService.act_jinetes | date:'shortTime'}}</span>
+                <span *ngIf="_caballoService.act_jinetes === 'No se ha actualizado'">{{_caballoService.act_jinetes}}</span>
+            </div>
+        </div>
+        <div class="c_m_hrs" id="ir_entrenadores" routerLink="/entrenadores" routerLinkActive="activadisimo">
+            <div>Entrenadores</div>
+            <div style="font-size: 10px;">
+                <span *ngIf="_caballoService.act_entrenadores !== 'No se ha actualizado'">{{ _caballoService.act_entrenadores | date:'dd/MM/yyyy'}} {{ _caballoService.act_entrenadores | date:'shortTime'}}</span>
+                <span *ngIf="_caballoService.act_entrenadores === 'No se ha actualizado'">{{_caballoService.act_entrenadores}}</span>
+            </div>
+
+        </div>
+        <div class="c_m_hrs" id="ir_haras" routerLink="/haras" routerLinkActive="activadisimo">
+            <div>Haras</div>
+            <div style="font-size: 10px;">
+                <span *ngIf="_caballoService.act_haras !== 'No se ha actualizado'">{{ _caballoService.act_haras | date:'dd/MM/yyyy'}} {{ _caballoService.act_haras | date:'shortTime'}}</span>
+                <span *ngIf="_caballoService.act_haras === 'No se ha actualizado'">{{_caballoService.act_haras}}</span>
+            </div>
+        </div>
+        <div class="c_m_hrs" id="ir_studs" routerLink="/studs" routerLinkActive="activadisimo">
+            <div>Studs</div>
+            <div style="font-size: 10px;">
+                <span *ngIf="_caballoService.act_studs !== 'No se ha actualizado'">{{ _caballoService.act_studs | date:'dd/MM/yyyy'}} {{ _caballoService.act_studs | date:'shortTime'}}</span>
+                <span *ngIf="_caballoService.act_studs === 'No se ha actualizado'">{{_caballoService.act_studs}}</span>
+            </div>
+        </div>
+        <div class="c_m_hrs" id="ir_hipodromos" routerLink="/hipodromos" routerLinkActive="activadisimo">
+            <div>Hipódromos</div>
+            <div style="font-size: 10px;">
+                <span *ngIf="_caballoService.act_hipodromos !== 'No se ha actualizado'">{{ _caballoService.act_hipodromos | date:'dd/MM/yyyy'}} {{ _caballoService.act_hipodromos | date:'shortTime'}}</span>
+                <span *ngIf="_caballoService.act_hipodromos === 'No se ha actualizado'">{{_caballoService.act_hipodromos}}</span>
+            </div>
+        </div>
+        <div class="c_m_hrs" id="ir_carreras" routerLink="/carreras" routerLinkActive="activadisimo">
+            Carreras
+        </div>
+        <div class="c_m_hrs" id="ir_inscripciones" routerLink="/inscripciones" routerLinkActive="activadisimo">
+            Inscripciones
+        </div>
+    </div>
+</div>

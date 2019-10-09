@@ -1,0 +1,114 @@
+<ng-container *ngFor="let carr of carrera">
+    <div class="main_nav">
+        <div routerLink="/carreras" style="cursor: pointer;" class="ico_now">
+            <i class="fas fa-angle-left"></i>
+        </div>
+        <span>Hispismo / Venezuela / {{carr.div}}  </span>
+        <input class="datetime" type="datetime-local" value="{{carr.fecha_hora}}" [ngModel]="carr.fecha_hora | date:'yyyy-MM-ddTHH:mm'" (ngModelChange)="carr.fecha_hora = $event">
+        <span> Número: </span>
+        <input type="text" class="datetime" value="{{carr.numero}}" [(ngModel)]="carr.numero" style="width: 40px;">
+        <span> Válida: </span>
+        <input type="text" class="datetime" value="{{carr.valida}}" [(ngModel)]="carr.valida" style="width: 40px;">
+        <span> Distancia: </span>
+        <input type="text" class="datetime" value="{{carr.distancia}}" [(ngModel)]="carr.distancia" style="width: 55px; margin-right: 10px;"> mts.
+    </div>
+    <div class="main_nav" style="text-align: center; padding-top: 3px;">
+        <input type="text" class="datetime" value="{{carr.titulo}}" [(ngModel)]="carr.titulo" style="width: 30%;">
+        <input type="text" class="datetime" value="{{carr.descripcion}}" [(ngModel)]="carr.descripcion" style="width: 58%;">
+    </div>
+    <div class="main_nav">
+        <div class="menu_menu_nav" [routerLink]="['/carrera', carrera[0].id_carrera ]" [queryParams]="{zona:'inscripciones'}" routerLinkActive="zonaactiva">Inscripciones</div>
+        <div class="menu_menu_nav" [routerLink]="['/carrera', carrera[0].id_carrera ]" [queryParams]="{zona:'inscribir'}" routerLinkActive="zonaactiva">Inscribir</div>
+        <div class="menu_menu_nav" [routerLink]="['/carrera', carrera[0].id_carrera ]" [queryParams]="{zona:'crearApuesta'}" routerLinkActive="zonaactiva">Crear Apuesta</div>
+    </div>
+
+    <ng-container *ngIf="zona === 'inscripciones'">
+        <div class="elementos el100" *ngFor="let ins of carr.inscritos; let i = index">
+            <ng-container *ngIf="ins.status !== '99'">
+                <div class='nro_puerta'>
+                    <div class="equis_ins" id="rx_{{ins.id_inscripcion}}">
+                        <i class="fas fa-prescription" (click)="muestraMens1(ins.id_inscripcion)" style="cursor: pointer;"></i>
+                        <div class="mens_e_i" id="dl1_{{ins.id_inscripcion}}">
+                            <div (click)="muestraMens2(ins.id_inscripcion)">Retirar de la carrera</div>
+                            <div (click)="muestraMens3(ins.id_inscripcion)">Eliminar la inscripción</div>
+                        </div>
+                        <div class="mens2_e_i" id="dl2_{{ins.id_inscripcion}}">
+                            <span>¿Está seguro de Retirar a este ejemplar?</span><br>
+                            <div (click)="retirar(ins, ins.id_inscripcion)">Sí</div>
+                            <div>No</div>
+                        </div>
+                        <div class="mens2_e_i" id="dl3_{{ins.id_inscripcion}}">
+                            <span>¿Está seguro de Eliminar esta inscripción?</span><br>
+                            <div (click)="eliminar(ins, ins.id_inscripcion)">Sí</div>
+                            <div>No</div>
+                        </div>
+                    </div>
+                    <input type="text" class="datetime" value="{{ins.numero}}" [(ngModel)]="ins.numero" id="nm-{{ins.id_inscripcion}}" style="width: 40%; margin-bottom: 2px;">
+                    <input type="text" class="datetime" value="{{ins.puesto}}" [(ngModel)]="ins.puesto" id="pt-{{ins.id_inscripcion}}" style="width: 40%;">
+                </div>
+                <div class='jersey_u'>
+                    <img [src]="ins.id_stud.id_stud + '.png' | imagen: 'stud' " height=50px>
+                    <div class="retirado" *ngIf="ins.status === '2'">R</div>
+                </div>
+                <div class='datos_pr'>
+                    <input autocomplete="off" type="text" class="datetime" value="{{ins.id_caballo.nombre}}" id="cb-{{ins.id_inscripcion}}" style="width: 60%; margin-bottom: 2px;" (click)="buscarCaballos(ins.id_caballo.nombre, ins.id_inscripcion)" (keyup)="buscarCaballos($event.target.value, ins.id_inscripcion)"
+                        (blur)="ocultaBus('bcab', ins.id_inscripcion)"> <br>
+                    <div class="busc_div bcab" id="bcab-{{ins.id_inscripcion}}" style="display: none;">
+                        <div *ngFor="let cab of caballios | slice: 0:12" (click)="selCab(i, cab, ins.id_inscripcion)">{{cab.nombre}}</div>
+                    </div>
+                    <input autocomplete="off" type="text" class="datetime" value="{{ins.id_jinete.nombre}}" id="jt-{{ins.id_inscripcion}}" style="width: 30%; margin-right: 2px;" (click)="buscarJinetes(ins.id_jinete.nombre, ins.id_inscripcion, i)" (keyup)="buscarJinetes($event.target.value, ins.id_inscripcion, i)"
+                        (blur)="ocultaBus('bjin', ins.id_inscripcion)">
+                    <input autocomplete="off" type="text" class="datetime" value="{{ins.id_entrenador.nombre}}" id="et-{{ins.id_inscripcion}}" style="width: 30%; margin-left: 0px;" (click)="buscarEntrenadores(ins.id_entrenador.nombre, ins.id_inscripcion, i)" (keyup)="buscarEntrenadores($event.target.value, ins.id_inscripcion, i)"
+                        (blur)="ocultaBus('bent', ins.id_inscripcion)">
+                    <div class="busc_div bjin" id="bjin-{{ins.id_inscripcion}}" style="display: none; width: 55%;">
+                        <div *ngFor="let jin of jineset | slice: 0:12" (click)="selJin(i, jin, ins.id_inscripcion)">{{jin.nombre}}</div>
+                    </div>
+                    <div class="busc_div bent" id="bent-{{ins.id_inscripcion}}" style="display: none; width: 55%;">
+                        <div *ngFor="let ent of enternadors" (click)="selEnt(i, ent, ins.id_inscripcion)">{{ent.nombre}}</div>
+                    </div>
+                </div>
+                <div class='datos_pr'>
+                    <input type="text" class="datetime" value="{{ins.peso}}" [(ngModel)]="ins.peso" id="ps-{{ins.id_inscripcion}}" style="width: 30%; margin-bottom: 2px;"> kgs.
+                    <div class='jin_cab'>
+                        <input autocomplete="off" type="text" class="datetime" value="{{ins.id_stud.descripcion}}" id="st1-{{ins.id_inscripcion}}" style="width: 40%; margin-right: 2px;" (click)="buscarStud(ins.id_stud.descripcion, ins.id_inscripcion, 1, i)" (keyup)="buscarStud( $event.target.value, ins.id_inscripcion, 1, i )"
+                            (blur)="ocultaBus('bus-1', ins.id_inscripcion)">
+                        <input autocomplete="off" type="text" class="datetime" value="{{ins.id_stud2.descripcion}}" id="st2-{{ins.id_inscripcion}}" style="width: 40%; margin-left: 0px;" (click)="buscarStud(ins.id_stud2.descripcion, ins.id_inscripcion, 2, i)" (keyup)="buscarStud( $event.target.value, ins.id_inscripcion, 2, i )"
+                            (blur)="ocultaBus('bus-2', ins.id_inscripcion)">
+                    </div>
+                    <div class="busc_div" id="bus-1-{{ins.id_inscripcion}}" style="display: none">
+                        <div *ngFor="let stu of studis | slice: 0:12" (click)="selStud(i, 1, stu, ins.id_inscripcion)">{{stu.descripcion}}</div>
+                    </div>
+                    <div class="busc_div" id="bus-2-{{ins.id_inscripcion}}" style="display: none">
+                        <div *ngFor="let stu of studis | slice: 0:12" (click)="selStud(i, 2, stu, ins.id_inscripcion)">{{stu.descripcion}}</div>
+                    </div>
+                </div>
+                <div class='datos_pr'>
+                    <div class='jin_cab nopad' *ngIf="ins.id_caballo !== '0'">Pedigree: {{ins.id_caballo.padre.nombre}} en {{ins.id_caballo.madre.nombre}}</div>
+                    <div class='jin_cab' *ngIf="ins.id_caballo !== '0'">Haras: <span></span>{{ins.id_caballo.id_haras.descripcion}}</div>
+                </div>
+            </ng-container>
+        </div>
+
+        <button (click)="guardarInfo()" *ngIf="enviando === false" class="guardarInfo">Guardar</button>
+    </ng-container>
+
+    <ng-container *ngIf="zona === 'inscribir'">
+        <div align="center">
+            <h3>Ejemplares ya inscritos en esta carrera:
+                <h2>0{{this.carrera[0].inscritos?.length}}</h2>
+            </h3>
+        </div>
+        <br> <br> <br>
+        <div align="center">
+            <h3>¿Cuántos ejemplares desea agregar?</h3>
+            <input type="number" autocomplete="off" class="datetime addejem" [(ngModel)]="agregarIns">
+        </div>
+
+        <div align="center">
+            <button (click)="agregarEjemps( agregarIns, this.carrera[0].id_carrera )" *ngIf="enviando === false" class="guardarInfo">Agregar</button>
+        </div>
+
+    </ng-container>
+
+
+</ng-container>

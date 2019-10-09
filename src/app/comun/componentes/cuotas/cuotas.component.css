@@ -1,0 +1,83 @@
+.select_horse_win {
+    position: relative;
+    border: none;
+    outline: none;
+    height: 23px;
+    background-color: #d8d8d8;
+    width: 100px;
+    color: #545454;
+    font-size: 12px;
+    vertical-align: top;
+    top: 1px;
+}
+
+.tk_generado {
+    padding: 12px;
+    text-align: center;
+    font-size: 0.8em;
+}
+
+.ttlhr {
+    margin-top: 6px
+}
+
+.ttl_hr,
+.ttl2_hr {
+    display: inline-block;
+    vertical-align: bottom;
+}
+
+.ttl_hr {
+    font-size: 1.5em;
+    text-align: left;
+    width: 40%;
+}
+
+.ttl2_hr {
+    text-align: right;
+    width: 60%;
+}
+
+.ttl_hipo {
+    font-size: 1.3em;
+}
+
+.hr_r1 {
+    font-size: 1em;
+}
+
+.hr_r1 div {
+    display: inline-block;
+}
+
+.hr_r2 {
+    font-size: 1.4em;
+    padding-left: 15px;
+    text-align: left;
+}
+
+.hr_r3 {}
+
+.hr_r3 div {
+    display: inline-block;
+    width: 33.33%;
+    font-size: 1em;
+}
+
+.separador1_tk {
+    border-bottom: solid 1px #CFCFCF;
+    height: 4px;
+    padding: 4px;
+    margin-bottom: 8px;
+}
+
+.hr_r4 {
+    font-size: 13px;
+    margin: 4px 0px;
+    color: grey;
+}
+
+.hr_r4 div {
+    display: inline-block;
+    width: 33.33%;
+}

@@ -1,0 +1,35 @@
+<ng-container *ngFor="let part of partido">
+    <div class="div_zb_1 zb_lado" style="position: relative; width: 75%;">
+        <div class="banner_vp" [ngStyle]="{'background': 'url(../../assets/vallas/' + part.id_categoria[0].id_categoria + '.jpg) no-repeat center center'}">
+            <ng-container *ngFor="let equipo of part.equipos; let i = index">
+                <div class="letra lizq" *ngIf="i === 0" [class.letra_color]="part.id_categoria[0].id_categoria === '26'">{{equipo.nombre}}</div>
+                <span class="versus" [class.letra_color]="part.id_categoria[0].id_categoria === '26'" *ngIf="i === 1"> VS </span>
+                <img *ngIf="equipo.nombre !== 'Empate'" [src]="equipo.img | imagen:'equipo'" height=95% class='ep_logo' style="position: static;">
+
+                <div class="letra lder" [class.letra_color]="part.id_categoria[0].id_categoria === '26'" *ngIf="part.equipos?.length === 2 && i === 1">{{equipo.nombre}}</div>
+                <div class="letra lder" [class.letra_color]="part.id_categoria[0].id_categoria === '26'" *ngIf="part.equipos?.length === 3 && i === 2">{{equipo.nombre}}</div>
+            </ng-container>
+        </div>
+        <div class="main_nav">{{part.titulo}} {{part.id_categoria[0].id_categoria}}
+            <div class="nliga">{{part.nombre_liga}}</div>
+        </div>
+        <div class="main_nav" style="padding-bottom: 0px; border-top: 1px solid #6e6e6e;">
+            <span class="vc_select">Mercados</span>
+        </div>
+        <div class="main_tipo_a">
+            Resultado Final
+        </div>
+        <div [ngClass]="queclase( part.equipos, part.id_categoria, equipo.id_equipo )" *ngFor="let equipo of part.equipos" (click)="selecciond( equipo.id_participante, part.id_categoria[0].id_categoria )">
+            <div [class]="part.id_categoria | importantes:equipo.nombre "><img *ngIf="equipo.nombre !== 'Empate'" [src]="equipo.img | imagen:'equipo'" height=125% class='ep_logo'>{{equipo.nombre}}<br>
+                <div class="div_span" *ngIf="(part.id_categoria === '24' || part.id_categoria === '29') && equipo.nacionalidad !== '0'">{{equipo.pais}} <img [src]="equipo.nacionalidad + '.png' | imagen:'nacionalidad'" height=12px></div>
+                <div class="div_span" *ngIf="(part.id_categoria === '24' || part.id_categoria === '29') && equipo.nacionalidad === '0'">Sin información <i class="fas fa-info-circle"></i> </div>
+                <div class="pitcher_eq" *ngIf="(part.id_categoria === '22') && equipo.pitcher !== false">{{equipo.pitcher.nombre}} ({{equipo.pitcher.era}}) </div>
+                <div class="pitcher_eq" style="display: none" *ngIf="(part.id_categoria === '22') && equipo.pitcher === false">Sin información <i class="fas fa-info-circle"></i> </div>
+            </div>
+            <div class='ep_cl_logro'>{{equipo.dividendo | cuota:'decimal'}}</div>
+        </div>
+    </div>
+    <div class="zona_cuota">
+        <app-cuotas></app-cuotas>
+    </div>
+</ng-container>

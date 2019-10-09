@@ -1,0 +1,15 @@
+<div class="cuerpo_reg" align="center" *ngIf="activado === true">
+    <i class="far fa-check-square" style="font-size: 4em;"></i><br><br>
+    <span class='titlw'>Activación realizada con éxito</span><br><br>
+    <div class='infor_sel'>
+        <button class='opt_lig' routerLink="/importantes/21"><i aria-hidden="true" class="fa fa-home"></i>&nbsp;&nbsp;&nbsp;Ir a Menú Principal</button>
+    </div>
+</div>
+
+<div class="cuerpo_reg" align="center" *ngIf="activado === false">
+    <i class="fas fa-user-times" style="font-size: 4em;"></i><br><br>
+    <span class='titlw'>{{mensaje}}</span><br><br>
+    <div class='infor_sel'>
+        <button class='opt_lig' routerLink="/importantes/21"><i aria-hidden="true" class="fa fa-home"></i>&nbsp;&nbsp;&nbsp;Ir a Menú Principal</button>
+    </div>
+</div>

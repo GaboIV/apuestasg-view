@@ -1,0 +1,330 @@
+<div class='body'>
+    <div class="cuerpo_reg" align="center" *ngIf="registro === true">
+        <i class="far fa-check-square" style="font-size: 4em;"></i><br><br>
+        <span class='titlw'>Registro realizado con éxito</span><br><br>
+        <div class='infor_sel'>
+            <button class='btn_registro' routerLink="/importantes/21"><i aria-hidden="true" class="fa fa-home"></i>&nbsp;&nbsp;&nbsp;Ir a Menú Principal</button>
+        </div>
+    </div>
+    <div class="cuerpo_reg" *ngIf="registro === false" [ngStyle]="{'height': largoTabla}">
+        <div class="cabecera_c_r">
+            <div class="titulo_c_c_r">
+                <b>Apertura de cuenta</b>
+            </div>
+            <div class="dato_c_c_r">
+                ¿Ya está registrado? <span><b>Recuerde sus datos de acceso</b></span>
+            </div>
+        </div>
+        <form name="invfrm" (ngSubmit)="enviarDatos(f.value)" #f="ngForm" ngNativeValidate>
+            <div class="cuerpo_c_r">
+                <p><span style="color: #7F0000">*</span> deberá completar este campo</p>
+                <p>Es necesario que proporcione información personal exacta para la verificación y seguridad de su cuenta. Tenga en cuenta que, para poder seguir utilizando su cuenta, es necesario que podamos verificar su identidad.</p>
+                <div class="forma_comp">
+                    <div class="subtitle">
+                        <span style="color: #7F0000">*</span> País de residencia:
+                    </div>
+                    <div class="subinput">
+                        <select class="inpt_reg" id="nro1" name='pais'>
+							<option value="231">Venezuela</option>
+						</select>
+                    </div>
+                    <div class="submsj">
+                        <div class="msj_reg nro1">
+                            <div class="tmsj_reg">Introduzca su pais de residencia</div>
+                            <div class="cpo_reg"><b>¿Necesitas ayuda?</b></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="cuerpo_c_r">
+                <div class="forma_comp ito_ini">
+                    <div class="subtitle">
+                        <span style="color: #7F0000">*</span> Tratamiento:
+                    </div>
+                    <div class="subinput">
+                        <select class="inpt_reg" id="nro2" name='tratamiento' [(ngModel)]="usuario.tratamiento">
+							<option value="1">Sr.</option>
+							<option value="2">Sra.</option>
+							<option value="3">Srta.</option>
+						</select>
+                    </div>
+                    <div class="submsj">
+                        <div class="msj_reg nro2">
+                            <div class="tmsj_reg">Seleccione forma de tratamiento</div>
+                            <div class="cpo_reg"><b>¿Necesitas ayuda?</b></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="forma_comp">
+                    <div class="subtitle">
+                        <span style="color: #7F0000">*</span> Nombre(s):
+                    </div>
+                    <div class="subinput">
+                        <input type="text" class="inpt_reg" id="nro3" name='nombre' [(ngModel)]="usuario.nombres">
+                    </div>
+                    <div class="submsj">
+                        <div class="msj_reg nro3">
+                            <div class="tmsj_reg">Introduzca solo su nombre. Tenga en cuenta que, para poder seguir utilizando su cuenta, es necesario que podamos verificar su identidad.</div>
+                            <div class="cpo_reg"><b>¿Necesitas ayuda?</b></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="forma_comp">
+                    <div class="subtitle">
+                        <span style="color: #7F0000">*</span> Apellidos:
+                    </div>
+                    <div class="subinput">
+                        <input type="text" class="inpt_reg" id="nro4" name='apellido' [(ngModel)]="usuario.apellidos">
+                    </div>
+                    <div class="submsj">
+                        <div class="msj_reg nro4">
+                            <div class="tmsj_reg">Introduzca solo sus apellidos. Tenga en cuenta que, para poder seguir utilizando su cuenta, es necesario que podamos verificar su identidad.</div>
+                            <div class="cpo_reg"><b>¿Necesitas ayuda?</b></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="forma_comp">
+                    <div class="subtitle">
+                        <span style="color: #7F0000">*</span> Fecha de nacimiento:
+                    </div>
+                    <div class="subinput" id="nro5">
+                        <input type="text" class="inpt_reg fdn dia_fdn" name='dia' id='nro37' (change)="ajustarNac('dia', $event.target.value)" [(ngModel)]="nacDia">
+                        <select class="inpt_reg fdn mes_fdn" id="nro27" name='mes' (change)="ajustarNac('mes', $event.target.value)" [(ngModel)]="nacMes">
+							<option value="1">Enero</option>
+							<option value="2">Febrero</option>
+							<option value="3">Marzo</option>
+							<option value="4">Abril</option>
+							<option value="5">Mayo</option>
+							<option value="6">Junio</option>
+							<option value="7">Julio</option>
+							<option value="8">Agosto</option>
+							<option value="9">Septiembre</option>
+							<option value="10">Octubre</option>
+							<option value="11">Noviembre</option>
+							<option value="12">Diciembre</option>
+						</select>
+                        <input type="text" class="inpt_reg fdn anyo_fdn" name='anio' id="nro47" (change)="ajustarNac('anio', $event.target.value)" [(ngModel)]="nacAnio">
+                    </div>
+                    <div class="submsj">
+                        <div class="msj_reg nro5">
+                            <div class="tmsj_reg">Introduzca su fecha de nacimiento.</div>
+                            <div class="cpo_reg"><b>¿Necesitas ayuda?</b></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="forma_comp">
+                    <div class="subtitle">
+                        <span style="color: #7F0000">*</span> Documento de Identidad:
+                    </div>
+                    <div class="subinput" id="nro50">
+                        <input type="text" class="inpt_reg fdn dia_fdn" name='letra' value='V' id="nro57" disabled>
+                        <input [(ngModel)]="usuario.cedula" type="text" class="inpt_reg fdn mes_fdn" name='cedula' style='width: 69.6% !important;' id="nro67">
+                    </div>
+                    <div class="submsj">
+                        <div class="msj_reg nro50">
+                            <div class="tmsj_reg">Introduzca su documento de identidad (Cédula).</div>
+                            <div class="cpo_reg"><b>¿Necesitas ayuda?</b></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="cuerpo_c_r">
+                <div class="forma_comp ito_ini">
+                    <div class="subtitle">
+                        <span style="color: #7F0000">*</span> Idioma:
+                    </div>
+                    <div class="subinput">
+                        <select class="inpt_reg" id="nro20" name='idioma'>
+							<option value="u">Español</option>
+						</select>
+                    </div>
+                    <div class="submsj">
+                        <div class="msj_reg nro20">
+                            <div class="tmsj_reg">Seleccione su idioma de preferencia.</div>
+                            <div class="cpo_reg"><b>¿Necesitas ayuda?</b></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="forma_comp">
+                    <div class="subtitle">
+                        <span style="color: #7F0000">*</span> Huso horario:
+                    </div>
+                    <div class="subinput">
+                        <select class="inpt_reg" id="nro21" name='huso'>
+							<option value="u">GMT -4 (VE)</option>
+						</select>
+                    </div>
+                    <div class="submsj">
+                        <div class="msj_reg nro21">
+                            <div class="tmsj_reg">Seleccione su franja horaria.</div>
+                            <div class="cpo_reg"><b>¿Necesitas ayuda?</b></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="forma_comp">
+                    <div class="subtitle">
+                        <span style="color: #7F0000">*</span> Formato de cuotas:
+                    </div>
+                    <div class="subinput">
+                        <select class="inpt_reg" id="nro22" name='cuotas'>
+							<option value="u">Decimal</option>
+						</select>
+                    </div>
+                    <div class="submsj">
+                        <div class="msj_reg nro22">
+                            <div class="tmsj_reg">Seleccione el formato en el que desee ver las cuotas.</div>
+                            <div class="cpo_reg"><b>¿Necesitas ayuda?</b></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="cuerpo_c_r">
+                <div class="forma_comp ito_ini">
+                    <div class="subtitle">
+                        <span style="color: #7F0000">*</span> Nombre de usuario:
+                    </div>
+                    <div class="subinput">
+                        <input type="text" class="inpt_reg" id="nro30" required name='usuario' [(ngModel)]="usuario.usuario">
+                    </div>
+                    <div class="submsj">
+                        <div class="msj_reg nro30">
+                            <div class="tmsj_reg">Introduzca un nombre de usuario que pueda recordar fácilmente. Deberá contener entre 6 y 14 caracteres; solo podrá utilizar letras, números y guiones bajos, sin espacios ni acentos.</div>
+                            <div class="cpo_reg"><b>¿Necesitas ayuda?</b></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="forma_comp">
+                    <div class="subtitle">
+                        <span style="color: #7F0000">*</span> Contraseña:
+                    </div>
+                    <div class="subinput">
+                        <input [(ngModel)]="usuario.password" type="password" class="inpt_reg" id="nro31" name='pass'>
+                    </div>
+                    <div class="submsj">
+                        <div class="msj_reg nro31">
+                            <div class="tmsj_reg">Por favor, introduzca una contraseña. Esta debe tener entre 6 y 32 caracteres y solo puede incluir letras, números y símbolos aceptados, sin espacios. Su contraseña no puede incluir su nombre de usuario, nombre o dirección
+                                de correo electrónico. Puede aumentar la seguridad de su contraseña si utiliza una combinación de letras, números y símbolos. Por favor, recuerde que las contraseñas distinguen mayúsculas y minúsculas.</div>
+                            <div class="cpo_reg"><b>¿Necesitas ayuda?</b></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="forma_comp">
+                    <div class="subtitle">
+                        <span style="color: #7F0000">*</span> Repita contraseña:
+                    </div>
+                    <div class="subinput">
+                        <input type="password" [(ngModel)]="usuario.password2" class="inpt_reg" id="nro34" name='repass'>
+                    </div>
+                    <div class="submsj">
+                        <div class="msj_reg nro34">
+                            <div class="tmsj_reg">Introduzca la contraseña de nuevo.</div>
+                            <div class="cpo_reg"><b>¿Necesitas ayuda?</b></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="forma_comp">
+                    <div class="subtitle">
+                        <span style="color: #7F0000">*</span> Nº de seguridad de cuatro dígitos:
+                    </div>
+                    <div class="subinput">
+                        <input [(ngModel)]="usuario.numerico" type="password" class="inpt_reg" id="nro32" name='cod'>
+                    </div>
+                    <div class="submsj">
+                        <div class="msj_reg nro32">
+                            <div class="tmsj_reg">Introduzca un número de seguridad de cuatro dígitos que pueda recordar fácilmente. Utlizaremos este número como forma adicional de identificación si necesitara ponerse en contacto con nosotros.</div>
+                            <div class="cpo_reg"><b>¿Necesitas ayuda?</b></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="forma_comp">
+                    <div class="subtitle">
+                        <span style="color: #7F0000">*</span> Repita nº de seguridad:
+                    </div>
+                    <div class="subinput">
+                        <input [(ngModel)]="usuario.numerico2" type="password" class="inpt_reg" id="nro33" name='recod'>
+                    </div>
+                    <div class="submsj">
+                        <div class="msj_reg nro33">
+                            <div class="tmsj_reg">Introduzca de nuevo el número de seguridad.</div>
+                            <div class="cpo_reg"><b>¿Necesitas ayuda?</b></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="cuerpo_c_r">
+                <div class="forma_comp ito_ini">
+                    <div class="subtitle">
+                        <span style="color: #7F0000">*</span> Correo electrónico:
+                    </div>
+                    <div class="subinput">
+                        <input type="email" [(ngModel)]="usuario.email" class="inpt_reg" id="nro51" name='correo' required>
+                    </div>
+                    <div class="submsj">
+                        <div class="msj_reg nro51">
+                            <div class="tmsj_reg">Indique su correo electrónico.</div>
+                            <div class="cpo_reg"><b>¿Necesitas ayuda?</b></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="forma_comp">
+                    <div class="subtitle">
+                        <span style="color: #7F0000"></span> Número telefónico:
+                    </div>
+                    <div class="subinput">
+                        <input type="text" class="inpt_reg" id="nro52" name='telefono' [(ngModel)]="usuario.telefono">
+                    </div>
+                    <div class="submsj">
+                        <div class="msj_reg nro52">
+                            <div class="tmsj_reg">Escriba su número de teléfono.</div>
+                            <div class="cpo_reg"><b>¿Necesitas ayuda?</b></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="cuerpo_c_r">
+                <div class="forma_comp ito_ini">
+                    <div class="subtitle">
+                        Código del bonus:
+                    </div>
+                    <div class="subinput">
+                        <input type="text" class="inpt_reg" id="nro36" name='bonus'>
+                    </div>
+                    <div class="submsj">
+                        <div class="msj_reg nro36">
+                            <div class="tmsj_reg">Si tiene un código promocional, introdúzcalo aquí.</div>
+                            <div class="cpo_reg"><b>¿Necesitas ayuda?</b></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class='infor_sel'>
+                <div class='c_box'>
+                    <input type="checkbox" name="ch_noticias" id='nro87' required>
+                </div>
+                <div class='text_box'>
+                    <span>Deseo recibir información sobre las ofertas y promociones de los productos de BetZone.</span>
+                </div>
+            </div>
+            <div class='infor_sel'>
+                <div class='c_box'>
+                    <input type="checkbox" name="ch_reglas" value="reglas" id='nro97' required>
+                </div>
+                <div class='text_box'>
+                    <span>Confirmo que tengo más de 18 años y que he leído, entiendo y acepto las <a>Condiciones generales</a>, <a>Reglas</a>, <a>Política de privacidad</a>, <a>Política de cookies</a> y las políticas relacionadas con el proceso de <a>verificación de edad</a> y el <a>'Proceso de identificación' (KYC)</a>.</span>
+                </div>
+            </div>
+
+            <div class='infor_sel'>
+                <input type="submit">
+            </div>
+
+        </form>
+
+        <div class='infor_sel'>
+            <div class='text_box alerta'>
+                <span id='mensaje_alerta'></span>
+                <span id='mensaje_good'></span>
+            </div>
+        </div>
+    </div>
+</div>

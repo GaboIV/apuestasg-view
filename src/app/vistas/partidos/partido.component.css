@@ -1,0 +1,105 @@
+.main_nav {
+    border-bottom: 0.5px solid #595959;
+    border-top: 0.5px solid #595959;
+}
+
+.ico_now {
+    border-right: 0.5px solid #595959;
+}
+
+.menu_menu_nav {
+    padding: 5px 20px;
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: middle
+}
+
+.menu_menu_nav:hover {
+    color: #efefef;
+}
+
+.elementos {
+    background: #25765C;
+    display: inline-block;
+    text-align: left;
+    vertical-align: top;
+}
+
+.datetime {
+    margin-left: 20px;
+    background: #272727;
+    border: none;
+    height: 22px;
+    outline: none;
+    border-radius: 4px;
+    text-align: center;
+    color: #cfcfcf;
+}
+
+.elemes .elementos:nth-child(1) {
+    border-right: #272727 solid 1px;
+}
+
+.eldatos {
+    width: 50%;
+    display: inline-block;
+    vertical-align: top;
+    padding: 5px 0px 5px 10px;
+}
+
+.elimg {
+    width: 25%;
+    text-align: center;
+    display: inline-block;
+    padding: 0px 20px;
+    border-right: 1px solid #0F6644;
+}
+
+.eldiv {
+    margin: 0 auto;
+    padding: 0 auto;
+    width: 25%;
+    text-align: center;
+    display: inline-block;
+    padding: 0px 20px;
+    border-left: 1px solid #0F6644;
+    height: 79px;
+    vertical-align: top;
+}
+
+.elcuotas {
+    width: 100%;
+    margin: 5px;
+    height: 27px;
+    font-size: 1.1em;
+    text-align: center;
+    border-radius: 4px;
+}
+
+.el50 {
+    width: 50%;
+}
+
+.el40 {
+    width: 40%;
+}
+
+.el20 {
+    width: 20%;
+}
+
+.namepit {
+    height: 27px;
+    padding-left: 5px;
+    font-size: 1em;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+.erapit {
+    height: 27px;
+    font-size: 1em;
+    text-align: center;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}

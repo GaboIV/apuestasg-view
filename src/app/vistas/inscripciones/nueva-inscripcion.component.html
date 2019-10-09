@@ -1,0 +1,25 @@
+<app-menu-caballos></app-menu-caballos>
+
+<div class="planilla_hrs">
+    <div class="caption_hrs">Agregar una carrera</div>
+    <div class="c_planilla_hrs">
+        <form name="invfrm" id="invfrm" action="" method="post" enctype="multipart/form-data">
+            <div class="codigo_planilla">Carrera:</div><input type="text" name="cod_car" [(ngModel)]="inscripcion.id_carrera" class="ipt_planilla_hrs" id="codigo_car" value="{{id_carrera}}" readonly>
+            <div class="codigo_planilla">Ejemplar:</div><input type="text" name="ejemplar_ipt" class="ipt_planilla_hrs" id="ejemplar_ipt" [(ngModel)]="inscripcion.id_caballo">
+            <div class="codigo_planilla">Jinete:</div><input type="text" name="jinete_ipt" class="ipt_planilla_hrs" id="jinete_ipt" [(ngModel)]="inscripcion.id_jinete">
+            <div class="codigo_planilla">Entrenador:</div><input type="text" name="entrenador_ipt" class="ipt_planilla_hrs" id="entrenador_ipt" [(ngModel)]="inscripcion.id_entrenador">
+            <div class="codigo_planilla">Peso:</div><input type="text" name="peso_ipt" class="date_planilla unida_hrs" [(ngModel)]="inscripcion.peso"><select name="peso_med" class="date_planilla anyo">
+					<option value="1">kgs.</option>					
+				</select>
+            <div class="codigo_planilla">Stud 1:</div><input type="text" name="stud1_ipt" class="ipt_planilla_hrs" id="stud1_ipt" [(ngModel)]="inscripcion.id_stud">
+            <div class="codigo_planilla">Stud 2:</div><input type="text" name="stud2_ipt" [(ngModel)]="inscripcion.id_stud2" class="ipt_planilla_hrs" id="stud2_ipt">
+            <div class="codigo_planilla">Número:</div><input type="text" name="numero_cab" [(ngModel)]="inscripcion.numero" class="date_planilla anyo car_hrs" value="00" style="border-right: 1px solid #cfcfcf; " id="nro_ipt"><input type="text" name="puesto_cab" class="date_planilla anyo car_hrs"
+                [(ngModel)]="inscripcion.puesto" value="00" style="border-right: none; " id="pto_ipt">
+
+        </form>
+    </div>
+    <div class="botones_hrs">
+        <div class="cancelar_hrs btn_hrs" id="can_hrs" [routerLink]="['/inscripciones']">Cancelar</div>
+        <div class="aceptar_hrs btn_hrs" id="acp_hrs" (click)="enviarDatos()">Aceptar</div>
+    </div>
+</div>

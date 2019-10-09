@@ -1,0 +1,25 @@
+.idiv {
+    display: inline-block;
+    width: 50px;
+    font-size: 1.5em;
+    color: #cfcfcf;
+    vertical-align: middle;
+}
+
+.textdiv {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 0.8em;
+}
+
+.tab_menu_mem {
+    outline: none;
+    cursor: pointer;
+}
+
+.btn_jaustado {
+    width: 125px;
+    height: 27px;
+    font-size: 0.8em;
+    margin: 10px 0px 10px 49px;
+}

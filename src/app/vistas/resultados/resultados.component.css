@@ -1,0 +1,99 @@
+.parts_rl {
+    display: inline-block;
+    width: 31%;
+    background: #333333;
+    border: 1px solid #303030;
+    margin: 6px;
+    color: #272727;
+    padding: 0px;
+    line-height: 0;
+}
+
+.titulo_rl {
+    color: #a7a7a7;
+    font-size: 12px;
+    display: inherit;
+    line-height: 1.5;
+}
+
+.equipos_rl {
+    width: 85%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.caballo_rl {
+    border-bottom: 1px solid #303030;
+}
+
+.equipos_rl .equipo_rl:nth-child(2) {
+    border-top: 1px solid #545454;
+}
+
+.equipo_rl {
+    line-height: 1;
+    text-align: left;
+    height: 30px;
+}
+
+.seleccional {
+    font-size: 1.2em;
+    background: none;
+    border: none;
+    outline: none;
+    padding-top: 3px;
+}
+
+.equipo_rl div,
+.equipo_rl select {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    font-size: 1.1em;
+    padding: 5px;
+    background: #404040;
+    color: #C3C3C3;
+}
+
+.caja_rl {
+    width: 20%;
+    border-left: 1px solid #545454;
+    text-align: center;
+}
+
+.name_rl,
+.cab_rl {
+    width: 80%;
+}
+
+.cab_rl {
+    height: 30px;
+    border: none;
+    outline: none;
+    background: #404040;
+}
+
+.boton_rl {
+    display: inline-block;
+    width: 15%;
+    font-size: 1.4em;
+    padding-top: 18px;
+    height: 60px;
+    background: #BBBBBB;
+    border: #BBBBBB 1px solid;
+    cursor: pointer;
+}
+
+.btn_cab {
+    height: 90px;
+    padding-top: 28px;
+}
+
+.boton_rl:hover {
+    background: #545454;
+    border: #545454 1px solid;
+}
+
+.carreras_rl .equipo_rl:nth-child(2) {
+    border-top: none;
+}

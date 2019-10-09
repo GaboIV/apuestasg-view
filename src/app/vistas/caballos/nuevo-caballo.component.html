@@ -1,0 +1,33 @@
+<app-menu-caballos></app-menu-caballos>
+<div>
+    <div class="botonoes">
+        <div (click)="cargarMadrillasUI('borrar')"><i class="fas fa-sync" id="act_yeg"></i>&nbsp;&nbsp;&nbsp;Actualizar yeguas madre</div>
+        <div (click)="cargarPadrillosUI('borrar')"><i class="fas fa-sync" id="act_pad"></i>&nbsp;&nbsp;&nbsp;Actualizar padrillos</div>
+        <div (click)="cargarHarasUI('borrar')"><i class="fas fa-sync" id="act_har"></i>&nbsp;&nbsp;&nbsp;Actualizar haras</div>
+    </div>
+    <div class="cuerpo_">
+        <div class="planilla_hrs">
+            <div class="caption_hrs">Agregar un ejemplar</div>
+            <div class="c_planilla_hrs">
+                <form name="invfrm" id="invfrm" action="" method="post" enctype="multipart/form-data" autocomplete="on">
+                    <div class="codigo_planilla">Nombre:</div><input type="text" name="name_hrs" class="ipt_planilla_hrs" id="nombre_hrs" [(ngModel)]="caballo.nombre">
+                    <div class="codigo_planilla">Sexo:</div><select name="sexo_hrs" [(ngModel)]="caballo.sexo" id="sexo_hrs" class="ipt_planilla_hrs">
+                            <option value="1">Caballo</option>
+                            <option value="2">Yegua</option>
+                          </select>
+                    <div class="codigo_planilla">Fecha:</div><input style="margin-bottom: 4px;" type="date" name="dia_hrs" class="ipt_planilla_hrs" [(ngModel)]="caballo.nacimiento">
+                    <div class="codigo_planilla">Padre:</div><input id="padre_hrs" [(ngModel)]="caballo.padre" type="text" name="padre_hrs" class="sel_planilla_pad">
+                    <div class="button_add_hrs">+</div>
+                    <div class="codigo_planilla">Madre:</div><input id="madre_hrs" [(ngModel)]="caballo.madre" type="text" name="madre_hrs" class="sel_planilla_pad" autocomplete="off">
+                    <div class="button_add_hrs">+</div>
+                    <div class="codigo_planilla">Haras:</div><input type="text" autocomplete="off" id="haras_hrs" [(ngModel)]="caballo.id_haras" name="haras_hrs" class="sel_planilla_pad">
+                    <div class="button_add_hrs">+</div>
+                </form>
+            </div>
+            <div class="botones_hrs">
+                <div class="cancelar_hrs btn_hrs" id="can_hrs" [routerLink]="['/caballos']">Cancelar</div>
+                <div class="aceptar_hrs btn_hrs" id="acp_hrs" (click)="enviarDatos()">Aceptar</div>
+            </div>
+        </div>
+    </div>
+</div>

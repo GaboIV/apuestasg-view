@@ -1,0 +1,72 @@
+<div class="buscador_it_001"><input #caja type="text" name="search_eq" placeholder="Buscar un equipo" class="search_eq" (keyup.enter)="buscarElemento(caja.value)"></div>
+<div class="equipos">
+    <div class=" ">
+        <div class="normal_table" cellspacing="0" border="0">
+            <div class="thead_nt">
+                <div class="tr_th_nt tr_col1">
+                    ID
+                </div>
+                <div class="tr_th_nt tr_col2">
+                    Nombre de Pais
+                </div>
+                <div class="tr_th_nt tr_col3">
+                    Iso (2)
+                </div>
+                <div class="tr_th_nt tr_col4">
+                    Iso (3)
+                </div>
+                <div class="tr_th_nt tr_col5">
+                    Ligas
+                </div>
+                <div class="tr_th_nt tr_col6">
+                    N° de Equipos
+                </div>
+                <div class="tr_th_nt tr_col7">
+                    Imagen
+                </div>
+                <div class="tr_th_nt tr_col8">
+                    Importancia
+                </div>
+                <div class="tr_th_nt tr_col9">
+                    Continente
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <table width="100%" id="tabla_equipos">
+        <tbody>
+            <tr class="par_th_nt" *ngFor="let pais of nacionalidades ">
+                <td width="5%" align="center">{{ pais.id_lista_p }}</td>
+                <td width="20%" class="ch_dv_nt">
+                    <p (click)="cambiarEdit()" *ngIf="mostrarEdit === false">{{ pais.nombre }}</p>
+                    <input type="text" [value]="pais.nombre" *ngIf="mostrarEdit === true" [(ngModel)]="pais.nombre" (focusout)="ocultarEdit( pais )">
+                </td>
+                <td width="6%" align="center">
+                    {{pais.acro_2}}
+                </td>
+                <td width="7%" align="center">
+                    {{pais.acro_3}}
+                </td>
+                <td width="16%" align="center">
+                    <div class='dep_tab_pai'>No hay ligas asignadas</div>
+                </td>
+                <td width="16%" align="center">
+                    <div class='dep_tab_pai'>No hay equipos asignados</div>
+                </td>
+                <td width="7%" align="center">
+                    <label style="cursor: pointer; position: relative; height: 60px;">
+                        <img [src]="pais.img | imagen:'nacionalidad'" alt="" height="50px;">
+                        <br>
+                        <input type="file" name="imagenSubir" (change)="subirImagen($event, pais)" style="display: none">
+                    </label>
+                </td>
+                <td width="7%" align="center">
+                    {{pais.importancia}}
+                </td>
+                <td width="16%" align="center">
+                    <div class='dep_tab_pai'>No hay continente asignado</div>
+                </td>
+            </tr>
+        </tbody>
+    </table>

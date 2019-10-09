@@ -1,0 +1,60 @@
+<app-menu-caballos></app-menu-caballos>
+<div *ngIf="nuevo === null">
+    <div class='cada_hrs pan_hrs' style="text-align: center; height: 95px;">
+        <div style="width: 50%; display: inline-block; vertical-align: middle">
+            <input type="text" placeholder="Buscar un hipódromo" (keyup)="buscarHipodromo( $event.target.value )" class="inpiut">
+        </div>
+        <div style="width: 50%; display: inline-block; vertical-align: middle; text-align: left;">
+            <div style="margin-bottom: 5px;" (click)="empezarNuevo()" class="update">
+                <i class="far fa-plus-square" style="font-size: 1.7em; vertical-align: sub; padding-right: 6px;"></i>Agregar
+            </div>
+            <div class="update" (click)="cargarHipodromos()">
+                <i id="spinact" class="fas fa-sync" style="font-size: 1.5em; vertical-align: sub; padding-right: 6px;"></i>Actualizar
+            </div>
+        </div>
+    </div>
+
+    <ng-container *ngIf="hipos?.length === 0">
+        <div class='cada_hrs' style="height: 95px;" *ngFor="let hipo of hipodromos">
+            <div class='name_hrs'>{{hipo.descripcion}}</div><br>
+            <div class='d_padre_hrs'>Ubicación: </div>
+            <div class='padre_hrs'>{{hipo.ubicacion}}</div>
+            <div class='d_padre_hrs'>Acro: </div>
+            <div class='padre_hrs'>{{hipo.acro}}</div>
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="hipos?.length > 0">
+        <div class='cada_hrs' style="height: 95px;" *ngFor="let hipo of hipos">
+            <div class='name_hrs'>{{hipo.descripcion}}</div><br>
+            <div class='d_padre_hrs'>Ubicación: </div>
+            <div class='padre_hrs'>{{hipo.ubicacion}}</div>
+            <div class='d_padre_hrs'>Acro: </div>
+            <div class='padre_hrs'>{{hipo.acro}}</div>
+        </div>
+    </ng-container>
+</div>
+
+<div *ngIf="nuevo !== null">
+    <div class="cuerpo_">
+        <div class="planilla_hrs">
+            <div class="caption_hrs">Agregar un hipódromo</div>
+            <div class="c_planilla_hrs">
+                <form>
+                    <div class="codigo_planilla">Nombre:</div>
+                    <input type="text" name="desc_hip" class="ipt_planilla_hrs" id="desc_hip" [(ngModel)]="hipodromo.descripcion">
+
+                    <div class="codigo_planilla">Acrónimo:</div>
+                    <input type="text" name="acro_hip" class="ipt_planilla_hrs" id="nombre_hrs" [(ngModel)]="hipodromo.acro">
+
+                    <div class="codigo_planilla">Ubicación:</div>
+                    <input type="text" name="ubi_hip" class="ipt_planilla_hrs" id="nombre_hrs" [(ngModel)]="hipodromo.ubicacion">
+                </form>
+            </div>
+            <div class="botones_hrs">
+                <div class="cancelar_hrs btn_hrs" id="can_hrs" (click)="resetPage()">Cancelar</div>
+                <div class="aceptar_hrs btn_hrs" id="acp_hrs" (click)="enviarDatos()">Aceptar</div>
+            </div>
+        </div>
+    </div>
+</div>

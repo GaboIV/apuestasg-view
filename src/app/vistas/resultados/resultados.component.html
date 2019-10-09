@@ -1,0 +1,76 @@
+<div>
+    <div class="buscador_it_001">
+        <select name="seleccionDeporte" id="seleccionDeporte" (change)="seleccionDeporte($event.target.value)" class="seleccional">
+          <option value="0">Seleccione un deporte</option>
+          <option *ngFor="let deporte of deportes " value={{deporte.id_categoria}}>{{ deporte.descripcion }}</option>
+        </select>
+
+        <ng-container *ngIf="ligas?.length > 0 && ligas[0].nombre_liga">
+            <select name="seleccionLiga" id="seleccionLiga" (change)="seleccionLiga($event.target.value)" class="seleccional" style="margin-left: 10px;">
+                <option value="0">Seleccione una liga</option>
+                <option *ngFor="let liga of ligas " value={{liga.id_liga}}>{{ liga.nombre_liga }}</option>      
+            </select>
+        </ng-container>
+
+        <ng-container *ngIf="ligas?.length > 0 && ligas[0].descripcion">
+            <select name="seleccionHipodromo" id="seleccionHipodromo" (change)="seleccionHipodromo($event.target.value)" *ngIf="ligas?.length > 0" class="seleccional" style="margin-left: 10px;">           
+                <option value="0">Seleccione un hipódromo</option>
+                <option *ngFor="let liga of ligas " value={{liga.id_hipodromo}}>{{ liga.descripcion }}</option>  
+            </select>
+        </ng-container>
+    </div>
+
+    <div style="text-align: center">
+        <ng-container *ngIf="partidos?.length > 0">
+            <div *ngFor="let part of partidos;" class="parts_rl" id="{{part.id_partido}}">
+                <div class="titulo_rl">
+                    {{part.fecha_inicio}}
+                </div>
+                <div class="equipos_rl">
+                    <div *ngFor="let eq of part.equipos; let i = index" class="equipo_rl">
+                        <div class="name_rl">{{eq.nombre}}</div>
+                        <div class="caja_rl" id="RL{{i}}{{part.id_partido}}" contenteditable="true">{{eq.resultado}}</div>
+                    </div>
+                </div>
+                <div class="boton_rl" (click)="enviarRL(part.id_partido, part.id_categoria, part.equipos[0].id_ta)">
+                    <i class="far fa-check-square"></i>
+                </div>
+            </div>
+        </ng-container>
+
+        <ng-container *ngIf="carreras?.length > 0">
+            <div *ngFor="let carr of carreras" class="parts_rl" id="{{carr.id_carrera}}">
+                <div class="titulo_rl">
+                    {{carr.fecha_hora}} - Carrera {{carr.numero}}
+                </div>
+                <div class="equipos_rl carreras_rl">
+                    <div class="equipo_rl caballo_rl">
+                        <select name="" id="{{carr.id_carrera}}cab1" class="cab_rl" [disabled]="carr.cuadro[0].ejemplar !== null">
+                            <option value="0">Selecciona al 1er lugar</option>
+                            <option *ngFor="let cab of carr.caballos " [selected]="cab.id_inscripcion === carr.cuadro[0].ejemplar" value={{cab.id_inscripcion}}>{{ cab.nombre }}</option>              
+                        </select>
+                        <div class="caja_rl" id="{{carr.id_carrera}}div1" contenteditable="true"><span *ngIf="carr.cuadro?.length > 0" class="cab_rl">{{ carr.cuadro[0].cuota }}</span></div>
+                    </div>
+                    <div class="equipo_rl caballo_rl">
+                        <select name="" id="{{carr.id_carrera}}cab2" class="cab_rl" [disabled]="carr.cuadro[1].ejemplar !== null">
+                            <option value="0">Selecciona al 2do lugar</option>
+                            <option *ngFor="let cab of carr.caballos " [selected]="cab.id_inscripcion === carr.cuadro[1].ejemplar" value={{cab.id_inscripcion}}>{{ cab.nombre }}</option>              
+                        </select>
+                        <div class="caja_rl" id="{{carr.id_carrera}}div2" contenteditable="true"><span *ngIf="carr.cuadro?.length > 0" class="cab_rl">{{ carr.cuadro[1].cuota }}</span></div>
+                    </div>
+                    <div class="equipo_rl">
+                        <select name="" id="{{carr.id_carrera}}cab3" class="cab_rl" [disabled]="carr.cuadro[2].ejemplar !== null">
+                            <option value="0">Selecciona 3er lugar</option>
+                            <option *ngFor="let cab of carr.caballos " [selected]="cab.id_inscripcion === carr.cuadro[2].ejemplar" value={{cab.id_inscripcion}}>{{ cab.nombre }}</option> 
+                        </select>
+                        <div class="caja_rl" id="{{carr.id_carrera}}div3" contenteditable="true"><span *ngIf="carr.cuadro?.length > 0" class="cab_rl">{{ carr.cuadro[2].cuota }}</span></div>
+                    </div>
+                </div>
+                <div class="boton_rl btn_cab" (click)="enviarCB(carr.id_carrera)">
+                    <i class="far fa-check-square"></i>
+                </div>
+            </div>
+        </ng-container>
+
+    </div>
+</div>

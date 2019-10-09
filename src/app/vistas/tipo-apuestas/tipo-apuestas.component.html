@@ -1,0 +1,56 @@
+<div class="equipos">
+    <div class=" ">
+        <div class="normal_table" cellspacing="0" border="0">
+            <div class="thead_nt">
+                <div class="tr_th_nt tr_col1">
+                    ID
+                </div>
+                <div class="tr_th_nt tr_col2">
+                    Deporte
+                </div>
+                <div class="tr_th_nt tr_col3">
+                    Nombre de Apuesta (WH)
+                </div>
+                <div class="tr_th_nt tr_col4">
+                    Nombre de Apuesta (BZ)
+                </div>
+                <div class="tr_th_nt tr_col5">
+                    Sufijo en ticket
+                </div>
+                <div class="tr_th_nt tr_col6">
+                    Importancia
+                </div>
+                <div class="tr_th_nt tr_col7">
+                    Indice
+                </div>
+                <div class="tr_th_nt tr_col8">
+                    Agregado
+                </div>
+            </div>
+        </div>
+
+        <table width="100%" id="tabla_equipos">
+            <tbody>
+                <tr class="par_th_nt" *ngFor="let tipo of tipoApuestas ">
+                    <td width="5%" align="center">{{ tipo.id_ta }}</td>
+                    <td width="12%">{{ tipo.id_categoria }}</td>
+                    <td width="19%">{{ tipo.descripcion_wihi_ta }}</td>
+                    <td contenteditable="false" width="19%" class="ch_dv_nt">
+                        <p (click)="cambiarEdit()" *ngIf="mostrarEdit === false">{{ tipo.descripcion_ta }}</p>
+                        <input type="text" [value]="tipo.descripcion_ta" *ngIf="mostrarEdit === true" [(ngModel)]="tipo.descripcion_ta" (focusout)="ocultarEdit( tipo )">
+                    </td>
+                    <td width="12%">
+                        {{tipo.opcion}}
+                    </td>
+                    <td width="11%">
+                        {{tipo.importancia}}
+                    </td>
+                    <td width="11%" align="center">
+                        {{tipo.indice}}
+                    </td>
+                    <td width="11%">
+                        {{tipo.agregado}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>

@@ -1,0 +1,83 @@
+<div class='body_histo'>
+    <div class='menu_barra_mem'>
+        <div class='btn_deposit tmm_select' style="cursor: pointer; background: #fff700" [routerLink]="['/deposito']" routerLinkActive="router-link-active">Depósito</div>
+        <div class='tab_menu_mem' [routerLink]="['/bancos']" routerLinkActive="router-link-active">Bancos</div>
+        <div class='tab_menu_mem' [routerLink]="['/mi-cuenta']" routerLinkActive="router-link-active">Mi cuenta</div>
+        <div class='tab_menu_mem ' routerLink="/historial/{{_inicioSesion.usuario.token}}" routerLinkActive=" router-link-active">Historial</div>
+        <div class='tab_menu_mem' [routerLink]="['/promociones']" routerLinkActive="router-link-active">Promociones</div>
+        <div class='tab_menu_mem' [routerLink]="['/mensajes']" routerLinkActive="router-link-active">Mensajes</div>
+    </div>
+
+    <!-- <div class='ter_membrete'>
+      <div class='sem_opc'>Deportes</div>
+      <div class='sem_opc'>Carreras Hípicas</div>
+  </div> -->
+
+    <div class="cuerpo_reg ">
+        <div class="cabecera_c_r ">
+            <div class="titulo_c_c_r ">
+                <b>Notificación de Depósito (VEF)</b>
+            </div>
+            <div class="dato_c_c_r ">
+                Saldo: <span><b>Bs. {{ _inicioSesion.usuario.disponible | montos:'decimal' }}</b></span>
+            </div>
+        </div>
+
+
+
+        <form #f="ngForm" ngNativeValidate class="" (ngSubmit)="guardarPago(f)">
+            <div class="dep_parte">
+                <label for="" class="">Banco origen*</label>
+                <div class="">
+                    <select [(ngModel)]="pago.banco_id" name="cuenta_id" class="">       
+                      
+                      <option *ngFor="let banco of bancos" [value]="banco.id_banco">{{ banco.nombre }} - {{ banco.inicial }}</option>
+                  </select>
+                </div>
+                <label for="" class="">Cuenta destino*</label>
+                <div class="">
+                    <select [(ngModel)]="pago.cuenta_id" name="banco_id" class="">                                
+                        <option *ngFor="let cuenta of cuentas" [value]="cuenta.id_cuenta">{{ cuenta.banco_id[0].nombre }} - {{ cuenta.numero }}</option>
+                  </select>
+                </div>
+            </div>
+            <div class="dep_parte">
+                <label for="" class="">Cédula de titular*</label>
+                <div class="">
+                    <div class="">
+                        <input autocomplete="off" [(ngModel)]="pago.cedula" name="cedula" type="text" class="" id="" placeholder="Documento del titular de la cuenta origen">
+                    </div>
+                </div>
+
+                <label for="" class="">Monto abonado*</label>
+                <div class="">
+                    <div class="">
+                        <input autocomplete="off" [(ngModel)]="pago.monto" name="monto" type="text" class="" id="" placeholder="Bolívares del abono">
+                    </div>
+                </div>
+
+                <label for="" class="">Fecha del pago*</label>
+                <div class="">
+                    <div class="">
+                        <input autocomplete="off" [(ngModel)]="pago.fecha_realizada" name="monto" type="date" class="" id="" placeholder="Fecha de realizada el pago">
+                    </div>
+                </div>
+
+                <label for="" class="">Referencia*</label>
+                <div class="">
+                    <div class="">
+                        <input autocomplete="off" [(ngModel)]="pago.referencia" name="monto" type="number" class="" id="" placeholder="Fecha de realizada el pago">
+                    </div>
+                </div>
+            </div>
+
+
+            <br><br>
+
+
+            <div class="dep_btn">
+                <div class="">
+                    <button type="submit" class="brr_izq_menu" style="border: none; padding-top: 0px; font-size: 1em;">Registrar en el sistema</button>
+                </div>
+            </div>
+        </form>

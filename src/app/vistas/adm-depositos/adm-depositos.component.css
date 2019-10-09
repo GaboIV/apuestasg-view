@@ -1,0 +1,85 @@
+.tr_th_nt {
+    text-align: center
+}
+
+.tr1 {
+    width: 5%;
+}
+
+.tr2 {
+    width: 8%;
+}
+
+.tr3 {
+    width: 10%;
+}
+
+.tr4,
+.tr5 {
+    width: 14%
+}
+
+.tr6,
+.tr7 {
+    width: 12%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.tr8 {
+    width: 10%;
+}
+
+.tr9 {
+    width: 8%;
+}
+
+.tr10 {
+    width: 7%;
+}
+
+.status {
+    position: relative;
+}
+
+.aprobado {
+    color: blue;
+}
+
+.rechazado {
+    color: red;
+}
+
+.cambioS {
+    position: absolute;
+    top: 29px;
+    z-index: 1;
+}
+
+.cambioS div {
+    height: 29px;
+    padding: 6px 10px 5px 10px;
+    cursor: pointer;
+    color: #272727;
+}
+
+.cambioS div:hover {
+    background: #F4F5F5;
+}
+
+.mCSB_container {
+    overflow: initial;
+}
+
+.tr10 .cambioS {
+    display: none;
+    background-color: white;
+    border-radius: 3px;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26), 0 2px 10px 0 rgba(0, 0, 0, 0.16);
+    padding: 9px 0px;
+}
+
+.tr10:hover .cambioS {
+    display: block;
+}

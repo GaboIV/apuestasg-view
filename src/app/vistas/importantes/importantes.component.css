@@ -1,0 +1,178 @@
+    .mCSB_inside>.mCSB_container {
+        margin-right: 2px;
+    }
+    
+    .gen_imp_eq {
+        /*border-left: 1px solid #6e6e6e;
+        border-right: 1px solid #6e6e6e;*/
+        padding: 7px 10px;
+        font-size: 13px;
+        height: 36px;
+        background-color: #efefef;
+        display: inline-block;
+        cursor: pointer;
+        color: #666;
+        position: relative;
+    }
+    
+    .gen_imp_eq:hover {
+        background: #ffdf1b;
+        color: #444;
+    }
+
+    .gen_imp_eq:hover .ep_cl_logro {
+        font-weight: bold;
+        color: #444;
+    }
+    
+    .eq_dos {
+        width: 50%;
+    }
+    
+    .dato_eq {
+        padding: 4px 10px 7px 20px;
+        height: 47px;
+        font-size: 14px;
+        overflow: initial;
+    }
+    
+    .dato_eq .ep_cl_name {
+        width: 85%;
+    }
+    
+    .dato_eq .ep_cl_logro {
+        width: 15%;
+        font-size: 1.3em;
+        padding-top: 9px;
+    }
+    
+    .eq_tres {
+        width: 37.5%;
+    }
+    
+    .eq_tres_emp {
+        width: 25% !important;
+        border: none;
+    }
+    
+    .ep_logo {
+        top: 3px;
+        left: 7px;
+        height: 80%;
+        position: absolute;
+    }
+    
+    .eq_tres_emp .ep_cl_name {
+        width: 70%;
+        padding-left: 0px;
+    }
+    
+    .dato_eq .pitcher_eq {
+        font-size: 0.70em;
+        margin-top: -2px;
+        display: block !important;
+    }
+    
+    .retirado {
+        position: absolute;
+        color: #efefef;
+        font-size: 2.3em;
+        top: 4px;
+        left: -10px;
+    }
+    
+    .a_g_r:hover {
+        color: #ccc !important;
+        cursor: not-allowed !important;
+        background-color: #5e5e5e !important;
+    }
+    
+    .iframe {
+        margin-top: -65px;
+    }
+    
+    .tapalogo {
+        position: absolute;
+        top: 4px;
+        right: 0px;
+        height: 26%;
+        width: 27%;
+        background: #efefef;
+        text-align: center;
+        padding-top: 3.5%;
+        color: #cdcdcd;
+    }
+    
+    .datetime {
+        margin: 0 20px;
+        background: #272727;
+        border: none;
+        height: 22px;
+        outline: none;
+        border-radius: 4px;
+        text-align: center;
+        color: #cfcfcf;
+    }
+    
+    .img_dest {
+        background: green;
+        height: 90px;
+        width: 100%;
+        /* background: url(../../../assets/banners/1.jpg) no-repeat center center; */
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        overflow: hidden;
+        text-align: center;
+        padding-top: 5px;
+    }
+    
+    .versus {
+        vertical-align: middle;
+        font-size: 2.2em;
+        font-weight: bold;
+    }
+    
+    .letra {
+        display: inline-block;
+        width: 20%;
+        vertical-align: middle;
+        font-size: 1em;
+        font-weight: bold;
+    }
+    
+    .letra_color {
+        color: brown;
+    }
+    
+    .lizq {
+        text-align: right;
+        padding-right: 10px;
+    }
+    
+    .lder {
+        text-align: left;
+        padding-left: 10px;
+        max-height: 70px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
+    .img_dest .ep_logo {
+        vertical-align: middle;
+        -webkit-filter: drop-shadow(8px 8px 10px #efefef);
+        /* Safari */
+        filter: drop-shadow(8px 8px 10px#efefef);
+        height: 88%;
+    }
+    
+    .redondo {
+        border-bottom: 4px solid whitesmoke;
+        border-radius: 100px;
+    }
+
+    .mCSB_horizontal.mCSB_inside > .mCSB_container {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }

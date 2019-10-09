@@ -1,0 +1,158 @@
+<div class='body_histo'>
+    <div class='menu_barra_mem'>
+        <div class='btn_deposit' style="cursor: pointer" [routerLink]="['/deposito']" routerLinkActive="router-link-active">Depósito</div>
+        <div class='tab_menu_mem' [routerLink]="['/bancos']" routerLinkActive="router-link-active">Bancos</div>
+        <div class='tab_menu_mem' [routerLink]="['/mi-cuenta']" routerLinkActive="router-link-active">Mi cuenta</div>
+        <div class='tab_menu_mem tmm_select' routerLink="/historial/{{_inicioSesion.usuario.token}}" routerLinkActive=" router-link-active">Historial</div>
+        <div class='tab_menu_mem' [routerLink]="['/promociones']" routerLinkActive="router-link-active">Promociones</div>
+        <div class='tab_menu_mem' [routerLink]="['/mensajes']" routerLinkActive="router-link-active">Mensajes</div>
+    </div>
+
+    <!-- <div class='ter_membrete'>
+        <div class='sem_opc'>Deportes</div>
+        <div class='sem_opc'>Carreras Hípicas</div>
+    </div> -->
+
+    <div class="cuerpo_reg ">
+        <div class="cabecera_c_r ">
+            <div class="titulo_c_c_r ">
+                <b>Historial de cuenta (VEF)</b>
+            </div>
+            <div class="dato_c_c_r ">
+                Saldo: <span><b>Bs. {{ _inicioSesion.usuario.disponible | montos:'decimal' }}</b></span>
+            </div>
+        </div>
+
+        <div class="cuerpo_c_r ">
+            <div class="forma_comp " style='padding-bottom: 0px; '>
+                <div class="subtitle ">
+                    Tipo de Historial:
+                </div>
+                <div class="subinput ">
+                    <select class="inpt_reg " id="nro1 " name='pais' (change)="cargarTicketes($event.target.value)">
+                        <option value="1">Todos los tickets</option>
+                        <option value="2">Tickets Pendientes</option>
+                        <option value="3">Tickets Finalizados</option>
+                        <!-- <option value="4">Movimientos de dinero</option> -->
+                    </select>
+                </div>
+                <div class="submsj ">
+                    <div class="msj_reg nro1 ">
+                        <div class="tmsj_reg ">Introduzca su pais de residencia</div>
+                        <div class="cpo_reg "><b>¿Necesitas ayuda?</b></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="forma_comp " style='padding: 8px 0px 4px 0px; font-size: 0.8em;'>
+                <ul>
+                    <li style='padding-top: 3px;'>
+                        <input type="radio" id="f-option " name="selector " checked="true ">
+                        <label for="f-option ">Últimas 24 horas</label>
+                        <div class="check "></div>
+                    </li>
+                    <li style='padding-top: 3px;'>
+                        <input type="radio" id="s-option " name="selector ">
+                        <label for="s-option ">Últimas 48 horas</label>
+                        <div class="check ">
+                            <div class="inside "></div>
+                        </div>
+                    </li>
+                    <li style='padding-top: 3px;'>
+                        <input type="radio" id="t-option " name="selector ">
+                        <label for="t-option " style='margin-right: 15px;'>Rango</label>
+                        <div class="check ">
+                            <div class="inside "></div>
+                        </div>
+                    </li>
+                    <li>
+                        <input type="text " class="inpt_reg fdn fecha " name='anyo' id="nro47 ">
+                        <input type="text " class="inpt_reg fdn fecha " name='anyo' id="nro47 ">
+                        <div class='btn_ver'>Ver</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="cuerpo_c_r " *ngFor="let tk of tickets ">
+            <div class="forma_comp " style='padding-bottom: 0px; font-size: 0.75em; '>
+                <div class='tabla_pend'>
+                    <div class='col col_nro'>
+                        #
+                    </div>
+                    <div class='col col_sel'>
+                        Selecciones
+                    </div>
+                    <div class='col col_dat'>
+                        Fecha y Hora
+                    </div>
+                    <div class='col col_cuo'>
+                        Cuota total
+                    </div>
+                    <div class='col col_apo' style="text-align: center ">
+                        Apostado
+                    </div>
+                    <div class='col col_win'>
+                        A Ganar
+                    </div>
+
+                    <div class='col col_nro'>
+                        {{tk.id_1_x_34PRLY}}
+                    </div>
+                    <div class='col col_sel'>
+
+                        <div class='daterio'>
+                            {{tk.correlativo}}
+                        </div>
+                        <div class='daterio'>
+                            {{tk.cod_seguridad}}
+                        </div>
+                        <div style="display: inline-block; vertical-align: middle; width: 94%; ">
+                            <div class='selecea' *ngFor="let sel of tk.selecciones ">
+                                <ng-container *ngIf="sel.id_deporte==='27' ">
+                                    <div class='c_sele'>({{sel.id_select.numero}}) {{sel.id_select.id_caballo.nombre}} <span *ngIf="sel.valor !==n ull "> @ {{sel.valor | number:'1.2'}} </span>
+                                        <span class='banner_histo' *ngIf="sel.id_select.status==='0' ">Pendiente</span>
+                                        <span class='banner_histo ganadeivis' *ngIf="sel.id_select.status==='1' ">Ganador</span>
+                                        <span class='banner_histo pendeivis' *ngIf="sel.id_select.status==='2' ">Segundo</span>
+                                        <span class='banner_histo pendeivis' *ngIf="sel.id_select.status==='3' ">Tercero</span>
+                                        <span class='banner_histo pendeivis' *ngIf="sel.id_select.status==='99' ">No figuró</span>
+                                    </div>
+
+                                    <div class='enc_sele'>Carrera {{sel.id_select.id_carrera.numero}} de {{sel.id_select.id_carrera.id_hipodromo.descripcion}} ({{ sel.id_select.id_carrera.fecha_hora | date:'dd/MM/yyyy'}})</div>
+                                </ng-container>
+                                <ng-container *ngIf="sel.id_deporte !=='27' ">
+                                    <div class='c_sele'><b>{{sel.equipo}}</b> @ {{sel.valor | cuota:'decimal'}}
+                                        <span class='banner_histo' *ngIf="sel.status==='0' ">Pendiente</span>
+                                        <span class='banner_histo ganadeivis' *ngIf="sel.status==='1' ">Ganador</span>
+                                        <span class='banner_histo' *ngIf="sel.status==='2' ">Descartado</span>
+                                        <span class='banner_histo pendeivis' *ngIf="sel.status==='3' ">Perdedor</span>
+                                    </div>
+                                    <div class='enc_sele'>{{sel.encuentro}} ({{ sel.fecha_inicio | date:'dd/MM/yyyy'}} {{ sel.fecha_inicio | date:'shortTime'}})</div>
+                                </ng-container>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class='col col_dat'>
+                        {{ tk.fecha_hora | date:'dd/MM/yyyy'}} <br> {{ tk.fecha_hora | date:'shortTime'}}
+                    </div>
+                    <div class='col col_cuo'>
+                        <span *ngIf="tk.a_ganar===1 && tk.estatus==='0' ">Cuota según dividendo</span>
+                        <span *ngIf="tk.a_ganar===1 && tk.estatus==='3' ">---</span>
+                        <span *ngIf="tk.a_ganar> 1">{{tk.cuota | number:'1.2'}}</span>
+                    </div>
+                    <div class='col col_apo' style="text-align: center">
+                        Bs. {{tk.monto}} <br>
+                        <span class='banner_histo pendeivis' *ngIf="tk.estatus === '3'">Perdido</span>
+                    </div>
+                    <div class='col col_win'>
+                        <span *ngIf="tk.a_ganar === 1 && tk.estatus === '0'">Ganancias según dividendo</span>
+                        <span *ngIf="tk.a_ganar === 1 && tk.estatus === '3'">---</span>
+                        <span *ngIf="tk.a_ganar > 1">Bs. {{ tk.a_ganar | number:'1.2'}}</span><br>
+                        <span class='banner_histo ganadeivis' *ngIf="tk.estatus === '1'">Ganado</span>
+                    </div>
+                    <div class='separador'></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

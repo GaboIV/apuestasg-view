@@ -1,0 +1,196 @@
+<div class="div_zb_3 zb_lado">
+    <div class="title_ap_fav title_cuota bajo_verde_green" style="padding-left: 0px;">
+        <div class="padre_acubrir">
+            <div *ngIf="_inicioSesion.esperando === true" style="width: 100px; height: 80px; text-align: center; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 2;"><img src="../assets/iconos/pro.svg"></div>
+            <div class="hijo_cubre" *ngIf="_inicioSesion.esperando === true"></div>
+            <div class="sub_title_cupon ">Cupón</div>
+
+
+            <ng-container *ngIf="_inicioSesion.selecciones2?.length > 0 && _inicioSesion.ticketes2 === null">
+                <ng-container *ngIf="_inicioSesion.selecciones2?.length === 1">
+                    <div class="carga_sel_zb3">
+                        <div *ngFor="let sel2 of _inicioSesion.selecciones2">
+                            <div class="tkt_body">
+                                <div class="equis_tkt desseleccion" id="epry-577" (click)="removerSel(sel2.id_seleccion)">x</div>
+                                <div class="nom_apostado">{{sel2.equipo}}</div>
+                                <div class="carr_apostado carr_encuentro">{{sel2.encuentro}}</div>
+                                <div class="carr_apostado"><input placeholder="imp." type="number" class="monto_apostado" name="monto_apostado" [(ngModel)]="_inicioSesion.montoapuesta" (keyup)="_inicioSesion.cambioApuesta( $event.target.value )"> Dividendo: <b>{{sel2.valor | cuota:'decimal'}}</b></div>
+                            </div>
+
+                            <div class="tkt_can_all tkt_import" style="text-align: right; border-top: solid 1px #aaa;">
+                                <div>Total a ganar: <span id="aganarsolo">Bs. {{ _inicioSesion.aganar | number:'1.2-2'}}</span></div>
+                            </div>
+                            <div class="tkt_apostar" (click)="apostard()">
+                                <span class="apostar_span">APOSTAR</span>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="_inicioSesion.selecciones2?.length > 1">
+                    <div class="carga_sel_zb3">
+                        <div class="tkt_can_all">
+                            <div>Cancelar todo</div>
+                        </div>
+                        <div *ngFor="let sel2 of _inicioSesion.selecciones2">
+                            <div class="tkt_body" id="577_244">
+                                <div class="equis_tkt desseleccion" id="epry-577" (click)="removerSel(sel2.id_seleccion)">x</div>
+                                <div class="logro_tkt" id=""><b>{{sel2.valor | cuota:'decimal'}}</b></div>
+                                <div class="nom_apostado">{{sel2.equipo}}</div>
+                                <div class="carr_apostado carr_encuentro">{{sel2.encuentro}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tkt_can_all tkt_import" style="text-align: right; border-top: solid 1px #aaa;">
+                        <input [(ngModel)]="_inicioSesion.montoapuesta" type="number" class="monto_apostado ipt_sapt" (keyup)="_inicioSesion.cambioApuesta( $event.target.value )">
+                        <div>Cuota: {{ _inicioSesion.cuota | number:'1.2-2'}}</div>
+                    </div>
+                    <div class="tkt_can_all tkt_import" style="text-align: right; border-top: solid 1px #aaa;">
+                        <div>Total a ganar: <span id="aganarsolo">Bs. {{ _inicioSesion.aganar | number:'1.2-2'}}</span></div>
+                    </div>
+                    <div class="tkt_apostar" (click)="apostard()">
+                        <span class="apostar_span">APOSTAR</span>
+                    </div>
+                </ng-container>
+            </ng-container>
+
+            <ng-container *ngIf="_inicioSesion.selecciones?.length > 0 && _inicioSesion.ticketes === null">
+                <div *ngFor="let sel of _inicioSesion.selecciones">
+                    <div class='tkt_body'>
+                        <div class="equis_tkt desseleccion" id="epry-577" (click)="removerSel(sel.id_seleccion)">x</div>
+                        <div class='nom_apostado'>({{sel.id_select.numero}}) {{sel.id_select.id_caballo.nombre}}</div>
+                        <div class='carr_apostado'>
+                            Carrera {{sel.id_select.id_carrera.numero}} de {{sel.id_select.id_carrera.id_hipodromo.descripcion}} ({{ sel.id_select.id_carrera.fecha_hora | date:'dd/MM/yyyy'}})
+                        </div>
+                        <div class='carr_apostado'>
+                            <input placeholder='imp.' type='text' class='monto_apostado amt' (keyup)="query()" name='monto_apostado' [(ngModel)]="_inicioSesion.montoapuesta">
+                            <select class="select_horse_win" id="{{sel.id_seleccion}}">
+                                    <option value="1">Ganador</option>
+                                    <option value="2">Placé</option>
+                                </select>
+                        </div>
+                        <div class='carr_apostado'>Máx. Bs. 5.000,00 (Ganancias según dividendo)</div>
+                    </div>
+                </div>
+                <div class='tkt_apostar' (click)="apostar()" *ngIf="_inicioSesion.selecciones?.length > 0">
+                    <span class='apostar_span'>APOSTAR</span>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="_inicioSesion.ticketes !== null">
+                <div class='tk_generado' *ngFor="let tk of _inicioSesion.ticketes">
+                    <div>
+                        <img src="../../../../assets/iconos/logo_bz_80.png" height="34px">
+                        <div class='ttl_tk'>{{tk.cod_seguridad}}</div>
+                    </div>
+                    <div class="ttlhr">
+                        <div class="ttl_hr">Carr. {{tk.selecciones.id_select.id_carrera.numero}}</div>
+                        <div class="ttl2_hr">
+                            <div>{{ tk.selecciones.id_select.id_carrera.fecha_hora | date:'dd/MM/yyyy'}} {{ tk.selecciones.id_select.id_carrera.fecha_hora | date:'shortTime'}} </div>
+                            <div class='ttl_hipo'>{{tk.selecciones.id_select.id_carrera.id_hipodromo.descripcion}}</div>
+                        </div>
+                    </div>
+                    <div class='separador1_tk'></div>
+                    <div class="hr_r1">
+                        <div style="width: 60%; text-align: left">Bs. {{tk.monto}} a ganar</div>
+                        <div style="width: 40%; text-align: right">Bs. {{tk.monto}}</div>
+                    </div>
+                    <div class="hr_r2">
+                        {{tk.selecciones.id_select.numero}} - {{tk.selecciones.id_select.id_caballo.nombre}}
+                    </div>
+                    <div class='separador1_tk'></div>
+                    <div class="hr_r3">
+                        <div style="text-align: left">1 apuesta</div>
+                        <div>TOTAL</div>
+                        <div style="text-align: right">Bs. {{tk.monto}}</div>
+                    </div>
+                    <div class="hr_r4">{{tk.a_ganar}}</div>
+                    <div class="hr_r4">
+                        <div style="text-align: left">{{tk.correlativo}}</div>
+                        <div>{{ tk.fecha_hora | date:'dd/MM/yyyy'}}</div>
+                        <div style="text-align: right">{{ tk.fecha_hora | date:'shortTime'}}</div>
+                    </div>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="_inicioSesion.ticketes2 !== null">
+                <div class="tk_generado" *ngFor="let tk2 of _inicioSesion.ticketes2">
+                    <div class="ttl_tk"><b>www.BetZone.com.ve</b></div>
+                    <div class="ttl_tk">Ticket de Apuesta</div>
+                    <div class="ttl_tk">Identificador: {{tk2.cod_seguridad}}</div>
+                    <div class="ttl_tk">Número de Ticket: {{tk2.correlativo}}</div>
+                    <div class="ttl_tk">Fecha y Hora: {{ tk2.fecha_hora | date:'dd/MM/yyyy'}} {{ tk2.fecha_hora | date:'shortTime'}}</div>
+                    <div class="separador1_tk"></div>
+                    <div class="cada_sel_tk" *ngFor="let sel of tk2.selecciones">
+                        <div class="encuentro_sel_tk">{{sel.descripcion}} - {{sel.nombre_liga}}
+                            <div style="float: right; ">{{ sel.fecha_inicio | date:'dd/MM/yyyy'}} </div>
+                        </div>
+                        <div class="encuentro_sel_tk">
+                            <div class="text_encuentro">{{sel.encuentro}}</div>
+                            <div style="float: right; ">{{ sel.fecha_inicio | date:'shortTime'}}</div>
+                        </div>
+                        <div class="equipo_sel_tk">{{sel.equipo}} a ganar
+                            <div style="float: right; ">{{sel.dividendo | cuota:'decimal'}}</div>
+                        </div>
+                    </div>
+
+                    <div class="separador2_tk"></div>
+                    <div class="cada_sel_tk" style="padding: 10px 0;">
+                        <div class="encuentro_sel_tk">Importe de Apuesta:
+                            <div style="float: right; ">Bs. {{ tk2.monto | number:'1.2-2'}}</div>
+                        </div>
+                        <div class="encuentro_sel_tk">Cuota Total:
+                            <div style="float: right; ">{{ tk2.cuota | number:'1.2-2'}}</div>
+                        </div>
+                        <div class="equipo_sel_tk">Ganancia Posible:
+                            <div style="float: right; ">Bs. {{ tk2.a_ganar | number:'1.2-2'}}</div>
+                        </div>
+                    </div>
+                    <div class="separador2_tk"></div>
+                    <div class="cada_sel_tk">
+                        <div class="encuentro_sel_tk" style="padding: 2px; text-align: center;">*** Gracias por Preferirnos ***</div>
+                    </div>
+                </div>
+            </ng-container>
+
+            <div class="carga_sel_zb3" *ngIf="(_inicioSesion.selecciones?.length === 0 && _inicioSesion.ticketes === null && _inicioSesion.ticketes2 === null && _inicioSesion.selecciones2?.length === 0) || _inicioSesion.usuario.usuario === undefined">
+                <div class="texto_cupon">Pulse una cuota para añadir una selección</div>
+            </div>
+        </div>
+    </div>
+    <div class="tarjetas">
+        <div class="nuevo_ingreso">
+            <h3>Bonus de Ingreso</h3>
+            <div class="div_img_tarjetas">
+                <img src="../../../assets/banners/barra01.jpg" width="100%">
+            </div>
+            <div class="div_txt_tarjetas">
+                <p>Bonus de ingreso del 100%.<br>Ver condiciones.</p>
+            </div>
+        </div>
+    </div>
+    <div class="tarjetas nuevo_ingreso">
+        <h3>Primer Ingreso</h3>
+        <div class="div_img_tarjetas">
+            <img src="../../../assets/banners/barra02.jpg" width="100%">
+        </div>
+        <div class="div_txt_tarjetas">
+            <p>Hable con un operador. <br>Entérate de las promociones. </p>
+        </div>
+    </div>
+    <div class="tarjetas nuevo_ingreso">
+        <h3>0-0 Reembolso</h3>
+        <div class="div_img_tarjetas">
+            <img src="../../../assets/banners/barra03.jpg" width="100%">
+        </div>
+        <div class="div_txt_tarjetas">
+            <p>Devolución en cada partido 0-0 de fútbol. <br>Ver condiciones. </p>
+        </div>
+    </div>
+    <div class="tarjetas nuevo_ingreso">
+        <h3>Combinadas de fútbol</h3>
+        <div class="div_img_tarjetas">
+            <img src="../../../assets/banners/barra04.jpg" width="100%">
+        </div>
+        <div class="div_txt_tarjetas">
+            <p>Hasta un 100% más en combinadas de fútbol. <br>Ver condiciones. </p>
+        </div>
+    </div>
+</div>

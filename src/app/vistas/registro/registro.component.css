@@ -1,0 +1,413 @@
+.body {
+    padding: 0px;
+    margin: 10px auto;
+    width: 85%;
+    border-radius: 10px;
+    /*font-family: 'PT-SANS', sans-serif;*/
+    font-size: 1.25em;
+    background-color: #F2F2F2;
+    font-family: 'Roboto Condensed', sans-serif;
+    color: #272727;
+}
+
+.membrete {
+    background: #14805E;
+    height: 75px;
+    padding-left: 50px;
+    padding-top: 6px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.membrete img {
+    width: 180px;
+}
+
+.cuerpo_reg {
+    padding: 25px;
+}
+
+.cabecera_c_r {
+    padding: 0px 2px 10px 2px;
+    border-bottom: 1px green solid;
+}
+
+.cabecera_c_r div {
+    display: inline-block;
+    vertical-align: middle;
+    color: #545454;
+}
+
+.titulo_c_c_r {
+    width: 30%;
+}
+
+.dato_c_c_r {
+    width: 70%;
+    font-size: 0.8em;
+    text-align: right;
+}
+
+.dato_c_c_r span {
+    color: green;
+}
+
+.cuerpo_c_r {
+    padding: 5px 2px 5px 2px;
+    border-bottom: 1px #808080 solid;
+}
+
+.cuerpo_c_r p {
+    font-size: 0.7em;
+}
+
+.forma_comp {
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.subtitle,
+.subinput,
+.submsj {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 0.8em;
+}
+
+.subtitle {
+    width: 33%;
+    text-align: right;
+}
+
+.subinput {
+    width: 33%;
+    text-align: center;
+}
+
+.submsj {
+    width: 34%;
+    text-align: left;
+}
+
+.inpt_reg {
+    padding: 5px 5px 5px 10px;
+    outline: none;
+    width: 90%;
+    font-size: 0.85em;
+    border-radius: 0px;
+    border: solid #A0A0A0 1px;
+    border-radius: 2px;
+}
+
+.inpt_reg:focus,
+.inpt_reg:active {
+    border: 1px #6587BE solid;
+    border-left: 3px solid green;
+}
+
+.inpt_reg:hover {}
+
+.msj_reg {
+    position: absolute;
+    background: white;
+    top: 0px;
+    border: #05684C solid 1px;
+    font-size: 0.9em;
+    display: none;
+}
+
+.tmsj_reg {
+    padding: 5px 12px;
+    text-align: left;
+    border-bottom: #05684C solid 1px;
+    background: #EFF9F6;
+}
+
+.cpo_reg {
+    padding: 5px 12px;
+    text-align: left;
+}
+
+.ito_ini {
+    padding-top: 10px;
+}
+
+.dia_fdn {
+    width: 19% !important;
+}
+
+.mes_fdn {
+    width: 41% !important;
+}
+
+.anyo_fdn {
+    width: 27% !important;
+}
+
+.infor_sel {
+    font-size: 0.8em;
+    width: 40%;
+    margin: 0 AUTO;
+    margin-top: 15px;
+    color: #888;
+}
+
+.infor_sel .c_box {
+    padding-top: 3px;
+    vertical-align: top;
+    display: inline-block;
+    text-align: center;
+    width: 10%;
+}
+
+.infor_sel .text_box {
+    vertical-align: top;
+    display: inline-block;
+    text-align: justify;
+    width: 90%;
+}
+
+.btn_registro {
+    border: none;
+    color: #fff;
+    background-color: #14805e;
+    cursor: pointer;
+    padding: 8px 14px;
+}
+
+.btn_registro:hover {
+    color: yellow;
+}
+
+.alerta {
+    color: red;
+}
+
+#mensaje_good {
+    color: green;
+}
+
+
+/*EXCLUSIVO HISTORIAL*/
+
+.menu_barra_mem {
+    background: #007153;
+    height: 36px;
+    padding: 4px 4px 2px 4px;
+}
+
+.btn_deposit {
+    background: #F3D827;
+    border-radius: 2px;
+    border: 1px solid #473C5C;
+    color: #473C5C;
+    display: inline-block;
+    width: 115px;
+    margin-top: -6px;
+    margin-left: 20px;
+    text-align: center;
+    vertical-align: middle;
+    margin-right: 25px;
+    -webkit-box-shadow: 0 8px 6px -6px black;
+    -moz-box-shadow: 0 8px 6px -6px black;
+    box-shadow: 0 8px 6px -6px black;
+}
+
+.btn_ver {
+    background: #006A4C;
+    border-radius: 2px;
+    border: 1px solid #473C5C;
+    color: #EFEFEF;
+    display: inline-block;
+    width: 80px;
+    margin-top: 0px;
+    margin-left: 10px;
+    text-align: center;
+    vertical-align: middle;
+    height: 26px;
+    padding-top: 2px;
+    box-sizing: border-box;
+}
+
+.tab_menu_mem {
+    box-sizing: border-box;
+    display: inline-block;
+    width: 115px;
+    background: #E0E0E0;
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+    height: 38px;
+    text-align: center;
+    color: #006D58;
+    font-size: 0.90em;
+    padding-top: 7px;
+}
+
+.tmm_select {
+    background: white;
+}
+
+.ter_membrete {
+    box-sizing: border-box;
+    background: white;
+    height: 38px;
+    text-align: center;
+    padding-top: 4px;
+}
+
+.sem_opc {
+    color: #5C5A65;
+    font-size: 0.75em;
+    border: #D3D3D3 solid 1px;
+    border-radius: 2px;
+    padding: 1px 6px;
+    display: inline-block;
+    background: #F3F5F4;
+}
+
+.forma_comp ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow: auto;
+    padding-bottom: 2px;
+}
+
+ul li {
+    color: #6F6D7A;
+    position: relative;
+    float: left;
+}
+
+ul li input[type=radio] {
+    visibility: hidden;
+}
+
+ul li label {
+    position: relative;
+    z-index: 9;
+    margin-left: -10px;
+    font-size: 0.9em;
+    padding: 5px 5px 5px 30px;
+    cursor: pointer;
+    -webkit-transition: all 0.25s linear;
+}
+
+ul li:hover label {}
+
+ul li .check {
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    border: 1px solid #AAAAAA;
+    border-radius: 100%;
+    height: 14px;
+    width: 14px;
+    top: 7px;
+    left: 20px;
+    z-index: 5;
+    transition: border .25s linear;
+    -webkit-transition: border .25s linear;
+}
+
+ul li:hover .check {}
+
+ul li .check::before {
+    display: block;
+    position: absolute;
+    content: '';
+    border-radius: 50%;
+    height: 8px;
+    width: 8px;
+    top: 1px;
+    left: 1px;
+    transition: background 0.25s linear;
+    -webkit-transition: background 0.25s linear;
+}
+
+input[type=radio]:checked~.check {
+    border: 2px solid #007D58;
+}
+
+input[type=radio]:checked~.check::before {
+    background: #007D58;
+}
+
+input[type=radio]:checked~label {
+    color: #007D58;
+}
+
+.fecha {
+    width: 100px;
+}
+
+.tabla_pend {
+    border: 1px solid #CFCFCF;
+    width: 100%;
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+}
+
+.tabla_pend .col {
+    vertical-align: middle;
+    box-sizing: border-box;
+    display: inline-block;
+    padding: 8px 2px;
+}
+
+.col_nro {
+    width: 5%;
+    color: #999999;
+    text-align: center;
+}
+
+.col_sel {
+    width: 38%;
+}
+
+.col_dat {
+    text-align: center;
+    width: 15%;
+}
+
+.col_cuo {
+    width: 10%;
+    text-align: center;
+}
+
+.col_win,
+.col_apo {
+    width: 16%;
+    text-align: right;
+    padding-right: 10px !important;
+}
+
+.daterio {
+    font-size: 0.72em;
+    color: #545454;
+    display: inline-block;
+    width: 3%;
+    vertical-align: middle;
+    writing-mode: vertical-lr;
+    transform: rotate(180deg);
+}
+
+.enc_sele {
+    font-size: 0.72em;
+    color: #999999;
+    margin-bottom: 5px;
+}
+
+.selecea {
+    display: inline-block;
+    vertical-align: middle;
+    width: 90%;
+}
+
+.separador {
+    border-bottom: 1px solid #BCBCBC;
+    height: 5px;
+    width: 90%;
+    margin: 0 auto;
+    margin-bottom: 5px;
+}

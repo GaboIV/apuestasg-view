@@ -1,0 +1,103 @@
+<div class="div_zb_1 zb_lado" style="position: relative; width: 75%;">
+    <ng-container *ngFor="let carr of carrera">
+        <div class="main_nav">
+            <div routerLink="/carreras" style="cursor: pointer;" class="ico_now" [routerLink]="['/importantes', '27' ]" [queryParams]="{dia: carr.dia, carrera: carr.numero }">
+                <i class="fas fa-angle-left"></i>
+            </div>
+            <span>Carrera {{carr.numero}} {{carr.id_hipodromo.descripcion}}</span>
+            <div style="float: right;">
+                <ng-container *ngFor="let ver_carr of _caballoService.carreras">
+                    <span [routerLink]="['/verCarrera', ver_carr.id_carrera ]" [queryParams]="{dia: ver_carr.dia, carrera: ver_carr.numero }" *ngIf="(ver_carr.fecha_hora | date:'d/MM/yyyy') === (carr.fecha_hora | date:'d/MM/yyyy')" class="v_nro_carrera" [class.vc_select]="param === ver_carr.id_carrera">{{ver_carr.numero}}</span>
+                </ng-container>
+            </div>
+        </div>
+        <div class="title_ap_fav bajo_verde_green">
+            <span>{{ carr.dia }}</span>
+            <span>{{ carr.fecha_hora | date:'d/MM/yyyy' }}</span>
+            <span>{{ carr.fecha_hora | date:'shortTime'}}</span>
+            <span>Inicia en {{ regreso }}</span>
+            <span>{{ carr.distancia }} mts.</span>
+            <span *ngIf="carr.valida === '0'">No válida</span>
+            <span *ngIf="carr.valida !== '0'">{{carr.valida}}ª vál.</span>
+        </div>
+        <div class="ep_cada_liga">
+            <div style="width: 5%;">
+                Nº <br>(Puesto)
+            </div>
+
+            <div style="width: 8%;">
+                Jersey
+            </div>
+
+            <div style="width: 27%; text-align: left;">
+                Ejemplar <br> Jinete / Entrenador
+            </div>
+
+            <div style="width: 9%; text-align: left;">
+                Peso <br> Edad
+            </div>
+
+            <div style="width: 22%; text-align: left;">
+                Pedrigree <br> Haras
+            </div>
+
+            <div style="width: 22%; text-align: left;">
+                Stud <br> Tickets jugados
+            </div>
+        </div>
+        <div class='cab_inscrito' *ngFor="let ins of carr.inscritos">
+            <div class='nro_puerta'>
+                <div class='num_par'>{{ins.numero}}</div>
+                <div class='pue_par'>{{ins.puesto}}</div>
+            </div>
+            <div class='jersey_u'>
+                <img [src]="ins.id_stud.id_stud + '.png' | imagen: 'stud' " height=42px>
+            </div>
+            <div class='datos_pr' style="width: 27%;">
+                <div class='nomb_cab' *ngIf="ins.id_caballo.nombre !== ''">{{ins.id_caballo.nombre}}</div>
+                <div class='jin_cab' style="color: #999999; text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: nowrap;">
+                    <span *ngIf="ins.id_jinete !== '0'" style="color: #efefef;">{{ins.id_jinete.nombre}}</span>
+                    <span *ngIf="ins.id_jinete === '0'">Sin información <i class="fas fa-info-circle"></i></span> /
+                    <span *ngIf="ins.id_entrenador !== '0'" style="color: #efefef;">{{ins.id_entrenador.nombre}}</span>
+                    <span *ngIf="ins.id_entrenador === '0'">Sin información <i class="fas fa-info-circle"></i></span>
+                </div>
+            </div>
+            <div class='datos_pr' style="width: 9%;">
+                <div class='nomb_cab nopad'>{{ins.peso}} kgs.</div>
+                <div class='jin_cab'>
+                    <span *ngIf="ins.id_caballo.edad === '0'" style="color: #999999;"> S/I <i class="fas fa-info-circle"></i> </span>
+                    <span *ngIf="ins.id_caballo.edad !== '0'" style="color: #efefef;"> {{ins.id_caballo.edad }} </span></div>
+            </div>
+            <div class='datos_pr' style="width: 22%; ">
+                <div class='jin_cab nopad'>
+                    <span *ngIf="ins.id_caballo.padre === '0'" style="color: #999999;">Sin información <i class="fas fa-info-circle"></i></span>
+                    <div *ngIf="ins.id_caballo.padre !== '0'" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">{{ins.id_caballo.padre.nombre}} en {{ins.id_caballo.madre.nombre}}</div>
+                </div>
+                <div class='jin_cab'>
+                    <div *ngIf="ins.id_caballo.id_haras !== '0'" style="text-overflow: ellipsis;
+                    overflow: hidden;
+                    white-space: nowrap;">{{ins.id_caballo.id_haras.descripcion}}</div>
+                    <span *ngIf="ins.id_caballo.id_haras === '0'" style="color: #999999;">Sin información <i class="fas fa-info-circle"></i></span>
+                </div>
+            </div>
+            <div class='datos_pr' style="width: 22%;">
+                <div class='jin_cab nopad'>
+                    <span *ngIf="ins.id_stud === '0'" style="color: #999999;">Sin información <i class="fas fa-info-circle"></i></span>
+                    <div *ngIf="ins.id_stud !== '0'" style="text-overflow: ellipsis;
+                    overflow: hidden;
+                    white-space: nowrap;">{{ins.id_stud.descripcion}}</div>
+                </div>
+                <div class='jin_cab'>
+                    0 tickets
+                </div>
+            </div>
+            <div *ngIf="ins.status !== '2'" (click)="seleccionh( ins.id_inscripcion )" class='a_ganar' id='pry_cab-$id_inscripcion'>A<br>Ganar</div>
+            <div *ngIf="ins.status === '2'" style="font-size: 2.3em;" class='a_ganar a_g_r'>R</div>
+        </div>
+    </ng-container>
+</div>
+<div class="zona_cuota">
+    <app-cuotas></app-cuotas>
+</div>

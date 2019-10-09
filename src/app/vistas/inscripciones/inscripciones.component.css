@@ -1,0 +1,23 @@
+.ui-widget {
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 0.8em;
+}
+
+.add_hrs {
+    z-index: 6600;
+}
+
+.ui-autocomplete {
+    z-index: 6601;
+    max-height: 300px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.ui-autocomplete::-webkit-scrollbar {
+    width: 10px;
+}
+
+.ui-autocomplete:hover::-webkit-scrollbar-thumb {
+    background: #efefef;
+}

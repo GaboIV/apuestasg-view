@@ -1,0 +1,20 @@
+<app-menu-caballos></app-menu-caballos>
+<div class="planilla_hrs">
+    <div class="caption_hrs">Agregar un jinete</div>
+    <div class="c_planilla_hrs">
+        <form name="invfrm" id="invfrm" action="" method="post" enctype="multipart/form-data">
+            <div class="codigo_planilla">Nombre:</div><input type="text" id="name_hrs" name="name_hrs" class="ipt_planilla_hrs" [(ngModel)]="jinete.nombre">
+            <div class="codigo_planilla">Estatura:</div><input type="number" name="name_hrs" class="ipt_planilla_hrs" [(ngModel)]="jinete.estatura">
+            <div class="codigo_planilla">Peso:</div><input type="number" name="name_hrs" class="ipt_planilla_hrs" [(ngModel)]="jinete.peso">
+            <div class="codigo_planilla">Nacionalidad:</div>
+            <select name="" id="" class="ipt_planilla_hrs" [(ngModel)]="jinete.nacionalidad">
+              <option value="231">Venezuela</option>
+            </select>
+
+        </form>
+    </div>
+    <div class="botones_hrs">
+        <div class="cancelar_hrs btn_hrs" id="can_hrs" [routerLink]="['/jinetes']">Cancelar</div>
+        <div class="aceptar_hrs btn_hrs" id="acp_hrs" (click)="enviarDatos()">Aceptar</div>
+    </div>
+</div>

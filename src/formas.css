@@ -1,0 +1,140 @@
+.boton {
+	text-decoration: none;
+    color: #fff;
+    background: #10664B;
+    text-align: center;
+    letter-spacing: .5px;
+    -webkit-transition: background-color .2s ease-out;
+    transition: background-color .2s ease-out;
+    cursor: pointer;
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+    overflow: hidden;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    vertical-align: middle;
+    -webkit-transition: .3s ease-out;
+    transition: .3s ease-out;
+    font-size: 14px;
+    outline: 0;
+    border: none;
+    border-radius: 2px;
+    display: inline-block;
+    height: 36px;
+    line-height: 36px;
+    padding: 0 16px;
+    text-transform: uppercase;
+    vertical-align: middle;
+    -webkit-tap-highlight-color: transparent;
+    webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
+}
+
+.ef_slice:hover {
+	background-color: #14805e;
+}
+
+.form_div {
+	display: block;
+	width: 90%;
+	margin-bottom: 10px;
+}
+
+.ib {
+	display: inline-block;
+}
+
+.titulo_form {
+	width: 20%;
+}
+
+.datos_form {
+	width: 80%;
+	position: relative;
+}
+
+.select_form {
+	position: relative;
+	padding: 1px 0px;
+    border-radius: 5px;
+	white-space: initial;
+    overflow: initial;
+    text-overflow: initial;
+    font-family: 'YT Sans', 'Roboto', 'Arial', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 24px;
+    width: 100%;
+    background-color: #ffffff;
+    height: 36px;
+    line-height: 18px;
+    padding-bottom: 2px;
+    padding-left: 56px;
+    padding-right: 56px;
+   
+    outline: none;
+    box-sizing: border-box;
+    border: 1px solid rgba(0,0,0,.20);
+}
+
+.select_form:focus {
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 0px;
+	color: #272727;
+	transition: 1s ease-out;
+}
+
+.select_equipo {
+	border-top-right-radius: 0px;
+	border-bottom-right-radius: 0px;
+}
+
+.select_div {
+	border-top-left-radius: 0px;
+	border-bottom-left-radius: 0px;
+	text-align: center;
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+.resp_form {
+	max-height: 360px;
+	overflow-y: scroll;
+	position: absolute;
+	top: 36px;
+	left: 0px;
+	width: 100%;
+	background: white;
+	border-radius: 5px;
+	border-top-left-radius: 0px;
+	border-top-right-radius: 0px;
+	padding-bottom: 16px;
+	border-right: 1px solid rgba(0,0,0,.12);
+	border-left: 1px solid rgba(0,0,0,.12);
+	border-bottom: 1px solid rgba(0,0,0,.12);
+	z-index: 1;
+}
+
+.cada_resp {
+	height: 35px;
+    padding-left: 45px;
+    border-bottom: 1px solid rgba(0,0,0,.12);
+    font-family: 'Roboto', 'Noto', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    font-weight: 500;
+    white-space: initial;
+    overflow: initial;
+    text-overflow: initial;
+    font-size: 1em;
+    line-height: 35px;
+    position: relative;
+}
+
+.cada_resp:hover {
+	background: #F4F4F4;
+	cursor: pointer;
+}

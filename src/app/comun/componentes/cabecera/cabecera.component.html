@@ -1,0 +1,235 @@
+<div class="encabezado">
+
+    <div class="version">v0.13b</div>
+
+    <div class="fila1_enc">
+
+        <div class="lado logo_enc" [routerLink]="['/importantes/21']" style="outline: none; cursor: pointer;">
+
+            <img src="../../../../assets/iconos/logo_bz_1024.png" height="70px">
+
+        </div>
+        <div class="lado menu_enc">
+
+            <div class="">Deportes</div>
+
+            <div>Apuestas en vivo</div>
+
+            <div>Animalitos</div>
+
+            <div>Póker</div>
+
+        </div>
+        <div class="lado opciones_enc">
+            <ng-container *ngIf="_sesionUsuario.estatus === 'noSesion'">
+                <div class="linea1_opciones_enc">
+                    <form (submit)="loginUsuario($event)">
+                        <input type="text" placeholder="Usuario" id="usuario" style='margin-right: 5px;'>
+                        <input type="password" placeholder="Contraseña" id="contrasena">
+                        <button>IR</button>
+                    </form>
+                </div>
+                <div class="linea2_opciones_enc">
+                    <div style="width:32%;" id="registrate_che" routerLink="/registro">
+                        Regístrate
+                    </div>
+                    <div class="">
+                        Recordar contraseña
+                    </div>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="_sesionUsuario.estatus === 'Sesion'">
+                <div class='caja_sesion'>
+                    <div class='first_session'>
+                        <div class='usuario_ss'>
+                            {{_sesionUsuario.usuario.usuario}}
+                        </div>
+                        <div class='salir_ss'>
+                            <i class='fas fa-power-off' (click)="logout()" [routerLink]="['/importantes/21']"></i>
+                        </div>
+                        <div class='msj_ss' [routerLink]="['/mensajes']">
+                            <i class='far fa-envelope' style='margin-right: 5px; vertical-align: middle; '></i>2
+                        </div>
+                    </div>
+                    <div class='second_session'>
+                        <div class='saldo_ss'>
+                            <div class='sdo_grl_ss'>Bs. {{ _sesionUsuario.usuario.disponible | number:'1.2-2' }}</div> <i class='fas fa-angle-down igriega'></i>
+                        </div>
+                        <div class='opciones_ss'>
+                            <div class='seccion_ss' [routerLink]="['/deposito']">Depósito</div>
+                            <div class='seccion_ss' id='history' routerLink="/historial/{{_sesionUsuario.usuario.token}}">Historial</div>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+
+
+    </div>
+
+    <div class="fila2_enc">
+
+        <div class="lado col_1">
+
+            <div id="hora_local">{{hora}}</div>
+
+        </div>
+        <div class="lado col_2">
+
+            <div class="cada_menu_col_2">Imágenes en directo</div>
+
+            <div class="cada_menu_col_2">Ayuda</div>
+
+            <div class="seleccionador_enc cada_menu_col_2 most_lang">
+
+                <div class="fijo_enc">
+
+                    Idioma
+
+                    <span class="opcion_seleccionador_enc">&nbsp;&nbsp;Español
+
+            <span class="flecha_enc">&#9660;</span>
+
+                    </span>
+
+                </div>
+
+                <div id="flotante_lang" class="flotante_enc">
+
+                    <div class="linea_lang_enc">
+
+                        <div>English
+
+                        </div>
+                        <div>
+
+                            Español <i class="fa fa-check" aria-hidden="true"></i>
+
+                        </div>
+
+                    </div>
+
+                    <div class="linea_lang_enc">
+
+                        <div>Deutsch
+
+                        </div>
+                        <div>
+
+                            Italiano
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="seleccionador_enc cada_menu_col_2 most_cuots">
+
+                <div class="fijo_enc">
+
+                    Cuotas
+
+                    <span class="opcion_seleccionador_enc">&nbsp;&nbsp;Decimal
+
+            <span class="flecha_enc">&#9660;</span>
+
+                    </span>
+
+                </div>
+
+                <div id="flotante_cuots" class="flotante_enc fl_enc_cuotas">
+
+                    <div class="linea_lang_enc">
+
+                        <div>Fraccional</div>
+
+                    </div>
+
+                    <div class="linea_lang_enc">
+
+                        <div>
+
+                            Decimal <i class="fa fa-check" aria-hidden="true"></i>
+
+                        </div>
+
+                    </div>
+
+                    <div class="linea_lang_enc">
+
+                        <div>Americano</div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="seleccionador_enc cada_menu_col_2 most_servs">
+
+                <div class="fijo_enc">
+
+                    <span class="opcion_seleccionador_enc">&nbsp;&nbsp;Servicios
+
+            <span class="flecha_enc">&#9660;</span>
+
+                    </span>
+
+                </div>
+
+                <div id="flotante_servs" class="flotante_enc fl_enc_servs">
+
+                    <div class="linea_lang_enc">
+
+                        <div>Ayuda</div>
+
+                    </div>
+
+                    <div class="linea_lang_enc">
+
+                        <div>Juego Responsable</div>
+
+                    </div>
+
+                    <div class="linea_lang_enc">
+
+                        <div>Móvil y Tableta</div>
+
+                    </div>
+
+                    <div class="linea_lang_enc">
+
+                        <div>Imágenes en directo</div>
+
+                    </div>
+
+                    <div class="linea_lang_enc">
+
+                        <div>Promociones</div>
+
+                    </div>
+
+                    <div class="linea_lang_enc">
+
+                        <div>Bonos de Apertura</div>
+
+                    </div>
+
+                    <div class="linea_lang_enc">
+
+                        <div>Bases y Condiciones</div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

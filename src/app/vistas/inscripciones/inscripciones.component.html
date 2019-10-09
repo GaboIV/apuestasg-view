@@ -1,0 +1,43 @@
+<app-menu-caballos></app-menu-caballos>
+
+<div>
+
+    <ng-container *ngFor="let carrera of carreras">
+
+        <div class='hipo_lista' *ngIf="carrera.div">{{carrera.div}}</div>
+
+        <div class='linea_carrera spin' (click)="abrirCarrera(carrera.id_carrera)" id="carr_{{carrera.id_carrera}}">
+            <div class=" normal_tt" id="tt_{{carrera.id_carrera}}">Carrera nro. {{carrera.numero}}</div>
+            <span class='anuncio_carr' *ngIf="carrera.valida !=='0' ">{{carrera.valida}}ª válida</span>
+            <span class='anuncio_carr' *ngIf="carrera.valida==='0' ">No válida</span>
+            <span class='anuncio_carr'>{{carrera.distancia}} mts.</span>
+            <span class='anuncio_carr'>{{carrera.fecha_hora | date:'shortTime'}}</span>
+            <span class='anuncio_carr ejs_inscritos'>{{carrera.inscripcion}}</span>
+            <span class='add_ins' id='mas_{{carrera.id_carrera}}' [routerLink]="['/nuevaInscripcion', carrera.codigo ]">+</span>
+        </div>
+        <div style="display: none;" id="{{carrera.id_carrera}}_id">
+            <div class='cab_inscrito' *ngFor="let ins of carrera.inscritos">
+                <div class='nro_puerta'>
+                    <div class='num_par'>{{ins.numero}}</div>
+                    <div class='pue_par'>{{ins.puesto}}</div>
+                </div>
+                <div class='jersey_u'><img [src]="ins.id_stud.id_stud + '.png' | imagen: 'stud' " height=50px></div>
+                <div class='datos_pr'>
+                    <div class='nomb_cab'>{{ins.id_caballo.nombre}}</div>
+                    <div class='jin_cab'>{{ins.id_jinete.nombre}} - {{ins.id_entrenador.nombre}}</div>
+                </div>
+                <div class='datos_pr'>
+                    <div class='jin_cab nopad'>Peso: {{ins.peso}}</div>
+                    <div class='jin_cab'><span>Stud: {{ins.id_stud.descripcion}}</span><span *ngIf="ins.id_stud2.descripcion !=='' "> / {{ins.id_stud2.descripcion}}</span></div>
+                </div>
+                <div class='datos_pr'>
+                    <div class='jin_cab nopad'>Pedigree: {{ins.id_caballo.padre.nombre}} en {{ins.id_caballo.madre.nombre}}</div>
+                    <div class='jin_cab'>Haras: <span></span>{{ins.id_caballo.id_haras.descripcion}}</div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </ng-container>
+</div>

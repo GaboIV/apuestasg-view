@@ -1,0 +1,41 @@
+.tr_col1 {
+    width: 5%;
+    border-left: none;
+}
+
+.tr_col2 {
+    width: 20%
+}
+
+.tr_col3 {
+    width: 6%
+}
+
+.tr_col4 {
+    width: 7%;
+}
+
+.tr_col5 {
+    width: 16%;
+}
+
+.tr_col6 {
+    width: 16%;
+}
+
+.tr_col7 {
+    width: 7%;
+}
+
+.tr_col8 {
+    width: 7%;
+}
+
+.tr_col9 {
+    width: 16%;
+}
+
+.tr_th_nt {
+    min-height: 52px;
+    font-size: 14px;
+}

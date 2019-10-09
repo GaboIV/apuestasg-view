@@ -1,0 +1,33 @@
+.botonoes div {
+    background: #14805E;
+    color: #EFEFEF;
+    display: inline-block;
+    width: 66%;
+    margin-top: 10px;
+    text-align: left;
+    vertical-align: middle;
+    height: 26px;
+    padding: 4px 8px;
+    box-sizing: border-box;
+}
+
+.botonoes div:hover {
+    color: #ffdf1b;
+    cursor: pointer;
+}
+
+.botonoes,
+.cuerpo_ {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.botonoes {
+    width: 30%;
+    text-align: right;
+}
+
+.cuerpo_ {
+    width: 70%;
+    text-align: left;
+}

@@ -1,0 +1,191 @@
+.banner_vp {
+    height: 100px;
+    width: 100%;
+    /* background: url(../../../assets/banners/1.jpg) no-repeat center center; */
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    overflow: hidden;
+    text-align: center;
+    padding-top: 5px;
+}
+
+.ep_logo {
+    vertical-align: middle;
+    -webkit-filter: drop-shadow(8px 8px 10px #efefef);
+    /* Safari */
+    filter: drop-shadow(8px 8px 10px#efefef);
+}
+
+.versus {
+    vertical-align: middle;
+    font-size: 2.5em;
+    font-weight: bold;
+}
+
+.letra {
+    display: inline-block;
+    width: 25%;
+    vertical-align: middle;
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.letra_color {
+    color: brown;
+}
+
+.lizq {
+    text-align: right;
+    padding-right: 10px;
+    max-height: 70px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.lder {
+    text-align: left;
+    padding-left: 10px;
+    max-height: 70px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.main_nav {
+    padding: 2px 12px;
+    font-size: 1.2em;
+    color: #fff;
+}
+
+.nliga {
+    color: #cfcfcf;
+    font-size: 0.8em;
+    float: right;
+    padding-top: 2px;
+}
+
+.vc_select {
+    height: 100%;
+    display: inline-block;
+    font-size: 1em;
+    text-align: center;
+    line-height: 27px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    vertical-align: top;
+    color: #bbb;
+    min-width: 25px;
+    margin: 0 10px;
+    color: #e4e4e4;
+    border-bottom-color: #ddd;
+}
+
+.main_tipo_a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    clear: both;
+    background-color: #14805e;
+    font-size: 14px;
+    line-height: 29px;
+    min-height: 29px;
+    color: #e4e4e4;
+    padding: 0 30px 0 10px;
+    cursor: pointer;
+    transition: background-color .4s cubic-bezier(0, .26, 0, 1);
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.gen_imp_eq {
+    border-left: 1px solid #6e6e6e;
+    border-right: 1px solid #6e6e6e;
+    padding: 7px 10px;
+    font-size: 13px;
+    height: 36px;
+    background-color: #5e5e5e;
+    display: inline-block;
+    cursor: pointer;
+    color: #bbb;
+    position: relative;
+}
+
+.gen_imp_eq:hover {
+    background: #777;
+}
+
+.eq_dos {
+    width: 50%;
+}
+
+.dato_eq {
+    padding: 4px 10px 7px 20px;
+    height: 47px;
+    font-size: 14px;
+    overflow: initial;
+}
+
+.dato_eq .ep_cl_name {
+    width: 85%;
+}
+
+.dato_eq .ep_cl_logro {
+    width: 15%;
+    font-size: 1.3em;
+    padding-top: 9px;
+}
+
+.eq_tres {
+    width: 37.5%;
+}
+
+.eq_tres_emp {
+    width: 25% !important;
+}
+
+.ep_logo {
+    top: 3px;
+    left: 7px;
+    height: 80%;
+    position: absolute;
+}
+
+.eq_tres_emp .ep_cl_name {
+    width: 70%;
+    padding-left: 0px;
+}
+
+.dato_eq .pitcher_eq {
+    font-size: 0.70em;
+    margin-top: -2px;
+    display: block !important;
+}
+
+.retirado {
+    position: absolute;
+    color: #efefef;
+    font-size: 2.3em;
+    top: 4px;
+    left: -10px;
+}
+
+.a_g_r:hover {
+    color: #ccc !important;
+    cursor: not-allowed !important;
+    background-color: #5e5e5e !important;
+}
+
+.ep_cl_name {
+    line-height: 1.2;
+    padding-left: 43px;
+    font-size: 1.5em;
+    padding-top: 0px;
+}
+
+.ep_cl_logro {
+    line-height: 1.2;
+    font-size: 1.5em;
+}

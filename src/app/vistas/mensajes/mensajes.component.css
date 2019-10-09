@@ -1,0 +1,97 @@
+.todo {
+    background: #fff;
+    color: #272727;
+}
+
+.menu_ib_izq,
+.cuerpo_ib {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.menu_ib_izq {
+    width: 20%;
+}
+
+.cuerpo_ib {
+    width: 80%;
+}
+
+.cada_menu_ib {
+    padding: 10px 15px;
+    margin: 10px;
+    border-radius: 5px;
+}
+
+.cada_menu_ib:hover {
+    cursor: pointer;
+    background: #c7c7c7;
+}
+
+.cada_submenu_ib {
+    padding: 10px 15px 10px 25px;
+}
+
+.unmensaje {
+    padding: 10px 15px;
+    margin: 10px;
+    border: 1px solid #fff;
+    cursor: pointer;
+}
+
+.unmensaje:hover {
+    border: 1px solid #c7c7c7;
+}
+
+.unmensaje div {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.ms_hour {
+    width: 15%;
+    padding: 2px;
+    text-align: right
+}
+
+.ms_hour span {
+    padding: 4px;
+    font-size: 0.9em;
+}
+
+.ms_titul {
+    width: 60%;
+    padding: 2px;
+}
+
+.mst_1 {
+    font-weight: 300;
+    margin-right: 8px;
+}
+
+.msst_1 {
+    font-size: 0.8em;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
+}
+
+.ms_author {
+    width: 20%;
+    font-weight: 400;
+}
+
+.ms_check {
+    width: 5%;
+    text-align: center;
+}
+
+.bolde {
+    font-weight: bold;
+    color: red;
+}
+
+.selecc_msj {
+    background: #e7e7e7;
+}

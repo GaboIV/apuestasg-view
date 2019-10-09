@@ -1,0 +1,41 @@
+<app-menu-caballos></app-menu-caballos>
+<div>
+    <div class='cada_hrs pan_hrs' style="text-align: center;">
+        <input type="text" placeholder="Buscar un jinete" (keyup)="buscarJinete( $event.target.value )" class="inpiut">
+        <br><br>
+        <div class="upd_act" routerLink="/nuevoJinete">
+            <i class="far fa-plus-square" style="font-size: 3em;"></i><br>Agregar Jinete
+        </div>
+        <div class="upd_act" (click)="cargarJinetes()">
+            <i id="spinact" class="fas fa-sync" style="font-size: 3em;"></i><br>Actualizar lista
+        </div>
+    </div>
+
+    <ng-container *ngIf="jienetes?.length === 0">
+        <div class='cada_hrs' *ngFor="let jinete of jinetes">
+            <div class='name_hrs'>{{jinete.nombre}}</div><br>
+            <div class='des_hrs'>-</div>
+            <div class='fecha_hrs'>-</div>
+            <div class='d_padre_hrs'>Estatura: </div>
+            <div class='padre_hrs'>{{jinete.estatura}}</div>
+            <div class='d_padre_hrs'>Peso: </div>
+            <div class='padre_hrs'>{{jinete.peso}}</div>
+            <div class='d_padre_hrs'>Origen: </div>
+            <div class='padre_hrs'>{{jinete.nacionalidad}}</div>
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="jienetes?.length > 0">
+        <div class='cada_hrs' *ngFor="let jinete of jienetes">
+            <div class='name_hrs'>{{jinete.nombre}}</div><br>
+            <div class='des_hrs'>-</div>
+            <div class='fecha_hrs'>-</div>
+            <div class='d_padre_hrs'>Estatura: </div>
+            <div class='padre_hrs'>{{jinete.estatura}}</div>
+            <div class='d_padre_hrs'>Peso: </div>
+            <div class='padre_hrs'>{{jinete.peso}}</div>
+            <div class='d_padre_hrs'>Origen: </div>
+            <div class='padre_hrs'>{{jinete.nacionalidad}}</div>
+        </div>
+    </ng-container>
+</div>

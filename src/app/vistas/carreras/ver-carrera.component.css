@@ -1,0 +1,62 @@
+.title_ap_fav span {
+    margin: 0px 15px;
+}
+
+.nro_puerta {
+    width: 5%;
+    text-align: center
+}
+
+.jersey_u {
+    width: 8%;
+}
+
+.a_g_r:hover {
+    color: #ccc !important;
+    cursor: not-allowed !important;
+    background-color: #5e5e5e !important;
+}
+
+.select_horse_win {
+    position: relative;
+    border: none;
+    outline: none;
+    height: 23px;
+    background-color: #d8d8d8;
+    width: 100px;
+    color: #545454;
+    font-size: 12px;
+    vertical-align: top;
+    top: 1px;
+}
+
+.ep_cada_liga {
+    padding: 0px;
+}
+
+.ep_cada_liga div {
+    display: inline-block;
+    font-size: 0.8em;
+    color: #6e6e6e;
+    text-align: center;
+    padding: 4px 0px;
+    vertical-align: middle
+}
+
+.v_nro_carrera {
+    display: inline-block;
+    font-size: 1em;
+    text-align: center;
+    line-height: 27px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    vertical-align: top;
+    color: #bbb;
+    min-width: 25px;
+    margin: 0 10px;
+}
+
+.vc_select {
+    color: #e4e4e4;
+    border-bottom-color: #ddd;
+}

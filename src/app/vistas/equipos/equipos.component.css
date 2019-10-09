@@ -1,0 +1,33 @@
+.trthnt_id {
+    width: 5%;
+    border-left: none;
+}
+
+.trthnt_name {
+    width: 15%;
+}
+
+.trthnt_nombre_wh {
+    width: 15%;
+}
+
+.trthnt_ligas {
+    width: 17%;
+}
+
+.trthnt_acronimo {
+    width: 11%;
+}
+
+.trthnt_imagen {
+    width: 13%;
+}
+
+.trthnt_nacionalidad {
+    width: 11%;
+}
+
+.trthnt_ciudad {
+    width: 13%;
+    padding: 4px 10px 5px 10px;
+}
