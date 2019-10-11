@@ -1,5 +1,5 @@
-const URL_INICIAL = 'http://localhost/';
-//const URL_INICIAL = 'http://apuestasg.gaboiv.com/';
+//const URL_INICIAL = 'http://localhost/';
+const URL_INICIAL = 'http://localhost/apuestasg-backend/public/api';
 
 export const URL_EQUIPOS = URL_INICIAL + 'bzbk/public/index.php/equipos';
 export const URL_CABALLOS = URL_INICIAL + 'bzbk/public/index.php/caballos';
@@ -25,6 +25,6 @@ export const URL_PARTIDOS = URL_INICIAL + 'bzbk/public/index.php/partidos';
 export const URL_A_FUNC = URL_INICIAL + 'bzac/php/funciones';
 export const URL_RESULTADOS = URL_INICIAL + 'bzbk/public/index.php/resultados';
 export const URL_SUBIDA_IMG = URL_INICIAL + 'bzbk/public/subida_logos.php';
-export const URL_FECHA = URL_INICIAL + 'bzbk/public/index.php';
+export const URL_FECHA = URL_INICIAL + '';
 export const URL_DEPOSITO = URL_INICIAL + 'bzbk/public/depositos.php';
 export const URL_MENSAJES = URL_INICIAL + 'bzbk/public/textos.php';

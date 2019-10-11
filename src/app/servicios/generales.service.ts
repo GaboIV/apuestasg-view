@@ -39,7 +39,7 @@ export class GeneralesService {
   }
 
   recibirHora() {
-    const url = URL_FECHA + '/hora/actual';
+    const url = URL_FECHA + '/hora';
 
     return this.http.get( url )
       .pipe(map ( (resp: any) => {
