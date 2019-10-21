@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { URL_FECHA, URL_TICKET, URL_SELECCION, URL_MENSAJES } from '../comun/link';
+import { URL_FECHA, URL_TICKET, URL_AUTH, URL_SELECCION, URL_MENSAJES } from '../comun/link';
 import { map } from 'rxjs/operators';
 import { Usuario } from '../modelos/usuario';
 
@@ -82,10 +82,9 @@ export class InicioSesionService {
 
   obtenerUsuario ( usuario, contrasena, tipoken ) {
     if ( usuario !== undefined) {
-      return this.http.post(URL_FECHA + '/inicioSesion', {
-        usuario,
-        contrasena,
-        tipoken
+      return this.http.post(URL_AUTH + '/login', {
+        "nick":usuario,
+        "password":contrasena
       }).pipe(map( (resp: any) => {
         const res = resp;
         this.menu = res.menu;

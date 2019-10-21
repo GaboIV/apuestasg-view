@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { URL_SUBIDA_IMG, URL_FECHA, URL_CATEGORIAS, URL_DEPOSITO, URL_CHANGELOG } from '../comun/link';
+import { URL_SUBIDA_IMG, URL_FECHA, URL_CATEGORIAS, URL_DEPOSITO, URL_CHANGELOG, URL_INICIAL } from '../comun/link';
 import { Pago } from '../modelos/pago.modelo';
 
 @Injectable({
@@ -30,16 +30,16 @@ export class GeneralesService {
   }
 
   cargarCategoriasJuegos() {
-    const url = URL_CATEGORIAS + '/juegos';
+    const url = URL_INICIAL + 'showgamesbycategory';
 
     return this.http.get( url )
       .pipe(map ( (resp: any) => {
-        return resp.juegos;
+        return resp;
       }));
   }
 
   recibirHora() {
-    const url = URL_FECHA + '/hora';
+    const url = URL_FECHA;
 
     return this.http.get( url )
       .pipe(map ( (resp: any) => {

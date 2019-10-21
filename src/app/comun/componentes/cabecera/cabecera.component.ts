@@ -66,11 +66,11 @@ export class CabeceraComponent implements OnInit {
     const contrasena = tarjeta.querySelector('#contrasena').value;
     this._sesionUsuario.obtenerUsuario( usuario, contrasena, 'contrasena')
     .subscribe( res => {
-      if (res.status === 'correcto') {
+      if (res.access_token) {
         this._subMenuService.cargarMenu();
         this._sesionUsuario.estatus = 'Sesion';
-        this._sesionUsuario.usuario = res.usuario;
-        this._sesionUsuario.guardarUsuario(res.usuario.id_usuario, res.usuario.token, res.usuario.usuario);
+        this._sesionUsuario.usuario = res.user;
+        this._sesionUsuario.guardarUsuario(res.user.id, res.access_token, res.user.nick);
         this._sesionUsuario.obtenerSelecciones().subscribe();
       }
     });

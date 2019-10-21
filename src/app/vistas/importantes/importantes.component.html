@@ -22,10 +22,10 @@
         </div>
         <div class="title_ap_fav" style="padding: 0px; height: 100px;" malihu-scrollbar [scrollbarOptions]="scrollbarOptions">
             <ng-container *ngFor="let juego of juegos">
-                <div *ngIf="juego.juegos !== 0" class="ep_cada_cat  " id="temp-{{juego.id_categoria}}" routerLink="/importantes/{{juego.id_categoria}}">
-                    <div class="imagen_dep"><img src="../../../assets/deportes/{{juego.id_categoria}}.svg" alt="" height="37px;"></div>
-                    <div class="texto_imagen_dep">{{juego.categoria}}</div>
-                    <div class='spin_cat' id="spin-{{juego.id_categoria}}">{{juego.juegos}}</div>
+                <div *ngIf="juego.juegos !== 0" class="ep_cada_cat  " id="temp-{{juego.id}}" routerLink="/importantes/{{juego.id}}">
+                    <div class="imagen_dep"><img src="../../../assets/deportes/{{juego.id}}.svg" alt="" height="37px;"></div>
+                    <div class="texto_imagen_dep">{{juego.name}}</div>
+                    <div class='spin_cat' id="spin-{{juego.id}}">{{juego.juegos}}</div>
                 </div>
             </ng-container>
         </div>

@@ -42,7 +42,7 @@
                 <div class='caja_sesion'>
                     <div class='first_session'>
                         <div class='usuario_ss'>
-                            {{_sesionUsuario.usuario.usuario}}
+                            {{_sesionUsuario.usuario.nick}}
                         </div>
                         <div class='salir_ss'>
                             <i class='fas fa-power-off' (click)="logout()" [routerLink]="['/importantes/21']"></i>
@@ -53,7 +53,7 @@
                     </div>
                     <div class='second_session'>
                         <div class='saldo_ss'>
-                            <div class='sdo_grl_ss'>Bs. {{ _sesionUsuario.usuario.disponible | number:'1.2-2' }}</div> <i class='fas fa-angle-down igriega'></i>
+                            <div class='sdo_grl_ss'>Bs. {{ _sesionUsuario.usuario.avaible | number:'1.2-2' }}</div> <i class='fas fa-angle-down igriega'></i>
                         </div>
                         <div class='opciones_ss'>
                             <div class='seccion_ss' [routerLink]="['/deposito']">Depósito</div>

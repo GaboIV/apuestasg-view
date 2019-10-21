@@ -89,7 +89,7 @@ const appRoutes: Routes = [
   { path: 'verPartido/:id_partido', component: VerPartidoComponent },
   { path: 'mensaje/:serialmsj', component: MensajeComponent },
   { path: '',
-  redirectTo: '/importantes/21',
+  redirectTo: '/importantes/1',
   pathMatch: 'full' },
   { path: '**', component: NoencontradoComponent }
 ];

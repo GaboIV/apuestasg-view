@@ -1,7 +1,7 @@
 export class Usuario {
 
     constructor(
-        public id_usuario?: string,
+        public id?: string,
         public apellidos?: string,
         public cedula?: number,
         public disponible?: string,

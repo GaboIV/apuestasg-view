@@ -32,10 +32,7 @@ export class ImportantesComponent implements OnInit {
 
   partidos: Partido;
   estatus: string;
-  envivos: Partido;
   dias_carr = [];
-  // tslint:disable-next-line:max-line-length
-  envivo = '//sportstream365.com/viewer/frame/?game=1909202&tagz=LZJJzqNGAEaVHCJrVr@6pQQDBYWdlhUG_x7BNmawsRKhwhSYeSoGe5kr5BCRIuUCuUir@yC9TbzI5pOent7u@@NvdsrSUKB5nmYh@Pzvb8YP0q_f_fPt9z9POMQNbr5@790JqX6eTNqqbEhLGoxy8CpuZT7pYzzgZhI2KMeTX6LXztkZIwBh9kZQ9Jxr14XiE32QN_5y5cmquRCcfDAPyYkBrlu7HBQI2u4e2o2LjLp@sDY33RaXGq@sbeoE8lHWzfcswApmg1SV11rjMTDYA8n3pFGGq@cG2Ub73IjitO_LoigEcQYbYdqPG7F0HUmqdN@eOb2267psgVjG3BDT8W51oEHt3U6IdrGQmbeEzb11gU6WGV3zhdX0a83VbimDN1JsB7GQsvbN75@XB@g4wzy0Wn1osiQKy8EJFJXUjPq@dYewUsDa2FrC8dHbj2MrHhKu5Z6xePaXwBWBGyYZw10tca1zBT_ta85a7AJptQ9BSCAbGN2JS@quX0qH9YzxTISmWwQel8FUlMBhNW0vGAkZhVEEsXyBzrVcDMBU4KHe5MzsuEpStjNwCWOgt93@NALGZW3Nc6uCz1Uc7CJ4PpnV1dbfrVxMXdShVWqMrqKG0ZW_Ho3DMdny6iU7LztlBVQubfNhuLtYSXXXW_CqXQpLKOd@4tesPjybSx2ObRyr6hgb@njqZAiQg7zWk2RjPn@7YxTgZs68oY6UVYYec_ZtiANynwuQedk4upM5JzB_2S1ufpIjXJAvjV4@4yxDE4FmqA_nuAjKoaX2FgVp9hP1Ysh_okbIf6TkqsrwGfu7mEwEINIAUh92a0vXfqSyOMXUCt_S8iOl3pvy9U2RoRkaCGBKsyxDmShETfx_9h8=&header=1&autoplay=1&width=348&height=200';
   destacados: Partido;
   carreras: Carrera;
   id: string;
@@ -67,7 +64,6 @@ export class ImportantesComponent implements OnInit {
       this.carrera_c = params.carrera;
     });
 
-    this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(this.envivo);
     this.route.params
         .subscribe( parametros => {
           this.id = parametros['id_categoria'];
@@ -115,8 +111,6 @@ export class ImportantesComponent implements OnInit {
     this.scroll_cuot();
 
     this.query2();
-
-    this.cargarEnVivo();
   }
 
   query2 () {
@@ -218,7 +212,10 @@ export class ImportantesComponent implements OnInit {
 
   cargarCategoriasJuegos() {
     this._generalesService.cargarCategoriasJuegos()
-          .subscribe( juegos => this.juegos = juegos );
+          .subscribe( resp => {
+            this.juegos = resp.categories;
+            this.solohoy();
+          });
   }
 
   seleccionh( id_apuesta ) {
@@ -285,11 +282,13 @@ export class ImportantesComponent implements OnInit {
       });
     } else {
       this.esperando = true;
+      console.log(this.id);
       this._partidosService.partidosPorCategoria(this.id, 'hoy', '')
-      .subscribe( (partidos: Partido) => {
-        this.esperando = false;
-        this.partidos = partidos;
-        this.carreras = null;
+      .subscribe( resp => {
+        console.log(resp)
+        // this.esperando = false;
+        // this.partidos = resp;
+        // this.carreras = null;
       });
     }
   }
@@ -303,23 +302,4 @@ export class ImportantesComponent implements OnInit {
               this.carreras = null;
             });
   }
-
-  cargarEnVivo () {
-    this._partidosService.cargarEnVivo()
-    .subscribe( resp => {
-      if (resp.status === 'correcto') {
-        this.envivo = resp.partidos[0].live_id;
-        this.regenerar( this.envivo );
-        this.envivos =  resp.partidos;
-      }
-    });
-  }
-
-  regenerar( live_id ) {
-    // tslint:disable-next-line:max-line-length
-    this.envivo = '//sportstream365.com/viewer/frame/?game=' + live_id + '&tagz=LZJJzqNGAEaVHCJrVr@6pQQDBYWdlhUG_x7BNmawsRKhwhSYeSoGe5kr5BCRIuUCuUir@yC9TbzI5pOent7u@@NvdsrSUKB5nmYh@Pzvb8YP0q_f_fPt9z9POMQNbr5@790JqX6eTNqqbEhLGoxy8CpuZT7pYzzgZhI2KMeTX6LXztkZIwBh9kZQ9Jxr14XiE32QN_5y5cmquRCcfDAPyYkBrlu7HBQI2u4e2o2LjLp@sDY33RaXGq@sbeoE8lHWzfcswApmg1SV11rjMTDYA8n3pFGGq@cG2Ub73IjitO_LoigEcQYbYdqPG7F0HUmqdN@eOb2267psgVjG3BDT8W51oEHt3U6IdrGQmbeEzb11gU6WGV3zhdX0a83VbimDN1JsB7GQsvbN75@XB@g4wzy0Wn1osiQKy8EJFJXUjPq@dYewUsDa2FrC8dHbj2MrHhKu5Z6xePaXwBWBGyYZw10tca1zBT_ta85a7AJptQ9BSCAbGN2JS@quX0qH9YzxTISmWwQel8FUlMBhNW0vGAkZhVEEsXyBzrVcDMBU4KHe5MzsuEpStjNwCWOgt93@NALGZW3Nc6uCz1Uc7CJ4PpnV1dbfrVxMXdShVWqMrqKG0ZW_Ho3DMdny6iU7LztlBVQubfNhuLtYSXXXW_CqXQpLKOd@4tesPjybSx2ObRyr6hgb@njqZAiQg7zWk2RjPn@7YxTgZs68oY6UVYYec_ZtiANynwuQedk4upM5JzB_2S1ufpIjXJAvjV4@4yxDE4FmqA_nuAjKoaX2FgVp9hP1Ysh_okbIf6TkqsrwGfu7mEwEINIAUh92a0vXfqSyOMXUCt_S8iOl3pvy9U2RoRkaCGBKsyxDmShETfx_9h8=&header=1&autoplay=1&width=348&height=200';
-    this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(this.envivo);
-
-  }
-
 }

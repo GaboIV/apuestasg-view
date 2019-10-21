@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { URL_PARTIDOS, URL_SELECCION, URL_RESULTADOS } from '../comun/link';
+import { URL_PARTIDOS, URL_SELECCION, URL_RESULTADOS, URL_INICIAL } from '../comun/link';
 import { map } from 'rxjs/operators';
 import { Partido } from '../modelos/partido';
 
@@ -42,7 +42,7 @@ export class PartidosService {
   }
 
   partidosPorCategoria ( id: string, dato: string, equipo: string ) {
-    const url = URL_PARTIDOS + '/categoria/' + id + '?fecha=' + dato + '&busqueda=' + equipo;
+    const url = URL_INICIAL + 'showgames/' + id;
 
     return this.http.get( url )
       .pipe(map ( (resp: any) => {
