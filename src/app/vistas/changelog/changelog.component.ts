@@ -43,7 +43,7 @@ export class ChangelogComponent implements OnInit {
   }
 
   enviarTarea () {
-    this._generalesService.agregarTarea( this.nuevaTarea, this._inicioSesion.usuario.id_usuario)
+    this._generalesService.agregarTarea( this.nuevaTarea, this._inicioSesion.usuario.id)
     .subscribe( resp => {
       if ( resp.status === 'correcto') {
         this.changelogs = resp.changelogs;

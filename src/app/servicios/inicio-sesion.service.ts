@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { URL_FECHA, URL_TICKET, URL_AUTH, URL_SELECCION, URL_MENSAJES } from '../comun/link';
+import { URL_TICKET, URL_AUTH, URL_SELECCION, URL_MENSAJES } from '../comun/link';
 import { map } from 'rxjs/operators';
 import { Usuario } from '../modelos/usuario';
 
@@ -56,7 +56,39 @@ export class InicioSesionService {
   menu: any;
 
   estatus = 'noSesion';
-  usuario: Usuario = new Usuario('', '', null, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
+  usuario: Usuario = new Usuario(
+    '', 
+    '', 
+    null, 
+    1, 
+    '', 
+    {
+    id: '',
+    document_type: '',
+    document_number: null,
+    name: '',
+    lastname: '',
+    birthday: '',
+    gender: '',
+    country_id: null,
+    state_id: '',
+    city_id: null,
+    parish_id: null,
+    address: '',
+    phone: '',
+    treatment: '',
+    available: '',
+    risk: '',
+    points: '',
+    ip: '',
+    browser: '',
+    created_at: '',
+    updated_at: '' 
+    }, 
+    '', 
+    ''
+  );
+
   token = '';
 
   constructor(
@@ -96,7 +128,7 @@ export class InicioSesionService {
 
   obtenerSelecciones () {
     this.esperando = true;
-    const url = URL_SELECCION + '/obtener/' + this.usuario.id_usuario;
+    const url = URL_SELECCION + '/obtener/' + this.usuario.id;
 
     return this.http.get( url )
       .pipe(map ( (resp: any) => {
@@ -193,7 +225,7 @@ export class InicioSesionService {
 
     if ( usuarior !== null && tokenr !== null && idr !== null) {
       this.usuario = usuarior;
-      this.usuario.id_usuario = idr;
+      this.usuario.id = idr;
       this.estatus = 'Sesion';
     }
   }
@@ -208,7 +240,7 @@ export class InicioSesionService {
   enviarTicket( montos: string ) {
     this.esperando = true;
     const url = URL_TICKET + '/agregar';
-    const id_usuario = this.usuario.id_usuario;
+    const id_usuario = this.usuario.id;
 
     return this.http.post( url, { montos, id_usuario }  )
       .pipe(map( (resp: any) => {
@@ -216,7 +248,7 @@ export class InicioSesionService {
         const res = resp;
         if ( resp.status === 'success') {
           this.ticketes = resp.ticketes;
-          this.usuario.disponible = resp.disponible;
+          this.usuario.player.available = resp.disponible;
           this.selecciones = null;
           this.esperando = false;
         }
@@ -228,7 +260,7 @@ export class InicioSesionService {
   enviarTicketd( montos: number ) {
     this.esperando = true;
     const url = URL_TICKET + '/agregard';
-    const id_usuario = this.usuario.id_usuario;
+    const id_usuario = this.usuario.id;
 
     return this.http.post( url, { montos, id_usuario }  )
       .pipe(map( (resp: any) => {
@@ -236,7 +268,7 @@ export class InicioSesionService {
         const res = resp;
         if ( resp.status === 'success') {
           this.ticketes2 = resp.ticketes;
-          this.usuario.disponible = resp.disponible;
+          this.usuario.player.available = resp.disponible;
           this.selecciones2 = null;
           this.esperando = false;
         }
@@ -246,7 +278,7 @@ export class InicioSesionService {
   }
 
   cargarTickets( estatus ) {
-    const url = URL_TICKET + '/ver/' + this.usuario.id_usuario + '/' + estatus;
+    const url = URL_TICKET + '/ver/' + this.usuario.id + '/' + estatus;
 
     return this.http.get( url )
       .pipe(map ( (resp: any) => {

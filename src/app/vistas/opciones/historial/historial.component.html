@@ -3,7 +3,7 @@
         <div class='btn_deposit' style="cursor: pointer" [routerLink]="['/deposito']" routerLinkActive="router-link-active">Depósito</div>
         <div class='tab_menu_mem' [routerLink]="['/bancos']" routerLinkActive="router-link-active">Bancos</div>
         <div class='tab_menu_mem' [routerLink]="['/mi-cuenta']" routerLinkActive="router-link-active">Mi cuenta</div>
-        <div class='tab_menu_mem tmm_select' routerLink="/historial/{{_inicioSesion.usuario.token}}" routerLinkActive=" router-link-active">Historial</div>
+        <div class='tab_menu_mem tmm_select' routerLink="/historial/{{_inicioSesion.token}}" routerLinkActive=" router-link-active">Historial</div>
         <div class='tab_menu_mem' [routerLink]="['/promociones']" routerLinkActive="router-link-active">Promociones</div>
         <div class='tab_menu_mem' [routerLink]="['/mensajes']" routerLinkActive="router-link-active">Mensajes</div>
     </div>
@@ -19,7 +19,7 @@
                 <b>Historial de cuenta (VEF)</b>
             </div>
             <div class="dato_c_c_r ">
-                Saldo: <span><b>Bs. {{ _inicioSesion.usuario.disponible | montos:'decimal' }}</b></span>
+                Saldo: <span><b>Bs. {{ _inicioSesion.usuario.player.available | montos:'decimal' }}</b></span>
             </div>
         </div>
 

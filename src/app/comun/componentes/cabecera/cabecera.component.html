@@ -53,11 +53,11 @@
                     </div>
                     <div class='second_session'>
                         <div class='saldo_ss'>
-                            <div class='sdo_grl_ss'>Bs. {{ _sesionUsuario.usuario.avaible | number:'1.2-2' }}</div> <i class='fas fa-angle-down igriega'></i>
+                            <div class='sdo_grl_ss'>Bs. {{ _sesionUsuario.usuario.player.available | number:'1.2-2' }}</div> <i class='fas fa-angle-down igriega'></i>
                         </div>
                         <div class='opciones_ss'>
                             <div class='seccion_ss' [routerLink]="['/deposito']">Depósito</div>
-                            <div class='seccion_ss' id='history' routerLink="/historial/{{_sesionUsuario.usuario.token}}">Historial</div>
+                            <div class='seccion_ss' id='history' routerLink="/historial/{{_sesionUsuario.token}}">Historial</div>
                         </div>
                     </div>
                 </div>

@@ -27,8 +27,8 @@ export class ImportantesComponent implements OnInit {
   public anchoTabla: any;
   public apostado = 0;
 
-  public scrollbarOptions = { axis: 'x', theme: 'light',  alwaysShowScrollbar: 1 };
-  public scrollbarOptions2 = { theme: 'dark-2',  alwaysShowScrollbar: 1, scrollbarPosition: 'inside' };
+  public scrollbarOptions = { axis: 'x', theme: 'light', alwaysShowScrollbar: 1 };
+  public scrollbarOptions2 = { theme: 'dark-2', alwaysShowScrollbar: 1, scrollbarPosition: 'inside' };
 
   partidos: Partido;
   estatus: string;
@@ -59,22 +59,22 @@ export class ImportantesComponent implements OnInit {
 
   ngOnInit() {
     this.route.queryParams
-    .subscribe(params => {
-      this.dia_c = params.dia;
-      this.carrera_c = params.carrera;
-    });
+      .subscribe(params => {
+        this.dia_c = params.dia;
+        this.carrera_c = params.carrera;
+      });
 
     this.route.params
-        .subscribe( parametros => {
-          this.id = parametros['id_categoria'];
-          $('.ep_cada_cat').removeClass('seleccionadosport');
-              $('#temp-' + this.id).addClass(' seleccionadosport ');
-              $('.spin_cat').removeClass('iconosport');
-              $('#spin-' + this.id).addClass(' iconosport ');
-          if ( parametros['id_categoria'] === '27') {
-            this.esperando = true;
-            this._caballoService.cargarCarreras('todas')
-            .subscribe( resp => {
+      .subscribe(parametros => {
+        this.id = parametros['id_categoria'];
+        $('.ep_cada_cat').removeClass('seleccionadosport');
+        $('#temp-' + this.id).addClass(' seleccionadosport ');
+        $('.spin_cat').removeClass('iconosport');
+        $('#spin-' + this.id).addClass(' iconosport ');
+        if (parametros['id_categoria'] === '27') {
+          this.esperando = true;
+          this._caballoService.cargarCarreras('todas')
+            .subscribe(resp => {
               this.esperando = false;
               this.carreras = resp.carreras;
               this.dias_carr = resp.dias;
@@ -85,18 +85,10 @@ export class ImportantesComponent implements OnInit {
                 this.router.navigate(['/importantes/27'], { queryParams: { 'dia': this.dias_carr[0].dia, 'carrera': this.carreras[0].numero } });
               }
             });
-          } else {
-            this.esperando = true;
-            this._partidosService.partidosPorCategoria(this.id, 'normal', '')
-            .subscribe( (resp: any) => {
-              console.log( resp.partidos );
-              this.esperando = false;
-              this.partidos = resp.partidos;
-              this.estatus = resp.status;
-              this.carreras = null;
-            });
-          }
-        });
+        } else {
+          this.esperando = true;          
+        }
+      });
     $('.mensaje_cp').hide();
     this.cargarDestacados();
     this.cargarCategoriasJuegos();
@@ -109,49 +101,41 @@ export class ImportantesComponent implements OnInit {
     $('#spin-' + this.id).addClass(' iconosport ');
 
     this.scroll_cuot();
-
-    this.query2();
   }
 
-  query2 () {
-    $('#iframejogo').click( () => {
-      alert('Hola');
-    } );
-  }
-
-  deleteFile () {
+  deleteFile() {
     const toast = swal.mixin({
       toast: true,
       position: 'top-end',
       showConfirmButton: false,
       timer: 2000
     });
-    toast ({
+    toast({
       type: 'success',
       title: 'Guardado'
     });
   }
 
-  scroll_cuot () {
+  scroll_cuot() {
     $(() => {
 
-      $(window).scroll(function() {
+      $(window).scroll(function () {
         const ancho = $('.zona_cuota').width();
 
         if ($(this).scrollTop() > 137) {
-            $('.zona_cuota').addClass('fixed');
-            $('.zona_cuota').removeClass('unfixed');
-            $('.zona_cuota').width( ancho );
+          $('.zona_cuota').addClass('fixed');
+          $('.zona_cuota').removeClass('unfixed');
+          $('.zona_cuota').width(ancho);
         } else {
-            $('.zona_cuota').removeClass('fixed');
-            $('.zona_cuota').addClass('unfixed');
+          $('.zona_cuota').removeClass('fixed');
+          $('.zona_cuota').addClass('unfixed');
         }
       });
     });
   }
 
-  check( id_liga ) {
-    if ( this.liga_temp === id_liga ) {
+  check(id_liga) {
+    if (this.liga_temp === id_liga) {
       return false;
     } else {
       this.liga_temp = id_liga;
@@ -159,15 +143,15 @@ export class ImportantesComponent implements OnInit {
     }
   }
 
-  clase ( valor, deporte, equipo ) {
+  clase(valor, deporte, equipo) {
     if (valor === 3) {
-      if ( equipo === '35') {
+      if (equipo === '1') {
         return 'ep_cada_logo ep_cada_central ep_empate_div';
       }
       return 'ep_cada_logo ep_cada_central';
     }
-    if ( valor === 2) {
-      if ( deporte === 24) {
+    if (valor === 2) {
+      if (deporte === 4) {
         return 'ep_cada_logo ep_cada_pero_dos css_jugador';
       } else {
         return 'ep_cada_logo ep_cada_pero_dos css_jugador';
@@ -175,25 +159,25 @@ export class ImportantesComponent implements OnInit {
     }
   }
 
-  queclase ( equipos, categoria, id_equipo ) {
+  queclase(equipos, categoria, id_equipo) {
     let clase = 'gen_imp_eq';
     const equipos_cant = equipos.length;
-
+    console.log(categoria + " " + id_equipo);
     if (equipos_cant === 2) {
       clase += ' eq_dos';
 
-      if ( categoria === '29' || categoria === '24') {
+      if (categoria === '9' || categoria === '4') {
         clase += ' dato_eq';
       }
 
-      if ( equipos[0].pitcher !== false || equipos[0].pitcher !== false) {
+      if (equipos[0].pitcher !== false || equipos[0].pitcher !== false) {
         clase += ' dato_eq';
       }
     }
 
-    if ( equipos_cant === 3) {
-      if ( equipos[1].nombre === 'Empate') {
-        if ( id_equipo === '35') {
+    if (equipos_cant === 3) {
+      if (equipos[1].name === 'Empate') {
+        if (id_equipo === '1') {
           clase += ' eq_tres_emp';
         } else {
           clase += ' eq_tres';
@@ -202,104 +186,103 @@ export class ImportantesComponent implements OnInit {
     }
 
     return clase;
-
   }
 
   cargarDestacados() {
     this._partidosService.cargarDestacados()
-          .subscribe( destacados => this.destacados = destacados );
+      .subscribe(destacados => this.destacados = destacados);
   }
 
   cargarCategoriasJuegos() {
     this._generalesService.cargarCategoriasJuegos()
-          .subscribe( resp => {
-            this.juegos = resp.categories;
-            this.solohoy();
-          });
+      .subscribe(resp => {
+        this.juegos = resp.categories;
+        console.log(resp);
+        this.solohoy();
+      });
   }
 
-  seleccionh( id_apuesta ) {
+  seleccionh(id_apuesta) {
     const toast = swal.mixin({
       toast: true,
       position: 'top-end'
     });
-    toast ({
+    toast({
       type: 'info',
       title: 'Enviando datos'
     });
 
-    this._inicioSesion.seleccionh( id_apuesta, this._inicioSesion.usuario )
-      .subscribe( resp => {
-          // tslint:disable-next-line:no-shadowed-variable
-          const toast = swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 2000
-          });
-          toast ({
-            type: resp.status,
-            title: resp.mstatus
-          });
+    this._inicioSesion.seleccionh(id_apuesta, this._inicioSesion.usuario)
+      .subscribe(resp => {
+        // tslint:disable-next-line:no-shadowed-variable
+        const toast = swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 2000
+        });
+        toast({
+          type: resp.status,
+          title: resp.mstatus
+        });
 
-          this.mstatus = resp.mstatus;
+        this.mstatus = resp.mstatus;
       });
-    }
+  }
 
-  selecciond ( id_apuesta, id_categoria ) {
+  selecciond(id_apuesta, id_categoria) {
     const toast = swal.mixin({
       toast: true,
       position: 'top-end'
     });
-    toast ({
+    toast({
       type: 'info',
       title: 'Enviando datos'
     });
 
-    this._inicioSesion.selecciond( id_apuesta, id_categoria, this._inicioSesion.usuario.id_usuario )
-      .subscribe( resp => {
-          const toast = swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 2000
-          });
-          toast ({
-            type: resp.status,
-            title: resp.mstatus
-          });
-    });
+    this._inicioSesion.selecciond(id_apuesta, id_categoria, this._inicioSesion.usuario.id)
+      .subscribe(resp => {
+        const toast = swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 2000
+        });
+        toast({
+          type: resp.status,
+          title: resp.mstatus
+        });
+      });
   }
 
   solohoy() {
-    if ( this.id === '27') {
+    if (this.id === '27') {
       this.esperando = true;
       this._caballoService.cargarCarreras('hoy')
-      .subscribe( resp => {
-        this.esperando = false;
-        this.carreras = resp.carreras;
-        this.partidos = null;
-      });
+        .subscribe(resp => {
+          this.esperando = false;
+          this.carreras = resp.carreras;
+          this.partidos = null;
+        });
     } else {
       this.esperando = true;
-      console.log(this.id);
       this._partidosService.partidosPorCategoria(this.id, 'hoy', '')
-      .subscribe( resp => {
-        console.log(resp)
-        // this.esperando = false;
-        // this.partidos = resp;
-        // this.carreras = null;
-      });
+        .subscribe(resp => {
+          console.log(resp);
+          this.esperando = false;
+          this.partidos = resp.juegos;
+          this.carreras = null;
+        });
     }
   }
 
-  buscarEquipo ( forma ) {
+  buscarEquipo(forma) {
     this.esperando = true;
     this._partidosService.partidosPorCategoria(this.id, 'normal', forma.busqueda)
-            .subscribe( (partidos: Partido) => {
-              this.esperando = false;
-              this.partidos = partidos;
-              this.carreras = null;
-            });
+      .subscribe((partidos: Partido) => {
+        this.esperando = false;
+        this.partidos = partidos;
+        this.carreras = null;
+      });
   }
 }

@@ -24,7 +24,7 @@ export class MensajeComponent implements OnInit {
 
 	      this.param = param;
 	 	});
-		this.cargarMensajes( '8888', this.param, this._inicioSesion.usuario.id_usuario );
+		this.cargarMensajes( '8888', this.param, this._inicioSesion.usuario.id );
 	}
 
 	cargarMensajes( pagina, criterio, id_usuario ) {

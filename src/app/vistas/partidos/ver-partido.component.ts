@@ -103,7 +103,7 @@ export class VerPartidoComponent implements OnInit {
       title: 'Enviando datos'
     });
 
-    this._inicioSesion.selecciond( id_apuesta, id_categoria, this._inicioSesion.usuario.id_usuario )
+    this._inicioSesion.selecciond( id_apuesta, id_categoria, this._inicioSesion.usuario.id )
       .subscribe( resp => {
 
           this.esperando = false;

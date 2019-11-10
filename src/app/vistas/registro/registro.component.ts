@@ -9,6 +9,7 @@ import * as $ from 'jquery';
 import { ToastrService } from 'ngx-toastr';
 import { isDate } from 'util';
 import swal from 'sweetalert2';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-registro',
@@ -17,7 +18,38 @@ import swal from 'sweetalert2';
 })
 export class RegistroComponent implements OnInit {
 
-  usuario: Usuario = new Usuario('', '', null, '0', '', '0', '', '0', '2', '', '', '', '', '231', '', '', '', '', '5', '', '', '', '1', '');
+  usuario: Usuario = new Usuario(
+    '', 
+    '', 
+    null, 
+    1, 
+    '', 
+    {
+    id: '',
+    document_type: '',
+    document_number: null,
+    name: '',
+    lastname: '',
+    birthday: '',
+    gender: '',
+    country_id: null,
+    state_id: '',
+    city_id: null,
+    parish_id: null,
+    address: '',
+    phone: '',
+    treatment: '',
+    available: '',
+    risk: '',
+    points: '',
+    ip: '',
+    browser: '',
+    created_at: '',
+    updated_at: '' 
+    }, 
+    '', 
+    ''
+  );
   nacDia = 1;
   nacMes = 1;
   nacAnio = 2018;
@@ -34,22 +66,22 @@ export class RegistroComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.usuario.nacimiento = this.nacAnio + '-' + this.nacMes + '-' + this.nacDia;
+    this.usuario.player.birthday = this.nacAnio + '-' + this.nacMes + '-' + this.nacDia;
   }
 
-  enviarDatos( form ) {
+  enviarDatos( form: NgForm ) {
     let mensaje = '';
     let tipo = '';
 
-    if ( this.usuario.id_pais === '231') {
-      if (this.usuario.tratamiento === '1' || this.usuario.tratamiento === '2' || this.usuario.tratamiento === '3') {
-        if (this.usuario.nombres.length >= 3) {
-          if (this.usuario.apellidos.length >= 3) {
-            if (isDate(this.usuario.nacimiento)) {
-              if (!isNaN(this.usuario.cedula) && this.usuario.cedula > 999999) {
-                if (this.usuario.usuario.length >= 3) {
-                  if (this.usuario.password.length > 5 && (this.usuario.password === this.usuario.password2)) {
-                    if (this.usuario.numerico.length > 3 && (this.usuario.numerico === this.usuario.numerico2)) {
+    if ( form.value.country_id === '231') {
+      if (form.value.treatment === '1' || form.value.treatment === '2' || this.usuario.player.treatment === '3') {
+        if (form.value.name.length >= 3) {
+          if (form.value.lastname.length >= 3) {
+            if (isDate(form.value.birthday)) {
+              if (!isNaN(form.value.document_number) && form.value.document_number > 999999) {
+                if (form.value.nick.length >= 3) {
+                  if (form.value.password.length > 5 && (form.value.password === form.value.password2)) {
+                    if (form.value.numeric.length > 3 && (form.value.numeric === form.value.numeric2)) {
                       const toast = swal.mixin({
                         toast: true,
                         position: 'center',
@@ -153,7 +185,7 @@ export class RegistroComponent implements OnInit {
       this.nacAnio = fecha.getFullYear();
     }
 
-    this.usuario.nacimiento = fecha;
+    this.usuario.player.birthday = fecha.toString();
 
     
   }

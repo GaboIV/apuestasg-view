@@ -7,7 +7,7 @@
             <img src="../../../assets/misc/banner_nuevo.jpg" width="100%" height="100%">
             <div class="title_esp_bn">Nuevos clientes</div>
             <div class="sub_title_esp_bn">Bono de ingreso de 10%</div>
-            <div class="hasta_esp_bn">Hasta Bs.S. 10.000</div>
+            <div class="hasta_esp_bn">Hasta Bs.S. 100.000</div>
             <div class="condi_esp_bn">Se aplican ciertas condiciones</div>
             <div class="bn_btn_reg">
                 <div class="btn_esp_bn">Regístrate Hoy</div>
@@ -33,27 +33,29 @@
             <div style="
             background: #313131; padding: 7px; border-radius: 3px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 3;">No se encontraron juegos disponibles para este deporte.</div>
         </div>
-        <div class="juegos_principales_zb1" *ngIf=" partidos !== []">
-
+        <div class="juegos_principales_zb1" *ngIf=" partidos !== []">                 
             <div *ngFor="let partido of partidos">
-                <div *ngIf="partido.equipos">
-                    <div class='ep_cada_liga' *ngIf="partido.nombre_liga !== null">{{partido.nombre_liga}} <img [src]="partido.id_pais + '.png' | imagen:'nacionalidad'" height=16px></div>
-                    <div class='banda_fecha' *ngIf="partido.manana">Mañana, {{ partido.fecha_inicio | date:'d/MM/yyyy'}}</div>
+                <div class='ep_cada_liga' *ngIf="partido.name !== null">{{partido.name}} <img [src]="partido.country_id + '.png' | imagen:'nacionalidad'" height=16px></div>
+                <div *ngFor="let game of partido.games">
+                    <!-- <div class='banda_fecha' *ngIf="partido.manana">Mañana, {{ partido.fecha_inicio | date:'d/MM/yyyy'}}</div> -->
                     <div class='ep_cada_partido'>
-                        {{partido.titulo}}
-                        <span>{{ partido.fecha_inicio | date:'d/MM/yyyy'}} - {{ partido.fecha_inicio | date:'shortTime'}}</span>
+                        
+                        <span>{{ game.start | date:'d/MM/yyyy'}} - {{ game.start | date:'shortTime'}}</span>
                     </div>
-                    <div class="expandir" [routerLink]="['/verPartido', partido.id_partido]" [queryParams]="{partido: partido}" style="background: #00488c; height: 30px; padding-top: 7px;">
+                    <div class="expandir" [routerLink]="['/verPartido', partido.id_partido]" [queryParams]="{partido: game}" style="background: #00488c; height: 30px; padding-top: 7px;">
                         <i class="fas fa-expand"></i>&nbsp;Ampliar
                     </div>
-                    <div [ngClass]="queclase( partido.equipos, partido.id_categoria, equipo.id_equipo )" *ngFor="let equipo of partido.equipos" (click)="selecciond( equipo.id_participante, partido.id_categoria )">
-                        <div [class]="partido.id_categoria | importantes:equipo.nombre "><img *ngIf="equipo.nombre !== 'Empate'" [src]="equipo.img | imagen:'equipo'" height=125% class='ep_logo'>{{equipo.nombre}}<br>
-                            <div class="div_span" *ngIf="(partido.id_categoria === '24' || partido.id_categoria === '29') && equipo.nacionalidad !== '0'">{{equipo.pais}} <img [src]="equipo.nacionalidad + '.png' | imagen:'nacionalidad'" height=12px></div>
-                            <div class="div_span" *ngIf="(partido.id_categoria === '24' || partido.id_categoria === '29') && equipo.nacionalidad === '0'">Sin información <i class="fas fa-info-circle"></i> </div>
-                            <div class="pitcher_eq" *ngIf="(partido.id_categoria === '22') && equipo.pitcher !== false">{{equipo.pitcher.nombre}} ({{equipo.pitcher.era}}) </div>
-                            <div class="pitcher_eq" style="display: none" *ngIf="(partido.id_categoria === '22') && equipo.pitcher === false">Sin información <i class="fas fa-info-circle"></i> </div>
+                    <div *ngFor="let competitor of game.competitors" class="gen_imp_eq" [class.eq_tres_emp]="game.competitors.length == 3 && competitor.team_id == 1" [class.eq_tres]="game.competitors.length == 3 && competitor.team_id != 1" (click)="selecciond( competitor.id, partido.category_id )">
+                        <div [class]="partido.category_id | importantes:competitor.team.name "><img *ngIf="competitor.team.name !== 'Empate'" [src]="'121.png' | imagen:'equipo'" height=125% class='ep_logo'>{{competitor.team.name}}<br>
+                            <!-- Agregar para partidos internacionales -->
+                            <!-- <div class="div_span" *ngIf="(partido.category_id === '24' || partido.category_id === '29') && equipo.nacionalidad !== '0'">{{equipo.pais}} <img [src]="equipo.nacionalidad + '.png' | imagen:'nacionalidad'" height=12px></div> -->
+                            <!-- <div class="div_span" *ngIf="(partido.category_id === '24' || partido.category_id === '29') && equipo.nacionalidad === '0'">Sin información <i class="fas fa-info-circle"></i> </div> -->
+                            <!--  -->
+                            <!-- <div class="pitcher_eq" *ngIf="(partido.category_id === '22') && equipo.pitcher !== false">{{equipo.pitcher.nombre}} ({{equipo.pitcher.era}}) </div>
+                            <div class="pitcher_eq" style="display: none" *ngIf="(partido.category_id === '22') && equipo.pitcher === false">Sin información <i class="fas fa-info-circle"></i> </div> -->
                         </div>
-                        <div class='ep_cl_logro'>{{equipo.dividendo | cuota:'decimal'}}</div>
+                        <div class='ep_cl_logro'>{{competitor.odd | cuota:'decimal'}}</div>
+
                     </div>
                 </div>
             </div>
@@ -117,23 +119,6 @@
     </div>
     <div class="div_zb_2 zb_lado">
         <div ap_fav_zb2>
-            <ng-container *ngIf="envivos !== undefined">
-                <div class="title_ap_fav bajo_verde_green" *ngIf="envivos !== undefined">
-                    <span>Ver en vivo</span>
-                    <select name="enviv" id="envivi" (change)="regenerar($event.target.value)" class="datetime">
-                        <option *ngFor="let env of envivos " value={{env.live_id}}>{{ env.titulo }}</option>
-                    </select>
-                </div>
-
-                <div style="height: 207px; overflow: hidden; position: relative; text-align: right; background: white;">
-                    <div class="tapalogo">BETZONE</div>
-
-                    <div class="iframe">
-                        <iframe [src]="urlSafe" width="348" height="348" frameborder="0" scrolling="no" id="iframejogo"></iframe>
-                    </div>
-                    <div>VER PARTIDO</div>
-                </div>
-            </ng-container>
 
             <div class="title_ap_fav bajo_verde_green">Apuestas favoritas</div>
             <div *ngFor="let dest of destacados">

@@ -17,7 +17,7 @@ export class MensajesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.cargarMensajes( '1', 'todas', this._inicioSesion.usuario.id_usuario );
+    this.cargarMensajes( '1', 'todas', this._inicioSesion.usuario.id );
   }
 
   cargarMensajes( pagina, criterio, id_usuario ) {

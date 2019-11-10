@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { GeneralesService } from '../../../servicios/generales.service';
 import { InicioSesionService } from '../../../servicios/inicio-sesion.service';
 import { Usuario } from '../../../modelos/usuario';
-import * as $ from 'jquery';
-import { SubMenuComponent } from '../sub-menu/sub-menu.component';
 import { SubMenuService } from '../../../servicios/sub-menu.service';
 
 @Component({
@@ -77,7 +75,39 @@ export class CabeceraComponent implements OnInit {
   }
 
   logout() {
-    this.usuario = new Usuario('', '', null, '0', '', '0', '', '0', '2', '', '', '', '', '231', '', '', '', '', '5', '', '', '', '1', '');
+    this.usuario = new Usuario(
+      '', 
+      '', 
+      null, 
+      1, 
+      '', 
+      {
+      id: '',
+      document_type: '',
+      document_number: null,
+      name: '',
+      lastname: '',
+      birthday: '',
+      gender: '',
+      country_id: null,
+      state_id: '',
+      city_id: null,
+      parish_id: null,
+      address: '',
+      phone: '',
+      treatment: '',
+      available: '',
+      risk: '',
+      points: '',
+      ip: '',
+      browser: '',
+      created_at: '',
+      updated_at: '' 
+      }, 
+      '', 
+      ''
+    );
+
     this.token = '';
 
     localStorage.removeItem('token');
@@ -86,7 +116,38 @@ export class CabeceraComponent implements OnInit {
     localStorage.removeItem('id');
 
     // tslint:disable-next-line:max-line-length
-    this._sesionUsuario.usuario = new Usuario('', '', null, '0', '', '0', '', '0', '2', '', '', '', '', '231', '', '', '', '', '5', '', '', '', '1', '');
+    this._sesionUsuario.usuario = new Usuario(
+      '', 
+      '', 
+      null, 
+      1, 
+      '', 
+      {
+      id: '',
+      document_type: '',
+      document_number: null,
+      name: '',
+      lastname: '',
+      birthday: '',
+      gender: '',
+      country_id: null,
+      state_id: '',
+      city_id: null,
+      parish_id: null,
+      address: '',
+      phone: '',
+      treatment: '',
+      available: '',
+      risk: '',
+      points: '',
+      ip: '',
+      browser: '',
+      created_at: '',
+      updated_at: '' 
+      }, 
+      '', 
+      ''
+    );
     this._sesionUsuario.estatus = 'noSesion';
     this._sesionUsuario.salirMenu();
 
@@ -96,14 +157,14 @@ export class CabeceraComponent implements OnInit {
 
   sesionActiva() {
       this._sesionUsuario.recogerSesion();
-      if ( this._sesionUsuario.usuario.usuario !== undefined) {
-        this._sesionUsuario.obtenerUsuario( this._sesionUsuario.usuario.usuario, this._sesionUsuario.usuario.token, 'token')
+      if ( this._sesionUsuario.usuario.nick !== undefined) {
+        this._sesionUsuario.obtenerUsuario( this._sesionUsuario.usuario.nick, this._sesionUsuario.token, 'token')
         .subscribe( res => {
           if (res.status === 'correcto') {
             this._subMenuService.cargarMenu();
             this._sesionUsuario.estatus = 'Sesion';
-            this._sesionUsuario.usuario = res.usuario;
-            this._sesionUsuario.guardarUsuario(res.usuario.id_usuario, res.usuario.token, res.usuario.usuario);
+            this._sesionUsuario.usuario = res.user;
+            this._sesionUsuario.guardarUsuario(res.usuario.id, res.access_token, res.usuario.nick);
           }
         });
       }

@@ -24,7 +24,7 @@
                         <span style="color: #7F0000">*</span> País de residencia:
                     </div>
                     <div class="subinput">
-                        <select class="inpt_reg" id="nro1" name='pais'>
+                        <select class="inpt_reg" id="nro1" name='country_id'>
 							<option value="231">Venezuela</option>
 						</select>
                     </div>
@@ -42,7 +42,7 @@
                         <span style="color: #7F0000">*</span> Tratamiento:
                     </div>
                     <div class="subinput">
-                        <select class="inpt_reg" id="nro2" name='tratamiento' [(ngModel)]="usuario.tratamiento">
+                        <select class="inpt_reg" id="nro2" name='treatment' [(ngModel)]="usuario.player.treatment">
 							<option value="1">Sr.</option>
 							<option value="2">Sra.</option>
 							<option value="3">Srta.</option>
@@ -60,7 +60,7 @@
                         <span style="color: #7F0000">*</span> Nombre(s):
                     </div>
                     <div class="subinput">
-                        <input type="text" class="inpt_reg" id="nro3" name='nombre' [(ngModel)]="usuario.nombres">
+                        <input type="text" class="inpt_reg" id="nro3" name='name' [(ngModel)]="usuario.player.name">
                     </div>
                     <div class="submsj">
                         <div class="msj_reg nro3">
@@ -74,7 +74,7 @@
                         <span style="color: #7F0000">*</span> Apellidos:
                     </div>
                     <div class="subinput">
-                        <input type="text" class="inpt_reg" id="nro4" name='apellido' [(ngModel)]="usuario.apellidos">
+                        <input type="text" class="inpt_reg" id="nro4" name='lastname' [(ngModel)]="usuario.player.lastname">
                     </div>
                     <div class="submsj">
                         <div class="msj_reg nro4">
@@ -118,7 +118,7 @@
                     </div>
                     <div class="subinput" id="nro50">
                         <input type="text" class="inpt_reg fdn dia_fdn" name='letra' value='V' id="nro57" disabled>
-                        <input [(ngModel)]="usuario.cedula" type="text" class="inpt_reg fdn mes_fdn" name='cedula' style='width: 69.6% !important;' id="nro67">
+                        <input [(ngModel)]="usuario.player.document_number" type="text" class="inpt_reg fdn mes_fdn" name='cedula' style='width: 69.6% !important;' id="nro67">
                     </div>
                     <div class="submsj">
                         <div class="msj_reg nro50">
@@ -184,7 +184,7 @@
                         <span style="color: #7F0000">*</span> Nombre de usuario:
                     </div>
                     <div class="subinput">
-                        <input type="text" class="inpt_reg" id="nro30" required name='usuario' [(ngModel)]="usuario.usuario">
+                        <input type="text" class="inpt_reg" id="nro30" required name='nick' [(ngModel)]="usuario.nick">
                     </div>
                     <div class="submsj">
                         <div class="msj_reg nro30">
@@ -198,7 +198,7 @@
                         <span style="color: #7F0000">*</span> Contraseña:
                     </div>
                     <div class="subinput">
-                        <input [(ngModel)]="usuario.password" type="password" class="inpt_reg" id="nro31" name='pass'>
+                        <input [(ngModel)]="usuario.password" type="password" class="inpt_reg" id="nro31" name='password'>
                     </div>
                     <div class="submsj">
                         <div class="msj_reg nro31">
@@ -213,7 +213,7 @@
                         <span style="color: #7F0000">*</span> Repita contraseña:
                     </div>
                     <div class="subinput">
-                        <input type="password" [(ngModel)]="usuario.password2" class="inpt_reg" id="nro34" name='repass'>
+                        <input type="password" class="inpt_reg" id="nro34" name='password2'>
                     </div>
                     <div class="submsj">
                         <div class="msj_reg nro34">
@@ -227,7 +227,7 @@
                         <span style="color: #7F0000">*</span> Nº de seguridad de cuatro dígitos:
                     </div>
                     <div class="subinput">
-                        <input [(ngModel)]="usuario.numerico" type="password" class="inpt_reg" id="nro32" name='cod'>
+                        <input type="password" class="inpt_reg" id="nro32" name='numeric'>
                     </div>
                     <div class="submsj">
                         <div class="msj_reg nro32">
@@ -241,7 +241,7 @@
                         <span style="color: #7F0000">*</span> Repita nº de seguridad:
                     </div>
                     <div class="subinput">
-                        <input [(ngModel)]="usuario.numerico2" type="password" class="inpt_reg" id="nro33" name='recod'>
+                        <input type="password" class="inpt_reg" id="nro33" name='numeric2'>
                     </div>
                     <div class="submsj">
                         <div class="msj_reg nro33">
@@ -257,7 +257,7 @@
                         <span style="color: #7F0000">*</span> Correo electrónico:
                     </div>
                     <div class="subinput">
-                        <input type="email" [(ngModel)]="usuario.email" class="inpt_reg" id="nro51" name='correo' required>
+                        <input type="email" [(ngModel)]="usuario.email" class="inpt_reg" id="nro51" name='email' required>
                     </div>
                     <div class="submsj">
                         <div class="msj_reg nro51">
@@ -271,7 +271,7 @@
                         <span style="color: #7F0000"></span> Número telefónico:
                     </div>
                     <div class="subinput">
-                        <input type="text" class="inpt_reg" id="nro52" name='telefono' [(ngModel)]="usuario.telefono">
+                        <input type="text" class="inpt_reg" id="nro52" name='telefono' [(ngModel)]="usuario.player.phone">
                     </div>
                     <div class="submsj">
                         <div class="msj_reg nro52">

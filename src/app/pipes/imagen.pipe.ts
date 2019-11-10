@@ -10,12 +10,12 @@ export class ImagenPipe implements PipeTransform {
     let url = URL_IMAGEN + '';
 
     if ( !img ) {
-      return url + '/equipos/xxx';
+      return url + '/teams/xxx';
     }
 
     switch ( tipo ) {
       case 'equipo':
-         url += '/equipos/' + img;
+         url += '/teams/' + img;
       break;
 
       case 'liga':

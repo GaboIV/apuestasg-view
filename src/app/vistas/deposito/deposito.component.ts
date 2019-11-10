@@ -28,7 +28,7 @@ export class DepositoComponent implements OnInit {
 
   ngOnInit() {
     
-    this.pago.id_usuario = this._inicioSesion.usuario.id_usuario;
+    this.pago.id_usuario = this._inicioSesion.usuario.id;
 
     this._generalesService.cargarCuentas()
     .subscribe( resp => {
