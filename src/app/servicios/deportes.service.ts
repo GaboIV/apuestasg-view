@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { URL_DEPORTES, URL_EQUIPOS } from '../comun/link';
+import { InicioSesionService } from './inicio-sesion.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,14 +11,15 @@ export class DeportesService {
 
   constructor(
     private http: HttpClient,
+    public _loginService: InicioSesionService,
   ) { }
 
   cargarDeportes() {
-    const url = URL_DEPORTES + '/ver/todos';
+    const url = URL_DEPORTES;
 
-    return this.http.get( url )
+    return this.http.get( url, this._loginService.httpOptions )
       .pipe(map ( (resp: any) => {
-        return resp.deportes;
+        return resp.categories;
       }));
   }
 

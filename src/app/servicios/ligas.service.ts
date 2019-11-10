@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { URL_LIGAS, URL_ACTUALIZACIONES } from '../comun/link';
 import { Liga } from '../modelos/ligas';
+import { InicioSesionService } from './inicio-sesion.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,22 +14,18 @@ export class LigasService {
 
   constructor(
     private http: HttpClient,
+    public _loginService: InicioSesionService,
   ) { }
 
-  cargarLigas(pagina: number, criterio: string) {
+  cargarLigas(page: any, words: string) {
+      let url = ""; 
+      
+      url = URL_LIGAS + '?page=' + page;       
 
-    let url = '';
-
-    if (criterio !== null) {
-      url = URL_LIGAS + '/ver/' + pagina + '/' + criterio;
-    } else {
-      url = URL_LIGAS + '/ver/' + pagina + '/todas';
-    }
-
-    return this.http.get( url )
+      return this.http.get( url, this._loginService.httpOptions )
       .pipe(map ( (resp: any) => {
-        return resp.ligas;
-      }));
+        return resp.leagues;
+      }));    
   }
 
   cargarActualizaciones() {
@@ -53,9 +50,9 @@ export class LigasService {
   }
 
   crearLiga(liga: Liga) {
-    const url = URL_LIGAS + '/agregar';
+    const url = URL_LIGAS;
 
-    return this.http.post( url, liga )
+    return this.http.post( url, liga, this._loginService.httpOptions )
       .pipe(map( (resp: any) => {
         const res = resp;
         return res;

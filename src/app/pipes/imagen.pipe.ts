@@ -19,7 +19,7 @@ export class ImagenPipe implements PipeTransform {
       break;
 
       case 'liga':
-       url += '/ligas/' + img;
+       url += '/leagues/' + img;
       break;
 
       case 'nacionalidad':

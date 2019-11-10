@@ -1,17 +1,14 @@
 export class Liga {
 
     constructor(
-        public nombre_liga?: string,
-        public descripcion?: string,
-        public actualizacion?: string,
+        public name?: string,
+        public data?: string,
         public url?: string,
-        public importancia?: number,
-        public id_categoria?: number,
-        public id_pais?: string,
-        public id_wihi_liga?: string,
-        public id_liga?: string,
+        public importance?: number,
+        public category_id?: number,
+        public country_id?: number,
+        public id?: string,
         public img?: string,
-        public equipos?: number,
-        public titulo?: string
+        public equipos?: number
     ) { }
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { URL_TICKET, URL_AUTH, URL_SELECCION, URL_MENSAJES } from '../comun/link';
 import { map } from 'rxjs/operators';
 import { Usuario } from '../modelos/usuario';
@@ -8,6 +8,12 @@ import { Usuario } from '../modelos/usuario';
   providedIn: 'root'
 })
 export class InicioSesionService {
+
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type':  'application/json'
+    })
+  };
 
   selecciones: any;
   selecciones2: any;
@@ -223,6 +229,15 @@ export class InicioSesionService {
     const tokenr = localStorage.getItem('token');
     const usuarior = JSON.parse(localStorage.getItem('usuario'));
 
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': 'Bearer ' + tokenr
+      })
+    };
+
+    console.log(this.httpOptions);
+
     if ( usuarior !== null && tokenr !== null && idr !== null) {
       this.usuario = usuarior;
       this.usuario.id = idr;
@@ -234,6 +249,16 @@ export class InicioSesionService {
     localStorage.setItem('id', id);
     localStorage.setItem('token', token);
     localStorage.setItem('usuario', JSON.stringify(this.usuario));
+
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': 'Bearer ' + token
+      })
+    };
+
+    console.log(this.httpOptions);
+
     this.token = token;
   }
 

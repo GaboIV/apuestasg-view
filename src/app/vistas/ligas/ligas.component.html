@@ -1,73 +1,59 @@
-<div class="buscador_it_001"><input #caja type="text" name="search_eq" placeholder="Buscar un equipo" class="search_eq" (keyup)="buscarElemento(caja.value)">
+<div class="buscador_it_001"><input #caja type="text" name="search_eq" placeholder="Buscar un equipo" class="search_eq"
+        (keyup)="buscarElemento(caja.value)">
     <div class="add_lig" routerLink="/agregarLiga">Nueva liga</div>
 </div>
 
 <div class="equipos" id="equipos">
     <div>
-        <div class="normal_table" cellspacing="0" border="0">
-            <div class="thead_nt">
-                <div class="tr_th_nt trthnt_id">
-                    ID
-                </div>
-                <div class="tr_th_nt trthnt_name">
-                    ID (WH)
-                </div>
-                <div class="tr_th_nt trthnt_nombre_wh">
-                    Nombre liga (BZ)
-                </div>
-                <div class="tr_th_nt trthnt_ligas">
-                    Deporte
-                </div>
-                <div class="tr_th_nt trthnt_acronimo">
-                    N° de Equip.
-                </div>
-
-                <div class="tr_th_nt trthnt_imagen">
-                    Importancia
-                </div>
-                <div class="tr_th_nt trthnt_nacionalidad">
-                    Imágen
-                </div>
-                <div class="tr_th_nt trthnt_ciudad">
-                    Nacionalidad
-                </div>
-            </div>
-        </div>
-
         <table width="100%" id="tabla_equipos" *ngIf="liguias?.length === 0">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Deporte</th>
+                    <th>Nro. de equipos</th>
+                    <th>Importancia</th>
+                    <th>Imagen</th>
+                    <th>Nacionalidad</th>
+                </tr>
+            </thead>
             <tbody>
                 <tr class="par_th_nt" *ngFor="let liga of ligas ">
-                    <td width="5%" align="center">{{ liga.id_liga }}</td>
-                    <td width="20%">{{ liga.id_wihi_liga }}</td>
+                    <td width="5%" align="center">{{ liga.id }}</td>
+                    <!-- <td width="20%">{{ liga.id_wihi_liga }}</td> -->
                     <td contenteditable="false" width="20%" class="ch_dv_nt">
-                        <p (click)="cambiarEdit()" *ngIf="mostrarEdit === false">{{ liga.nombre_liga }}</p>
-                        <input type="text" [value]="liga.nombre_liga" *ngIf="mostrarEdit === true" [(ngModel)]="liga.nombre_liga" (focusout)="ocultarEdit( liga )">
-                    </td>
-                    <td width="14%">
-                        <select name="liga" (change)="cambiarEdit()" class="ch_slc_nt" [(ngModel)]="liga.id_categoria">
-                        <option *ngFor="let deporte of deportes " value={{deporte.id_categoria}}>{{ deporte.descripcion }}</option>
-                    </select>
-                    </td>
-                    <td width="9%">
-                        {{liga.equipos}}
-                    </td>
-                    <td width="9%" align="center">
-                        <p (click)="cambiarEdit()" *ngIf="mostrarEdit === false">{{ liga.importancia }}</p>
-                        <input type="text" [value]="liga.importancia" *ngIf="mostrarEdit === true" [(ngModel)]="liga.importancia" (focusout)="ocultarEdit( liga )">
-                    </td>
-                    <td width="9%">
-                        <label style="cursor: pointer; position: relative; height: 60px;">
-                        <img [src]="liga.img | imagen:'liga'" alt="" height="50px;">
-                        <br>
-                        <input type="file" name="imagenSubir" (change)="subirImagen($event, liga)" style="display: none">
-                    </label>
+                        <p (click)="cambiarEdit()" *ngIf="mostrarEdit === false">{{ liga.name }}</p>
+                        <input type="text" [value]="liga.name" *ngIf="mostrarEdit === true" [(ngModel)]="liga.name"
+                            (focusout)="ocultarEdit( liga )">
                     </td>
                     <td width="14%" align="center">
-                        <select name="liga" (change)="cambiarEdit()" class="ch_slc_nt">
-                          <option *ngFor="let nacionalidad of nacionalidades " value={{nacionalidad.id_lista_p}}>{{ nacionalidad.nombre }}</option>
-                      </select>
+                        <select name="liga" (change)="cambiarEdit()" class="ch_slc_nt" [(ngModel)]="liga.category_id">
+                            <option *ngFor="let deporte of deportes " value={{deporte.id}}>{{ deporte.name }}</option>
+                        </select>
                     </td>
-
+                    <td width="9%" align="center">
+                        <!-- {{liga.equipos}} -->
+                        -
+                    </td>
+                    <td width="9%" align="center">
+                        <p (click)="cambiarEdit()" *ngIf="mostrarEdit === false">{{ liga.importance }}</p>
+                        <input type="text" [value]="liga.importance" *ngIf="mostrarEdit === true"
+                            [(ngModel)]="liga.importance" (focusout)="ocultarEdit( liga )">
+                    </td>
+                    <td width="9%" align="center">
+                        <label style="cursor: pointer; position: relative; height: 60px;">
+                            <img [src]="'8.png' | imagen:'liga'" alt="" height="50px;">
+                            <br>
+                            <input type="file" name="imagenSubir" (change)="subirImagen($event, liga)" style="display: none">
+                        </label>
+                        
+                    </td>
+                    <td width="14%" align="center">
+                        <select name="liga" (change)="cambiarEdit()" class="ch_slc_nt" [(ngModel)]="liga.country_id">
+                            <option *ngFor="let nacionalidad of nacionalidades " value={{nacionalidad.id}}>
+                                {{ nacionalidad.name }}</option>
+                        </select>
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -78,31 +64,36 @@
                     <td width="20%">{{ liga.id_wihi_liga }}</td>
                     <td contenteditable="false" width="20%" class="ch_dv_nt">
                         <p (click)="cambiarEdit()" *ngIf="mostrarEdit === false">{{ liga.nombre_liga }}</p>
-                        <input type="text" [value]="liga.nombre_liga" *ngIf="mostrarEdit === true" [(ngModel)]="liga.nombre_liga" (focusout)="ocultarEdit( liga )">
+                        <input type="text" [value]="liga.nombre_liga" *ngIf="mostrarEdit === true"
+                            [(ngModel)]="liga.nombre_liga" (focusout)="ocultarEdit( liga )">
                     </td>
                     <td width="14%">
                         <select name="liga" (change)="cambiarEdit()" class="ch_slc_nt" [(ngModel)]="liga.id_categoria">
-                        <option *ngFor="let deporte of deportes " value={{deporte.id_categoria}}>{{ deporte.descripcion }}</option>
-                    </select>
+                            <option *ngFor="let deporte of deportes " value={{deporte.id_categoria}}>
+                                {{ deporte.descripcion }}</option>
+                        </select>
                     </td>
                     <td width="9%">
                         {{liga.equipos}}
                     </td>
                     <td width="9%" align="center">
                         <p (click)="cambiarEdit()" *ngIf="mostrarEdit === false">{{ liga.importancia }}</p>
-                        <input type="text" [value]="liga.importancia" *ngIf="mostrarEdit === true" [(ngModel)]="liga.importancia" (focusout)="ocultarEdit( liga )">
+                        <input type="text" [value]="liga.importancia" *ngIf="mostrarEdit === true"
+                            [(ngModel)]="liga.importancia" (focusout)="ocultarEdit( liga )">
                     </td>
                     <td width="9%">
                         <label style="cursor: pointer; position: relative; height: 60px;">
-                        <img [src]="liga.img | imagen:'liga'" alt="" height="50px;">
-                        <br>
-                        <input type="file" name="imagenSubir" (change)="subirImagen($event, liga)" style="display: none">
-                    </label>
+                            <img [src]="liga.img | imagen:'liga'" alt="" height="50px;">
+                            <br>
+                            <input type="file" name="imagenSubir" (change)="subirImagen($event, liga)"
+                                style="display: none">
+                        </label>
                     </td>
                     <td width="14%" align="center">
                         <select name="liga" (change)="cambiarEdit()" class="ch_slc_nt">
-                          <option *ngFor="let nacionalidad of nacionalidades " value={{nacionalidad.id_lista_p}}>{{ nacionalidad.nombre }}</option>
-                      </select>
+                            <option *ngFor="let nacionalidad of nacionalidades " value={{nacionalidad.id_lista_p}}>
+                                {{ nacionalidad.nombre }}</option>
+                        </select>
                     </td>
 
                 </tr>
@@ -110,7 +101,8 @@
         </table>
     </div>
     <ul class="pagination pagination-large">
-        <li style="cursor: pointer" class='{{desactivar}}' (click)="cambiarPagina('b')"><span>&lsaquo; Anterior</span></li>
+        <li style="cursor: pointer" class='{{desactivar}}' (click)="cambiarPagina('b')"><span>&lsaquo; Anterior</span>
+        </li>
         <li style="cursor: pointer">
             <span class='color_gray' (click)="cambiarPagina('a')">Siguiente &rsaquo;</span>
         </li>

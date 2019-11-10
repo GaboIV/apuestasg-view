@@ -2363,11 +2363,10 @@ cuerpo {
     border: 1px #272727 solid;
 }
 
-.thead_nt {
-    background: black;
+thead tr {
+    background: black !important;
     color: white;
     height: 27px;
-    text-align: left;
 }
 
 .tr_th_nt {

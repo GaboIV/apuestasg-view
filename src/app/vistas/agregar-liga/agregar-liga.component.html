@@ -4,30 +4,30 @@
 <br><br><br><br>
 
 <div class="formulario">
-    <div>
+    <form #f="ngForm" ngNativeValidate (ngSubmit)="enviarDatos(f)">
         <label>
           Nombre de la Liga:
-          <input type="text" class="entrada" [(ngModel)]="liga.nombre_liga">
+          <input type="text" required name="name" class="entrada" [(ngModel)]="liga.name">
         </label>
         <label>
             URL de actualización:
-            <input type="text" class="entrada" [(ngModel)]="liga.url">
+            <input type="text" name="url" class="entrada" [(ngModel)]="liga.url">
         </label>
         <label>
             Categoría de Deporte
-            <select name="deporte" class="entrada" [(ngModel)]="liga.id_categoria">
-                <option *ngFor="let deporte of deportes" value={{deporte.id_categoria}}>{{ deporte.descripcion }}</option>
+            <select name="category_id" class="entrada" [(ngModel)]="liga.category_id">
+                <option *ngFor="let deporte of deportes" value={{deporte.id}}>{{ deporte.name }}</option>
             </select>
         </label>
         <label>
             País de la liga
-            <select class="entrada" name="liga" [(ngModel)]="liga.id_pais">
-                <option *ngFor="let nacionalidad of nacionalidades " value={{nacionalidad.id_lista_p}}>{{ nacionalidad.nombre }}</option>
+            <select class="entrada" name="country_id" [(ngModel)]="liga.country_id">
+                <option *ngFor="let nacionalidad of nacionalidades " value={{nacionalidad.id}}>{{ nacionalidad.name }}</option>
             </select>
         </label>
         <div class="partes_tit barra_botn">
             <div class="butt_lig butt_canc_lig">Cancelar</div>
-            <div class="butt_lig butt_acep_lig" (click)="enviarDatos(liga)">Aceptar</div>
+            <button class="butt_lig butt_acep_lig" type="submit">Aceptar</button>
         </div>
-    </div>
+    </form>
 </div>

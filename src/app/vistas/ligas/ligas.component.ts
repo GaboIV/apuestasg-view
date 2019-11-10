@@ -37,7 +37,7 @@ export class LigasComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.ligas = JSON.parse( localStorage.getItem('ligas') );
+    this.ligas = JSON.parse(localStorage.getItem('ligas'));
 
     this.cargarLigas(this.pagina, 'todas');
     this.cargarNacionalidades();
@@ -46,42 +46,41 @@ export class LigasComponent implements OnInit {
 
   cargarLigas(pagina, criterio) {
     this._ligasService.cargarLigas(pagina, criterio)
-          .subscribe( ligas => {
-              this.ligas = ligas;
-              localStorage.setItem('ligas', JSON.stringify(ligas) );
-            }
-          );
+      .subscribe(ligas => {
+        this.ligas = ligas.data;
+        localStorage.setItem('ligas', JSON.stringify(ligas.data));
+      });
   }
 
   cargarNacionalidades() {
     this._nacionalidadesService.cargarNacionalidades()
-          .subscribe( nacionalidades => this.nacionalidades = nacionalidades );
+      .subscribe(nacionalidades => this.nacionalidades = nacionalidades);
   }
 
   cargarDeportes() {
     this._deporteService.cargarDeportes()
-          .subscribe( deportes => this.deportes = deportes );
+      .subscribe(deportes => this.deportes = deportes);
   }
 
   cambiarEdit() {
-    this.mostrarEdit =  true;
+    this.mostrarEdit = true;
   }
 
-  ocultarEdit( liga: Liga ) {
-    console.log( liga );
-    this.mostrarEdit =  false;
-    this._ligasService.actualizarLiga( liga )
-    .subscribe( res => {
-      console.log( res );
-    });
+  ocultarEdit(liga: Liga) {
+    console.log(liga);
+    this.mostrarEdit = false;
+    this._ligasService.actualizarLiga(liga)
+      .subscribe(res => {
+        console.log(res);
+      });
   }
 
   subirImagen(event, liga) {
     this.selectedFile = event.target.files[0];
-    this._generalesService.subirImagen( liga.id_liga, this.selectedFile, 'ligas' )
-      .subscribe( res => {
+    this._generalesService.subirImagen(liga.id_liga, this.selectedFile, 'ligas')
+      .subscribe(res => {
         this.resultado = res;
-        console.log ( this.resultado );
+        console.log(this.resultado);
         liga.img = this.resultado.imagen;
       });
   }
@@ -89,7 +88,7 @@ export class LigasComponent implements OnInit {
   cambiarPagina(valor: string) {
     if (valor === 'a') {
       this.pagina = this.pagina + 1;
-      this.cargarLigas(this.pagina , 'todas');
+      this.cargarLigas(this.pagina, 'todas');
 
       if (this.pagina !== 1) {
         this.desactivar = 'color_grey';
@@ -109,12 +108,12 @@ export class LigasComponent implements OnInit {
   buscarElemento(valor: string) {
     this.liguias = [];
 
-    if ( valor !== '') {
+    if (valor !== '') {
       const busqueda = new RegExp(valor, 'i');
-      const liguias = this.ligas.filter( ligas => busqueda.test( ligas.nombre_liga ) );
-  
-      console.log( liguias );
-  
+      const liguias = this.ligas.filter(ligas => busqueda.test(ligas.name));
+
+      console.log(liguias);
+
       this.liguias = liguias;
     }
   }

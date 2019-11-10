@@ -9,6 +9,7 @@ import { HttpClient } from '@angular/common/http';
 import { Liga } from '../../modelos/ligas';
 import { LigasService } from '../../servicios/ligas.service';
 import { ToastrService } from 'ngx-toastr';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-agregar-liga',
@@ -17,7 +18,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 
 export class AgregarLigaComponent implements OnInit {
-  liga: Liga = new Liga('', '', '', '', 0, 0, '', '', '', '', 0, '');
+  liga: Liga = new Liga('', '', '', 0, 1, 231, null, '', 0);
   nacionalidades: Nacionalidad[];
   deportes: Deporte[];
   resultado: any;
@@ -45,25 +46,28 @@ export class AgregarLigaComponent implements OnInit {
 
   cargarNacionalidades() {
     this._nacionalidadesService.cargarNacionalidades()
-          .subscribe( nacionalidades => this.nacionalidades = nacionalidades );
+      .subscribe(nacionalidades => this.nacionalidades = nacionalidades);
   }
 
   cargarDeportes() {
     this._deporteService.cargarDeportes()
-          .subscribe( deportes => this.deportes = deportes );
+      .subscribe(deportes => {
+        this.deportes = deportes;
+      });
   }
 
-  enviarDatos( liga: Liga ) {
-    this._ligasService.crearLiga( liga )
-    .subscribe( res => {
-      if ( res.status === 'correcto') {
-        this.toastr.success('Correcto', 'Liga guardada satisfactoriamente', {
-          timeOut: 3000,
-          positionClass: 'toast-bottom-right'
-        });
-        this.router.navigate(['/ligas']);
-      }
-    });
+  enviarDatos(f: NgForm) {
+    this._ligasService.crearLiga(f.value)
+      .subscribe(res => {
+
+          this.toastr.success('Correcto', 'Liga guardada satisfactoriamente', {
+            timeOut: 3000,
+            positionClass: 'toast-bottom-right'
+          });
+          this.router.navigate(['/ligas']);
+      
+      });
+    console.log(f.value);
   }
 
 }

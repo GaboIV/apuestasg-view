@@ -99,7 +99,7 @@ export class EquiposComponent implements OnInit {
   }
 
   ligaCa(liga: Liga) {
-    this.cargarEquipos(1, 'todos', liga.id_liga);
+    this.cargarEquipos(1, 'todos', liga.id);
   }
 
 }

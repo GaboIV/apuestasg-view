@@ -232,7 +232,7 @@ export class AgregarPartidoComponent implements OnInit {
 
     if ( descripcion !== '') {
       const busqueda = new RegExp(descripcion, 'i');
-      const lig = this.ligas.filter( ligas => busqueda.test( ligas.nombre_liga ) );
+      const lig = this.ligas.filter( ligas => busqueda.test( ligas.name ) );
       this.lig = lig;
     } else {
       this.lig = this.ligas;
