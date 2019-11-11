@@ -31,7 +31,7 @@ export class ImagenPipe implements PipeTransform {
       break;
 
       case 'partido':
-       url += '/partidos/' + img;
+       url += '/games/' + img;
       break;
 
       case 'categoria':

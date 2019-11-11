@@ -55,7 +55,7 @@
                         <span>{{ game.start | date:'d/MM/yyyy'}} - {{ game.start | date:'shortTime'}}</span>
                     </div>
                     <div class="expandir" [routerLink]="['/verPartido', partido.id_partido]"
-                        [queryParams]="{partido: game}" style="background: #00488c; height: 30px; padding-top: 7px;">
+                        [queryParams]="{partido: game}" style="background: #00488c; height: 31px; padding-top: 7px; margin-top: -1px;">
                         <i class="fas fa-expand"></i>&nbsp;Ampliar
                     </div>
                     <div *ngFor="let competitor of game.competitors" class="gen_imp_eq"
@@ -64,7 +64,7 @@
                         [class.eq_dos]="game.competitors.length == 2"
                         (click)="selecciond( competitor.id, partido.category_id )">
                         <div [class]="partido.category_id | importantes:competitor.team.name "><img
-                                *ngIf="competitor.team.name !== 'Empate'" [src]="competitor.team.id + '.png' | imagen:'equipo'"
+                                *ngIf="competitor.team.name !== 'Empate'" [src]="sanitize(competitor.team.image)"
                                 height=125% class='ep_logo'>{{competitor.team.name}}<br>
                             <!-- Agregar para partidos internacionales -->
                             <!-- <div class="div_span" *ngIf="(partido.category_id === '24' || partido.category_id === '29') && equipo.nacionalidad !== '0'">{{equipo.pais}} <img [src]="equipo.nacionalidad + '.png' | imagen:'nacionalidad'" height=12px></div> -->

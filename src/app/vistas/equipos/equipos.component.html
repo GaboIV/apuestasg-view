@@ -1,69 +1,59 @@
-<div class="buscador_it_001"><input #caja type="text" name="search_eq" placeholder="Buscar un equipo" class="search_eq" (keyup.enter)="buscarElemento(caja.value)"></div>
+<div class="buscador_it_001"><input #caja type="text" name="search_eq" placeholder="Buscar un equipo" class="search_eq"
+        (keyup.enter)="buscarElemento(caja.value)"></div>
 
 <div class="equipos">
-    <div class=" ">
-        <div class="normal_table " cellspacing="0 " border="0 ">
-            <div class="thead_nt ">
-                <div class="tr_th_nt trthnt_id ">
-                    ID
-                </div>
-                <div class="tr_th_nt trthnt_name ">
-                    Nombre Equipo (WH)
-                </div>
-                <div class="tr_th_nt trthnt_nombre_wh ">
-                    Nombre Equipo (BZ)
-                </div>
-                <div class="tr_th_nt trthnt_ligas ">
-                    Ligas
-                </div>
-                <div class="tr_th_nt trthnt_acronimo ">
-                    Acrónimo
-                </div>
-                <div class="tr_th_nt trthnt_imagen ">
-                    Imágen
-                </div>
-                <div class="tr_th_nt trthnt_nacionalidad ">
-                    Estadio
-                </div>
-                <div class="tr_th_nt trthnt_ciudad ">
-                    Nacionalidad
-                </div>
-            </div>
-        </div>
-    </div>
-
     <table width="100%" id="tabla_equipos">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre externo</th>
+                <th>Nombre</th>
+                <th>Ligas</th>
+                <th>Acrónimo</th>
+                <th>Imagen</th>
+                <th>Estadio/Sede</th>
+                <th>Nacionalidad</th>
+            </tr>
+        </thead>
         <tbody>
             <tr class="par_th_nt" *ngFor="let equipo of equipos ">
-                <td width="5%" align="center">{{ equipo.id_equipo }}</td>
-                <td width="15%">{{ equipo.id_wihi_equipo }}</td>
+                <td width="5%" align="center">{{ equipo.id }}</td>
+                <td width="15%">{{ equipo.name_uk }}</td>
                 <td contenteditable="false" width="15%" class="ch_dv_nt">
-                    <p (click)="cambiarEdit()" *ngIf="mostrarEdit === false">{{ equipo.nombre_equipo }}</p>
-                    <input type="text" [value]="equipo.nombre_equipo" *ngIf="mostrarEdit === true" [(ngModel)]="equipo.nombre_equipo" (focusout)="ocultarEdit( equipo )">
+                    <p (click)="cambiarEdit()" *ngIf="mostrarEdit === false">{{ equipo.name }}</p>
+                    <input type="text" [value]="equipo.name" *ngIf="mostrarEdit === true"
+                        [(ngModel)]="equipo.name" (focusout)="ocultarEdit( equipo )">
                 </td>
                 <td width="17%">
-                    <div class='cada_liga_nt' *ngFor="let liga of equipo.ligas" (click)="ligaCa(liga)">
-                        {{liga.nombre}}
+                    <div class='cada_liga_nt' *ngFor="let liga of equipo.leagues" (click)="ligaCa(liga)">
+                        {{liga.name}}
                     </div>
                 </td>
                 <td width="11%">
-                    <p (click)="cambiarEdit()" *ngIf="mostrarEdit === false" style="cursor:pointer">{{ equipo.acro }}</p>
-                    <input type="text" [value]="equipo.acro" *ngIf="mostrarEdit === true" [(ngModel)]="equipo.acro" (focusout)="ocultarEdit( equipo )">
+                    <p (click)="cambiarEdit()" *ngIf="mostrarEdit === false" style="cursor:pointer">{{ equipo.acro }}
+                    </p>
+                    <input type="text" [value]="equipo.acro" *ngIf="mostrarEdit === true" [(ngModel)]="equipo.acro"
+                        (focusout)="ocultarEdit( equipo )">
                 </td>
                 <td width="8%" align="center">
                     <label style="cursor: pointer; position: relative; height: 60px;">
-                        <img [src]="equipo.img | imagen:'equipo'" alt="" height="50px;">
+                        <img [src]="equipo.id + '.png'| imagen:'equipo'" alt="" height="50px;">
                         <br>
-                        <input type="file" name="imagenSubir" (change)="subirImagen($event, equipo)" style="display: none">
+                        <input type="file" name="imagenSubir" (change)="subirImagen($event, equipo)"
+                            style="display: none">
                     </label>
                 </td>
                 <td width="16%">
-                    <p (click)="cambiarEdit()" *ngIf="mostrarEdit === false" style="cursor:pointer">{{ equipo.estadio }}</p>
-                    <input type="text" [value]="equipo.estadio" *ngIf="mostrarEdit === true" [(ngModel)]="equipo.estadio" (focusout)="ocultarEdit( equipo )">
+                    <p (click)="cambiarEdit()" *ngIf="mostrarEdit === false" style="cursor:pointer">{{ equipo.stadium }}
+                    </p>
+                    <input type="text" [value]="equipo.stadium" *ngIf="mostrarEdit === true"
+                        [(ngModel)]="equipo.stadium" (focusout)="ocultarEdit( equipo )">
                 </td>
                 <td width="13%" align="center">
-                    <select name="nacionalidad_equipo" (change)="cambiarEdit()" class="ch_slc_nt" [(ngModel)]="equipo.nacionalidad">
-                        <option *ngFor="let nacionalidad of nacionalidades " value={{nacionalidad.id_lista_p}}>{{ nacionalidad.nombre }}</option>
+                    <select name="nacionalidad_equipo" (change)="cambiarEdit()" class="ch_slc_nt"
+                        [(ngModel)]="equipo.nacionalidad">
+                        <option *ngFor="let nacionalidad of nacionalidades " value={{nacionalidad.id}}>
+                            {{ nacionalidad.name }}</option>
                     </select>
                 </td>
 
@@ -72,7 +62,8 @@
     </table>
 
     <ul class="pagination pagination-large">
-        <li style="cursor: pointer" class='{{desactivar}}' (click)="cambiarPagina('b')"><span>&lsaquo; Anterior</span></li>
+        <li style="cursor: pointer" class='{{desactivar}}' (click)="cambiarPagina('b')"><span>&lsaquo; Anterior</span>
+        </li>
         <li style="cursor: pointer">
             <span class='color_gray' (click)="cambiarPagina('a')">Siguiente &rsaquo;</span>
         </li>

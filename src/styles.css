@@ -834,10 +834,10 @@ cuerpo {
 }
 
 .ep_cada_liga {
-    color: #545454;
+    color: #fff;
     vertical-align: middle;
-    background-color: #ddd;
-    font-size: 14.5px;
+    background-color: #d61828;
+    font-size: 1.1em;
     padding: 5px 10px;
     width: 100%;
     cursor: pointer;

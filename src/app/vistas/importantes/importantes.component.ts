@@ -37,7 +37,7 @@ export class ImportantesComponent implements OnInit {
   carreras: Carrera;
   id: string;
   liga_temp = 0;
-  juegos: any;
+  juegos: any = [];
   usuario: any;
 
   mstatus = null;
@@ -71,7 +71,7 @@ export class ImportantesComponent implements OnInit {
         $('#temp-' + this.id).addClass(' seleccionadosport ');
         $('.spin_cat').removeClass('iconosport');
         $('#spin-' + this.id).addClass(' iconosport ');
-        if (parametros['id_categoria'] === '27') {
+        if (parametros['id_categoria'] === '7') {
           this.esperando = true;
           this._caballoService.cargarCarreras('todas')
             .subscribe(resp => {
@@ -87,7 +87,8 @@ export class ImportantesComponent implements OnInit {
             });
         } else {
           this.esperando = true;   
-          this.cargarCategoriasJuegos();     
+          this.cargarCategoriasJuegos();  
+          console.log(this.juegos);   
         }
       });
     $('.mensaje_cp').hide();
@@ -194,12 +195,17 @@ export class ImportantesComponent implements OnInit {
   }
 
   cargarCategoriasJuegos() {
-    this._generalesService.cargarCategoriasJuegos()
+    if (this.juegos.length == 0) {
+      this._generalesService.cargarCategoriasJuegos()
       .subscribe(resp => {
         this.juegos = resp.categories;
         console.log(resp);
         this.solohoy();
       });
+    } else {
+      this.solohoy();
+    }
+    
   }
 
   seleccionh(id_apuesta) {
@@ -284,5 +290,9 @@ export class ImportantesComponent implements OnInit {
         this.partidos = partidos;
         this.carreras = null;
       });
+  }
+
+  sanitize(url:string){
+    return this.sanitizer.bypassSecurityTrustUrl(url);
   }
 }

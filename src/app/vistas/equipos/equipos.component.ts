@@ -30,7 +30,6 @@ export class EquiposComponent implements OnInit {
     public _equipoService: EquiposService,
     public _nacionalidadesService: NacionalidadesService,
     public _generalesService: GeneralesService,
-    private http: HttpClient
   ) { }
 
   ngOnInit() {
@@ -40,39 +39,41 @@ export class EquiposComponent implements OnInit {
 
   cargarEquipos(pagina, criterio, liga) {
     this._equipoService.cargarEquipos(pagina, criterio, liga)
-          .subscribe( equipos => this.equipos = equipos );
+      .subscribe(equipos => {
+        this.equipos = equipos.data
+      });
   }
 
   cargarNacionalidades() {
     this._nacionalidadesService.cargarNacionalidades()
-          .subscribe( nacionalidades => this.nacionalidades = nacionalidades );
+      .subscribe(nacionalidades => this.nacionalidades = nacionalidades);
   }
 
   cambiarEdit() {
-    this.mostrarEdit =  true;
+    this.mostrarEdit = true;
   }
 
-  ocultarEdit( equipo: Equipo ) {
-    console.log( equipo );
-    this.mostrarEdit =  false;
-    this._equipoService.actualizarEquipo( equipo )
-            .subscribe( res => {
-              console.log( res );
-            });
+  ocultarEdit(equipo: Equipo) {
+    console.log(equipo);
+    this.mostrarEdit = false;
+    this._equipoService.actualizarEquipo(equipo)
+      .subscribe(res => {
+        console.log(res);
+      });
   }
 
   subirImagen(event, equipo) {
     this.selectedFile = event.target.files[0];
-    this._generalesService.subirImagen( equipo.id_equipo, this.selectedFile, 'equipos' )
-      .subscribe( res => {
+    this._generalesService.subirImagen(equipo.id_equipo, this.selectedFile, 'equipos')
+      .subscribe(res => {
         this.resultado = res;
-        console.log ( this.resultado );
+        console.log(this.resultado);
         equipo.img = this.resultado.imagen;
       });
   }
 
   buscarElemento(valor: string) {
-    if ( valor === '') {
+    if (valor === '') {
       valor = 'todos';
     }
     this.cargarEquipos(this.pagina, valor, 'todas');
@@ -81,7 +82,7 @@ export class EquiposComponent implements OnInit {
   cambiarPagina(valor: string) {
     if (valor === 'a') {
       this.pagina = this.pagina + 1;
-      this.cargarEquipos(this.pagina , 'todos', 'todas');
+      this.cargarEquipos(this.pagina, 'todos', 'todas');
 
       if (this.pagina !== 1) {
         this.desactivar = 'color_grey';

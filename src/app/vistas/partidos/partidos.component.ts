@@ -52,53 +52,56 @@ export class PartidosComponent implements OnInit {
 
   cargarDeportes() {
     this._deportesService.cargarDeportes()
-          .subscribe( deportes => this.deportes = deportes );
+      .subscribe(deportes => this.deportes = deportes);
   }
 
-  seleccionDeporte ( seleccion ) {
+  seleccionDeporte(seleccion) {
     this.ligas = null;
-    this._deportesService.seleccionDeporte( seleccion )
-      .subscribe( ligas => {
+    this._deportesService.seleccionDeporte(seleccion)
+      .subscribe(ligas => {
         this.ligas = ligas;
       });
   }
 
-  seleccionLiga( seleccion ) {
+  seleccionLiga(seleccion) {
     this.partidos = null;
 
     this.criterio = '-' + seleccion;
 
-    this._partidosService.cargarPartidos( 1, '-' + seleccion )
-      .subscribe( partidos => this.partidos = partidos );
+    this._partidosService.cargarPartidos(1, '-' + seleccion)
+      .subscribe(partidos => this.partidos = partidos);
   }
 
   cargarPartidos(pagina, criterio) {
     this._partidosService.cargarPartidos(pagina, criterio)
-          .subscribe( partidos => this.partidos = partidos );
+      .subscribe(partidos => {
+        this.partidos = partidos.data
+        console.log(partidos);
+      });
   }
 
   subirImagen(event, partido) {
     this.selectedFile = event.target.files[0];
-    this._generalesService.subirImagen( partido.id_partido, this.selectedFile, 'partidos' )
-      .subscribe( res => {
+    this._generalesService.subirImagen(partido.id_partido, this.selectedFile, 'partidos')
+      .subscribe(res => {
         this.resultado = res;
-        console.log ( this.resultado );
+        console.log(this.resultado);
         partido.img = this.resultado.imagen;
       });
   }
 
-  cambiarEstado ( partido: Partido ) {
-    this._partidosService.actualizarPartido( partido )
-    .subscribe( res => {
-      console.log( res );
-    });
+  cambiarEstado(partido: Partido) {
+    this._partidosService.actualizarEstado(partido.id, partido.outstanding)
+      .subscribe(res => {
+        console.log(res);
+      });
   }
 
   cambiarPagina(valor: string) {
-  
+
     if (valor === 'a') {
       this.pagina = this.pagina + 1;
-      this.cargarPartidos(this.pagina , this.criterio);
+      this.cargarPartidos(this.pagina, this.criterio);
 
       if (this.pagina !== 1) {
         this.desactivar = 'color_grey';
@@ -115,24 +118,24 @@ export class PartidosComponent implements OnInit {
     }
   }
 
-  cambiarLive( partido: Partido ) {
-    this._partidosService.actualizarPartido ( partido )
-    .subscribe( resp => {
-      console.log( resp );
-    });
+  cambiarLive(partido: Partido) {
+    this._partidosService.actualizarPartido(partido)
+      .subscribe(resp => {
+        console.log(resp);
+      });
   }
 
-  verficarEdad (partido: Partido) {
+  verficarEdad(partido: Partido) {
     return true;
   }
 
-  anularPartido ( partido: Partido ) {
+  anularPartido(partido: Partido) {
     const swalWithBootstrapButtons = swal.mixin({});
 
     swalWithBootstrapButtons({
       title: '¿Deseas anular este partido?',
       // tslint:disable-next-line:max-line-length
-      html: 'Partido: ' + partido.titulo,
+      html: 'Partido: ',
       type: 'question',
       showCancelButton: true,
       confirmButtonText: 'Sí, anular',
@@ -140,17 +143,17 @@ export class PartidosComponent implements OnInit {
       reverseButtons: true
     }).then((result) => {
       if (result.value) {
-        this._partidosService.anularPartido( partido )
-        .subscribe( resp => {
-          if (resp.status === 'correcto') {
-            swalWithBootstrapButtons(
-              '¡Partido anulado!',
-              'Operación realizada correctamente',
-              'success'
-            );
-            partido.eventos[0] = 'Cancelado';
-          }
-        });
+        this._partidosService.anularPartido(partido)
+          .subscribe(resp => {
+            if (resp.status === 'correcto') {
+              swalWithBootstrapButtons(
+                '¡Partido anulado!',
+                'Operación realizada correctamente',
+                'success'
+              );
+              // partido.eventos[0] = 'Cancelado';
+            }
+          });
       } else if (
         result.dismiss === swal.DismissReason.cancel
       ) {

@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { URL_EQUIPOS } from '../comun/link';
 import { Equipo } from '../modelos/equipos';
+import { InicioSesionService } from './inicio-sesion.service';
 
 
 @Injectable()
@@ -12,21 +13,24 @@ export class EquiposService {
 
   constructor(
     private http: HttpClient,
+    public _loginService: InicioSesionService,
   ) { }
 
   cargarEquipos(pagina: number, criterio: string, liga: string) {
 
     let url = '';
 
-    if (criterio !== null) {
-      url = URL_EQUIPOS + '/ver/' + pagina + '/' + criterio + '/' + liga;
-    } else {
-      url = URL_EQUIPOS + '/ver/' + pagina + '/todos/' + '/' + liga;
-    }
+    // if (criterio !== null) {
+    //   url = URL_EQUIPOS + '/ver/' + pagina + '/' + criterio + '/' + liga;
+    // } else {
+    //   url = URL_EQUIPOS + '/ver/' + pagina + '/todos/' + '/' + liga;
+    // }
 
-    return this.http.get( url )
+    url = URL_EQUIPOS + '?page=' + pagina;
+
+    return this.http.get( url, this._loginService.httpOptions )
       .pipe(map ( (resp: any) => {
-        return resp.equipos;
+        return resp.teams;
       }));
   }
 

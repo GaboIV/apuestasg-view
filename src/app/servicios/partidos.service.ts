@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { URL_PARTIDOS, URL_SELECCION, URL_RESULTADOS, URL_INICIAL } from '../comun/link';
 import { map } from 'rxjs/operators';
 import { Partido } from '../modelos/partido';
+import { InicioSesionService } from './inicio-sesion.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,21 +14,25 @@ export class PartidosService {
 
   constructor(
     private http: HttpClient,
+    public _loginService: InicioSesionService,
   ) { }
 
   cargarPartidos(pagina: number, criterio: string) {
 
     let url = '';
 
-    if (criterio !== null) {
-      url = URL_PARTIDOS + '/ver/' + pagina + '/' + criterio;
-    } else {
-      url = URL_PARTIDOS + '/ver/' + pagina + '/todos';
-    }
+    // if (criterio !== null) {
+    //   url = URL_PARTIDOS + '/ver/' + pagina + '/' + criterio;
+    // } else {
+    //   url = URL_PARTIDOS + '/ver/' + pagina + '/todos';
+    // }
 
-    return this.http.get( url )
+    url = URL_PARTIDOS + '?page=' + pagina;
+
+    return this.http.get( url, this._loginService.httpOptions )
       .pipe(map ( (resp: any) => {
-        return resp.partidos;
+        console.log(resp);
+        return resp.games;
       }));
   }
 
@@ -54,6 +59,17 @@ export class PartidosService {
     const url = URL_PARTIDOS + '/actualizar';
 
     return this.http.post( url, partido )
+      .pipe(map( (resp: any) => {
+        const res = resp;
+        return res;
+      })
+    );
+  }
+
+  actualizarEstado( id, estatus ) {
+    const url = URL_PARTIDOS + '/updateOutstanding/' + id;
+
+    return this.http.post( url, { "outstanding": estatus }, this._loginService.httpOptions )
       .pipe(map( (resp: any) => {
         const res = resp;
         return res;
