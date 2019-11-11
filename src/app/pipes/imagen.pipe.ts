@@ -23,7 +23,7 @@ export class ImagenPipe implements PipeTransform {
       break;
 
       case 'nacionalidad':
-       url += '/nacionalidades/' + img;
+       url += '/countries/' + img;
       break;
 
       case 'usuario':

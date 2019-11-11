@@ -42,29 +42,31 @@ export class ActualizacionesComponent implements OnInit {
 
   cargarActualizaciones() {
     this._ligasService.cargarActualizaciones()
-          .subscribe( actualizaciones => this.actualizaciones = actualizaciones );
+      .subscribe(actualizaciones => {
+        this.actualizaciones = actualizaciones
+      });
   }
 
   cargarNacionalidades() {
     this._nacionalidadesService.cargarNacionalidades()
-          .subscribe( nacionalidades => this.nacionalidades = nacionalidades );
+      .subscribe(nacionalidades => this.nacionalidades = nacionalidades);
   }
 
-  cambiarMostrar( act ) {
+  cambiarMostrar(act) {
 
-    if ( this.mostrar === 0) {
-      this.mostrar = act.id_liga;
+    if (this.mostrar === 0) {
+      this.mostrar = act.id;
     } else {
       this.mostrar = 0;
     }
   }
 
-  actualizarPartidos( id_liga ) {
-    this.ventanaCentrada(URL_A_FUNC + '/encuentros.php?IDE=' + id_liga, '800', '600', 'Popupuno');
+  actualizarPartidos(id) {
+    this.ventanaCentrada(URL_A_FUNC + '/encuentros.php?IDE=' + id, '800', '600', 'Popupuno');
   }
 
-  actualizarCuotas( id_liga ) {
-    this.ventanaCentrada(URL_A_FUNC + '/cuotas.php?IDE=' + id_liga + '&total_parts=0&actual_part=0', '800', '600', 'Popupuno');
+  actualizarCuotas(id) {
+    this.ventanaCentrada(URL_A_FUNC + '/cuotas.php?IDE=' + id + '&total_parts=0&actual_part=0', '800', '600', 'Popupuno');
   }
 
   ventanaCentrada(pagina, w, h, nombre) {

@@ -42,7 +42,7 @@
                     </td>
                     <td width="9%" align="center">
                         <label style="cursor: pointer; position: relative; height: 60px;">
-                            <img [src]="'8.png' | imagen:'liga'" alt="" height="50px;">
+                            <img [src]="liga.id + '.png' | imagen:'liga'" alt="" height="50px;">
                             <br>
                             <input type="file" name="imagenSubir" (change)="subirImagen($event, liga)" style="display: none">
                         </label>

@@ -23,6 +23,8 @@ export class InicioSesionService {
   ticketes2 = null;
   aganar: any;
   montoapuesta = 10;
+  countries = JSON.parse(localStorage.getItem('countries'));
+  categories = JSON.parse(localStorage.getItem('categories'));
 
   wines = ''; montos: any; public apostado = 0;
 

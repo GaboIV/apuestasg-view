@@ -29,12 +29,10 @@ export class LigasService {
   }
 
   cargarActualizaciones() {
-
-    const url = URL_ACTUALIZACIONES + '/ver/' + 'todas';
-
-    return this.http.get( url )
+    const url = URL_ACTUALIZACIONES;
+    return this.http.get( url, this._loginService.httpOptions  )
       .pipe(map ( (resp: any) => {
-        return resp.actualizaciones;
+        return resp.updates;
       }));
   }
 

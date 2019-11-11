@@ -86,12 +86,12 @@ export class ImportantesComponent implements OnInit {
               }
             });
         } else {
-          this.esperando = true;          
+          this.esperando = true;   
+          this.cargarCategoriasJuegos();     
         }
       });
     $('.mensaje_cp').hide();
     this.cargarDestacados();
-    this.cargarCategoriasJuegos();
 
     this.usuario = this._inicioSesion.usuario;
 

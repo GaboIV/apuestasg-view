@@ -3,42 +3,45 @@
 </div>
 
 <div class="row">
-    <ng-container *ngFor="let act of actualizaciones">
+    <ng-container *ngFor="let cat of actualizaciones">
 
-        <div class='act_categoria' *ngIf="act.titulo" style="display: block">{{act.titulo}}</div>
+        <div *ngIf="cat.leagues.length != 0" class='act_categoria' style="display: block">{{cat.name}}</div>
 
-        <div style="display: inline-block; width: 30%;">
-
-            <div class="cada_lig" *ngIf="mostrar !== act.id_liga">
-                <div class="img_lig s_c_lig">
-                    <img [src]="act.id_pais + '.png' | imagen:'nacionalidad'">
+        <ng-container *ngFor="let act of cat.leagues">
+            <div style="display: inline-block; width: 30%;">
+                <div class="cada_lig" *ngIf="mostrar !== act.id">
+                    <div class="img_lig s_c_lig">
+                        <img [src]="act.country_id + '.png' | imagen:'nacionalidad'">
+                    </div>
+                    <div class="datos_lig s_c_lig">
+                        <div class="nombre_lig">{{act.name}}</div>
+                        <div class="descripcion_lig">
+                            {{act.data}}
+                        </div>
+                        <!-- <div class="equipos_lig">Registrados: {{act.equipos}} -->
+                        <div class="equipos_lig">Registrados: -
+                        </div>
+                        <div class="partidos_lig">Partidos hoy: ---
+                        </div>
+                        <div class="rueda_lig" id="img{{act.id}}" (click)="cambiarMostrar( act )"><img src="../../../assets/misc/menu.png" width="100%"></div>
+                        <div class="mensaje_lig">
+                            <div class="id_lig">ID: {{act.id}}
+                            </div>
+                            <div class="ult_lig">Últ. act.: {{act.updated_at}}
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="datos_lig s_c_lig">
-                    <div class="nombre_lig">{{act.nombre_liga}}</div>
-                    <div class="descripcion_lig">
-                        {{act.descripcion}}
-                    </div>
-                    <div class="equipos_lig">Registrados: {{act.equipos}}
-                    </div>
-                    <div class="partidos_lig">Partidos hoy: ---
-                    </div>
-                    <div class="rueda_lig" id="img{{act.id_liga}}" (click)="cambiarMostrar( act )"><img src="../../../assets/misc/menu.png" width="100%"></div>
-                    <div class="mensaje_lig">
-                        <div class="id_lig">ID: {{act.id_liga}}
-                        </div>
-                        <div class="ult_lig">Últ. act.: {{act.actualizacion}}
-                        </div>
-                    </div>
+                <div class="cada_lig_opc" *ngIf="mostrar === act.id">
+                    <img src="../../../assets/misc/menu.png" alt="" class="img_opc" (click)="cambiarMostrar( act )">
+                    <div class="tit_opc">{{act.name}}</div>
+                    <div class="opt_lig" (click)="actualizarPartidos(act.id)">Act. Partidos</div>
+                    <div class="opt_lig" (click)="actualizarCuotas(act.id)">Act. Cuotas</div>
+                    <div class="opt_lig">Act. Altas/Bajas</div>
+                    <div class="opt_lig">Act. URL</div>
                 </div>
             </div>
-            <div class="cada_lig_opc" *ngIf="mostrar === act.id_liga">
-                <img src="../../../assets/misc/menu.png" alt="" class="img_opc" (click)="cambiarMostrar( act )">
-                <div class="tit_opc">{{act.nombre_liga}}</div>
-                <div class="opt_lig" (click)="actualizarPartidos(act.id_liga)">Act. Partidos</div>
-                <div class="opt_lig" (click)="actualizarCuotas(act.id_liga)">Act. Cuotas</div>
-                <div class="opt_lig">Act. Altas/Bajas</div>
-                <div class="opt_lig">Act. URL</div>
-            </div>
-        </div>
+        </ng-container>
     </ng-container>
 </div>
+<br>

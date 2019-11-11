@@ -1,6 +1,9 @@
 // export const URL_INICIAL = 'http://api.apuestasg.com.ve/api/';
 export const URL_INICIAL = 'http://localhost/apuestasg-backend/public/api/';
+// export const URL_A_FUNC = 'http://agac.apuestasg.com.ve/php/funciones';
+export const URL_A_FUNC = 'http://localhost/apuestasg-scrap/php/funciones';
 
+export const URL_ACTUALIZACIONES = URL_INICIAL + 'updates';
 export const URL_AUTH = URL_INICIAL + 'auth';
 export const URL_DEPORTES = URL_INICIAL + 'categories';
 export const URL_FECHA = URL_INICIAL + 'hora';
@@ -21,13 +24,9 @@ export const URL_INSCRIPCION = URL_INICIAL + 'bzbk/public/index.php/inscripcion'
 export const URL_SELECCION = URL_INICIAL + 'bzbk/public/index.php/seleccion';
 export const URL_TICKET = URL_INICIAL + 'bzbk/public/index.php/ticket';
 export const URL_USUARIOS = URL_INICIAL + 'bzbk/public/index.php/usuarios';
-export const URL_CATEGORIAS = URL_INICIAL + 'bzbk/public/index.php/categorias';
 export const URL_CHANGELOG = URL_INICIAL + 'bzbk/public/index.php/changelog';
-
 export const URL_TIPOAPUESTAS = URL_INICIAL + 'bzbk/public/index.php/tipoApuestas';
-export const URL_ACTUALIZACIONES = URL_INICIAL + 'bzbk/public/index.php/actualizaciones';
 export const URL_PARTIDOS = URL_INICIAL + 'bzbk/public/index.php/partidos';
-export const URL_A_FUNC = URL_INICIAL + 'bzac/php/funciones';
 export const URL_RESULTADOS = URL_INICIAL + 'bzbk/public/index.php/resultados';
 export const URL_SUBIDA_IMG = URL_INICIAL + 'bzbk/public/subida_logos.php';
 export const URL_DEPOSITO = URL_INICIAL + 'bzbk/public/depositos.php';

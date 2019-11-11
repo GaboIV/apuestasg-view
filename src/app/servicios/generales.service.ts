@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { URL_SUBIDA_IMG, URL_FECHA, URL_CATEGORIAS, URL_DEPOSITO, URL_CHANGELOG, URL_INICIAL } from '../comun/link';
+import { URL_SUBIDA_IMG, URL_FECHA, URL_DEPOSITO, URL_CHANGELOG, URL_INICIAL } from '../comun/link';
 import { Pago } from '../modelos/pago.modelo';
 
 @Injectable({
