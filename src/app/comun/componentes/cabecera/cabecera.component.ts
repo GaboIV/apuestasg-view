@@ -157,7 +157,7 @@ export class CabeceraComponent implements OnInit {
 
   sesionActiva() {
       this._sesionUsuario.recogerSesion();
-      if ( this._sesionUsuario.usuario.nick !== undefined) {
+      if ( this._sesionUsuario.usuario.nick !== undefined && this._sesionUsuario.usuario.nick !== '' ) {
         this._sesionUsuario.obtenerUsuario( this._sesionUsuario.usuario.nick, this._sesionUsuario.token, 'token')
         .subscribe( res => {
           if (res.status === 'correcto') {

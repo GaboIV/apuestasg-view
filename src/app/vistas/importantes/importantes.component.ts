@@ -88,7 +88,6 @@ export class ImportantesComponent implements OnInit {
         } else {
           this.esperando = true;   
           this.cargarCategoriasJuegos();  
-          console.log(this.juegos);   
         }
       });
     $('.mensaje_cp').hide();
@@ -163,7 +162,6 @@ export class ImportantesComponent implements OnInit {
   queclase(equipos, categoria, id_equipo) {
     let clase = 'gen_imp_eq';
     const equipos_cant = equipos.length;
-    console.log(categoria + " " + id_equipo);
     if (equipos_cant === 2) {
       clase += ' eq_dos';
 
@@ -192,7 +190,6 @@ export class ImportantesComponent implements OnInit {
   cargarDestacados() {
     this._partidosService.cargarDestacados()
       .subscribe(destacados => {
-        console.log(destacados);
         this.destacados = destacados
       });
   }
@@ -202,7 +199,6 @@ export class ImportantesComponent implements OnInit {
       this._generalesService.cargarCategoriasJuegos()
       .subscribe(resp => {
         this.juegos = resp.categories;
-        console.log(resp);
         this.solohoy();
       });
     } else {
@@ -277,7 +273,6 @@ export class ImportantesComponent implements OnInit {
       this.esperando = true;
       this._partidosService.partidosPorCategoria(this.id, 'hoy', '')
         .subscribe(resp => {
-          console.log(resp);
           this.esperando = false;
           this.partidos = resp.juegos;
           this.carreras = null;

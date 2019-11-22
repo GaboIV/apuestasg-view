@@ -25,7 +25,6 @@ export class CuotasComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log( "Usuario:" + this._inicioSesion.usuario.nick );
     if ( this._inicioSesion.usuario.nick !== undefined && this._inicioSesion.usuario.nick !== '') {
       this.obtenerSelecciones();
     }

@@ -120,14 +120,36 @@ export class InicioSesionService {
     this.aganar = montoapuesta * this.cuota;
   }
 
-  obtenerUsuario ( usuario, contrasena, tipoken ) {
-    if ( usuario !== undefined) {
-      return this.http.post(URL_AUTH + '/login', {
+  obtenerUsuario ( usuario, contrasena, tipoken = '' ) {
+    if ( usuario !== undefined && usuario != '' ) {
+      let url = '';
+
+      if (contrasena == '') {
+        const tokenr = localStorage.getItem('token'); 
+
+        this.httpOptions = {
+          headers: new HttpHeaders({
+            'Content-Type':  'application/json',
+            'Authorization': 'Bearer ' + tokenr
+          })
+        };
+
+        url = URL_SELECCION + '/login';
+
+        contrasena = 'XyX_cuirrten_WeR_2364';
+        usuario = 'XyX_cuirrply_WeR_2364';
+      } else {
+        url = URL_AUTH + '/login';
+      }
+      return this.http.post(url, {
         "nick":usuario,
-        "password":contrasena
-      }).pipe(map( (resp: any) => {
+        "password":contrasena,
+        "tipoken":tipoken
+      }, this.httpOptions).pipe(map( (resp: any) => {
         const res = resp;
+        console.log(res);
         this.menu = res.menu;
+        this.usuario = res.user;
         localStorage.setItem('menu', JSON.stringify(this.menu));
         return res;
       }));
@@ -136,9 +158,18 @@ export class InicioSesionService {
 
   obtenerSelecciones () {
     this.esperando = true;
-    const url = URL_SELECCION + '/obtener/' + this.usuario.id;
+    const url = URL_SELECCION + '/selections/load';
 
-    return this.http.get( url )
+    const tokenr = localStorage.getItem('token');
+
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': 'Bearer ' + tokenr
+      })
+    };
+
+    return this.http.get( url, this.httpOptions )
       .pipe(map ( (resp: any) => {
         localStorage.setItem('tiposeleccion', resp.tipo);
         localStorage.setItem('selecciones', JSON.stringify(resp.selecciones));
@@ -238,8 +269,6 @@ export class InicioSesionService {
       })
     };
 
-    console.log(this.httpOptions);
-
     if ( usuarior !== null && tokenr !== null && idr !== null) {
       this.usuario = usuarior;
       this.usuario.id = idr;
@@ -258,8 +287,6 @@ export class InicioSesionService {
         'Authorization': 'Bearer ' + token
       })
     };
-
-    console.log(this.httpOptions);
 
     this.token = token;
   }
