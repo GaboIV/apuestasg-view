@@ -64,7 +64,7 @@
                         [class.eq_dos]="game.competitors.length == 2"
                         (click)="selecciond( competitor.id, partido.category_id )">
                         <div [class]="partido.category_id | importantes:competitor.team.name "><img
-                                *ngIf="competitor.team.name !== 'Empate'" [src]="sanitize(competitor.team.image)"
+                                *ngIf="competitor.team.name !== 'Empate'" [src]="competitor.team.image | imagen:'equipo'"
                                 height=125% class='ep_logo'>{{competitor.team.name}}<br>
                             <!-- Agregar para partidos internacionales -->
                             <!-- <div class="div_span" *ngIf="(partido.category_id === '24' || partido.category_id === '29') && equipo.nacionalidad !== '0'">{{equipo.pais}} <img [src]="equipo.nacionalidad + '.png' | imagen:'nacionalidad'" height=12px></div> -->
@@ -156,32 +156,32 @@
 
             <div class="title_ap_fav bajo_verde_green">Apuestas favoritas</div>
             <div *ngFor="let dest of destacados">
-                <ng-container *ngIf="dest.equipos">
-
-                    <img [src]="dest.id_partido + '.png' | imagen:'partido'" width=100% class='img_dtcd'
-                        *ngIf="dest.img !== null">
+                <ng-container *ngIf="dest.competitors">
+                    <img [src]="dest.image | imagen:'partido'" width=100% class='img_dtcd'
+                        *ngIf="dest.image !== null">
                     <div class="img_dest"
-                        [ngStyle]="{'background': 'url(../../assets/vallas/' + dest.id_categoria + '.jpg) no-repeat center center'}">
-                        <ng-container *ngFor="let equipo of dest.equipos; let i = index">
+                        [ngStyle]="{'background': 'url(../../assets/vallas/' + dest.league.category_id + '.jpg) no-repeat center center'}">
+                        <ng-container *ngFor="let equipo of dest.competitors; let i = index">
 
-                            <span class="versus" [class.letra_color]="dest.id_categoria === '26'" *ngIf="i === 1"> VS
+                            <span class="versus" [class.letra_color]="dest.league.category_id === '6'" *ngIf="i === 1"> VS
                             </span>
-                            <img *ngIf="equipo.nombre !== 'Empate'" [src]="equipo.img | imagen:'equipo'" class='ep_logo'
-                                style="position: static;" [class.redondo]="dest.id_categoria === '24'">
+                            <img *ngIf="equipo.name != 'Empate'" [src]="equipo.image | imagen:'equipo'" class='ep_logo'
+                                style="position: static;" [class.redondo]="dest.league.category_id === '4'">
 
                         </ng-container>
                     </div>
                     <div class='titulo_destacado'>
-                        <span class='liga_dtcd'>{{dest.nombre_liga}}</span>
-                        <span class='equipos_dtcd'>{{dest.titulo}}</span>
+                        <span class='liga_dtcd'>{{dest.league.name}}</span>
+                        <!-- <span class='equipos_dtcd'>{{dest.titulo}}</span> -->
+                        <span class='equipos_dtcd'>-</span>
                     </div>
-                    <div class='ep_descripcion_ta'>{{ dest.fecha_inicio | date:'d/MM/yyyy'}} -
-                        {{ dest.fecha_inicio | date:'shortTime'}}</div>
-                    <div class='ep_cada_logo destacado_odd' *ngFor="let equipo of dest.equipos"
-                        (click)="selecciond( equipo.id_participante, dest.id_categoria )">
-                        <img class="destacado_img" [src]="equipo.img | imagen:'equipo'" height=125%>
-                        <div class='ep_cl_name destacado_name'>{{equipo.nombre}}</div>
-                        <div class='ep_cl_logro destacado_cuota'>{{equipo.dividendo | cuota:'decimal'}}</div>
+                    <div class='ep_descripcion_ta'>{{ dest.start | date:'d/MM/yyyy'}} -
+                        {{ dest.start | date:'shortTime'}}</div>
+                    <div class='ep_cada_logo destacado_odd' *ngFor="let equipo of dest.competitors"
+                        (click)="selecciond( equipo.team_id, dest.league.category_id )">
+                        <img *ngIf="equipo.name != 'Empate'" class="destacado_img" [src]="equipo.image | imagen:'equipo'" height=125%>
+                        <div class='ep_cl_name destacado_name'>{{equipo.name}}</div>
+                        <div class='ep_cl_logro destacado_cuota'>{{equipo.odd | cuota:'decimal'}}</div>
                     </div>
                 </ng-container>
             </div>

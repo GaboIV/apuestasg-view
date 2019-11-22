@@ -37,12 +37,10 @@ export class PartidosService {
   }
 
   cargarDestacados() {
-
-    const url = URL_PARTIDOS + '/ver/destacados';
-
+    const url = URL_INICIAL + 'showgamesoutstanding';
     return this.http.get( url )
       .pipe(map ( (resp: any) => {
-        return resp.destacados;
+        return resp.outstanding;
       }));
   }
 
@@ -69,7 +67,7 @@ export class PartidosService {
   actualizarEstado( id, estatus ) {
     const url = URL_PARTIDOS + '/updateOutstanding/' + id;
 
-    return this.http.post( url, { "outstanding": estatus }, this._loginService.httpOptions )
+    return this.http.put( url, { "outstanding": estatus }, this._loginService.httpOptions )
       .pipe(map( (resp: any) => {
         const res = resp;
         return res;

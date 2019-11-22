@@ -191,7 +191,10 @@ export class ImportantesComponent implements OnInit {
 
   cargarDestacados() {
     this._partidosService.cargarDestacados()
-      .subscribe(destacados => this.destacados = destacados);
+      .subscribe(destacados => {
+        console.log(destacados);
+        this.destacados = destacados
+      });
   }
 
   cargarCategoriasJuegos() {
@@ -290,9 +293,5 @@ export class ImportantesComponent implements OnInit {
         this.partidos = partidos;
         this.carreras = null;
       });
-  }
-
-  sanitize(url:string){
-    return this.sanitizer.bypassSecurityTrustUrl(url);
   }
 }
