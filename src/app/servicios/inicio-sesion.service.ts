@@ -142,9 +142,9 @@ export class InicioSesionService {
         url = URL_AUTH + '/login';
       }
       return this.http.post(url, {
-        "nick":usuario,
-        "password":contrasena,
-        "tipoken":tipoken
+        "nick" : usuario,
+        "password" : contrasena,
+        "tipoken" : tipoken
       }, this.httpOptions).pipe(map( (resp: any) => {
         const res = resp;
         console.log(res);
@@ -212,20 +212,26 @@ export class InicioSesionService {
     this.esperando = true;
     this.ticketes = null;
     this.ticketes2 = null;
-    const url = URL_SELECCION + '/agregard/' + id_apuesta;
+    const url = URL_SELECCION + '/selections/add';
 
-    return this.http.post( url, {id_usuario, id_categoria} )
+    return this.http.post( url, {
+      "bet_id" : id_apuesta,
+      "category_id" : id_categoria
+    }, this.httpOptions )
       .pipe(map( (resp: any) => {
         const res = resp;
-        if ( resp.selecciones ) {
-            this.selecciones2 = resp.selecciones;
+        if ( resp.selections ) {
+            this.selecciones2 = resp.selections;
 
-            this.cuota = resp.cuota;
+            this.cuota = resp.quot;
 
             this.cambioApuesta( this.montoapuesta );
         }
         this.esperando = false;
-        return res;
+
+        console.log(resp);
+
+        return resp;
       })
     );
   }

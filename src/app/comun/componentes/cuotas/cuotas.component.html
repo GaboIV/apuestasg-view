@@ -11,9 +11,9 @@
                     <div class="carga_sel_zb3">
                         <div *ngFor="let sel2 of _inicioSesion.selecciones2">
                             <div class="tkt_body">
-                                <div class="equis_tkt desseleccion" id="epry-577" (click)="removerSel(sel2.id_seleccion)">x</div>
-                                <div class="nom_apostado">{{sel2.equipo}}</div>
-                                <div class="carr_apostado carr_encuentro">{{sel2.encuentro}}</div>
+                                <div class="equis_tkt desseleccion" id="epry-577" (click)="removerSel(sel2.select_id)">x</div>
+                                <div class="nom_apostado">{{sel2.competitor.team.name}}</div>
+                                <div class="carr_apostado carr_encuentro">{{sel2.game.avaible}}</div>
                                 <div class="carr_apostado"><input placeholder="imp." type="number" class="monto_apostado" name="monto_apostado" [(ngModel)]="_inicioSesion.montoapuesta" (keyup)="_inicioSesion.cambioApuesta( $event.target.value )"> Dividendo: <b>{{sel2.valor | cuota:'decimal'}}</b></div>
                             </div>
 
@@ -21,7 +21,7 @@
                                 <div>Total a ganar: <span id="aganarsolo">Bs. {{ _inicioSesion.aganar | number:'1.2-2'}}</span></div>
                             </div>
                             <div class="tkt_apostar" (click)="apostard()">
-                                <span class="apostar_span">APOSTAR</span>
+                                <span class="apostar_span">APOSTARE</span>
                             </div>
                         </div>
                     </div>
@@ -33,10 +33,10 @@
                         </div>
                         <div *ngFor="let sel2 of _inicioSesion.selecciones2">
                             <div class="tkt_body" id="577_244">
-                                <div class="equis_tkt desseleccion" id="epry-577" (click)="removerSel(sel2.id_seleccion)">x</div>
-                                <div class="logro_tkt" id=""><b>{{sel2.valor | cuota:'decimal'}}</b></div>
-                                <div class="nom_apostado">{{sel2.equipo}}</div>
-                                <div class="carr_apostado carr_encuentro">{{sel2.encuentro}}</div>
+                                <div class="equis_tkt desseleccion" id="epry-577" (click)="removerSel(sel2.select_id)">x</div>
+                                <div class="logro_tkt" id=""><b>{{sel2.value | cuota:'decimal'}}</b></div>
+                                <div class="nom_apostado">{{sel2.competitor.team.name}}</div>
+                                <div class="carr_apostado carr_encuentro">{{sel2.game.name}}</div>
                             </div>
                         </div>
                     </div>
