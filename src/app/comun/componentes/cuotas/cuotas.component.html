@@ -11,10 +11,10 @@
                     <div class="carga_sel_zb3">
                         <div *ngFor="let sel2 of _inicioSesion.selecciones2">
                             <div class="tkt_body">
-                                <div class="equis_tkt desseleccion" id="epry-577" (click)="removerSel(sel2.select_id)">x</div>
-                                <div class="nom_apostado">{{sel2.competitor.team.name}}</div>
-                                <div class="carr_apostado carr_encuentro">{{sel2.game.avaible}}</div>
-                                <div class="carr_apostado"><input placeholder="imp." type="number" class="monto_apostado" name="monto_apostado" [(ngModel)]="_inicioSesion.montoapuesta" (keyup)="_inicioSesion.cambioApuesta( $event.target.value )"> Dividendo: <b>{{sel2.valor | cuota:'decimal'}}</b></div>
+                                <div class="equis_tkt desseleccion" id="epry-577" (click)="removerSel(sel2.id)">x</div>
+                                <div class="nom_apostado">{{sel2.equipo}}</div>
+                                <div class="carr_apostado carr_encuentro">{{sel2.encuentro}}</div>
+                                <div class="carr_apostado"><input placeholder="imp." type="number" class="monto_apostado" name="monto_apostado" [(ngModel)]="_inicioSesion.montoapuesta" (keyup)="_inicioSesion.cambioApuesta( $event.target.value )"> Dividendo: <b>{{sel2.value | cuota:'decimal'}}</b></div>
                             </div>
 
                             <div class="tkt_can_all tkt_import" style="text-align: right; border-top: solid 1px #aaa;">
@@ -28,15 +28,15 @@
                 </ng-container>
                 <ng-container *ngIf="_inicioSesion.selecciones2?.length > 1">
                     <div class="carga_sel_zb3">
-                        <div class="tkt_can_all">
+                        <div class="tkt_can_all" (click)="removeAll()">
                             <div>Cancelar todo</div>
                         </div>
                         <div *ngFor="let sel2 of _inicioSesion.selecciones2">
                             <div class="tkt_body" id="577_244">
-                                <div class="equis_tkt desseleccion" id="epry-577" (click)="removerSel(sel2.select_id)">x</div>
+                                <div class="equis_tkt desseleccion" id="epry-577" (click)="removerSel(sel2.id)">x</div>
                                 <div class="logro_tkt" id=""><b>{{sel2.value | cuota:'decimal'}}</b></div>
-                                <div class="nom_apostado">{{sel2.competitor.team.name}}</div>
-                                <div class="carr_apostado carr_encuentro">{{sel2.game.name}}</div>
+                                <div class="nom_apostado">{{sel2.equipo}}</div>
+                                <div class="carr_apostado carr_encuentro">{{sel2.encuentro}}</div>
                             </div>
                         </div>
                     </div>
@@ -113,13 +113,13 @@
             <ng-container *ngIf="_inicioSesion.ticketes2 !== null">
                 <div class="tk_generado" *ngFor="let tk2 of _inicioSesion.ticketes2">
                     <div class="ttl_tk"><b>www.BetZone.com.ve</b></div>
-                    <div class="ttl_tk">Ticket de Apuesta</div>
+                    <div class="ttl_tk">Ticket de apuesta</div>
                     <div class="ttl_tk">Identificador: {{tk2.cod_seguridad}}</div>
-                    <div class="ttl_tk">Número de Ticket: {{tk2.correlativo}}</div>
-                    <div class="ttl_tk">Fecha y Hora: {{ tk2.fecha_hora | date:'dd/MM/yyyy'}} {{ tk2.fecha_hora | date:'shortTime'}}</div>
+                    <div class="ttl_tk">Número de ticket: {{tk2.correlativo}}</div>
+                    <div class="ttl_tk">Fecha y hora: {{ tk2.fecha_hora | date:'dd/MM/yyyy'}} {{ tk2.fecha_hora | date:'shortTime'}}</div>
                     <div class="separador1_tk"></div>
                     <div class="cada_sel_tk" *ngFor="let sel of tk2.selecciones">
-                        <div class="encuentro_sel_tk">{{sel.descripcion}} - {{sel.nombre_liga}}
+                        <div class="encuentro_sel_tk">{{sel.liga}}
                             <div style="float: right; ">{{ sel.fecha_inicio | date:'dd/MM/yyyy'}} </div>
                         </div>
                         <div class="encuentro_sel_tk">

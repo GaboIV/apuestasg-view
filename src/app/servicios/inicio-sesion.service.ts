@@ -158,7 +158,7 @@ export class InicioSesionService {
 
   obtenerSelecciones () {
     this.esperando = true;
-    const url = URL_SELECCION + '/selections/load';
+    const url = URL_SELECCION + '/load';
 
     const tokenr = localStorage.getItem('token');
 
@@ -212,7 +212,7 @@ export class InicioSesionService {
     this.esperando = true;
     this.ticketes = null;
     this.ticketes2 = null;
-    const url = URL_SELECCION + '/selections/add';
+    const url = URL_SELECCION + '/add';
 
     return this.http.post( url, {
       "bet_id" : id_apuesta,
@@ -299,10 +299,10 @@ export class InicioSesionService {
 
   enviarTicket( montos: string ) {
     this.esperando = true;
-    const url = URL_TICKET + '/agregar';
+    const url = URL_TICKET + '/add';
     const id_usuario = this.usuario.id;
 
-    return this.http.post( url, { montos, id_usuario }  )
+    return this.http.post( url, { montos, id_usuario }, this.httpOptions )
       .pipe(map( (resp: any) => {
         this.esperando = false;
         const res = resp;
@@ -319,10 +319,10 @@ export class InicioSesionService {
 
   enviarTicketd( montos: number ) {
     this.esperando = true;
-    const url = URL_TICKET + '/agregard';
+    const url = URL_TICKET + '/add';
     const id_usuario = this.usuario.id;
 
-    return this.http.post( url, { montos, id_usuario }  )
+    return this.http.post( url, { montos, id_usuario }, this.httpOptions )
       .pipe(map( (resp: any) => {
         this.esperando = false;
         const res = resp;
@@ -348,9 +348,20 @@ export class InicioSesionService {
 
   borrarSel( id_sel ) {
     this.esperando = true;
-    const url = URL_SELECCION + '/' + id_sel;
+    const url = URL_SELECCION + '/delete/' + id_sel;
 
-    return this.http.delete( url )
+    return this.http.delete( url, this.httpOptions )
+      .pipe(map ( (resp: any) => {
+        this.obtenerSelecciones();
+        return resp;
+      }));
+  }
+
+  borrarAll() {
+    this.esperando = true;
+    const url = URL_SELECCION + '/delete/all';
+
+    return this.http.delete( url, this.httpOptions )
       .pipe(map ( (resp: any) => {
         this.obtenerSelecciones();
         return resp;

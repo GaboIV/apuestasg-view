@@ -62,6 +62,38 @@ export class CuotasComponent implements OnInit {
     });
   }
 
+  removeAll() {
+
+    const toast = swal.mixin({
+      toast: true,
+      position: 'top-end'
+    });
+    toast ({
+      type: 'info',
+      title: 'Enviando datos'
+    });
+
+    this._inicioSesion.borrarAll()
+    .subscribe( resp => {
+
+      // tslint:disable-next-line:no-shadowed-variable
+      const toast = swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 2000
+      });
+      toast ({
+        type: resp.status,
+        title: resp.mstatus
+      });
+
+      if ( resp.status === 'success') {
+        this.obtenerSelecciones();
+      }
+    });
+  }
+
   obtenerSelecciones() {
     this._inicioSesion.obtenerSelecciones()
     .subscribe( resp => {
