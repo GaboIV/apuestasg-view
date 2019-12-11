@@ -19,39 +19,28 @@
             <tr class="par_th_nt" *ngFor="let equipo of equipos ">
                 <td width="5%" align="center">{{ equipo.id }}</td>
                 <td width="15%">{{ equipo.name_uk }}</td>
-                <td contenteditable="false" width="15%" class="ch_dv_nt">
-                    <p (click)="cambiarEdit()" *ngIf="mostrarEdit === false">{{ equipo.name }}</p>
-                    <input type="text" [value]="equipo.name" *ngIf="mostrarEdit === true"
-                        [(ngModel)]="equipo.name" (focusout)="ocultarEdit( equipo )">
+                <td #name [innerText]="equipo.name" (blur)="modificarDato(equipo.id, name.innerText, equipo, 'name', 'nombre ')" contenteditable="true" width="15%">
+                    <p>{{ equipo.name }}</p>
                 </td>
                 <td width="17%">
                     <div class='cada_liga_nt' *ngFor="let liga of equipo.leagues" (click)="ligaCa(liga)">
                         {{liga.name}}
                     </div>
                 </td>
-                <td width="11%">
-                    <p (click)="cambiarEdit()" *ngIf="mostrarEdit === false" style="cursor:pointer">{{ equipo.acro }}
-                    </p>
-                    <input type="text" [value]="equipo.acro" *ngIf="mostrarEdit === true" [(ngModel)]="equipo.acro"
-                        (focusout)="ocultarEdit( equipo )">
+                <td contenteditable="true" [innerText]="equipo.acro" #acro (blur)="modificarDato(equipo.id, acro.innerText, equipo, 'acro', 'acrónimo ')" width="11%">
+                    <p>{{ equipo.acro }}</p>
                 </td>
                 <td width="8%" align="center">
                     <label style="cursor: pointer; position: relative; height: 60px;">
                         <img [src]="equipo.id + '.png'| imagen:'equipo'" alt="" height="50px;">
-                        <br>
-                        <input type="file" name="imagenSubir" (change)="subirImagen($event, equipo)"
-                            style="display: none">
                     </label>
                 </td>
-                <td width="16%">
-                    <p (click)="cambiarEdit()" *ngIf="mostrarEdit === false" style="cursor:pointer">{{ equipo.stadium }}
+                <td contenteditable="true" width="16%" [innerText]="equipo.stadium" #stadium (blur)="modificarDato(equipo.id, stadium.innerText, equipo, 'stadium', 'estadio ')">
+                    <p *ngIf="mostrarEdit === false" style="cursor:pointer">{{ equipo.stadium }}
                     </p>
-                    <input type="text" [value]="equipo.stadium" *ngIf="mostrarEdit === true"
-                        [(ngModel)]="equipo.stadium" (focusout)="ocultarEdit( equipo )">
                 </td>
                 <td width="13%" align="center">
-                    <select name="nacionalidad_equipo" (change)="cambiarEdit()" class="ch_slc_nt"
-                        [(ngModel)]="equipo.nacionalidad">
+                    <select name="nacionalidad_equipo" [value]="equipo.country_id" (change)="modificarDato(equipo.id, $event.target.value, equipo, 'country_id', 'nacionalidad ')">
                         <option *ngFor="let nacionalidad of nacionalidades " value={{nacionalidad.id}}>
                             {{ nacionalidad.name }}</option>
                     </select>

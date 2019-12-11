@@ -7,6 +7,7 @@ import { Nacionalidad } from '../../modelos/nacionalidad';
 import { GeneralesService } from '../../servicios/generales.service';
 import { Liga } from '../../modelos/ligas';
 import { URL_A_FUNC } from '../../comun/link';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-equipos',
@@ -96,6 +97,28 @@ export class EquiposComponent implements OnInit {
       if (this.pagina === 1) {
         this.desactivar = 'disabled';
       }
+    }
+  }
+
+  modificarDato (id, value, equipo, parameter, sp_parameter = '') {
+    if (value != equipo[parameter] && (value != '' || equipo[parameter] != null)) {
+      this._equipoService.modificarDatoEquipo(id, value, parameter)
+      .subscribe(res => {
+        console.log(res);
+        if (res.status == 'success') {
+          equipo[parameter] = value;
+          const toast = swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 2000
+          });
+          toast({
+            type: res.status,
+            title: 'Se modificó el campo ' + sp_parameter + 'correctamente'
+          });
+        }
+      });
     }
   }
 

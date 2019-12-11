@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { URL_TICKET, URL_AUTH, URL_SELECCION, URL_MENSAJES } from '../comun/link';
+import { URL_TICKET, URL_AUTH, URL_SELECCION, URL_MENSAJES, URL_JUGADORES } from '../comun/link';
 import { map } from 'rxjs/operators';
 import { Usuario } from '../modelos/usuario';
 
@@ -134,7 +134,7 @@ export class InicioSesionService {
           })
         };
 
-        url = URL_SELECCION + '/login';
+        url = URL_JUGADORES + '/login';
 
         contrasena = 'XyX_cuirrten_WeR_2364';
         usuario = 'XyX_cuirrply_WeR_2364';

@@ -45,6 +45,21 @@ export class EquiposService {
     );
   }
 
+  modificarDatoEquipo(id, value, parameter) {
+    const url = URL_EQUIPOS + '/' + id;
+    
+    var key = parameter;
+    var obj = {};
+    obj[key] = value;
+
+    return this.http.put( url, obj, this._loginService.httpOptions )
+      .pipe(map( (resp: any) => {
+        const res = resp;
+        return res;
+      })
+    );
+  }
+
   subirImagen( equipo: Equipo, selectedFile: File ) {
     const uploadData = new FormData();
     uploadData.append('myFile', selectedFile, selectedFile.name);

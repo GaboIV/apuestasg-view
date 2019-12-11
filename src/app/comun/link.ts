@@ -1,8 +1,8 @@
-export const URL_INICIAL = 'http://api.apuestasg.com.ve/api/';
-export const URL_A_FUNC = 'http://agac.apuestasg.com.ve/php/funciones';
+// export const URL_INICIAL = 'http://api.apuestasg.com.ve/api/';
+// export const URL_A_FUNC = 'http://agac.apuestasg.com.ve/php/funciones';
 
-// export const URL_INICIAL = 'http://localhost/apuestasg-backend/public/api/';
-// export const URL_A_FUNC = 'http://localhost/apuestasg-scrap/php/funciones';
+export const URL_INICIAL = 'http://localhost/apuestasg-backend/public/api/';
+export const URL_A_FUNC = 'http://localhost/apuestasg-scrap/php/funciones';
 
 export const URL_ACTUALIZACIONES = URL_INICIAL + 'updates';
 export const URL_AUTH = URL_INICIAL + 'auth';
@@ -11,6 +11,7 @@ export const URL_EQUIPOS = URL_INICIAL + 'teams';
 export const URL_FECHA = URL_INICIAL + 'hora';
 export const URL_GAMES = URL_INICIAL + 'games';
 export const URL_IMAGEN = URL_INICIAL + 'images';
+export const URL_JUGADORES = URL_INICIAL + 'player';
 export const URL_LIGAS = URL_INICIAL + 'leagues';
 export const URL_NACIONALIDADES = URL_INICIAL + 'countries';
 export const URL_PARTIDOS = URL_INICIAL + 'games';
@@ -25,7 +26,6 @@ export const URL_STUDS = URL_INICIAL + 'bzbk/public/index.php/studs';
 export const URL_HIPODROMOS = URL_INICIAL + 'bzbk/public/index.php/hipodromos';
 export const URL_CARRERAS = URL_INICIAL + 'bzbk/public/index.php/carreras';
 export const URL_INSCRIPCION = URL_INICIAL + 'bzbk/public/index.php/inscripcion';
-export const URL_USUARIOS = URL_INICIAL + 'bzbk/public/index.php/usuarios';
 export const URL_CHANGELOG = URL_INICIAL + 'bzbk/public/index.php/changelog';
 export const URL_TIPOAPUESTAS = URL_INICIAL + 'bzbk/public/index.php/tipoApuestas';
 export const URL_RESULTADOS = URL_INICIAL + 'bzbk/public/index.php/resultados';
