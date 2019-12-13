@@ -8,6 +8,7 @@ import { Nacionalidad } from '../../modelos/nacionalidad';
 import { Deporte } from '../../modelos/deporte';
 import { DeportesService } from '../../servicios/deportes.service';
 import { GeneralesService } from '../../servicios/generales.service';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-ligas',
@@ -105,14 +106,33 @@ export class LigasComponent implements OnInit {
     }
   }
 
+  modificarDato(id, value, liga, parameter, sp_parameter = '') {
+    if (value != liga[parameter] && (value != '' || liga[parameter] != null)) {
+      this._ligasService.modificarDatoLiga(id, value, parameter)
+        .subscribe(res => {
+          if (res.status == 'success') {
+            liga[parameter] = value;
+            const toast = swal.mixin({
+              toast: true,
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 2000
+            });
+            toast({
+              type: res.status,
+              title: 'Se modificó el campo ' + sp_parameter + 'correctamente'
+            });
+          }
+        });
+    }
+  }
+
   buscarElemento(valor: string) {
     this.liguias = [];
 
     if (valor !== '') {
       const busqueda = new RegExp(valor, 'i');
       const liguias = this.ligas.filter(ligas => busqueda.test(ligas.name));
-
-      console.log(liguias);
 
       this.liguias = liguias;
     }

@@ -1239,6 +1239,10 @@ cuerpo {
     box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.08);
 }
 
+.filter_eq {
+    width: 150px !important;
+    margin-right: 10px;
+}
 
 /**/
 
@@ -1327,6 +1331,7 @@ cuerpo {
     color: #d61828;
     display: block;
 }
+
 
 .equipos_dtcd {
     color: #444;
@@ -2334,10 +2339,19 @@ cuerpo {
 
 .search_eq {
     height: 30px;
-    width: 280px;
+    width: 180px;
     padding-left: 12px;
     outline: none;
     border: white 1px solid;
+}
+
+.seleccional { 
+    background: #004a7f;
+    color: white;
+    height: 30px;
+    padding: 4px 10px;
+    font-size: 1em;
+    width: 150px;
 }
 
 .cuerpo_cat_eq {
@@ -2353,7 +2367,7 @@ cuerpo {
 }
 
 .equipos {
-    padding: 5px;
+    /* padding: 5px; */
     position: relative;
     overflow: auto;
 }
@@ -2361,6 +2375,10 @@ cuerpo {
 .normal_table {
     font-size: 15px;
     border: 1px #272727 solid;
+}
+
+.tabla_equipos {
+    border-spacing: inherit;
 }
 
 thead tr {
@@ -2403,16 +2421,16 @@ thead tr {
     color: white;
 }
 
-#tabla_equipos td {
+.tabla_equipos td {
     padding: 4px 8px;
     font-weight: 100;
 }
 
-#tabla_equipos tr:nth-child(odd) {
+.tabla_equipos tr:nth-child(odd) {
     background: #757575;
 }
 
-#tabla_equipos tr:nth-child(even) {
+.tabla_equipos tr:nth-child(even) {
     background: #666666;
 }
 

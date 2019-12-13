@@ -29,15 +29,6 @@ export class DeportesService {
     }
   }
 
-  seleccionDeporte( id_categoria ) {
-    const url = URL_DEPORTES + '/categoria/' + id_categoria;
-
-    return this.http.get( url )
-      .pipe(map ( (resp: any) => {
-        return resp.ligas;
-      }));
-  }
-
   cargarEquipos(liga: string) {
 
     const url = URL_EQUIPOS + '/equiposui/' + liga;

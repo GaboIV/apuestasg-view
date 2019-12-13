@@ -36,6 +36,15 @@ export class PartidosService {
       }));
   }
 
+  filtrarPartidos(pagina: number, category_id, country_id, start, criterio) {
+    let url = URL_PARTIDOS + '/byFilters?page=' + pagina;
+
+    return this.http.post( url, { category_id: category_id, country_id:country_id, start: start, name : criterio }, this._loginService.httpOptions )
+      .pipe(map ( (resp: any) => {
+        return resp;
+      }));
+  }
+
   cargarDestacados() {
     const url = URL_INICIAL + 'showgamesoutstanding';
     return this.http.get( url )

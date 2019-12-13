@@ -47,6 +47,21 @@ export class LigasService {
     );
   }
 
+  modificarDatoLiga(id, value, parameter) {
+    const url = URL_LIGAS + '/' + id;
+    
+    var key = parameter;
+    var obj = {};
+    obj[key] = value;
+
+    return this.http.put( url, obj, this._loginService.httpOptions )
+      .pipe(map( (resp: any) => {
+        const res = resp;
+        return res;
+      })
+    );
+  }
+
   crearLiga(liga: Liga) {
     const url = URL_LIGAS;
 
@@ -54,6 +69,16 @@ export class LigasService {
       .pipe(map( (resp: any) => {
         const res = resp;
         return res;
+      })
+    );
+  }
+
+  seleccionDeportePais( id_categoria, id_pais ) {
+    const url = URL_LIGAS + '/category/country';
+
+    return this.http.post( url, { country_id : id_pais, category_id : id_categoria },this._loginService.httpOptions )
+      .pipe(map ( (resp: any) => {
+        return resp;
       })
     );
   }

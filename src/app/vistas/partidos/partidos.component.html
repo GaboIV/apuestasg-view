@@ -1,34 +1,42 @@
 <div class="equipos">
-    <!-- <div class="buscador_it_001">
-        <input #caja type="text" name="search_eq" placeholder="Buscar un equipo" class="search_eq" (change)="cargarPartidos('1', $event.target.value)">
-        <div class="add_lig" routerLink="/agregarPartido">Crear un partido</div>
-        <select name="seleccionDeporte" id="seleccionDeporte" (change)="seleccionDeporte($event.target.value)" class="seleccional">
-            <option value="0">Seleccione un deporte</option>
-            <option *ngFor="let deporte of deportes " value={{deporte.id_categoria}}>{{ deporte.descripcion }}</option>
+    <div class="buscador_it_001">
+        <input type="text" name="search_eq" placeholder="Buscar un equipo" class="search_eq" [(ngModel)]="criterio">
+
+        <div class="add_lig" routerLink="/agregarPartido">+</div>
+
+        <input #date type="date" name="date_eq" placeholder="Fecha" class="search_eq filter_eq" [(ngModel)]="start">
+
+        <select name="deporte" class="seleccional" [(ngModel)]="category_id" (change)="changeCategory()">
+            <option value="0">Deporte</option>
+            <option *ngFor="let deporte of deportes " value={{deporte.id}}>{{ deporte.name }}</option>
         </select>
-        <ng-container *ngIf="ligas?.length > 0 && ligas[0].nombre_liga">
-            <select name="seleccionLiga" id="seleccionLiga" (change)="seleccionLiga($event.target.value)" class="seleccional" style="margin-left: 10px;">
-                    <option value="0">Seleccione una liga</option>
-                    <option *ngFor="let liga of ligas " value={{liga.id_liga}}>{{ liga.nombre_liga }}</option>      
-                </select>
-        </ng-container>
 
-        <ng-container *ngIf="ligas?.length > 0 && ligas[0].descripcion">
-            <select name="seleccionHipodromo" id="seleccionHipodromo" (change)="seleccionHipodromo($event.target.value)" *ngIf="ligas?.length > 0" class="seleccional" style="margin-left: 10px;">           
-                    <option value="0">Seleccione un hipódromo</option>
-                    <option *ngFor="let liga of ligas " value={{liga.id_hipodromo}}>{{ liga.descripcion }}</option>  
-                </select>
-        </ng-container>
-    </div> -->
+        <select name="pais" class="seleccional" [(ngModel)]="country_id" (change)="changeCountry()">
+            <option value="0">Pais</option>
+            <option *ngFor="let pais of nacionalidades " value={{pais.id}}>{{ pais.name }}</option>
+        </select>
 
-    <table width="100%" id="tabla_equipos">
+        <select name="liga" class="seleccional" *ngIf="ligas?.length > 0 && ligas[0].name">
+            <option value="0">Liga</option>
+            <option *ngFor="let liga of ligas " value={{liga.id}}>{{ liga.name }}</option>
+        </select>
+
+        <select name="equipo" class="seleccional" *ngIf="equipos?.length > 0 && equipos[0].name">
+            <option value="0">Equipo</option>
+            <option *ngFor="let equipo of equipos " value={{equipo.id}}>{{ equipo.name }}</option>
+        </select>
+
+        <div class="add_lig add_filter" (click)="filtrarPartidos(1)">Filtrar</div>
+    </div>
+
+    <table width="100%" class="tabla_equipos">
         <thead>
             <tr>
                 <th>ID</th>
                 <th>Equipos</th>
+                <th>Cuotas</th>
                 <th>Datos</th>
                 <th>Fechas</th>
-                <th>Cuotas</th>
                 <th>Imagen</th>
                 <th>Texto</th>
                 <th>Puntos</th>
@@ -41,6 +49,10 @@
                 <td width="15%">
                     <div class='cada_liga_nt' *ngFor="let equipo of partido.competitors ">{{equipo.team.name}}</div>
                 </td>
+                <td width="7%">
+                    <div class='cada_liga_nt' *ngFor="let equipo of partido.competitors ">
+                        {{equipo.odd | cuota:'decimal'}}</div>
+                </td>
                 <td contenteditable="false" width="15%" class="ch_dv_nt">
                     <div class='cada_liga_nt'>{{ partido.start | date:'d/MM/yyyy'}}</div>
                     <div class='cada_liga_nt'>{{ partido.start | date:'shortTime'}}</div>
@@ -49,10 +61,6 @@
                     <div class='cada_liga_nt'>{{partido.league.category.name}}</div>
                     <div class='cada_liga_nt'>{{partido.league.name}}</div>
                 </td>
-                <td width="7%">
-                    <div class='cada_liga_nt' *ngFor="let equipo of partido.competitors ">
-                        {{equipo.odd | cuota:'decimal'}}</div>
-                </td>
                 <td width="17%">
                     <label style="cursor: pointer; position: relative; height: 60px;">
                         <img [src]="partido.id + '.png' | imagen:'partido'" alt="" height="50px;">
@@ -60,7 +68,7 @@
                         <!-- <input type="file" name="imagenSubir" (change)="subirImagen($event, partido)" style="display: none"> -->
                     </label>
                 </td>
-                <td width="11%" style="text-align: center">
+                <td width="11%" style="text-align: center" contenteditable="true">
                     <!-- <label>En vivo <input type="checkbox" (change)="cambiarLive(partido)" [(ngModel)]="partido.status_lid" [checked]="partido.status_lid" name="status_lid" id="cbox_{{partido.id}}"></label>
 
                     <input type="text" class="datetime" value="{{partido.live_id}}" [(ngModel)]="partido.live_id" style="width: 90%;"> -->

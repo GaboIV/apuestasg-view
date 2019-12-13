@@ -1,8 +1,8 @@
-// export const URL_INICIAL = 'http://api.apuestasg.com.ve/api/';
-// export const URL_A_FUNC = 'http://agac.apuestasg.com.ve/php/funciones';
+export const URL_INICIAL = 'http://api.apuestasg.com.ve/api/';
+export const URL_A_FUNC = 'http://agac.apuestasg.com.ve/php/funciones';
 
-export const URL_INICIAL = 'http://localhost/apuestasg-backend/public/api/';
-export const URL_A_FUNC = 'http://localhost/apuestasg-scrap/php/funciones';
+// export const URL_INICIAL = 'http://localhost/apuestasg-backend/public/api/';
+// export const URL_A_FUNC = 'http://localhost/apuestasg-scrap/php/funciones';
 
 export const URL_ACTUALIZACIONES = URL_INICIAL + 'updates';
 export const URL_AUTH = URL_INICIAL + 'auth';

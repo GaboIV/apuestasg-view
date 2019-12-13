@@ -101,7 +101,7 @@ export class EquiposComponent implements OnInit {
   }
 
   modificarDato (id, value, equipo, parameter, sp_parameter = '') {
-    if (value != equipo[parameter] && (value != '' || equipo[parameter] != null)) {
+    if (value != equipo[parameter] && (value != '' || equipo[parameter] != null) ) {
       this._equipoService.modificarDatoEquipo(id, value, parameter)
       .subscribe(res => {
         console.log(res);
