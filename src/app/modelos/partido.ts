@@ -1,7 +1,7 @@
 export class Partido {
     constructor(
         public id?: string,
-        public id_web?: string,
+        public web_id?: string,
         public league_id?: string,
         public start?: Date,
         public avaible?: Date,
@@ -13,5 +13,8 @@ export class Partido {
         public status_live_id?: boolean,
         public created_at?: Date,
         public updated_at?: Date,
+        public teams?: any,
+        public descripcion?: any,
+        public category_id?: any
     ) { }
 }

@@ -77,6 +77,9 @@ export class EquiposComponent implements OnInit {
     if (valor === '') {
       valor = 'todos';
     }
+
+    console.log(valor);
+
     this.cargarEquipos(this.pagina, valor, 'todas');
   }
 

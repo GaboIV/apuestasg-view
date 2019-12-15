@@ -1,9 +1,9 @@
 export class Equipo {
 
     constructor(
-        public nombre_equipo?: string,
+        public name?: string,
         public acro?: string,
-        public estadio?: string,
+        public stadium?: string,
         public lugar?: string,
         public ligas?: string,
         public nacionalidad?: string,

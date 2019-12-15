@@ -145,9 +145,9 @@ export class PartidosService {
   }
 
   crearPartido ( partido: Partido ) {
-    const url = URL_PARTIDOS + '/crear';
+    const url = URL_PARTIDOS;
 
-    return this.http.post( url, partido )
+    return this.http.post( url, partido, this._loginService.httpOptions )
       .pipe(map( (resp: any) => {
         const res = resp;
         return res;

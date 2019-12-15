@@ -31,3 +31,17 @@
     width: 13%;
     padding: 4px 10px 5px 10px;
 }
+
+.add_lig {
+    margin-right: 15px;
+    width: auto;
+    padding: 1px 15px;
+    font-size: 1.3em;
+}
+
+.add_filter {
+    width: auto;
+    padding: 5px 10px;
+    font-size: 1em;
+    background: #d61828;
+}

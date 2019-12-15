@@ -1,4 +1,4 @@
-<!-- <div class="buscador_it_001">
+<div class="buscador_it_001">
     <div class="add_lig" routerLink="/partidos">Regresar a partidos</div>
 </div>
 <br><br>
@@ -13,7 +13,7 @@
             <div class="datos_form ib">
                 <input id="ipt_deporte" (focus)="selectMostrar = 'deportes'" placeholder="Seleccione o escriba un deporte" autocomplete="off" class="select_form" (keyup)="buscarDeporte($event.target.value)">
                 <div class="resp_form" *ngIf="selectMostrar === 'deportes'" (click)="clickedInside($event)">
-                    <div (click)="seleccionDeporte( deporte.id_categoria, deporte.descripcion )" class="cada_resp" *ngFor="let deporte of depor">{{ deporte.descripcion }}</div>
+                    <div (click)="seleccionDeporte( deporte.id, deporte.name )" class="cada_resp" *ngFor="let deporte of depor">{{ deporte.name }}</div>
                 </div>
             </div>
         </div>
@@ -24,7 +24,7 @@
             <div class="datos_form ib">
                 <input id="ipt_liga" (focus)="selectMostrar = 'ligas'" placeholder="Seleccione o escriba una liga" autocomplete="off" class="select_form" (keyup)="buscarLiga($event.target.value)">
                 <div class="resp_form" *ngIf="selectMostrar === 'ligas'" (click)="clickedInside($event)">
-                    <div (click)="cargarEquipos( liga.id_liga, liga.nombre_liga )" class="cada_resp" *ngFor="let liga of lig ">{{ liga.nombre_liga }}</div>
+                    <div (click)="cargarEquipos( liga.id, liga.name )" class="cada_resp" *ngFor="let liga of lig ">{{ liga.name }}</div>
                 </div>
             </div>
         </div>
@@ -33,7 +33,7 @@
                 Fecha y Hora:
             </div>
             <div class="datos_form ib">
-                <input type="datetime-local" class="select_form" name="fecha_partido" [(ngModel)]="partido.fecha_inicio" value="1">
+                <input type="datetime-local" class="select_form" name="fecha_partido" [(ngModel)]="partido.start" value="1">
             </div>
         </div>
         <div class="form_div cada_linea">
@@ -53,11 +53,11 @@
                 Equipo 1:
             </div>
             <div class="datos_form ib">
-                <input id="ipt_eq1" name="equipo1" (focus)="selectMostrar = 'equipo1'" placeholder="Seleccione o escriba un equipo" autocomplete="off" class="select_form select_equipo" [(ngModel)]="partido.equipos[0]" style="width: 70%;" (keyup)="buscarEquipo1($event.target.value, 0)">
+                <input id="ipt_eq1" name="equipo1" (focus)="selectMostrar = 'equipo1'" placeholder="Seleccione o escriba un equipo" autocomplete="off" class="select_form select_equipo" [(ngModel)]="partido.teams[0]" style="width: 70%;" (keyup)="buscarEquipo1($event.target.value, 0)">
                 <input type="text" class="select_form select_div" style="width: 30%;" (keyup)="cuotaDecimal($event.target.value, 0)" autocomplete="off" id="div_e1">
                 <span class="dividendo_alt">{{partido.descripcion[3]}}</span>
                 <div class="resp_form" *ngIf="selectMostrar === 'equipo1'" (click)="clickedInside($event)" style="width: 70%;">
-                    <div (click)="seleccionEquipo( eq.id_equipo, eq.nombre_equipo, '1' )" class="cada_resp" *ngFor="let eq of eq1 " style="position: relative;"><img src="http://www.betzone.com.ve/bzbk/public/imagenes/equipos/{{eq.img}}" alt="" height="95%" style="position: absolute; top: 1px; left: 6px;"> {{ eq.nombre_equipo }}</div>
+                    <div (click)="seleccionEquipo( eq.id, eq.name, '1' )" class="cada_resp" *ngFor="let eq of eq1 " style="position: relative;"><img src="http://www.betzone.com.ve/bzbk/public/imagenes/teams/{{eq.img}}" alt="" height="95%" style="position: absolute; top: 1px; left: 6px;"> {{ eq.name }}</div>
                 </div>
             </div>
         </div>
@@ -66,11 +66,11 @@
                 Equipo 2:
             </div>
             <div class="datos_form ib">
-                <input id="ipt_eq2" (focus)="selectMostrar = 'equipo2'" placeholder="Seleccione o escriba un equipo" autocomplete="off" name="equipo2" class="select_form select_equipo" [(ngModel)]="partido.equipos[1]" style="width: 70%;" (keyup)="buscarEquipo2($event.target.value, 1)">
+                <input id="ipt_eq2" (focus)="selectMostrar = 'equipo2'" placeholder="Seleccione o escriba un equipo" autocomplete="off" name="equipo2" class="select_form select_equipo" [(ngModel)]="partido.teams[1]" style="width: 70%;" (keyup)="buscarEquipo2($event.target.value, 1)">
                 <input type="text" class="select_form select_div" style="width: 30%;" (keyup)="cuotaDecimal($event.target.value, 1)" autocomplete="off" id="div_e2">
                 <span class="dividendo_alt">{{partido.descripcion[4]}}</span>
                 <div class="resp_form" *ngIf="selectMostrar === 'equipo2'" (click)="clickedInside($event)" style="width: 70%;">
-                    <div (click)="seleccionEquipo( eq.id_equipo, eq.nombre_equipo, '2' )" class="cada_resp" *ngFor="let eq of eq2 "><img src="http://www.betzone.com.ve/bzbk/public/imagenes/equipos/{{eq.img}}" alt="" height="95%" style="position: absolute; top: 1px; left: 6px;">{{ eq.nombre_equipo }}</div>
+                    <div (click)="seleccionEquipo( eq.id, eq.name, '2' )" class="cada_resp" *ngFor="let eq of eq2 "><img src="http://www.betzone.com.ve/bzbk/public/imagenes/teams/{{eq.img}}" alt="" height="95%" style="position: absolute; top: 1px; left: 6px;">{{ eq.name }}</div>
                 </div>
             </div>
         </div>
@@ -79,11 +79,11 @@
                 Equipo 3:
             </div>
             <div class="datos_form ib">
-                <input id="ipt_eq3" name="equipo3" (focus)="selectMostrar = 'equipo3'" placeholder="Seleccione o escriba un equipo" autocomplete="off" class="select_form select_equipo" [(ngModel)]="partido.equipos[2]" style="width: 70%;" (keyup)="buscarEquipo3($event.target.value, 2)">
+                <input id="ipt_eq3" name="equipo3" (focus)="selectMostrar = 'equipo3'" placeholder="Seleccione o escriba un equipo" autocomplete="off" class="select_form select_equipo" [(ngModel)]="partido.teams[2]" style="width: 70%;" (keyup)="buscarEquipo3($event.target.value, 2)">
                 <input type="text" class="select_form select_div" style="width: 30%;" (keyup)="cuotaDecimal($event.target.value, 2)" autocomplete="off" id="div_e3">
                 <span class="dividendo_alt">{{partido.descripcion[5]}}</span>
                 <div class="resp_form" *ngIf="selectMostrar === 'equipo3'" (click)="clickedInside($event)" style="width: 70%;">
-                    <div (click)="seleccionEquipo( eq.id_equipo, eq.nombre_equipo, '3' )" class="cada_resp" *ngFor="let eq of eq3 "><img src="http://www.betzone.com.ve/bzbk/public/imagenes/equipos/{{eq.img}}" alt="" height="95%" style="position: absolute; top: 1px; left: 6px;">{{ eq.nombre_equipo }}</div>
+                    <div (click)="seleccionEquipo( eq.id, eq.name, '3' )" class="cada_resp" *ngFor="let eq of eq3 "><img src="http://www.betzone.com.ve/bzbk/public/imagenes/teams/{{eq.img}}" alt="" height="95%" style="position: absolute; top: 1px; left: 6px;">{{ eq.name }}</div>
                 </div>
             </div>
         </div>
@@ -92,4 +92,4 @@
         </div>
 
     </form>
-</div> -->
+</div>

@@ -34,6 +34,16 @@ export class EquiposService {
       }));
   }
 
+  cargarEquiposPorLiga (id: any) {
+    const url = URL_EQUIPOS + '/byleague/' + id;
+
+    return this.http.get( url,this._loginService.httpOptions )
+      .pipe(map ( (resp: any) => {
+        return resp;
+      })
+    );
+  }
+
   actualizarEquipo(equipo: Equipo) {
     const url = URL_EQUIPOS + '/actualizar';
 

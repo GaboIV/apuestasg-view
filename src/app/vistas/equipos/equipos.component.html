@@ -1,5 +1,8 @@
-<div class="buscador_it_001"><input #caja type="text" name="search_eq" placeholder="Buscar un equipo" class="search_eq"
-        (keyup.enter)="buscarElemento(caja.value)"></div>
+<div class="buscador_it_001">
+    <input #caja type="text" name="search_eq" placeholder="Buscar un equipo" class="search_eq" (keyup.enter)="buscarElemento(caja.value)">
+    <div class="add_lig" routerLink="/agregarEquipo">+</div>
+    <div class="add_lig add_filter" (click)="buscarElemento(caja.value)">Filtrar</div>
+</div>
 
 <div class="equipos">
     <table width="100%" id="tabla_equipos">

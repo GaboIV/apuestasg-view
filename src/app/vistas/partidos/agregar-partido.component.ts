@@ -3,13 +3,12 @@ import { DeportesService } from '../../servicios/deportes.service';
 import { Deporte } from '../../modelos/deporte';
 import { PartidosService } from 'src/app/servicios/partidos.service';
 import { EquiposService } from 'src/app/servicios/equipos.service';
+import { LigasService } from 'src/app/servicios/ligas.service';
 import { Partido } from 'src/app/modelos/partido';
 import swal from 'sweetalert2';
 import { Equipo } from '../../modelos/equipos';
 import { Liga } from '../../modelos/ligas';
 declare var $: any;
-
-
 
 @Component({
   selector: 'app-agregar-partido',
@@ -34,10 +33,11 @@ export class AgregarPartidoComponent implements OnInit {
 
   tipoCuota = '1';
 
-  partido: Partido = new Partido('', '', '0', null, null, '', '', false, 0, false, false, null, null);
+  partido: Partido = new Partido('', '', '0', null, null, '', '', false, 0, false, false, null, null, [], []);
 
   constructor(
     public _deportesService: DeportesService,
+    public _ligasService: LigasService,
     public _partidosService: PartidosService,
     public _equipoService: EquiposService,
   ) { }
@@ -48,107 +48,108 @@ export class AgregarPartidoComponent implements OnInit {
 
   cargarDeportes() {
     this._deportesService.cargarDeportes()
-          .subscribe( deportes => {
-            this.deportes = deportes;
-            this.depor = deportes;
-          });
+    .subscribe( deportes => {
+      this.deportes = deportes;
+      this.depor = deportes;
+      console.log(deportes);
+    });
   }
 
   seleccionDeporte ( seleccion, nombre ) {
-    // // this.partido.category_id =  seleccion;
-    // this.partido.league_id = null;
-    // $('#ipt_liga').val('');
-    // this.partido.guide = '';
-    // this.partido.equipos = [];
-    // $('.select_equipo').val('');
-    // $('.select_div').val('');
-    // this.selectMostrar = '';
-    // this.ligas = null;
-    // $('#ipt_deporte').val(nombre);
-    // this._deportesService.seleccionDeporte( seleccion )
-    // .subscribe( ligas => {
-    //   this.ligas = ligas;
-    //   this.lig = ligas;
-    // });
+    this.partido.category_id =  seleccion;
+    this.partido.league_id = null;
+    $('#ipt_liga').val('');
+    this.partido.guide = '';
+    this.partido.teams = [];
+    $('.select_equipo').val('');
+    $('.select_div').val('');
+    this.selectMostrar = '';
+    this.ligas = null;
+    $('#ipt_deporte').val(nombre);
+    this._ligasService.seleccionDeportePais( seleccion, 0 )
+    .subscribe( resp => {
+      this.ligas = resp.ligas;
+      this.lig = resp.ligas;
+    });
   }
 
   cargarEquipos(liga, nombre) {
-    // this.partido.league_id = liga;
-    // $('#ipt_liga').val(nombre);
-    // this.partido.descripcion = [];
-    // this.partido.equipos = [];
-    // $('.select_equipo').val('');
-    // $('.select_div').val('');
-    // this.selectMostrar = '';
-    // this._deportesService.cargarEquipos(liga)
-    // .subscribe( resp => {
-    //   this.equipos = resp.equiposui;
-    //   this.eq1 = resp.equiposui;
-    //   this.eq2 = resp.equiposui;
-    //   this.eq3 = resp.equiposui;
-    // });
+    this.partido.league_id = liga;
+    $('#ipt_liga').val(nombre);
+    this.partido.descripcion = [];
+    this.partido.teams = [];
+    $('.select_equipo').val('');
+    $('.select_div').val('');
+    this.selectMostrar = '';
+    this._equipoService.cargarEquiposPorLiga(liga)
+    .subscribe( resp => {
+      this.equipos = resp.teams;
+      this.eq1 = resp.teams;
+      this.eq2 = resp.teams;
+      this.eq3 = resp.teams;
+    });
   }
 
-  // enviarDatos ( f ) {
-  //   this.partido.equipos[0] = $('#ipt_eq1').val();
-  //   this.partido.equipos[1] = $('#ipt_eq2').val();
-  //   if ( this.tipoCuota === '2' ) {
-  //     this.partido.descripcion[0] = $('#div_e1').val();
-  //     this.partido.descripcion[1] = $('#div_e2').val();
-  //   }
+  enviarDatos ( f ) {
+    this.partido.teams[0] = $('#ipt_eq1').val();
+    this.partido.teams[1] = $('#ipt_eq2').val();
+    if ( this.tipoCuota === '2' ) {
+      this.partido.descripcion[0] = $('#div_e1').val();
+      this.partido.descripcion[1] = $('#div_e2').val();
+    }
 
-  //   if ( this.tipoCuota === '1') {
-  //     this.partido.descripcion[0] = this.partido.descripcion[3];
-  //     this.partido.descripcion[1] = this.partido.descripcion[4];
-  //   }
+    if ( this.tipoCuota === '1') {
+      this.partido.descripcion[0] = this.partido.descripcion[3];
+      this.partido.descripcion[1] = this.partido.descripcion[4];
+    }
 
-  //   if ($('#ipt_eq3').val() !== '' ) {
-  //     this.partido.equipos[2] = $('#ipt_eq3').val();
+    if ($('#ipt_eq3').val() !== '' ) {
+      this.partido.teams[2] = $('#ipt_eq3').val();
 
-  //     if ( this.tipoCuota === '2' ) {
-  //       this.partido.descripcion[2] = $('#div_e3').val();
-  //     }
+      if ( this.tipoCuota === '2' ) {
+        this.partido.descripcion[2] = $('#div_e3').val();
+      }
 
-  //     if ( this.tipoCuota === '1' ) {
-  //       this.partido.descripcion[2] = this.partido.descripcion[5];
-  //     }
-  //   }
+      if ( this.tipoCuota === '1' ) {
+        this.partido.descripcion[2] = this.partido.descripcion[5];
+      }
+    }
     
-  //   const swalWithBootstrapButtons = swal.mixin({});
+    const swalWithBootstrapButtons = swal.mixin({});
 
-  //   swalWithBootstrapButtons({
-  //     title: '¿Deseas enviar estos datos?',
-  //     // tslint:disable-next-line:max-line-length
-  //     html: 'Equipo 1: ' + this.partido.equipos[0] + ' (' + this.partido.descripcion[0] + ')<br> Equipo 2: ' + this.partido.equipos[1] + ' (' + this.partido.descripcion[1] + ')<br> Equipo 3: ' + this.partido.equipos[2] + ' (' + this.partido.descripcion[2] + ')',
-  //     type: 'question',
-  //     showCancelButton: true,
-  //     confirmButtonText: 'Sí, enviar',
-  //     cancelButtonText: 'Cancelar',
-  //     reverseButtons: true
-  //   }).then((result) => {
-  //     if (result.value) {
-  //       this._partidosService.crearPartido( this.partido )
-  //       .subscribe( resp => {
-  //         if (resp.status === 'correcto') {
-  //           swalWithBootstrapButtons(
-  //             '¡Partido agregado!',
-  //             'Los datos se han guardado correctamente',
-  //             'success'
-  //           );
-  //           this.partido.equipos = [];
-  //           this.partido.descripcion = [];
-  //         }
+    swalWithBootstrapButtons({
+      title: '¿Deseas enviar estos datos?',
+      // tslint:disable-next-line:max-line-length
+      html: 'Equipo 1: ' + this.partido.teams[0] + ' (' + this.partido.descripcion[0] + ')<br> Equipo 2: ' + this.partido.teams[1] + ' (' + this.partido.descripcion[1] + ')<br> Equipo 3: ' + this.partido.teams[2] + ' (' + this.partido.descripcion[2] + ')',
+      type: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, enviar',
+      cancelButtonText: 'Cancelar',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.value) {
+        this._partidosService.crearPartido( this.partido )
+        .subscribe( resp => {
+          if (resp.status === 'correcto') {
+            swalWithBootstrapButtons(
+              '¡Partido agregado!',
+              'Los datos se han guardado correctamente',
+              'success'
+            );
+            this.partido.teams = [];
+            this.partido.descripcion = [];
+          }
 
-  //         if ( resp.status === 'existe') {
-  //           swal ('Partido existente', resp.mensaje, 'info');
-  //         }
-  //       });
-  //     } else if (
-  //       result.dismiss === swal.DismissReason.cancel
-  //     ) {
-  //     }
-  //   });
-  // }
+          if ( resp.status === 'existe') {
+            swal ('Partido existente', resp.mensaje, 'info');
+          }
+        });
+      } else if (
+        result.dismiss === swal.DismissReason.cancel
+      ) {
+      }
+    });
+  }
 
   gcd ( a, b ) {
     if (b < 0.0000001) { return a; }
@@ -168,7 +169,7 @@ export class AgregarPartidoComponent implements OnInit {
       const res2 = res.toFixed(2);
       const ni = i + 3;
 
-      // this.partido.descripcion[ni] = res2;
+      this.partido.descripcion[ni] = res2;
     }
 
     if ( this.tipoCuota === '1') {
@@ -187,7 +188,7 @@ export class AgregarPartidoComponent implements OnInit {
 
       const ni = i + 3;
 
-      // this.partido.descripcion[ni] = fraq;
+      this.partido.descripcion[ni] = fraq;
     }
   }
 
@@ -244,7 +245,7 @@ export class AgregarPartidoComponent implements OnInit {
 
     if ( descripcion !== '') {
       const busqueda = new RegExp(descripcion, 'i');
-      const eq1 = this.equipos.filter( equipos => busqueda.test( equipos.nombre_equipo ) );
+      const eq1 = this.equipos.filter( equipos => busqueda.test( equipos.name ) );
       this.eq1 = eq1;
     } else {
       this.eq1 = this.equipos;
@@ -255,7 +256,7 @@ export class AgregarPartidoComponent implements OnInit {
 
     if ( descripcion !== '') {
       const busqueda = new RegExp(descripcion, 'i');
-      const eq2 = this.equipos.filter( equipos => busqueda.test( equipos.nombre_equipo ) );
+      const eq2 = this.equipos.filter( equipos => busqueda.test( equipos.name ) );
       this.eq2 = eq2;
     } else {
       this.eq2 = this.equipos;
@@ -266,7 +267,7 @@ export class AgregarPartidoComponent implements OnInit {
 
     if ( descripcion !== '') {
       const busqueda = new RegExp(descripcion, 'i');
-      const eq3 = this.equipos.filter( equipos => busqueda.test( equipos.nombre_equipo ) );
+      const eq3 = this.equipos.filter( equipos => busqueda.test( equipos.name ) );
       this.eq3 = eq3;
     } else {
       this.eq3 = this.equipos;
