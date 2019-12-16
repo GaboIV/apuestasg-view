@@ -1,6 +1,6 @@
 <div class='body_histo'>
     <div class='menu_barra_mem'>
-        <div class='btn_deposit' style="cursor: pointer"></div>
+        <!-- <div class='btn_deposit' style="cursor: pointer"></div> -->
         <div class='tab_menu_mem' [routerLink]="['/changelog']" [queryParams]="{zona:'tareas'}" routerLinkActive="tmm_select">Changelog</div>
         <div class='tab_menu_mem' [routerLink]="['/changelog']" [queryParams]="{zona:'agregarTarea'}" routerLinkActive="tmm_select"><i class="far fa-calendar-plus"></i> Añadir tarea</div>
         <div class='tab_menu_mem' [routerLink]="['/changelog']" [queryParams]="{zona:'modificarTarea'}" routerLinkActive="tmm_select">Modificar tarea</div>
@@ -8,19 +8,19 @@
     <ng-container *ngIf="zona === 'tareas'">
         <div style="padding: 15px;" *ngFor="let cl of changelogs">
             <div class="idiv">
-                <i class="far fa-clock" *ngIf="cl.estatus === '0'" (click)="verEstatus(cl.id_reto)"></i>
-                <i class="far fa-check-square" *ngIf="cl.estatus === '1'" style="color: green;"></i>
+                <i class="far fa-clock" *ngIf="cl.status === 0" (click)="verEstatus(cl.id)"></i>
+                <i class="far fa-check-square" *ngIf="cl.status === 1" style="color: green;"></i>
             </div>
             <div class="textdiv">
                 <div>
-                    <h3>{{cl.texto}}</h3>
+                    <h3>{{cl.text}}</h3>
                 </div>
                 <div style="font-size: 0.8em;">
-                    <i class="far fa-user-circle"></i> {{cl.id_usuario.usuario}} &nbsp;&nbsp;&nbsp;
-                    <i class="far fa-clock"></i> {{ cl.fecha_hora | date:'d/MM/yyyy'}} {{ cl.fecha_hora | date:'shortTime'}}
+                    <i class="far fa-user-circle"></i> {{cl.user_id}} &nbsp;&nbsp;&nbsp;
+                    <i class="far fa-clock"></i> {{ cl.created_at | date:'d/MM/yyyy'}} {{ cl.created_at | date:'shortTime'}}
                 </div>
             </div>
-            <div *ngIf="nuevoEstatus === cl.id_reto">
+            <div *ngIf="nuevoEstatus === cl.id">
                 <div (click)="cambiarEstatus(cl)" class="aceptar_hrs btn_hrs btn_jaustado">Tarea realizada</div>
             </div>
         </div>

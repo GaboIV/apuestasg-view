@@ -1,6 +1,6 @@
 <div class="zona_bet" style="position: relative">
     <div class="div_zb_1 zb_lado" style="position: relative">
-        <div style="width: 100%; height: 100%; text-align: center; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 3; background: #0a5f0d5e;"
+        <div style="width: 100%; height: 100%; text-align: center; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 3; background: #0021695e;"
             *ngIf="esperando === true">
         </div>
         <div style="width: 100%; height: 100px; text-align: center; position: absolute; top: 20%; left: 50%; transform: translate(-50%, -50%); z-index: 4;"
@@ -178,7 +178,7 @@
                     <div class='ep_descripcion_ta'>{{ dest.start | date:'d/MM/yyyy'}} -
                         {{ dest.start | date:'shortTime'}}</div>
                     <div class='ep_cada_logo destacado_odd' *ngFor="let equipo of dest.competitors"
-                        (click)="selecciond( equipo.team_id, dest.league.category_id )">
+                        (click)="selecciond( equipo.id, dest.league.category_id )">
                         <img *ngIf="equipo.name != 'Empate'" class="destacado_img" [src]="equipo.image | imagen:'equipo'" height=125%>
                         <div class='ep_cl_name destacado_name'>{{equipo.name}}</div>
                         <div class='ep_cl_logro destacado_cuota'>{{equipo.odd | cuota:'decimal'}}</div>

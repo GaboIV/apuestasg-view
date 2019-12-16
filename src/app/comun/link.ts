@@ -6,6 +6,7 @@ export const URL_A_FUNC = 'http://agac.apuestasg.com.ve/php/funciones';
 
 export const URL_ACTUALIZACIONES = URL_INICIAL + 'updates';
 export const URL_AUTH = URL_INICIAL + 'auth';
+export const URL_CHANGELOG = URL_INICIAL + 'changelogs';
 export const URL_DEPORTES = URL_INICIAL + 'categories';
 export const URL_EQUIPOS = URL_INICIAL + 'teams';
 export const URL_FECHA = URL_INICIAL + 'hora';
@@ -26,7 +27,6 @@ export const URL_STUDS = URL_INICIAL + 'bzbk/public/index.php/studs';
 export const URL_HIPODROMOS = URL_INICIAL + 'bzbk/public/index.php/hipodromos';
 export const URL_CARRERAS = URL_INICIAL + 'bzbk/public/index.php/carreras';
 export const URL_INSCRIPCION = URL_INICIAL + 'bzbk/public/index.php/inscripcion';
-export const URL_CHANGELOG = URL_INICIAL + 'bzbk/public/index.php/changelog';
 export const URL_TIPOAPUESTAS = URL_INICIAL + 'bzbk/public/index.php/tipoApuestas';
 export const URL_RESULTADOS = URL_INICIAL + 'bzbk/public/index.php/resultados';
 export const URL_SUBIDA_IMG = URL_INICIAL + 'bzbk/public/subida_logos.php';

@@ -28,7 +28,7 @@ export class ChangelogComponent implements OnInit {
   ngOnInit() {
     this._generalesService.cargarChangelog( 'todos' )
     .subscribe( resp => {
-      this.changelogs = resp.changelog;
+      this.changelogs = resp.changelogs;
     });
 
     this.route.queryParams

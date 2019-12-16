@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { URL_SUBIDA_IMG, URL_FECHA, URL_DEPOSITO, URL_CHANGELOG, URL_INICIAL } from '../comun/link';
 import { Pago } from '../modelos/pago.modelo';
+import { InicioSesionService } from './inicio-sesion.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,8 @@ export class GeneralesService {
   fecha: any;
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    public _loginService: InicioSesionService,
   ) { }
 
   subirImagen( id: string, selectedFile: File, carpeta ) {
@@ -88,9 +90,9 @@ export class GeneralesService {
   }
 
   cargarChangelog ( dato ) {
-    const url = URL_CHANGELOG + '/ver/' + dato;
+    const url = URL_CHANGELOG;
 
-    return this.http.get( url )
+    return this.http.get( url, this._loginService.httpOptions )
       .pipe(map ( (resp: any) => {
         return resp;
       }));
