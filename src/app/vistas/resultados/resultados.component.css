@@ -36,13 +36,13 @@
     height: 30px;
 }
 
-.seleccional {
+/*.seleccional {
     font-size: 1.2em;
     background: none;
     border: none;
     outline: none;
     padding-top: 3px;
-}
+}*/
 
 .equipo_rl div,
 .equipo_rl select {
@@ -96,4 +96,18 @@
 
 .carreras_rl .equipo_rl:nth-child(2) {
     border-top: none;
+}
+
+.add_filter {
+    width: auto;
+    padding: 5px 10px;
+    font-size: 1em;
+    background: #d61828;
+}
+
+.add_lig {
+    margin-right: 15px;
+    width: auto;
+    padding: 1px 15px;
+    font-size: 1.3em;
 }

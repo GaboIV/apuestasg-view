@@ -112,9 +112,9 @@ export class PartidosService {
   }
 
   enviarRL ( id_partido, id_categoria, id_ta, resultado ) {
-    const url = URL_RESULTADOS + '/agregar';
+    const url = URL_RESULTADOS;
 
-    return this.http.post( url, {id_partido, id_ta, id_categoria, resultado} )
+    return this.http.post( url, { game_id : id_partido, bet_type_id : id_ta, category_id : id_categoria, result : resultado }, this._loginService.httpOptions )
       .pipe(map( (resp: any) => {
         const res = resp;
         return res;

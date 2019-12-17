@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Nacionalidad } from '../../modelos/nacionalidad';
 import { DeportesService } from '../../servicios/deportes.service';
 import { Deporte } from '../../modelos/deporte';
 import { PartidosService } from '../../servicios/partidos.service';
+import { NacionalidadesService } from '../../servicios/servicios.indice';
+import { LigasService } from 'src/app/servicios/ligas.service';
 
 @Component({
   selector: 'app-resultados',
@@ -14,32 +17,34 @@ export class ResultadosComponent implements OnInit {
   ligas: any = [];
   partidos: any = [];
   carreras: any = [];
+  nacionalidades: Nacionalidad[];
+
+  category_id = 0;
+  country_id = 0;
+  start = 0;
+
+  criterio = 'todos';
 
   constructor(
     public _deporteService: DeportesService,
-    public _partidosService: PartidosService
+    public _partidosService: PartidosService,
+    public _nacionalidadesService: NacionalidadesService,
+    public _ligasService: LigasService,
   ) { }
 
   ngOnInit() {
     this.cargarDeportes();
+    this.cargarNacionalidades();
+  }
+
+  cargarNacionalidades() {
+    this._nacionalidadesService.cargarNacionalidades()
+      .subscribe(nacionalidades => this.nacionalidades = nacionalidades);
   }
 
   cargarDeportes() {
     this._deporteService.cargarDeportes()
           .subscribe( deportes => this.deportes = deportes );
-  }
-
-  seleccionDeporte ( seleccion ) {
-    this.ligas = null;
-    this._partidosService.seleccionDeporte( seleccion )
-      .subscribe( ligas => this.ligas = ligas );
-  }
-
-  seleccionLiga( seleccion ) {
-    this.partidos = null;
-    this.carreras = null;
-    this._partidosService.seleccionLiga( seleccion )
-      .subscribe( partidos => this.partidos = partidos );
   }
 
   seleccionHipodromo( seleccion ) {
@@ -54,6 +59,8 @@ export class ResultadosComponent implements OnInit {
     const valor2 = $('#RL1' + id_partido).text();
 
     const resultado = valor1 + '!' + valor2;
+
+    console.log(id_partido, id_categoria, id_ta, resultado);
 
     this._partidosService.enviarRL( id_partido, id_categoria, id_ta, resultado)
     .subscribe( resp => {
@@ -78,6 +85,30 @@ export class ResultadosComponent implements OnInit {
     } );
   }
 
+  changeCountry() {
+    this.ligas = null;
+    this._ligasService.seleccionDeportePais(this.category_id, this.country_id)
+    .subscribe(resp => {
+      this.ligas = resp.ligas;
+    });
+  }
 
+  changeCategory() {
+    if (this.country_id != 0) {
+      this.ligas = null;
+      this._ligasService.seleccionDeportePais(this.category_id, this.country_id)
+      .subscribe(resp => {
+        this.ligas = resp.ligas;
+      });
+    }    
+  }
+
+  filtrarPartidos(pagina) {
+    this._partidosService.filtrarPartidos(pagina, this.category_id, this.country_id, this.start, this.criterio)
+      .subscribe(resp => {
+        console.log(resp);
+        this.partidos = resp.games.data
+      });
+  }
 
 }

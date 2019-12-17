@@ -35,7 +35,9 @@
                 </td>
                 <td width="8%" align="center">
                     <label style="cursor: pointer; position: relative; height: 60px;">
-                        <img [src]="equipo.id + '.png'| imagen:'equipo'" alt="" height="50px;">
+                        <img [src]="equipo.image | imagen:'equipo'" alt="" height="50px;">
+                        <br>
+                        <input type="file" name="imagenSubir" (change)="subirImagen($event, equipo)" style="display: none">
                     </label>
                 </td>
                 <td contenteditable="true" width="16%" [innerText]="equipo.stadium" #stadium (blur)="modificarDato(equipo.id, stadium.innerText, equipo, 'stadium', 'estadio ')">

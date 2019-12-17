@@ -16,6 +16,7 @@ export const URL_JUGADORES = URL_INICIAL + 'player';
 export const URL_LIGAS = URL_INICIAL + 'leagues';
 export const URL_NACIONALIDADES = URL_INICIAL + 'countries';
 export const URL_PARTIDOS = URL_INICIAL + 'games';
+export const URL_RESULTADOS = URL_INICIAL + 'games/result';
 export const URL_SELECCION = URL_INICIAL + 'player/selections';
 export const URL_TICKET = URL_INICIAL + 'player/ticket';
 
@@ -28,7 +29,5 @@ export const URL_HIPODROMOS = URL_INICIAL + 'bzbk/public/index.php/hipodromos';
 export const URL_CARRERAS = URL_INICIAL + 'bzbk/public/index.php/carreras';
 export const URL_INSCRIPCION = URL_INICIAL + 'bzbk/public/index.php/inscripcion';
 export const URL_TIPOAPUESTAS = URL_INICIAL + 'bzbk/public/index.php/tipoApuestas';
-export const URL_RESULTADOS = URL_INICIAL + 'bzbk/public/index.php/resultados';
-export const URL_SUBIDA_IMG = URL_INICIAL + 'bzbk/public/subida_logos.php';
 export const URL_DEPOSITO = URL_INICIAL + 'bzbk/public/depositos.php';
 export const URL_MENSAJES = URL_INICIAL + 'bzbk/public/textos.php';

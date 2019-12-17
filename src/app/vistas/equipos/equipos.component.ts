@@ -39,10 +39,21 @@ export class EquiposComponent implements OnInit {
   }
 
   cargarEquipos(pagina, criterio, liga) {
+    const toast = swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 2000
+    });
+    toast({
+      type: 'info',
+      title: 'Cargando equipos'
+    });
     this._equipoService.cargarEquipos(pagina, criterio, liga)
       .subscribe(equipos => {
         this.equipos = equipos.data
-      });
+        swal.close();
+      });      
   }
 
   cargarNacionalidades() {
@@ -65,11 +76,11 @@ export class EquiposComponent implements OnInit {
 
   subirImagen(event, equipo) {
     this.selectedFile = event.target.files[0];
-    this._generalesService.subirImagen(equipo.id_equipo, this.selectedFile, 'equipos')
+    this._generalesService.subirImagen(equipo.id, this.selectedFile, 'teams')
       .subscribe(res => {
         this.resultado = res;
         console.log(this.resultado);
-        equipo.img = this.resultado.imagen;
+        equipo.image = this.resultado.image;
       });
   }
 

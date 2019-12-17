@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { URL_SUBIDA_IMG, URL_FECHA, URL_DEPOSITO, URL_CHANGELOG, URL_INICIAL } from '../comun/link';
+import { URL_FECHA, URL_DEPOSITO, URL_CHANGELOG, URL_IMAGEN, URL_INICIAL } from '../comun/link';
 import { Pago } from '../modelos/pago.modelo';
 import { InicioSesionService } from './inicio-sesion.service';
 
@@ -22,8 +22,10 @@ export class GeneralesService {
 
   subirImagen( id: string, selectedFile: File, carpeta ) {
     const uploadData = new FormData();
-    uploadData.append('myFile', selectedFile, selectedFile.name);
-    return this.http.post( URL_SUBIDA_IMG + '?id=' + id + '&c=' + carpeta, uploadData)
+    uploadData.append('image', selectedFile);
+    uploadData.append('id', id);
+    uploadData.append('model', carpeta);
+    return this.http.post( URL_IMAGEN, uploadData)
       .pipe(map ( (resp: any) => {
         const res = resp;
         return res;
