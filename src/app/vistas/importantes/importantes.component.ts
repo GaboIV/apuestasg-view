@@ -282,10 +282,10 @@ export class ImportantesComponent implements OnInit {
 
   buscarEquipo(forma) {
     this.esperando = true;
-    this._partidosService.partidosPorCategoria(this.id, 'normal', forma.busqueda)
-      .subscribe((partidos: Partido) => {
+    this._partidosService.partidosPorBusqueda(this.id, 'normal', forma.busqueda)
+      .subscribe((resp) => {
         this.esperando = false;
-        this.partidos = partidos;
+        this.partidos = resp.juegos.data;
         this.carreras = null;
       });
   }

@@ -196,4 +196,13 @@ export class PartidosService {
       })
     );
   }
+
+  partidosPorBusqueda ( id: string, dato: string, equipo: string ) {
+    const url = URL_PARTIDOS + '/byName?page=1'
+
+    return this.http.post( url, { name : equipo }, this._loginService.httpOptions )
+      .pipe(map ( (resp: any) => {
+        return resp;
+      }));
+  }
 }
