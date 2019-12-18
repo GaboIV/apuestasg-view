@@ -5,6 +5,7 @@ import { Deporte } from '../../modelos/deporte';
 import { PartidosService } from '../../servicios/partidos.service';
 import { NacionalidadesService } from '../../servicios/servicios.indice';
 import { LigasService } from 'src/app/servicios/ligas.service';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-resultados',
@@ -54,7 +55,7 @@ export class ResultadosComponent implements OnInit {
       .subscribe( carreras => this.carreras = carreras );
   }
 
-  enviarRL( id_partido, id_categoria, id_ta ) {
+  enviarRL( id_partido, id_categoria, id_ta, partido:any ) {
     const valor1 = $('#RL0' + id_partido).text();
     const valor2 = $('#RL1' + id_partido).text();
 
@@ -64,7 +65,20 @@ export class ResultadosComponent implements OnInit {
 
     this._partidosService.enviarRL( id_partido, id_categoria, id_ta, resultado)
     .subscribe( resp => {
-      console.log( resp );
+      if (resp.status == 'correcto'){
+          const toast = swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 2000
+          });
+          toast({
+            type: 'success',
+            title: 'Se agregó el resultado correctamente'
+          });
+
+          partido.status = 3;
+        }
     } );
   }
 
@@ -104,7 +118,7 @@ export class ResultadosComponent implements OnInit {
   }
 
   filtrarPartidos(pagina) {
-    this._partidosService.filtrarPartidos(pagina, this.category_id, this.country_id, this.start, this.criterio)
+    this._partidosService.filtrarPartidosResult(pagina, this.category_id, this.country_id, this.start, this.criterio)
       .subscribe(resp => {
         console.log(resp);
         this.partidos = resp.games.data

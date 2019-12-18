@@ -111,3 +111,17 @@
     padding: 1px 15px;
     font-size: 1.3em;
 }
+
+.ready {
+    border: #14ff00 1px solid !important;
+}
+
+.ready2 {
+    background: #14ff00 !important;
+    border: none;
+}
+
+.ready2:hover {
+    background: #14ff00 !important;
+    border: none;
+}

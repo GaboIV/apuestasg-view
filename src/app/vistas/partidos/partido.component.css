@@ -1,10 +1,10 @@
 .main_nav {
-    border-bottom: 0.5px solid #595959;
-    border-top: 0.5px solid #595959;
+    /*border-bottom: 0.5px solid #595959;
+    border-top: 0.5px solid #595959;*/
 }
 
 .ico_now {
-    border-right: 0.5px solid #595959;
+    /*border-right: 0.5px solid #595959;*/
 }
 
 .menu_menu_nav {
@@ -19,7 +19,7 @@
 }
 
 .elementos {
-    background: #25765C;
+    background: #0D2C49;
     display: inline-block;
     text-align: left;
     vertical-align: top;
@@ -27,13 +27,13 @@
 
 .datetime {
     margin-left: 20px;
-    background: #272727;
+    background: #fff;
     border: none;
     height: 22px;
     outline: none;
     border-radius: 4px;
     text-align: center;
-    color: #cfcfcf;
+    color: #444;
 }
 
 .elemes .elementos:nth-child(1) {
@@ -73,7 +73,8 @@
     height: 27px;
     font-size: 1.1em;
     text-align: center;
-    border-radius: 4px;
+    border-radius: 5px;
+    border: none;
 }
 
 .el50 {
@@ -92,14 +93,18 @@
     height: 27px;
     padding-left: 5px;
     font-size: 1em;
-    border-top-left-radius: 4px;
-    border-bottom-left-radius: 4px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border:none;
+    margin-top: 5px;
 }
 
 .erapit {
     height: 27px;
     font-size: 1em;
     text-align: center;
-    border-top-right-radius: 4px;
-    border-bottom-right-radius: 4px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border:none;
+    border-left: 1px solid #CFCFCF;
 }

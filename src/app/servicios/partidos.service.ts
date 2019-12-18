@@ -36,8 +36,30 @@ export class PartidosService {
       }));
   }
 
+  cargarPartido(id: number) {
+
+    let url = '';
+
+    url = URL_PARTIDOS + '/' + id;
+
+    return this.http.get( url, this._loginService.httpOptions )
+      .pipe(map ( (resp: any) => {
+        console.log(resp);
+        return resp.game;
+      }));
+  }
+
   filtrarPartidos(pagina: number, category_id, country_id, start, criterio) {
     let url = URL_PARTIDOS + '/byFilters?page=' + pagina;
+
+    return this.http.post( url, { category_id: category_id, country_id:country_id, start: start, name : criterio }, this._loginService.httpOptions )
+      .pipe(map ( (resp: any) => {
+        return resp;
+      }));
+  }
+
+  filtrarPartidosResult(pagina: number, category_id, country_id, start, criterio) {
+    let url = URL_RESULTADOS + '/gamesByFilters?page=' + pagina;
 
     return this.http.post( url, { category_id: category_id, country_id:country_id, start: start, name : criterio }, this._loginService.httpOptions )
       .pipe(map ( (resp: any) => {
@@ -134,9 +156,9 @@ export class PartidosService {
   }
 
   guardarDatos ( pitchers, partido ) {
-    const url = URL_PARTIDOS + '/agregarDatos';
+    const url = URL_PARTIDOS + "/" + partido.id;
 
-    return this.http.post( url, { pitchers, partido } )
+    return this.http.put( url, { pitchers, partido }, this._loginService.httpOptions )
       .pipe(map( (resp: any) => {
         const res = resp;
         return res;

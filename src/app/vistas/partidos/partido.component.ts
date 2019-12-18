@@ -13,7 +13,7 @@ declare var $: any;
 })
 export class PartidoComponent implements OnInit {
 
-  partido: any;
+  partido: any = [];
 
   pitchers: Array<{nombre: string, era: string}>;
   era1 = '';
@@ -33,26 +33,26 @@ export class PartidoComponent implements OnInit {
   ngOnInit() {
     this.route.params
       .subscribe( parametros => {
-        const param = '!' + parametros.id_partido;
-        this._partidosService.cargarPartidos(1, param)
-          .subscribe( partidos => {
-            this.partido = partidos;
-            this.id_part1 = partidos[0].equipos[0].id_participante;
-            this.id_part2 = partidos[0].equipos[1].id_participante;
-            this.id_equipo1 = partidos[0].equipos[0].id_equipo;
-            this.id_equipo2 = partidos[0].equipos[1].id_equipo;
-            if ( partidos[0].equipos[0].pitchers !== 'undefined') {
+        const param = parametros.id_partido;
+        this._partidosService.cargarPartido(param)
+          .subscribe( partido => {
+            this.partido = partido;
+            this.id_part1 = partido.competitors[0].id_participante;
+            this.id_part2 = partido.competitors[1].id_participante;
+            this.id_equipo1 = partido.competitors[0].id_equipo;
+            this.id_equipo2 = partido.competitors[1].id_equipo;
+            if ( partido.competitors[0].pitchers ) {
               $(() => {
                 $( '#p1' ).autocomplete({
-                    source: partidos[0].equipos[0].pitchers
+                    source: partido.competitors[0].pitchers
                 });
               });
             }
 
-            if ( partidos[0].equipos[1].pitchers !== 'undefined') {
+            if ( partido.competitors[1].pitchers) {
               $(() => {
                 $( '#p2' ).autocomplete({
-                    source: partidos[0].equipos[1].pitchers
+                    source: partido.competitors[1].pitchers
                 });
               });
             }
@@ -67,9 +67,12 @@ export class PartidoComponent implements OnInit {
       { nombre: $('#p1').val() , era: $('#e1').val() },
     ];
 
+    console.log(this.pitchers, this.partido);
+
     this._partidosService.guardarDatos(this.pitchers, this.partido)
     .subscribe( resp => {
       if ( resp.status === 'success') {
+        console.log(resp);
         swal(
           '¡Partido modificado!',
           'Los datos se han modificado correctamente',
@@ -77,6 +80,8 @@ export class PartidoComponent implements OnInit {
         );
       }
     });
+
+    
   }
 
   cuotaDecimal (valor) {
@@ -113,7 +118,7 @@ export class PartidoComponent implements OnInit {
 
     const fraq = Math.floor(numerator) + '/' + Math.floor(denominator);
 
-    this.partido[0].equipos[i].dividendo = fraq;
+    this.partido.competitors[i].odd = fraq;
 
     $(() => {
       $('#fq-' + id_eq).val(fraq);
