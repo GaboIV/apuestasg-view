@@ -167,9 +167,15 @@
         height: 88%;
     }
     
-    .redondo {
+    /*.redondo {
         border-bottom: 4px solid whitesmoke;
         border-radius: 100px;
+    }*/
+
+    .redondo {
+        border: 2px solid #fff;
+        background: #fff;
+        border-radius: 50%;
     }
 
     .mCSB_horizontal.mCSB_inside > .mCSB_container {

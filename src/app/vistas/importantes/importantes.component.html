@@ -163,10 +163,9 @@
                         [ngStyle]="{'background': 'url(../../assets/vallas/' + dest.league.category_id + '.jpg) no-repeat center center'}">
                         <ng-container *ngFor="let equipo of dest.competitors; let i = index">
 
-                            <span class="versus" [class.letra_color]="dest.league.category_id === '6'" *ngIf="i === 1"> VS
+                            <span class="versus" [class.letra_color]="dest.league.category_id === 4" *ngIf="i === 1"> VS
                             </span>
-                            <img *ngIf="equipo.name != 'Empate'" [src]="equipo.image | imagen:'equipo'" class='ep_logo'
-                                style="position: static;" [class.redondo]="dest.league.category_id === '4'">
+                            <img *ngIf="equipo.name != 'Empate'" [src]="equipo.image | imagen:'equipo'" class='ep_logo' style="position: static;" [class.redondo]="dest.league.category_id === 4">
 
                         </ng-container>
                     </div>
