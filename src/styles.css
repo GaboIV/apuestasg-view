@@ -841,7 +841,6 @@ cuerpo {
     padding: 5px 10px;
     width: 100%;
     cursor: pointer;
-    border-bottom: 1px solid #cfcfcf;
 }
 
 .ep_cada_partido {
@@ -1376,10 +1375,11 @@ cuerpo {
 }
 
 .banda_fecha {
-    background: #00488c;
+    background: #ffdf1b;
     font-size: 0.8em;
-    color: #fff;
+    color: #444;
     padding: 5px 10px;
+    font-weight: 400;
 }
 
 .tarjetas {

@@ -199,10 +199,10 @@ export class ImportantesComponent implements OnInit {
       this._generalesService.cargarCategoriasJuegos()
       .subscribe(resp => {
         this.juegos = resp.categories;
-        this.solohoy();
+        this.solohoy(1);
       });
     } else {
-      this.solohoy();
+      this.solohoy(1);
     }
     
   }
@@ -260,7 +260,8 @@ export class ImportantesComponent implements OnInit {
       });
   }
 
-  solohoy() {
+  solohoy(id) {
+    this.id = id;
     if (this.id === '27') {
       this.esperando = true;
       this._caballoService.cargarCarreras('hoy')

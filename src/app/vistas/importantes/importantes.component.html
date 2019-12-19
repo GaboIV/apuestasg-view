@@ -29,7 +29,7 @@
             [scrollbarOptions]="scrollbarOptions">
             <ng-container *ngFor="let juego of juegos">
                 <div *ngIf="juego.juegos !== 0" class="ep_cada_cat  " id="temp-{{juego.id}}"
-                    routerLink="/importantes/{{juego.id}}">
+                    (click)="solohoy(juego.id)">
                     <div class="imagen_dep"><img src="../../../assets/deportes/{{juego.id}}.svg" alt="" height="37px;">
                     </div>
                     <div class="texto_imagen_dep">{{juego.name}}</div>
@@ -51,11 +51,10 @@
                 <div >
                     <div class='banda_fecha' *ngIf="game.manana">Mañana, {{ game.start | date:'d/MM/yyyy'}}</div>
                     <div class='ep_cada_partido'>
-
-                        <span>{{game.encuentro}}   {{ game.start | date:'d/MM/yyyy'}} - {{ game.start | date:'shortTime'}}</span>
+                        <span>{{game.encuentro}} {{ game.start | date:'d/MM/yyyy'}} - {{ game.start | date:'shortTime'}}</span>
                     </div>
                     <div class="expandir" [routerLink]="['/verPartido', game.id]"
-                        [queryParams]="{partido: game}" style="background: #00488c; height: 31px; padding-top: 7px; margin-top: -1px;">
+                        [queryParams]="{partido: game}" style="background: #00488c; height: 30px; padding-top: 7px;">
                         <i class="fas fa-expand"></i>&nbsp;Ampliar
                     </div>
                     <div *ngFor="let competitor of game.competitors" class="gen_imp_eq"

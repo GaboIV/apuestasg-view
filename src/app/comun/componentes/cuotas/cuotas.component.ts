@@ -101,7 +101,7 @@ export class CuotasComponent implements OnInit {
         if ( resp.tipo === '2x') {
           this.selecciones = [];
           this.selecciones2 = resp.selecciones;
-          this.cuota = resp.cuota;
+          this.cuota = resp.quot;
           this.cambioApuesta();
         } else if ( resp.tipo === '27') {
           this.selecciones2 = [];

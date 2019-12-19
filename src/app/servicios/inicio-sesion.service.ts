@@ -118,6 +118,7 @@ export class InicioSesionService {
   cambioApuesta ( montoapuesta ) {
     this.montoapuesta = montoapuesta;
     this.aganar = montoapuesta * this.cuota;
+    console.log(montoapuesta, this.aganar, this.cuota)
   }
 
   obtenerUsuario ( usuario, contrasena, tipoken = '' ) {
@@ -176,7 +177,7 @@ export class InicioSesionService {
         if ( resp.tipo === '2x') {
           this.selecciones = [];
           this.selecciones2 = resp.selecciones;
-          this.cuota = resp.cuota;
+          this.cuota = resp.quot;
         } else if ( resp.tipo === '27') {
           this.selecciones2 = [];
           this.selecciones = resp.selecciones;
@@ -222,7 +223,6 @@ export class InicioSesionService {
         const res = resp;
         if ( resp.selections ) {
             this.selecciones2 = resp.selections;
-
             this.cuota = resp.quot;
 
             this.cambioApuesta( this.montoapuesta );
