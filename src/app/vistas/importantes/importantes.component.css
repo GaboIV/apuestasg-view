@@ -126,6 +126,15 @@
         overflow: hidden;
         text-align: center;
         padding-top: 5px;
+        position: relative;
+    }
+
+    .img_dest_country {
+        position: absolute;
+        bottom: 7px;
+        margin-left: -9%;
+        height: 27%;
+        border-radius: 0px;
     }
     
     .versus {
