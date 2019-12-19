@@ -857,7 +857,7 @@ cuerpo {
 }
 
 .ep_cada_partido span {
-    font-size: 11px;
+    /*font-size: 11px;*/
     color: #0d2c49;
     padding-left: 5px;
 }
@@ -1376,7 +1376,7 @@ cuerpo {
 }
 
 .banda_fecha {
-    background: #d61828;
+    background: #00488c;
     font-size: 0.8em;
     color: #fff;
     padding: 5px 10px;

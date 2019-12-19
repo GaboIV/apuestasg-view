@@ -45,16 +45,16 @@
                 No se encontraron juegos disponibles para este deporte.</div>
         </div>
         <div class="juegos_principales_zb1" *ngIf=" partidos !== []">
-            <div *ngFor="let partido of partidos">
-                <div class='ep_cada_liga' *ngIf="partido.name !== null">{{partido.name}} <img
-                        [src]="partido.country_id + '.png' | imagen:'nacionalidad'" height=16px></div>
-                <div *ngFor="let game of partido.games">
-                    <!-- <div class='banda_fecha' *ngIf="partido.manana">Mañana, {{ partido.fecha_inicio | date:'d/MM/yyyy'}}</div> -->
+            <div *ngFor="let game of partidos">
+                <div class='ep_cada_liga' *ngIf="game.league_name">{{game.league_name}} <img
+                        [src]="game.league.country_id + '.png' | imagen:'nacionalidad'" height=16px></div>
+                <div >
+                    <div class='banda_fecha' *ngIf="game.manana">Mañana, {{ game.start | date:'d/MM/yyyy'}}</div>
                     <div class='ep_cada_partido'>
 
-                        <span>{{ game.start | date:'d/MM/yyyy'}} - {{ game.start | date:'shortTime'}}</span>
+                        <span>{{game.encuentro}}   {{ game.start | date:'d/MM/yyyy'}} - {{ game.start | date:'shortTime'}}</span>
                     </div>
-                    <div class="expandir" [routerLink]="['/verPartido', partido.id_partido]"
+                    <div class="expandir" [routerLink]="['/verPartido', game.id]"
                         [queryParams]="{partido: game}" style="background: #00488c; height: 31px; padding-top: 7px; margin-top: -1px;">
                         <i class="fas fa-expand"></i>&nbsp;Ampliar
                     </div>
@@ -62,8 +62,8 @@
                         [class.eq_tres_emp]="game.competitors.length == 3 && competitor.team_id == 1"
                         [class.eq_tres]="game.competitors.length == 3 && competitor.team_id != 1"
                         [class.eq_dos]="game.competitors.length == 2"
-                        (click)="selecciond( competitor.id, partido.category_id )">
-                        <div [class]="partido.category_id | importantes:competitor.team.name "><img
+                        (click)="selecciond( competitor.id, game.league.category_id )">
+                        <div [class]="game.league.category_id | importantes:competitor.team.name "><img
                                 *ngIf="competitor.team.name !== 'Empate'" [src]="competitor.team.image | imagen:'equipo'"
                                 height=125% class='ep_logo'>{{competitor.team.name}}<br>
                             <!-- Agregar para partidos internacionales -->
