@@ -14,7 +14,7 @@ import { EquiposComponent } from './vistas/equipos/equipos.component';
 import { NoencontradoComponent } from './vistas/noencontrado/noencontrado.component';
 import { APP_ROUTES } from './app.routes';
 import { ServiciosModulo } from './servicios/servicios.modulo';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PipesModule } from './pipes/pipes.module';
@@ -25,6 +25,7 @@ import { CuotasComponent } from './comun/componentes/cuotas/cuotas.component';
 import { ToastrModule } from 'ngx-toastr';
 import { AgregarPartidoComponent } from './vistas/partidos/agregar-partido.component';
 import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
+import { HttpErrorInterceptor } from 'src/app/interceptor/httpconfig.interceptor';
 
 
 
@@ -56,7 +57,13 @@ import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
     ToastrModule.forRoot(),
     SweetAlert2Module.forRoot()
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent],
   exports: [PrincipalComponent]
 })

@@ -104,8 +104,8 @@ export class CabeceraComponent implements OnInit {
       created_at: '',
       updated_at: '' 
       }, 
-      '', 
-      ''
+      '',
+      null
     );
 
     this.token = '';
@@ -146,7 +146,7 @@ export class CabeceraComponent implements OnInit {
       updated_at: '' 
       }, 
       '', 
-      ''
+      null
     );
     this._sesionUsuario.estatus = 'noSesion';
     this._sesionUsuario.salirMenu();

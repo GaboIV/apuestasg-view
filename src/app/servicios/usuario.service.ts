@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Usuario } from '../modelos/usuario';
 import { HttpClient } from '@angular/common/http';
-import {  URL_JUGADORES } from '../comun/link';
+import {  URL_JUGADORES, URL_REGISTRO } from '../comun/link';
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -13,8 +13,8 @@ export class UsuarioService {
     private http: HttpClient,
   ) { }
 
-  crearUsuario(usuario: Usuario) {
-    const url = URL_JUGADORES + '/crear';
+  crearUsuario(usuario) {
+    const url = URL_REGISTRO;
 
     return this.http.post( url, usuario )
       .pipe(map( (resp: any) => {

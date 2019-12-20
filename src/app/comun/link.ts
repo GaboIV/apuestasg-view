@@ -16,6 +16,7 @@ export const URL_JUGADORES = URL_INICIAL + 'player';
 export const URL_LIGAS = URL_INICIAL + 'leagues';
 export const URL_NACIONALIDADES = URL_INICIAL + 'countries';
 export const URL_PARTIDOS = URL_INICIAL + 'games';
+export const URL_REGISTRO = URL_INICIAL + 'auth/register';
 export const URL_RESULTADOS = URL_INICIAL + 'results';
 export const URL_SELECCION = URL_INICIAL + 'player/selections';
 export const URL_TICKET = URL_INICIAL + 'player/ticket';

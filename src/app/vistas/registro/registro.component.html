@@ -15,7 +15,7 @@
                 ¿Ya está registrado? <span><b>Recuerde sus datos de acceso</b></span>
             </div>
         </div>
-        <form name="invfrm" (ngSubmit)="enviarDatos(f.value)" #f="ngForm" ngNativeValidate>
+        <form name="invfrm" (ngSubmit)="enviarDatos(f)" #f="ngForm" ngNativeValidate>
             <div class="cuerpo_c_r">
                 <p><span style="color: #7F0000">*</span> deberá completar este campo</p>
                 <p>Es necesario que proporcione información personal exacta para la verificación y seguridad de su cuenta. Tenga en cuenta que, para poder seguir utilizando su cuenta, es necesario que podamos verificar su identidad.</p>
@@ -24,7 +24,7 @@
                         <span style="color: #7F0000">*</span> País de residencia:
                     </div>
                     <div class="subinput">
-                        <select class="inpt_reg" id="nro1" name='country_id'>
+                        <select [(ngModel)]="usuario.player.country_id" class="inpt_reg" id="nro1" name='country_id'>
 							<option value="231">Venezuela</option>
 						</select>
                     </div>
@@ -43,9 +43,10 @@
                     </div>
                     <div class="subinput">
                         <select class="inpt_reg" id="nro2" name='treatment' [(ngModel)]="usuario.player.treatment">
-							<option value="1">Sr.</option>
-							<option value="2">Sra.</option>
-							<option value="3">Srta.</option>
+							<option value="Sr.">Sr.</option>
+                            <option value="Sra.">Sra.</option>
+                            <!-- <option value="Srto.">Srto.</option> -->
+							<option value="Srta.">Srta.</option>
 						</select>
                     </div>
                     <div class="submsj">
@@ -88,7 +89,7 @@
                         <span style="color: #7F0000">*</span> Fecha de nacimiento:
                     </div>
                     <div class="subinput" id="nro5">
-                        <input type="text" class="inpt_reg fdn dia_fdn" name='dia' id='nro37' (change)="ajustarNac('dia', $event.target.value)" [(ngModel)]="nacDia">
+                        <!-- <input type="text" class="inpt_reg fdn dia_fdn" name='dia' id='nro37' (change)="ajustarNac('dia', $event.target.value)" [(ngModel)]="nacDia">
                         <select class="inpt_reg fdn mes_fdn" id="nro27" name='mes' (change)="ajustarNac('mes', $event.target.value)" [(ngModel)]="nacMes">
 							<option value="1">Enero</option>
 							<option value="2">Febrero</option>
@@ -103,7 +104,8 @@
 							<option value="11">Noviembre</option>
 							<option value="12">Diciembre</option>
 						</select>
-                        <input type="text" class="inpt_reg fdn anyo_fdn" name='anio' id="nro47" (change)="ajustarNac('anio', $event.target.value)" [(ngModel)]="nacAnio">
+                        <input type="text" class="inpt_reg fdn anyo_fdn" name='anio' id="nro47" (change)="ajustarNac('anio', $event.target.value)" [(ngModel)]="nacAnio"> -->
+                        <input type="date" class="inpt_reg" id="nro5" name='birthday' [(ngModel)]="usuario.player.birthday">
                     </div>
                     <div class="submsj">
                         <div class="msj_reg nro5">
@@ -117,8 +119,12 @@
                         <span style="color: #7F0000">*</span> Documento de Identidad:
                     </div>
                     <div class="subinput" id="nro50">
-                        <input type="text" class="inpt_reg fdn dia_fdn" name='letra' value='V' id="nro57" disabled>
-                        <input [(ngModel)]="usuario.player.document_number" type="text" class="inpt_reg fdn mes_fdn" name='cedula' style='width: 69.6% !important;' id="nro67">
+                        <select style="border-bottom-right-radius: 0px; border-top-right-radius: 0px; border-right: none;" class="inpt_reg fdn dia_fdn" id="nro2" name='document_type' [(ngModel)]="usuario.player.document_type">
+							<option value="V">V</option>
+							<option value="E">E</option>
+						</select>
+                        <!-- <input type="text" class="inpt_reg fdn dia_fdn" name='letra' value='V' id="nro57" disabled> -->
+                        <input style="border-bottom-left-radius: 0px; border-top-left-radius: 0px; border-left: none; width: 69.6% !important;" [(ngModel)]="usuario.player.document_number" type="text" class="inpt_reg fdn mes_fdn" name='document_number' id="nro67">
                     </div>
                     <div class="submsj">
                         <div class="msj_reg nro50">
@@ -134,8 +140,8 @@
                         <span style="color: #7F0000">*</span> Idioma:
                     </div>
                     <div class="subinput">
-                        <select class="inpt_reg" id="nro20" name='idioma'>
-							<option value="u">Español</option>
+                        <select [(ngModel)]="usuario.player.language_id" class="inpt_reg" id="nro20" name='language_id'>
+							<option value=1>Español</option>
 						</select>
                     </div>
                     <div class="submsj">
@@ -150,8 +156,8 @@
                         <span style="color: #7F0000">*</span> Huso horario:
                     </div>
                     <div class="subinput">
-                        <select class="inpt_reg" id="nro21" name='huso'>
-							<option value="u">GMT -4 (VE)</option>
+                        <select [(ngModel)]="usuario.player.timezone" class="inpt_reg" id="nro21" name='timezone'>
+							<option value="America/Caracas">GMT -4 (VE)</option>
 						</select>
                     </div>
                     <div class="submsj">
@@ -166,8 +172,8 @@
                         <span style="color: #7F0000">*</span> Formato de cuotas:
                     </div>
                     <div class="subinput">
-                        <select class="inpt_reg" id="nro22" name='cuotas'>
-							<option value="u">Decimal</option>
+                        <select [(ngModel)]="usuario.player.format_quot" class="inpt_reg" id="nro22" name='format_quot'>
+							<option value=1>Decimal</option>
 						</select>
                     </div>
                     <div class="submsj">
@@ -198,7 +204,7 @@
                         <span style="color: #7F0000">*</span> Contraseña:
                     </div>
                     <div class="subinput">
-                        <input [(ngModel)]="usuario.password" type="password" class="inpt_reg" id="nro31" name='password'>
+                        <input [(ngModel)]="usuario.password" type="password" class="inpt_reg" id="nro31" name='password' required>
                     </div>
                     <div class="submsj">
                         <div class="msj_reg nro31">
@@ -213,7 +219,7 @@
                         <span style="color: #7F0000">*</span> Repita contraseña:
                     </div>
                     <div class="subinput">
-                        <input type="password" class="inpt_reg" id="nro34" name='password2'>
+                        <input ngModel type="password" class="inpt_reg" id="nro34" name='password_confirmation' required>
                     </div>
                     <div class="submsj">
                         <div class="msj_reg nro34">
@@ -227,7 +233,7 @@
                         <span style="color: #7F0000">*</span> Nº de seguridad de cuatro dígitos:
                     </div>
                     <div class="subinput">
-                        <input type="password" class="inpt_reg" id="nro32" name='numeric'>
+                        <input [(ngModel)]="usuario.code_security" type="password" class="inpt_reg" id="nro32" name='code_security' required>
                     </div>
                     <div class="submsj">
                         <div class="msj_reg nro32">
@@ -241,7 +247,7 @@
                         <span style="color: #7F0000">*</span> Repita nº de seguridad:
                     </div>
                     <div class="subinput">
-                        <input type="password" class="inpt_reg" id="nro33" name='numeric2'>
+                        <input ngModel type="password" class="inpt_reg" id="nro33" name='code_security_confirmation'>
                     </div>
                     <div class="submsj">
                         <div class="msj_reg nro33">
@@ -271,7 +277,7 @@
                         <span style="color: #7F0000"></span> Número telefónico:
                     </div>
                     <div class="subinput">
-                        <input type="text" class="inpt_reg" id="nro52" name='telefono' [(ngModel)]="usuario.player.phone">
+                        <input type="text" class="inpt_reg" id="nro52" name='phone' [(ngModel)]="usuario.player.phone">
                     </div>
                     <div class="submsj">
                         <div class="msj_reg nro52">
@@ -287,7 +293,7 @@
                         Código del bonus:
                     </div>
                     <div class="subinput">
-                        <input type="text" class="inpt_reg" id="nro36" name='bonus'>
+                        <input [(ngModel)]="bonus" type="text" class="inpt_reg" id="nro36" name='bonus'>
                     </div>
                     <div class="submsj">
                         <div class="msj_reg nro36">
@@ -302,7 +308,7 @@
                     <input type="checkbox" name="ch_noticias" id='nro87' required>
                 </div>
                 <div class='text_box'>
-                    <span>Deseo recibir información sobre las ofertas y promociones de los productos de BetZone.</span>
+                    <span>Deseo recibir información sobre las ofertas y promociones de los productos de Apuestas G.</span>
                 </div>
             </div>
             <div class='infor_sel'>
@@ -314,8 +320,8 @@
                 </div>
             </div>
 
-            <div class='infor_sel'>
-                <input type="submit">
+            <div class='infor_sel' style="text-align: center;">
+                <input type="submit" class="boton guardar ef_slice" value="Registrarse">
             </div>
 
         </form>

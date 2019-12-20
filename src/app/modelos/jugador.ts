@@ -21,6 +21,9 @@ export class Jugador {
         public ip?: string,
         public browser?: string,
         public created_at?: string,
-        public updated_at?: string
+        public updated_at?: string,
+        public language_id?: number,
+        public timezone?: string,
+        public format_quot?: number
     ) { }
 }

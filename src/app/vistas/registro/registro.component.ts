@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from '../../modelos/usuario';
 import { Router, ActivatedRoute } from '@angular/router';
-import { NacionalidadesService } from '../../servicios/servicios.indice';
+import { NacionalidadesService, SubMenuService } from '../../servicios/servicios.indice';
 import { GeneralesService } from '../../servicios/generales.service';
 import { HttpClient } from '@angular/common/http';
 import { UsuarioService } from '../../servicios/usuario.service';
@@ -10,6 +10,7 @@ import { ToastrService } from 'ngx-toastr';
 import { isDate } from 'util';
 import swal from 'sweetalert2';
 import { NgForm } from '@angular/forms';
+import { InicioSesionService } from 'src/app/servicios/inicio-sesion.service';
 
 @Component({
   selector: 'app-registro',
@@ -18,41 +19,43 @@ import { NgForm } from '@angular/forms';
 })
 export class RegistroComponent implements OnInit {
 
+  bonus = "ENTRADA_100K_AG";
+
   usuario: Usuario = new Usuario(
-    '', 
-    '', 
-    null, 
+    '',
+    'gaboiv', 
+    'gabrielcaraballo1907@getMaxListeners.com',
     1, 
-    '', 
+    '',
     {
-    id: '',
-    document_type: '',
-    document_number: null,
-    name: '',
-    lastname: '',
-    birthday: '',
-    gender: '',
-    country_id: null,
-    state_id: '',
-    city_id: null,
-    parish_id: null,
-    address: '',
-    phone: '',
-    treatment: '',
-    available: '',
-    risk: '',
-    points: '',
-    ip: '',
-    browser: '',
-    created_at: '',
-    updated_at: '' 
+      id: '',
+      document_type: 'V',
+      document_number: 19489658,
+      name: 'Gabriel Eduardo',
+      lastname: 'Caraballo Moya',
+      birthday: '2019-07-19',
+      gender: 'M',
+      country_id: 231,
+      state_id: '',
+      city_id: null,
+      parish_id: null,
+      address: '',
+      phone: '04262858771',
+      treatment: 'Sr.',
+      available: '',
+      risk: '',
+      points: '',
+      ip: '',
+      browser: '',
+      created_at: '',
+      updated_at: '',
+      language_id: 1,
+      timezone: "America/Caracas",
+      format_quot: 1
     }, 
-    '', 
-    ''
+    '222222',
+    1911
   );
-  nacDia = 1;
-  nacMes = 1;
-  nacAnio = 2018;
   registro = false;
 
   constructor(
@@ -62,26 +65,28 @@ export class RegistroComponent implements OnInit {
     public _generalesService: GeneralesService,
     public _usuarioService: UsuarioService,
     private http: HttpClient,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    public _sesionUsuario: InicioSesionService,
+    public _subMenuService: SubMenuService
   ) { }
 
-  ngOnInit() {
-    this.usuario.player.birthday = this.nacAnio + '-' + this.nacMes + '-' + this.nacDia;
-  }
+  ngOnInit() {}
 
   enviarDatos( form: NgForm ) {
     let mensaje = '';
     let tipo = '';
 
-    if ( form.value.country_id === '231') {
-      if (form.value.treatment === '1' || form.value.treatment === '2' || this.usuario.player.treatment === '3') {
-        if (form.value.name.length >= 3) {
-          if (form.value.lastname.length >= 3) {
+    form.value.birthday = new Date(form.value.birthday);
+
+    if ( form.value.country_id === 231) {
+      if (form.value.treatment === 'Sr.' || form.value.treatment === 'Sra.' || this.usuario.player.treatment === 'Srta.') {
+        if (form.value.name.length >= 2) {
+          if (form.value.lastname.length >= 2) {
             if (isDate(form.value.birthday)) {
-              if (!isNaN(form.value.document_number) && form.value.document_number > 999999) {
-                if (form.value.nick.length >= 3) {
-                  if (form.value.password.length > 5 && (form.value.password === form.value.password2)) {
-                    if (form.value.numeric.length > 3 && (form.value.numeric === form.value.numeric2)) {
+              if (!isNaN(form.value.document_number) && form.value.document_number > 99999) {
+                if (form.value.nick.length >= 4) {
+                  if (form.value.password.length > 5 && (form.value.password === form.value.password_confirmation)) {
+                    if (form.value.code_security.length > 3 && (form.value.code_security === form.value.code_security_confirmation)) {
                       const toast = swal.mixin({
                         toast: true,
                         position: 'center',
@@ -92,7 +97,7 @@ export class RegistroComponent implements OnInit {
                         title: 'Enviando datos'
                       });
 
-                      this._usuarioService.crearUsuario( this.usuario )
+                      this._usuarioService.crearUsuario( form.value )
                       .subscribe( res => {
 
                         swal(
@@ -101,7 +106,18 @@ export class RegistroComponent implements OnInit {
                           res.status
                         );
 
-                        this.router.navigate(['/importantes/21']);
+                        this._sesionUsuario.obtenerUsuario( form.value.nick, form.value.password, 'contrasena')
+                        .subscribe( res => {
+                          if (res.access_token) {
+                            this._subMenuService.cargarMenu();
+                            this._sesionUsuario.estatus = 'Sesion';
+                            this._sesionUsuario.usuario = res.user;
+                            this._sesionUsuario.guardarUsuario(res.user.id, res.access_token, res.user.nick);
+                            this._sesionUsuario.obtenerSelecciones().subscribe();
+                          }
+                        });
+
+                        this.router.navigate(['/importantes/1']);
 
                       });
                     } else {
@@ -154,40 +170,6 @@ export class RegistroComponent implements OnInit {
         positionClass: 'toast-bottom-right'
       });
     }
-  }
-
-  ajustarNac(tipo, evento) {
-    if ( tipo === 'dia') {
-      this.nacDia = evento;
-    }
-
-    if ( tipo === 'mes') {
-      this.nacMes = evento;
-    }
-
-    if ( tipo === 'anio') {
-      this.nacAnio = evento;
-    }
-
-    
-
-    let fecha = new Date(this.nacAnio + '-' + this.nacMes + '-' + this.nacDia + ' GMT -0500');
-
-    this.nacDia = fecha.getDate();
-    this.nacMes = fecha.getMonth() + 1;
-    this.nacAnio = fecha.getFullYear();
-
-    if ( isNaN(this.nacDia) ) {
-      fecha = new Date('1999-1-1');
-
-      this.nacDia = fecha.getDate();
-      this.nacMes = fecha.getMonth() + 1;
-      this.nacAnio = fecha.getFullYear();
-    }
-
-    this.usuario.player.birthday = fecha.toString();
-
-    
   }
 
 }

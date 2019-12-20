@@ -94,7 +94,7 @@ export class InicioSesionService {
     updated_at: '' 
     }, 
     '', 
-    ''
+    null
   );
 
   token = '';
