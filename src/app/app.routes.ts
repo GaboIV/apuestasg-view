@@ -71,7 +71,7 @@ const appRoutes: Routes = [
   { path: 'actualizaciones', component: ActualizacionesComponent, canActivate: [AdminGuardGuard]},
   { path: 'partidos', component: PartidosComponent, canActivate: [AdminGuardGuard]},
   { path: 'registro', component: RegistroComponent },
-  { path: 'historial/:id_historial', component: HistorialComponent },
+  { path: 'historial', component: HistorialComponent },
   { path: 'mensajes', component: MensajesComponent },
   { path: 'activacion/:cod_act', component: ActivacionComponent },
   { path: 'deposito', component: DepositoComponent },

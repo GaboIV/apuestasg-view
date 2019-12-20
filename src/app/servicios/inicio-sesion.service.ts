@@ -338,11 +338,11 @@ export class InicioSesionService {
   }
 
   cargarTickets( estatus ) {
-    const url = URL_TICKET + '/ver/' + this.usuario.id + '/' + estatus;
+    const url = URL_TICKET + '/load';
 
-    return this.http.get( url )
+    return this.http.get( url, this.httpOptions )
       .pipe(map ( (resp: any) => {
-        return resp.ticketes;
+        return resp;
       }));
   }
 

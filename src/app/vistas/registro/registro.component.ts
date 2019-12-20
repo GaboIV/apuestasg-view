@@ -23,24 +23,24 @@ export class RegistroComponent implements OnInit {
 
   usuario: Usuario = new Usuario(
     '',
-    'gaboiv', 
-    'gabrielcaraballo1907@getMaxListeners.com',
+    '', 
+    '',
     1, 
     '',
     {
       id: '',
       document_type: 'V',
-      document_number: 19489658,
-      name: 'Gabriel Eduardo',
-      lastname: 'Caraballo Moya',
-      birthday: '2019-07-19',
+      document_number: null,
+      name: '',
+      lastname: '',
+      birthday: '',
       gender: 'M',
       country_id: 231,
       state_id: '',
       city_id: null,
       parish_id: null,
       address: '',
-      phone: '04262858771',
+      phone: '',
       treatment: 'Sr.',
       available: '',
       risk: '',
@@ -53,8 +53,8 @@ export class RegistroComponent implements OnInit {
       timezone: "America/Caracas",
       format_quot: 1
     }, 
-    '222222',
-    1911
+    '',
+    null
   );
   registro = false;
 

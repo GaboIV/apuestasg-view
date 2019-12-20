@@ -170,7 +170,11 @@
                             <span class="versus" [class.letra_color]="dest.league.category_id === 4" *ngIf="i === 1"> VS
                             </span>
                             <img *ngIf="equipo.team.name != 'Empate'" [src]="equipo.team.image | imagen:'equipo'" class='ep_logo' style="position: static;" [class.redondo]="dest.league.category_id === 4">
-                            <img class="img_dest_country" [src]="equipo.team.country_id + '.png' | imagen:'nacionalidad'" height=16px name=image_country>
+                            <!-- <div class="img_dest_country">
+                                <img *ngIf="dest.league.category_id === 4" class="img_int_country" [src]="equipo.team.country_id + '.png' | imagen:'nacionalidad'" height=16px name=image_country>
+                            </div> -->
+
+                            <img *ngIf="dest.league.category_id === 4" class="img_dest_country" [src]="equipo.team.country_id + '.png' | imagen:'nacionalidad'" height=16px name=image_country>
 
                         </ng-container>
                     </div>

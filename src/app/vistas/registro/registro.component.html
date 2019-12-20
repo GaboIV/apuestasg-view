@@ -61,7 +61,7 @@
                         <span style="color: #7F0000">*</span> Nombre(s):
                     </div>
                     <div class="subinput">
-                        <input type="text" class="inpt_reg" id="nro3" name='name' [(ngModel)]="usuario.player.name">
+                        <input type="text" class="inpt_reg" id="nro3" name='name' [(ngModel)]="usuario.player.name" required>
                     </div>
                     <div class="submsj">
                         <div class="msj_reg nro3">
@@ -75,7 +75,7 @@
                         <span style="color: #7F0000">*</span> Apellidos:
                     </div>
                     <div class="subinput">
-                        <input type="text" class="inpt_reg" id="nro4" name='lastname' [(ngModel)]="usuario.player.lastname">
+                        <input type="text" class="inpt_reg" id="nro4" name='lastname' [(ngModel)]="usuario.player.lastname" required>
                     </div>
                     <div class="submsj">
                         <div class="msj_reg nro4">
@@ -105,7 +105,7 @@
 							<option value="12">Diciembre</option>
 						</select>
                         <input type="text" class="inpt_reg fdn anyo_fdn" name='anio' id="nro47" (change)="ajustarNac('anio', $event.target.value)" [(ngModel)]="nacAnio"> -->
-                        <input type="date" class="inpt_reg" id="nro5" name='birthday' [(ngModel)]="usuario.player.birthday">
+                        <input type="date" class="inpt_reg" id="nro5" name='birthday' [(ngModel)]="usuario.player.birthday" required>
                     </div>
                     <div class="submsj">
                         <div class="msj_reg nro5">
@@ -247,7 +247,7 @@
                         <span style="color: #7F0000">*</span> Repita nº de seguridad:
                     </div>
                     <div class="subinput">
-                        <input ngModel type="password" class="inpt_reg" id="nro33" name='code_security_confirmation'>
+                        <input ngModel type="password" class="inpt_reg" id="nro33" name='code_security_confirmation' required>
                     </div>
                     <div class="submsj">
                         <div class="msj_reg nro33">
@@ -277,7 +277,7 @@
                         <span style="color: #7F0000"></span> Número telefónico:
                     </div>
                     <div class="subinput">
-                        <input type="text" class="inpt_reg" id="nro52" name='phone' [(ngModel)]="usuario.player.phone">
+                        <input type="text" class="inpt_reg" id="nro52" name='phone' [(ngModel)]="usuario.player.phone" required>
                     </div>
                     <div class="submsj">
                         <div class="msj_reg nro52">
