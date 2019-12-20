@@ -42,6 +42,8 @@ export class ImportantesComponent implements OnInit {
 
   mstatus = null;
 
+  radio = "24";
+
   dia_c = '';
   carrera_c = '';
 
@@ -199,10 +201,10 @@ export class ImportantesComponent implements OnInit {
       this._generalesService.cargarCategoriasJuegos()
       .subscribe(resp => {
         this.juegos = resp.categories;
-        this.solohoy(1);
+        this.solohoy(this.id);
       });
     } else {
-      this.solohoy(1);
+      this.solohoy(this.id);
     }
     
   }
@@ -260,7 +262,7 @@ export class ImportantesComponent implements OnInit {
       });
   }
 
-  solohoy(id) {
+  solohoy(id, radio = this.radio) {
     this.id = id;
     if (this.id === '27') {
       this.esperando = true;
@@ -272,7 +274,7 @@ export class ImportantesComponent implements OnInit {
         });
     } else {
       this.esperando = true;
-      this._partidosService.partidosPorCategoria(this.id, 'hoy', '')
+      this._partidosService.partidosPorCategoria(this.id, radio, '')
         .subscribe(resp => {
           this.esperando = false;
           this.partidos = resp.juegos;
@@ -289,5 +291,13 @@ export class ImportantesComponent implements OnInit {
         this.partidos = resp.juegos.data;
         this.carreras = null;
       });
+  }
+
+  verifyRadio(value = this.radio, id = this.id) {
+    if (this.radio != value) {
+      this.radio = value;
+      console.log(value);
+      this.solohoy(this.id, value);
+    }
   }
 }

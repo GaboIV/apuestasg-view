@@ -17,10 +17,15 @@
             </div>
         </div>
 
-        <div class="title_ap_fav bajo_verde_green">Encuentros para las próximas 24
-            horas&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <div class="title_ap_fav bajo_verde_green">
+            <label>
+                <input (click)="verifyRadio('24')" type="radio" id="cbox1" name="gender" checked> Próximas 24 horas &nbsp;&nbsp;&nbsp;
+            </label>
+            <label>
+                <input (click)="verifyRadio('today')" type="radio" id="cbox2" name="gender"> Sólo hoy &nbsp;&nbsp;&nbsp;
+            </label>
             <form name="invfrm" (ngSubmit)="buscarEquipo(f.value)" #f="ngForm" ngNativeValidate
-                style="display: inline-block;">
+                style="display: inline-block; vertical-align: middle; float: right; padding-right: 10px;">
                 <input class="solo_hoy" type="text" name="busqueda" placeholder="Busque un equipo" ngModel required
                     #busqueda="ngModel">
             </form>

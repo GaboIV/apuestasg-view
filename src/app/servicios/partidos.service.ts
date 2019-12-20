@@ -76,7 +76,11 @@ export class PartidosService {
   }
 
   partidosPorCategoria ( id: string, dato: string, equipo: string ) {
-    const url = URL_INICIAL + 'showgames/' + id;
+    let url = URL_INICIAL + 'showgames/' + id;
+
+    if (dato == '24' || dato == 'today') {
+      url = url + "?radio=" + dato
+    }
 
     return this.http.get( url )
       .pipe(map ( (resp: any) => {
