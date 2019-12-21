@@ -4,6 +4,7 @@ export const URL_A_FUNC = 'http://agac.apuestasg.com.ve/php/funciones';
 // export const URL_INICIAL = 'http://localhost/apuestasg-backend/public/api/';
 // export const URL_A_FUNC = 'http://localhost/apuestasg-scrap/php/funciones';
 
+export const URL_ACCOUNT = URL_INICIAL + 'accounts';
 export const URL_ACTUALIZACIONES = URL_INICIAL + 'updates';
 export const URL_AUTH = URL_INICIAL + 'auth';
 export const URL_CHANGELOG = URL_INICIAL + 'changelogs';

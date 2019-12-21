@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { URL_FECHA, URL_DEPOSITO, URL_CHANGELOG, URL_IMAGEN, URL_INICIAL } from '../comun/link';
+import { URL_FECHA, URL_DEPOSITO, URL_CHANGELOG, URL_IMAGEN, URL_INICIAL, URL_ACCOUNT } from '../comun/link';
 import { Pago } from '../modelos/pago.modelo';
 import { InicioSesionService } from './inicio-sesion.service';
 
@@ -65,11 +65,11 @@ export class GeneralesService {
   }
 
   cargarCuentas () {
-    const url = URL_DEPOSITO + '/cuentas';
+    const url = URL_ACCOUNT;
 
     return this.http.get( url )
       .pipe(map ( (resp: any) => {
-        return resp.cuentas;
+        return resp.accounts;
       }));
   }
 

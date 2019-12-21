@@ -11,16 +11,16 @@
 <div class="body_histo">
 	<div class="tarjeta" *ngFor="let cuenta of cuentas">
 		<div class="tjt_tit">
-			<span>{{cuenta.banco_id[0].nombre}}</span> <br>
-			<img src="../assets/misc/{{cuenta.banco_id[0].id_banco}}.png" width="60%">
+			<span>{{cuenta.bank.name}}</span> <br>
+			<img src="../assets/misc/{{cuenta.bank.id}}.png" width="60%">
 		</div>
 		<div class="tjt_cpo">
 			<div class="tjt_stt">A nombre:</div>
-			<div class="tjt_des">{{cuenta.nombre}}</div>
+			<div class="tjt_des">{{cuenta.name}}</div>
 		</div>
 		<div class="tjt_cpo">
 			<div class="tjt_stt">Documento:</div>
-			<div class="tjt_des">{{cuenta.documento}}</div>
+			<div class="tjt_des">{{cuenta.document}}</div>
 		</div>
 		<div class="tjt_cpo">
 			<div class="tjt_stt">Tipo:</div>
@@ -28,11 +28,11 @@
 		</div>
 		<div class="tjt_cpo">
 			<div class="tjt_stt">Número:</div>
-			<div class="tjt_des">{{cuenta.numero}}</div>
+			<div class="tjt_des">{{cuenta.number}}</div>
 		</div>
 		<div class="tjt_cpo" style="border-bottom-left-radius: 4px; border-bottom-right-radius: 4px;">
 			<div class="tjt_stt">Correo:</div>
-			<div class="tjt_des">{{cuenta.correo}}</div>
+			<div class="tjt_des">{{cuenta.email}}</div>
 		</div>
 	</div>
 	

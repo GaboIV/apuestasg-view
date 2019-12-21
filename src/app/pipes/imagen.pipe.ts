@@ -42,6 +42,10 @@ export class ImagenPipe implements PipeTransform {
        url += '/studs/' + img;
       break;
 
+      case 'cuenta':
+       url += '/accounts/' + img;
+      break;
+
       default:
        console.log('Tipo de imagen no válido');
        url += '/equipo/xxx';
