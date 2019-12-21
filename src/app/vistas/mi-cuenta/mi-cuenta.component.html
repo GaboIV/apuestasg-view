@@ -8,3 +8,136 @@
         <div class='tab_menu_mem ' [routerLink]="['/mensajes']" routerLinkActive="router-link-active">Mensajes</div>
     </div>
 </div>
+
+
+<div class="planilla_hrs">
+	<form name="datos_personal" (ngSubmit)="enviarDatosPersonal(g)" #g="ngForm" ngNativeValidate>
+	    <div class="caption_hrs">Datos personales</div>
+	    <div class="c_planilla_hrs">
+
+	        <div class="codigo_planilla">Tipo doc.:</div>
+	        <select name="tipo_documento " class="ipt_planilla_hrs " disabled>
+				<option value="1">Cédula de identidad</option>
+			</select>
+
+	        <div class="codigo_planilla">Número:</div>
+	        <select [ngModel]="usuario.player.document_type" name="document_type" class="date_planilla cod_hrs" id="document_type" disabled>
+				<option value="V">V</option>
+				<option value="E">E</option>
+			</select>
+	        <input [ngModel]="usuario.player.document_number" type="text" name="document_number" class="date_planilla unida_hrs" style="width: 50%;" disabled>
+	      
+			<div class="codigo_planilla">Tratamiento:</div>
+			<select [ngModel]="usuario.player.treatment" name="treatment" id="treatment" class="ipt_planilla_hrs hipodromo_car">
+				<option value="Sr.">Señor</option>
+				<option value="Sra.">Señora</option>
+				<option value="Srta.">Señorita</option>
+			</select>
+
+	        <div class="codigo_planilla">Nombres:</div>
+	        <input [ngModel]="usuario.player.name" type="text" name="name" class="ipt_planilla_hrs" id="name">
+
+	        <div class="codigo_planilla">Apellidos:</div>
+	        <input [ngModel]="usuario.player.lastname" type="text" name="lastname" class="ipt_planilla_hrs" id="lastname">
+
+	        <div class="codigo_planilla">Género:</div>
+	        <select [ngModel]="usuario.player.gender" name="gender" id="gender" class="ipt_planilla_hrs hipodromo_car">
+	          <option value="M">Hombre</option>
+	          <option value="F">Mujer</option>
+			</select>
+	        
+	        <div class="codigo_planilla">Teléfono:</div>
+	        <input [ngModel]="usuario.player.phone" type="text" name="phone" class="ipt_planilla_hrs" id="phone">
+
+	        <div class="codigo_planilla">Correo el.:</div>
+	        <input [ngModel]="usuario.email" type="text" name="email" class="ipt_planilla_hrs" id="email" disabled>
+
+	        <div class="codigo_planilla">Fecha nac.:</div>
+	        <input [ngModel]="usuario.player.birthday" type="date" name="birthday" class="ipt_planilla_hrs" id="birthday" style="text-align: left;">
+	    </div>
+	    <div class="botones_hrs ">
+	        <input type="submit" class="aceptar_hrs btn_hrs " value="Actualizar">
+	    </div>
+	</form>
+</div>
+<div class="planilla_hrs">
+	<form name="datos_personal" (ngSubmit)="enviarDatosComplemento(h)" #h="ngForm" ngNativeValidate>
+	    <div class="caption_hrs">Datos complementarios</div>
+	    <div class="c_planilla_hrs">
+	    	<div class="codigo_planilla">Pais:</div>
+	        <select name="country_id" class="ipt_planilla_hrs " [ngModel]="usuario.player.country_id">
+				<option value="231">Venezuela</option>
+			</select>
+
+			<div class="codigo_planilla">Estado:</div>
+	        <select name="state_id" class="ipt_planilla_hrs " [ngModel]="usuario.player.state_id">
+				<option value=2>Anzoátegui</option>
+			</select>
+
+			<div class="codigo_planilla">Ciudad:</div>
+	        <select name="city_id" class="ipt_planilla_hrs " [ngModel]="usuario.player.city_id">
+				<option value="8">Anaco</option>
+			</select>
+
+			<div class="codigo_planilla">Parroquia:</div>
+	        <select name="parish_id" class="ipt_planilla_hrs " [ngModel]="usuario.player.parish_id">
+				<option value="26">Anaco</option>
+			</select>
+
+			<div class="codigo_planilla">Idioma:</div>
+	        <select name="language_id" class="ipt_planilla_hrs " [ngModel]="usuario.player.language_id">
+				<option value="1">Español</option>
+			</select>
+
+			<div class="codigo_planilla">Horario:</div>
+	        <select name="timezone" class="ipt_planilla_hrs " [ngModel]="usuario.player.timezone">
+				<option value="America/Caracas">Caracas, Venezuela</option>
+			</select>
+
+			<div class="codigo_planilla">Cuotas:</div>
+	        <select name="format_quot" class="ipt_planilla_hrs " [ngModel]="usuario.player.format_quot">
+				<option value=1>Decimal</option>
+			</select>
+
+			<div class="codigo_planilla">Dirección:</div>
+			<textarea [ngModel]="usuario.player.address" name="address" class="ipt_planilla_hrs" id="address" style="margin-bottom: 5px; "></textarea>
+	    </div>
+	    <div class="botones_hrs ">
+	        <input type="submit" class="aceptar_hrs btn_hrs " value="Actualizar">
+	    </div>
+	</form>
+</div>
+<div class="planilla_hrs">
+	<form name="datos_usuario" (ngSubmit)="enviarDatosUsuario(f)" #f="ngForm" ngNativeValidate>
+	    <div class="caption_hrs">Datos de usuario</div>
+	    <div class="c_planilla_hrs">
+	    	<div class="codigo_planilla">Nick:</div>
+	        <input type="text" [ngModel]="usuario.nick" name="nick" class="ipt_planilla_hrs" id="nick" minlength=4 required>
+
+			<span>Llene estos campos para cambiar su contraseña </span> <br>
+
+			<div class="codigo_planilla" style="width: 50%;">Contraseña actual:</div>
+	        <input minlength="6" ngModel type="password" name="password_old" class="ipt_planilla_hrs" id="passord_old" style="width: 50%;">
+
+	        <div class="codigo_planilla" style="width: 50%;">Contraseña nueva:</div>
+	        <input minlength="6" ngModel type="password" name="password" class="ipt_planilla_hrs" id="passord" style="width: 50%;">
+
+	        <div class="codigo_planilla" style="width: 50%;">Repita contraseña:</div>
+	        <input type="password" ngModel minlength="6" name="password_confirmation" class="ipt_planilla_hrs" id="password_confirmation" style="width: 50%;">
+
+	        <span>Llene estos campos para cambiar su número de seguridad </span> <br>
+
+			<div class="codigo_planilla" style="width: 50%;">Número actual:</div>
+	        <input  minlength="4" maxlength="4" ngModel type="password" name="code_security_old" class="ipt_planilla_hrs" id="code_security_old" style="width: 50%;">
+
+	        <div class="codigo_planilla" style="width: 50%;">Número nuevo:</div>
+	        <input  minlength="4" maxlength="4" ngModel type="password" name="code_security" class="ipt_planilla_hrs" id="code_security" style="width: 50%;">
+
+	        <div class="codigo_planilla" style="width: 50%;">Repita número:</div>
+	        <input type="password" minlength="4" ngModel maxlength="4" name="code_security_confirmation" class="ipt_planilla_hrs" id="code_security_confirmation" style="width: 50%;">
+	    </div>
+	    <div class="botones_hrs ">
+	        <input type="submit" class="aceptar_hrs btn_hrs " value="Actualizar">
+	    </div>
+    </form>
+</div>

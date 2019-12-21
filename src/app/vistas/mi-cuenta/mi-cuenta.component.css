@@ -1,0 +1,18 @@
+.caption_hrs {
+    background: #d61828;
+    color: white;
+}
+
+.planilla_hrs {
+    background: white;
+    width: 30%;
+    margin: 15px;
+    display: inline-block;
+    vertical-align: top
+}
+
+span {
+    color: #444;
+    font-size: 0.85em;
+    line-height: 2;
+}

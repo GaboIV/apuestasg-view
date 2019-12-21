@@ -27,8 +27,6 @@ import { AgregarPartidoComponent } from './vistas/partidos/agregar-partido.compo
 import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
 import { HttpErrorInterceptor } from 'src/app/interceptor/httpconfig.interceptor';
 
-
-
 @NgModule({
   declarations: [
     AppComponent,

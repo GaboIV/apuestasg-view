@@ -3,6 +3,7 @@ import { Usuario } from '../modelos/usuario';
 import { HttpClient } from '@angular/common/http';
 import {  URL_JUGADORES, URL_REGISTRO } from '../comun/link';
 import { map } from 'rxjs/operators';
+import { InicioSesionService } from './inicio-sesion.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,7 @@ export class UsuarioService {
 
   constructor(
     private http: HttpClient,
+    public _loginService: InicioSesionService,
   ) { }
 
   crearUsuario(usuario) {
@@ -28,6 +30,28 @@ export class UsuarioService {
     const url = URL_JUGADORES + '/activar/' + cod_act;
 
     return this.http.post( url, cod_act )
+      .pipe(map( (resp: any) => {
+        const res = resp;
+        return res;
+      })
+    );
+  }
+
+  modificarDatosPersonal (player) {
+    const url = URL_JUGADORES + '/updates/personal';
+
+    return this.http.put( url, player, this._loginService.httpOptions )
+      .pipe(map( (resp: any) => {
+        const res = resp;
+        return res;
+      })
+    );
+  }
+
+  modificarDatosComplementario(player) {
+    const url = URL_JUGADORES + '/updates/complement';
+
+    return this.http.put( url, player, this._loginService.httpOptions )
       .pipe(map( (resp: any) => {
         const res = resp;
         return res;

@@ -1616,7 +1616,9 @@ cuerpo {
     border: none;
     font-size: 1em;
     padding: 4px 10px;
-    border-right: 1px solid #cfcfcf;
+    /*border-right: 1px solid #cfcfcf;*/
+    height: 29px;
+
 }
 
 .anyo {
@@ -1659,7 +1661,7 @@ cuerpo {
     vertical-align: top;
     margin-bottom: 15px;
     text-align: center;
-    padding-top: 4px;
+    /*padding-top: 4px;*/
     color: #BBBBBB;
     cursor: pointer;
 }
@@ -1667,6 +1669,7 @@ cuerpo {
 .aceptar_hrs {
     background: #FFD646;
     color: #272727;
+    border: none;
 }
 
 .unida_hrs {
