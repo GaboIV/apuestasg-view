@@ -1,9 +1,9 @@
 
 export class Banco {
     constructor(
-        public nombre: string,
-        public inicial?: string,
-        public id_banco?: number
+        public name: string,
+        public initial?: string,
+        public id?: number
     ) {
 
     }

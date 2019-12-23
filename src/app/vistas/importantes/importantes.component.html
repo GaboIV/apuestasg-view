@@ -163,8 +163,7 @@
                 <ng-container *ngIf="dest.competitors">
                     <img [src]="dest.image | imagen:'partido'" width=100% class='img_dtcd'
                         *ngIf="dest.image !== null">
-                    <div class="img_dest"
-                        [ngStyle]="{'background': 'url(../../assets/vallas/' + dest.league.category_id + '.jpg) no-repeat center center'}">
+                    <div *ngIf="dest.image == 'noimage.png'" class="img_dest" [ngStyle]="{'background': 'url(../../assets/vallas/' + dest.league.category_id + '.jpg) no-repeat center center'}">
                         <ng-container *ngFor="let equipo of dest.competitors; let i = index">
 
                             <span class="versus" [class.letra_color]="dest.league.category_id === 4" *ngIf="i === 1"> VS

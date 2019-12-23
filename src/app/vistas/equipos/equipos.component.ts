@@ -24,6 +24,8 @@ export class EquiposComponent implements OnInit {
   pagina = 1;
   desactivar = 'disabled';
   liga = 'todas';
+  total = 0;
+  criterio = '';
 
   constructor(
     public router: Router,
@@ -39,11 +41,12 @@ export class EquiposComponent implements OnInit {
   }
 
   cargarEquipos(pagina, criterio, liga) {
+    this.criterio = criterio;
     const toast = swal.mixin({
       toast: true,
       position: 'top-end',
       showConfirmButton: false,
-      timer: 2000
+      timer: 20000
     });
     toast({
       type: 'info',
@@ -52,6 +55,8 @@ export class EquiposComponent implements OnInit {
     this._equipoService.cargarEquipos(pagina, criterio, liga)
       .subscribe(equipos => {
         this.equipos = equipos.data
+        this.total = equipos.total;
+        this.pagina = equipos.current_page;
         swal.close();
       });      
   }
@@ -79,7 +84,6 @@ export class EquiposComponent implements OnInit {
     this._generalesService.subirImagen(equipo.id, this.selectedFile, 'teams')
       .subscribe(res => {
         this.resultado = res;
-        console.log(this.resultado);
         equipo.image = this.resultado.image;
       });
   }
@@ -89,29 +93,12 @@ export class EquiposComponent implements OnInit {
       valor = 'todos';
     }
 
-    console.log(valor);
-
     this.cargarEquipos(this.pagina, valor, 'todas');
   }
 
-  cambiarPagina(valor: string) {
-    if (valor === 'a') {
-      this.pagina = this.pagina + 1;
-      this.cargarEquipos(this.pagina, 'todos', 'todas');
+  pageChanged (page) {
+    this.pagina = page;
 
-      if (this.pagina !== 1) {
-        this.desactivar = 'color_grey';
-      }
-    }
-
-    if (valor === 'b' && this.pagina > 1) {
-      this.pagina = this.pagina - 1;
-      this.cargarEquipos(this.pagina, 'todos', 'todas');
-
-      if (this.pagina === 1) {
-        this.desactivar = 'disabled';
-      }
-    }
   }
 
   modificarDato (id, value, equipo, parameter, sp_parameter = '') {

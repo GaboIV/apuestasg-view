@@ -26,7 +26,7 @@
             <option *ngFor="let equipo of equipos " value={{equipo.id}}>{{ equipo.name }}</option>
         </select>
 
-        <div class="add_lig add_filter" (click)="filtrarPartidos(1)">Filtrar</div>
+        <div class="add_lig add_filter" (click)="cargarPartidos('1', 'busquueeddaa')">Filtrar</div>
     </div>
 
     <table width="100%" class="tabla_equipos">
@@ -43,7 +43,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr class="par_th_nt" *ngFor="let partido of partidos ">
+            <tr class="par_th_nt" *ngFor="let partido of partidos | paginate: { itemsPerPage: 50, currentPage: pagina, totalItems: total }">
                 <td width="5%" style="cursor: pointer" align="center" [routerLink]="['/partido', partido.id ]">
                     {{ partido.id }}</td>
                 <td width="15%">
@@ -63,9 +63,9 @@
                 </td>
                 <td width="17%">
                     <label style="cursor: pointer; position: relative; height: 60px;">
-                        <img [src]="partido.id + '.png' | imagen:'partido'" alt="" height="50px;">
+                        <img [src]="partido.image | imagen:'partido'" alt="" height="50px;">
                         <br>
-                        <!-- <input type="file" name="imagenSubir" (change)="subirImagen($event, partido)" style="display: none"> -->
+                        <input type="file" name="imagenSubir" (change)="subirImagen($event, partido)" style="display: none">
                     </label>
                 </td>
                 <td width="11%" style="text-align: center" contenteditable="true">
@@ -88,10 +88,6 @@
         </tbody>
     </table>
 
-    <ul class="pagination pagination-large">
-        <li style="cursor: pointer" class='{{desactivar}}' (click)="cambiarPagina('b')"><span>&lsaquo; Anterior</span>
-        </li>
-        <li style="cursor: pointer">
-            <span class='color_gray' (click)="cambiarPagina('a')">Siguiente &rsaquo;</span>
-        </li>
-    </ul>
+    <div class="pagination_fixed">
+        <pagination-controls previousLabel="Anterior" nextLabel="Siguiente" maxSize="12" (pageChange)="cargarPartidos($event, 'busquueeddaa')"></pagination-controls>
+    </div>

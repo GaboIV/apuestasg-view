@@ -27,10 +27,10 @@ export class AdmDepositosComponent implements OnInit {
   }
 
   cambioStatus (pago: Pago, estatus) {
-    this._generalesService.actualizarPago(pago.id_pago, estatus)
+    this._generalesService.actualizarPago(pago.id, estatus)
     .subscribe( resp => {
       if ( resp.status === 'correcto') {
-        pago.estatus = estatus;
+        pago.status = estatus;
       }
     });
   }

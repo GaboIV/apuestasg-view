@@ -1,8 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Usuario } from '../modelos/usuario';
 import { HttpClient } from '@angular/common/http';
-import {  URL_JUGADORES, URL_REGISTRO } from '../comun/link';
+import { 
+  URL_JUGADORES, 
+  URL_REGISTRO,
+  URL_DEPOSITO
+  } from '../comun/link';
 import { map } from 'rxjs/operators';
+import { Pago } from '../modelos/pago.modelo';
 import { InicioSesionService } from './inicio-sesion.service';
 
 @Injectable({
@@ -52,6 +57,17 @@ export class UsuarioService {
     const url = URL_JUGADORES + '/updates/complement';
 
     return this.http.put( url, player, this._loginService.httpOptions )
+      .pipe(map( (resp: any) => {
+        const res = resp;
+        return res;
+      })
+    );
+  }
+
+  crearPago(pago: Pago) {
+    const url = URL_JUGADORES + "/pays";
+
+    return this.http.post( url, pago, this._loginService.httpOptions )
       .pipe(map( (resp: any) => {
         const res = resp;
         return res;

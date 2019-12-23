@@ -19,7 +19,7 @@
                 <b>Notificación de Depósito (VEF)</b>
             </div>
             <div class="dato_c_c_r ">
-                Saldo: <span><b>Bs. {{ _inicioSesion.usuario.player.available | montos:'decimal' }}</b></span>
+                Saldo: <span><b>Bs. {{ _inicioSesion.usuario.player.available | number:'1.2-2' }}</b></span>
             </div>
         </div>
 
@@ -27,46 +27,52 @@
 
         <form #f="ngForm" ngNativeValidate class="" (ngSubmit)="guardarPago(f)">
             <div class="dep_parte">
-                <label for="" class="">Banco origen*</label>
+                <label for="" class="">Banco origen</label>
                 <div class="">
-                    <select [(ngModel)]="pago.banco_id" name="cuenta_id" class="">       
-                      
-                      <option *ngFor="let banco of bancos" [value]="banco.id_banco">{{ banco.nombre }} - {{ banco.inicial }}</option>
+                    <select [(ngModel)]="pago.bank_id" name="bank_id" class="" required="">
+                        <option *ngFor="let banco of bancos" [value]="banco.id">{{ banco.name }} </option>
                   </select>
                 </div>
-                <label for="" class="">Cuenta destino*</label>
+                <label for="" class="">Cuenta destino</label>
                 <div class="">
-                    <select [(ngModel)]="pago.cuenta_id" name="banco_id" class="">                                
-                        <option *ngFor="let cuenta of cuentas" [value]="cuenta.id_cuenta">{{ cuenta.banco_id[0].nombre }} - {{ cuenta.numero }}</option>
+                    <select [(ngModel)]="pago.account_id" name="account_id" class="" required="">
+                        <option *ngFor="let cuenta of cuentas" [value]="cuenta.id">{{ cuenta.bank.name }} : {{ cuenta.number }}</option>
                   </select>
                 </div>
             </div>
             <div class="dep_parte">
-                <label for="" class="">Cédula de titular*</label>
+                <label for="" class="">Cédula de titular</label>
                 <div class="">
                     <div class="">
-                        <input autocomplete="off" [(ngModel)]="pago.cedula" name="cedula" type="text" class="" id="" placeholder="Documento del titular de la cuenta origen">
+                        <input autocomplete="off" [(ngModel)]="pago.document" name="document" type="text" class="" id="" placeholder="Documento del titular de la cuenta origen" required>
                     </div>
                 </div>
 
-                <label for="" class="">Monto abonado*</label>
+                <label for="" class="">Monto abonado</label>
                 <div class="">
                     <div class="">
-                        <input autocomplete="off" [(ngModel)]="pago.monto" name="monto" type="text" class="" id="" placeholder="Bolívares del abono">
+                        <input autocomplete="off" [(ngModel)]="pago.amount" name="amount" type="text" class="" id="" placeholder="Bolívares del abono" required>
                     </div>
                 </div>
 
-                <label for="" class="">Fecha del pago*</label>
+                <label for="" class="">Fecha del pago</label>
                 <div class="">
                     <div class="">
-                        <input autocomplete="off" [(ngModel)]="pago.fecha_realizada" name="monto" type="date" class="" id="" placeholder="Fecha de realizada el pago">
+                        <input autocomplete="off" [(ngModel)]="pago.register_date" name="register_date" type="date" class="" id="" placeholder="Fecha de realizado el abono" required>
                     </div>
                 </div>
 
-                <label for="" class="">Referencia*</label>
+                <label for="" class="">Hora del pago</label>
                 <div class="">
                     <div class="">
-                        <input autocomplete="off" [(ngModel)]="pago.referencia" name="monto" type="number" class="" id="" placeholder="Fecha de realizada el pago">
+                        <input autocomplete="off" [(ngModel)]="pago.registro" name="registro" type="time" class="" id="" placeholder="Hora de realizado el abono" required>
+                    </div>
+                </div>
+
+                <label for="" class="">Referencia</label>
+                <div class="">
+                    <div class="">
+                        <input autocomplete="off" [(ngModel)]="pago.reference" name="reference" type="number" class="" id="" placeholder="Referencia de transferencia" required>
                     </div>
                 </div>
             </div>
@@ -77,7 +83,7 @@
 
             <div class="dep_btn">
                 <div class="">
-                    <button type="submit" class="brr_izq_menu" style="border: none; padding-top: 0px; font-size: 1em;">Registrar en el sistema</button>
+                    <button type="submit" class="brr_izq_menu" style="border: none; padding-top: 0px; font-size: 1em;">Registrar pago en el sistema</button>
                 </div>
             </div>
         </form>

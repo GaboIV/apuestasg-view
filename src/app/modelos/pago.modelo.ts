@@ -1,16 +1,16 @@
 
 export class Pago {
     constructor(
-        public monto: string,
-        public cedula: string,
-        public fecha_realizada: string,
-        public referencia: string,
+        public amount: string,
+        public document: string,
+        public register_date: string,
+        public reference: string,
         public registro: any,
-        public estatus: string,
-        public id_usuario: any,
-        public banco_id: any,
-        public cuenta_id?: any,
-        public id_pago?: number
+        public status: string,
+        public player_id: any,
+        public bank_id: any,
+        public account_id?: any,
+        public id?: number
     ) {
 
     }

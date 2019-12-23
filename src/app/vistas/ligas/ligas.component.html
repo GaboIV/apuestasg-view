@@ -5,7 +5,7 @@
 
 <div class="equipos" id="equipos">
     <div>
-        <table width="100%" id="tabla_equipos" *ngIf="liguias?.length === 0">
+        <table width="100%" class="tabla_equipos" *ngIf="liguias?.length === 0">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -19,7 +19,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="par_th_nt" *ngFor="let liga of ligas ">
+                <tr class="par_th_nt" *ngFor="let liga of ligas | paginate: { itemsPerPage: 50, currentPage: pagina, totalItems: total }">
                     <td width="5%" align="center">{{ liga.id }}</td>
                     <td #name [innerText]="liga.name" (blur)="modificarDato(liga.id, name.innerText, liga, 'name', 'nombre ')" contenteditable="true" width="20%" >
                         <p>{{ liga.name }}</p>
@@ -38,7 +38,7 @@
                     </td>
                     <td width="9%" align="center">
                         <label style="cursor: pointer; position: relative; height: 60px;">
-                            <img [src]="liga.id + '.png' | imagen:'liga'" alt="" height="50px;">
+                            <img [src]="liga.image | imagen:'liga'" alt="" height="50px;">
                             <br>
                             <input type="file" name="imagenSubir" (change)="subirImagen($event, liga)" style="display: none">
                         </label>                        
@@ -98,11 +98,7 @@
             </tbody>
         </table>
     </div>
-    <ul class="pagination pagination-large">
-        <li style="cursor: pointer" class='{{desactivar}}' (click)="cambiarPagina('b')"><span>&lsaquo; Anterior</span>
-        </li>
-        <li style="cursor: pointer">
-            <span class='color_gray' (click)="cambiarPagina('a')">Siguiente &rsaquo;</span>
-        </li>
-    </ul>
+    <div class="pagination_fixed">
+        <pagination-controls previousLabel="Anterior" nextLabel="Siguiente" maxSize="12" (pageChange)="cargarLigas($event, criterio)"></pagination-controls>
+    </div>
 </div>

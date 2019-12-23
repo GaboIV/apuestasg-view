@@ -27,6 +27,9 @@ export class LigasComponent implements OnInit {
   liguias: Liga[] = [];
   desactivar = 'disabled';
 
+  criterio = '';
+  total = 0;
+
   constructor(
     public router: Router,
     public activatedRoute: ActivatedRoute,
@@ -46,9 +49,23 @@ export class LigasComponent implements OnInit {
   }
 
   cargarLigas(pagina, criterio) {
+    this.criterio = criterio;
+    const toast = swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 20000
+    });
+    toast({
+      type: 'info',
+      title: 'Cargando ligas'
+    });
     this._ligasService.cargarLigas(pagina, criterio)
       .subscribe(ligas => {
         this.ligas = ligas.data;
+        this.total = ligas.total;
+        this.pagina = ligas.current_page;
+        swal.close();
         localStorage.setItem('ligas', JSON.stringify(ligas.data));
       });
   }
@@ -78,11 +95,10 @@ export class LigasComponent implements OnInit {
 
   subirImagen(event, liga) {
     this.selectedFile = event.target.files[0];
-    this._generalesService.subirImagen(liga.id_liga, this.selectedFile, 'ligas')
+    this._generalesService.subirImagen(liga.id, this.selectedFile, 'leagues')
       .subscribe(res => {
         this.resultado = res;
-        console.log(this.resultado);
-        liga.img = this.resultado.imagen;
+        liga.image = this.resultado.image;
       });
   }
 

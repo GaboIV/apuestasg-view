@@ -1,7 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { URL_FECHA, URL_DEPOSITO, URL_CHANGELOG, URL_IMAGEN, URL_INICIAL, URL_ACCOUNT } from '../comun/link';
+import { 
+  URL_FECHA, 
+  URL_DEPOSITO, 
+  URL_CHANGELOG, 
+  URL_IMAGEN, 
+  URL_INICIAL, 
+  URL_ACCOUNT,
+  URL_BANK
+  } from '../comun/link';
 import { Pago } from '../modelos/pago.modelo';
 import { InicioSesionService } from './inicio-sesion.service';
 
@@ -74,11 +82,11 @@ export class GeneralesService {
   }
 
   cargarBancos () {
-    const url = URL_DEPOSITO + '/bancos';
+    const url = URL_BANK;
 
     return this.http.get( url )
       .pipe(map ( (resp: any) => {
-        return resp.bancos;
+        return resp.banks;
       }));
   }
 
@@ -98,17 +106,6 @@ export class GeneralesService {
       .pipe(map ( (resp: any) => {
         return resp;
       }));
-  }
-
-  crearPago(pago: Pago) {
-    const url = URL_DEPOSITO + '/pagos/agregar';
-
-    return this.http.post( url, pago )
-      .pipe(map( (resp: any) => {
-        const res = resp;
-        return res;
-      })
-    );
   }
 
   agregarTarea(tarea, id_usuario) {

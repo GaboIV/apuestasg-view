@@ -37,7 +37,10 @@ export class PartidosComponent implements OnInit {
   country_id = 0;
   start = 0;
 
+  total = 0;
+
   criterio = 'todos';
+  criterio2 = '';
 
   constructor(
     public router: Router,
@@ -77,19 +80,43 @@ export class PartidosComponent implements OnInit {
   }
 
   cargarPartidos(pagina, criterio) {
-    this._partidosService.cargarPartidos(pagina, criterio)
-      .subscribe(partidos => {
-        this.partidos = partidos.data
-      });
+    const toast = swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 20000
+    });
+    toast({
+      type: 'info',
+      title: 'Cargando partidos'
+    });
+    if (criterio == 'busquueeddaa') {
+       this._partidosService.filtrarPartidos(pagina, this.category_id, this.country_id, this.start, this.criterio)
+        .subscribe(resp => {
+          this.pagina = resp.games.current_page;
+          this.partidos = resp.games.data;
+          this.total = resp.games.total;
+          swal.close();
+        });
+    } else {
+      this._partidosService.cargarPartidos(pagina, criterio)
+        .subscribe(partidos => {
+          this.pagina = partidos.current_page;
+          this.partidos = partidos.data
+          this.total = partidos.total;
+          this.criterio2 = criterio;
+          swal.close();
+        });
+    }
+    
   }
 
   subirImagen(event, partido) {
     this.selectedFile = event.target.files[0];
-    this._generalesService.subirImagen(partido.id_partido, this.selectedFile, 'partidos')
+    this._generalesService.subirImagen(partido.id, this.selectedFile, 'games')
       .subscribe(res => {
         this.resultado = res;
-        console.log(this.resultado);
-        partido.img = this.resultado.imagen;
+        partido.image = this.resultado.image;
       });
   }
 
@@ -98,27 +125,6 @@ export class PartidosComponent implements OnInit {
       .subscribe(res => {
         console.log(res);
       });
-  }
-
-  cambiarPagina(valor: string) {
-
-    if (valor === 'a') {
-      this.pagina = this.pagina + 1;
-      this.cargarPartidos(this.pagina, this.criterio);
-
-      if (this.pagina !== 1) {
-        this.desactivar = 'color_grey';
-      }
-    }
-
-    if (valor === 'b' && this.pagina > 1) {
-      this.pagina = this.pagina - 1;
-      this.cargarPartidos(this.pagina, this.criterio);
-
-      if (this.pagina === 1) {
-        this.desactivar = 'disabled';
-      }
-    }
   }
 
   cambiarLive(partido: Partido) {
@@ -181,13 +187,4 @@ export class PartidosComponent implements OnInit {
       });
     }    
   }
-
-  filtrarPartidos(pagina) {
-    this._partidosService.filtrarPartidos(pagina, this.category_id, this.country_id, this.start, this.criterio)
-      .subscribe(resp => {
-        console.log(resp);
-        this.partidos = resp.games.data
-      });
-  }
-
 }

@@ -50,6 +50,8 @@ import { CuotasComponent } from '../comun/componentes/cuotas/cuotas.component';
 import { VerPartidoComponent } from './partidos/ver-partido.component';
 import { MensajeComponent } from './mensajes/mensaje/mensaje.component';
 
+import {NgxPaginationModule} from 'ngx-pagination';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -60,7 +62,8 @@ import { MensajeComponent } from './mensajes/mensaje/mensaje.component';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MalihuScrollbarModule.forRoot(),
-    SweetAlert2Module.forRoot()
+    SweetAlert2Module.forRoot(),
+    NgxPaginationModule
   ],
   declarations: [
     NacionalidadesComponent,

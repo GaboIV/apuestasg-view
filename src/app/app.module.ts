@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MalihuScrollbarModule } from 'ngx-malihu-scrollbar';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 import { AppComponent } from './app.component';
 import { ComponentesModule } from './comun/componentes/componentes.module';
@@ -53,7 +54,8 @@ import { HttpErrorInterceptor } from 'src/app/interceptor/httpconfig.interceptor
     VistasModule,
     MalihuScrollbarModule.forRoot(),
     ToastrModule.forRoot(),
-    SweetAlert2Module.forRoot()
+    SweetAlert2Module.forRoot(),
+    NgxPaginationModule
   ],
   providers: [
     {

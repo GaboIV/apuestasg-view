@@ -5,7 +5,7 @@
 </div>
 
 <div class="equipos">
-    <table width="100%" id="tabla_equipos">
+    <table width="100%" class="tabla_equipos">
         <thead>
             <tr>
                 <th>ID</th>
@@ -19,7 +19,8 @@
             </tr>
         </thead>
         <tbody>
-            <tr class="par_th_nt" *ngFor="let equipo of equipos ">
+            <tr class="par_th_nt" *ngFor="let equipo of equipos | paginate: { itemsPerPage: 50, currentPage: pagina, totalItems: total }">
+            
                 <td width="5%" align="center">{{ equipo.id }}</td>
                 <td width="15%">{{ equipo.name_uk }}</td>
                 <td #name [innerText]="equipo.name" (blur)="modificarDato(equipo.id, name.innerText, equipo, 'name', 'nombre ')" contenteditable="true" width="15%">
@@ -55,11 +56,7 @@
         </tbody>
     </table>
 
-    <ul class="pagination pagination-large">
-        <li style="cursor: pointer" class='{{desactivar}}' (click)="cambiarPagina('b')"><span>&lsaquo; Anterior</span>
-        </li>
-        <li style="cursor: pointer">
-            <span class='color_gray' (click)="cambiarPagina('a')">Siguiente &rsaquo;</span>
-        </li>
-    </ul>
+    <div class="pagination_fixed">
+        <pagination-controls previousLabel="Anterior" nextLabel="Siguiente" maxSize="12" (pageChange)="cargarEquipos($event, criterio, 'todas')"></pagination-controls>
+    </div>    
 </div>
