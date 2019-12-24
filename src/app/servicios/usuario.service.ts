@@ -67,6 +67,8 @@ export class UsuarioService {
   crearPago(pago: Pago) {
     const url = URL_JUGADORES + "/pays";
 
+    pago.register_date = pago.register_date + " " + pago.registro;
+
     return this.http.post( url, pago, this._loginService.httpOptions )
       .pipe(map( (resp: any) => {
         const res = resp;

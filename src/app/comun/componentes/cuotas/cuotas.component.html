@@ -14,7 +14,7 @@
                                 <div class="equis_tkt desseleccion" id="epry-577" (click)="removerSel(sel2.id)">x</div>
                                 <div class="nom_apostado">{{sel2.equipo}}</div>
                                 <div class="carr_apostado carr_encuentro">{{sel2.encuentro}}</div>
-                                <div class="carr_apostado"><input placeholder="imp." type="number" class="monto_apostado" name="monto_apostado" [(ngModel)]="_inicioSesion.montoapuesta" (keyup)="_inicioSesion.cambioApuesta( $event.target.value )"> Dividendo: <b>{{sel2.value | cuota:'decimal'}}</b></div>
+                                <div class="carr_apostado"><input placeholder="imp." type="text" class="monto_apostado" name="monto_apostado" [(ngModel)]="_inicioSesion.montoapuesta" (keyup)="_inicioSesion.cambioApuesta( $event.target.value )"> Dividendo: <b>{{sel2.value | cuota:'decimal'}}</b></div>
                             </div>
 
                             <div class="tkt_can_all tkt_import" style="text-align: right; border-top: solid 1px #aaa;">
@@ -41,7 +41,7 @@
                         </div>
                     </div>
                     <div class="tkt_can_all tkt_import" style="text-align: right; border-top: solid 1px #aaa;">
-                        <input [(ngModel)]="_inicioSesion.montoapuesta" type="number" class="monto_apostado ipt_sapt" (keyup)="_inicioSesion.cambioApuesta( $event.target.value )">
+                        <input [(ngModel)]="_inicioSesion.montoapuesta" type="text" class="monto_apostado ipt_sapt" (keyup)="_inicioSesion.cambioApuesta( $event.target.value )">
                         <div>Cuota: {{ _inicioSesion.cuota | number:'1.2-2'}}</div>
                     </div>
                     <div class="tkt_can_all tkt_import" style="text-align: right; border-top: solid 1px #aaa;">

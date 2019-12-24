@@ -153,6 +153,9 @@ export class CabeceraComponent implements OnInit {
 
     this._sesionUsuario.selecciones = [];
     this._sesionUsuario.selecciones2 = [];
+
+    this._sesionUsuario.ticketes = null;
+    this._sesionUsuario.ticketes2 = null;
   }
 
   sesionActiva() {

@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { URL_TICKET, URL_AUTH, URL_SELECCION, URL_MENSAJES, URL_JUGADORES } from '../comun/link';
 import { map } from 'rxjs/operators';
 import { Usuario } from '../modelos/usuario';
+import swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -116,12 +117,13 @@ export class InicioSesionService {
   }
 
   cambioApuesta ( montoapuesta ) {
-    this.montoapuesta = montoapuesta;
+    this.montoapuesta = montoapuesta.toString().replace(/,/g, '.');
     this.aganar = montoapuesta * this.cuota;
-    console.log(montoapuesta, this.aganar, this.cuota)
   }
 
   obtenerUsuario ( usuario, contrasena, tipoken = '' ) {
+    this.ticketes = null;
+    this.ticketes2 = null;
     if ( usuario !== undefined && usuario != '' ) {
       let url = '';
 
@@ -148,7 +150,6 @@ export class InicioSesionService {
         "tipoken" : tipoken
       }, this.httpOptions).pipe(map( (resp: any) => {
         const res = resp;
-        console.log(res);
         this.menu = res.menu;
         this.usuario = res.user;
         localStorage.setItem('menu', JSON.stringify(this.menu));
@@ -158,6 +159,9 @@ export class InicioSesionService {
   }
 
   obtenerSelecciones () {
+    this.ticketes = null;
+    this.ticketes2 = null;
+
     this.esperando = true;
     const url = URL_SELECCION + '/load';
 
@@ -228,8 +232,6 @@ export class InicioSesionService {
             this.cambioApuesta( this.montoapuesta );
         }
         this.esperando = false;
-
-        console.log(resp);
 
         return resp;
       })
@@ -302,6 +304,21 @@ export class InicioSesionService {
     const url = URL_TICKET + '/add';
     const id_usuario = this.usuario.id;
 
+    if (isNaN(this.aganar) == true) {
+      const toast = swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 2000
+      });
+      toast({
+        type: 'warning',
+        title: 'Debes ingresar un aporte válido'
+      });
+      this.esperando = false;
+      return;
+    }
+
     return this.http.post( url, { montos, id_usuario }, this.httpOptions )
       .pipe(map( (resp: any) => {
         this.esperando = false;
@@ -321,6 +338,21 @@ export class InicioSesionService {
     this.esperando = true;
     const url = URL_TICKET + '/add';
     const id_usuario = this.usuario.id;
+
+    if (isNaN(this.aganar) == true) {
+      const toast = swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 2000
+      });
+      toast({
+        type: 'warning',
+        title: 'Debes ingresar un aporte válido'
+      });
+      this.esperando = false;
+      return;
+    }
 
     return this.http.post( url, { montos, id_usuario }, this.httpOptions )
       .pipe(map( (resp: any) => {
