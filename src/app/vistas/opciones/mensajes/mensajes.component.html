@@ -1,12 +1,5 @@
 <div class='body_histo'>
-    <div class='menu_barra_mem'>
-        <div class='btn_deposit' style="cursor: pointer" [routerLink]="['/deposito']" routerLinkActive="router-link-active">Depósito</div>
-        <div class='tab_menu_mem' [routerLink]="['/bancos']" routerLinkActive="router-link-active">Bancos</div>
-        <div class='tab_menu_mem' [routerLink]="['/mi-cuenta']" routerLinkActive="router-link-active">Mi cuenta</div>
-        <div class='tab_menu_mem' routerLink="/historial/{{_inicioSesion.token}}" routerLinkActive=" router-link-active">Historial</div>
-        <div class='tab_menu_mem' [routerLink]="['/promociones']" routerLinkActive="router-link-active">Promociones</div>
-        <div class='tab_menu_mem tmm_select' [routerLink]="['/mensajes']" routerLinkActive="router-link-active">Mensajes</div>
-    </div>
+    <app-menu-opciones></app-menu-opciones>
 </div>
 
 <div class="todo">

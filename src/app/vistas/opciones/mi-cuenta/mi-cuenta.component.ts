@@ -2,14 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { InicioSesionService } from 'src/app/servicios/inicio-sesion.service';
 import { UsuarioService } from 'src/app/servicios/usuario.service';
-import { Usuario } from '../../modelos/usuario';
+import { Usuario } from '../../../modelos/usuario';
 import { NgForm } from '@angular/forms';
 import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-mi-cuenta',
   templateUrl: './mi-cuenta.component.html',
-  styleUrls: ['./mi-cuenta.component.css', '../opciones/historial/historial.component.css']
+  styleUrls: ['./mi-cuenta.component.css']
 })
 export class MiCuentaComponent implements OnInit {
 

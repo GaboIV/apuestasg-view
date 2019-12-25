@@ -120,7 +120,6 @@ export class ImportantesComponent implements OnInit {
 
   scroll_cuot() {
     $(() => {
-
       $(window).scroll(function () {
         const ancho = $('.zona_cuota').width();
 
@@ -131,6 +130,19 @@ export class ImportantesComponent implements OnInit {
         } else {
           $('.zona_cuota').removeClass('fixed');
           $('.zona_cuota').addClass('unfixed');
+        }
+
+        const win_wid = $(window).height();
+        const z1_wid = $('#z1_bet').height();
+        const ancho1 = $('#z1_bet').width();
+
+        if (win_wid > z1_wid) {
+          if ($(this).scrollTop() > 137) {
+            $('#z1_bet').addClass('fixed');
+            $('#z1_bet').width(ancho1);
+          } else {
+            $('#z1_bet').removeClass('fixed');
+          }
         }
       });
     });

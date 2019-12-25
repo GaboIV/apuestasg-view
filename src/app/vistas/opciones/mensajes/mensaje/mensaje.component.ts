@@ -5,7 +5,7 @@ import { InicioSesionService } from 'src/app/servicios/inicio-sesion.service';
 @Component({
   selector: 'app-mensaje',
   templateUrl: './mensaje.component.html',
-  styleUrls: ['../mensajes.component.css', '../../opciones/historial/historial.component.css']
+  styleUrls: ['../mensajes.component.css']
 })
 export class MensajeComponent implements OnInit {
 

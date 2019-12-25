@@ -3,6 +3,8 @@ import { GeneralesService } from '../../../servicios/generales.service';
 import { InicioSesionService } from '../../../servicios/inicio-sesion.service';
 import { Usuario } from '../../../modelos/usuario';
 import { SubMenuService } from '../../../servicios/sub-menu.service';
+import swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-cabecera',
@@ -15,6 +17,7 @@ export class CabeceraComponent implements OnInit {
   hora: any;
   token = '';
   usuario: Usuario;
+  vermenuuser = false;
 
   constructor(
     public _generalesService: GeneralesService,
@@ -172,4 +175,25 @@ export class CabeceraComponent implements OnInit {
         });
       }
     }
+
+   toglevermenuuser () {
+     this.vermenuuser = !this.vermenuuser;
+   }
+
+   recogerSesion(){
+     const toast = swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 2000
+      });
+      toast ({
+        type: "info",
+        title: "Actualizando datos de usuario"
+      });
+     this._sesionUsuario.obtenerUsuario(this._sesionUsuario.usuario.nick, '', 'token')
+     .subscribe(resp => {
+       swal.close();
+     });
+   }
 }

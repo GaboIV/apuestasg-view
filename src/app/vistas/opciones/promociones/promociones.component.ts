@@ -5,7 +5,7 @@ import { InicioSesionService } from 'src/app/servicios/inicio-sesion.service';
 @Component({
   selector: 'app-promociones',
   templateUrl: './promociones.component.html',
-  styleUrls: ['./promociones.component.css', '../opciones/historial/historial.component.css']
+  styleUrls: ['./promociones.component.css']
 })
 export class PromocionesComponent implements OnInit {
 

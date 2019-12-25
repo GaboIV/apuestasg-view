@@ -27,23 +27,23 @@ import { NuevoCarreraComponent } from './vistas/carreras/nuevo-carrera.component
 import { NuevaInscripcionComponent } from './vistas/inscripciones/nueva-inscripcion.component';
 import { HistorialComponent } from './vistas/opciones/historial/historial.component';
 import { ResultadosComponent } from './vistas/resultados/resultados.component';
-import { DepositoComponent } from './vistas/deposito/deposito.component';
-import { BancosComponent } from './vistas/bancos/bancos.component';
-import { MiCuentaComponent } from './vistas/mi-cuenta/mi-cuenta.component';
-import { PromocionesComponent } from './vistas/promociones/promociones.component';
-import { MensajesComponent } from './vistas/mensajes/mensajes.component';
-import { MensajeComponent } from './vistas/mensajes/mensaje/mensaje.component';
 import { PartidoComponent } from './vistas/partidos/partido.component';
 import { AdminGuardGuard } from './guardias/admin-guard.guard';
 import { UsuariosComponent } from './vistas/usuarios/usuarios.component';
 import { NoticiasComponent } from './vistas/noticias/noticias.component';
 import { EstadisticasComponent } from './vistas/estadisticas/estadisticas.component';
-import { AdmDepositosComponent } from './vistas/adm-depositos/adm-depositos.component';
 import { ChangelogComponent } from './vistas/changelog/changelog.component';
 import { AgregarPartidoComponent } from './vistas/partidos/agregar-partido.component';
 import { CarreraComponent } from './vistas/carreras/carrera.component';
 import { VerCarreraComponent } from './vistas/carreras/ver-carrera.component';
 import { VerPartidoComponent } from './vistas/partidos/ver-partido.component';
+import { BancosComponent } from './vistas/opciones/bancos/bancos.component';
+import { DepositoComponent } from './vistas/opciones/deposito/deposito.component';
+import { AdmDepositosComponent } from './vistas/adm-depositos/adm-depositos.component';
+import { MiCuentaComponent } from './vistas/opciones/mi-cuenta/mi-cuenta.component';
+import { PromocionesComponent } from './vistas/opciones/promociones/promociones.component';
+import { MensajesComponent } from './vistas/opciones/mensajes/mensajes.component';
+import { MensajeComponent } from './vistas/opciones/mensajes/mensaje/mensaje.component';
 const appRoutes: Routes = [
   { path: 'importantes/:id_categoria', component: ImportantesComponent },
   { path: 'equipos', component: EquiposComponent, canActivate: [AdminGuardGuard] },

@@ -1,0 +1,42 @@
+.menu_barra_mem {
+    background: #d61828;
+    height: 36px;
+    padding: 4px 4px 2px 4px;
+}
+
+
+.btn_deposit {
+    cursor: pointer;
+    background: #F3D827;
+    border-radius: 2px;
+    border: 1px solid #473C5C;
+    color: #473C5C;
+    display: inline-block;
+    width: 115px;
+    margin-left: 20px;
+    text-align: center;
+    vertical-align: top;
+    margin-right: 25px;
+    -webkit-box-shadow: 0 8px 6px -6px black;
+    -moz-box-shadow: 0 8px 6px -6px black;
+    box-shadow: 0 8px 6px -6px black;
+}
+
+.tab_menu_mem {
+    box-sizing: border-box;
+    display: inline-block;
+    width: 115px;
+    background: #E0E0E0;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    height: 32px;
+    text-align: center;
+    color: #006D58;
+    font-size: 0.90em;
+    padding-top: 7px;
+    cursor: pointer
+}
+
+.tmm_select {
+    background: white;
+}

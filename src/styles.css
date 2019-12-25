@@ -216,7 +216,6 @@ cuerpo {
 .opciones_enc {
     min-width: 25%;
     text-align: right;
-    overflow: hidden;
     float: right;
 }
 
@@ -2220,6 +2219,30 @@ cuerpo {
     font-size: 0.8em;
 }
 
+.op_saldo {
+    position: absolute;
+    top: 23px;
+    left: 0px;
+    width: 80%;
+    background: white;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    color: #444;
+    font-size: 1.1em;
+    overflow: hidden;
+}
+
+.menu_users {
+    padding: 5px 10px;
+    width: 100%;
+}
+
+.menu_users:hover {
+    color: white;
+    cursor: pointer;
+    background: #00488c;
+}
+
 .first_session {
     padding-bottom: 5px;
     border-bottom: 1px solid #20A07A;
@@ -2259,6 +2282,7 @@ cuerpo {
 
 .second_session {
     padding-top: 4px;
+    position: relative;
 }
 
 .second_session div {
@@ -2680,4 +2704,14 @@ thead tr {
 .bolde {
     font-weight: bold;
     color: #14805E;
+}
+
+.body_histo {
+    padding: 0px;
+    margin: 0px;
+    /*font-family: 'PT-SANS', sans-serif;*/
+    font-size: 1.25em;
+    background-color: #fff;
+    font-family: 'Roboto Condensed', sans-serif;
+    color: #272727;
 }

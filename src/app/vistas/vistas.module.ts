@@ -29,18 +29,11 @@ import { AgregarHarasComponent } from './haras/agregar-haras.component';
 import { NuevoStudComponent } from './studs/nuevo-stud.component';
 import { NuevoCarreraComponent } from './carreras/nuevo-carrera.component';
 import { NuevaInscripcionComponent } from './inscripciones/nueva-inscripcion.component';
-import { HistorialComponent } from './opciones/historial/historial.component';
 import { ResultadosComponent } from './resultados/resultados.component';
-import { DepositoComponent } from './deposito/deposito.component';
-import { BancosComponent } from './bancos/bancos.component';
-import { MiCuentaComponent } from './mi-cuenta/mi-cuenta.component';
-import { PromocionesComponent } from './promociones/promociones.component';
-import { MensajesComponent } from './mensajes/mensajes.component';
 import { PartidoComponent } from './partidos/partido.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { NoticiasComponent } from './noticias/noticias.component';
 import { EstadisticasComponent } from './estadisticas/estadisticas.component';
-import { AdmDepositosComponent } from './adm-depositos/adm-depositos.component';
 import { ChangelogComponent } from './changelog/changelog.component';
 import { MenuCaballosComponent } from '../comun/componentes/menu-caballos/menu-caballos.component';
 import { CarreraComponent } from './carreras/carrera.component';
@@ -48,9 +41,9 @@ import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
 import { VerCarreraComponent } from './carreras/ver-carrera.component';
 import { CuotasComponent } from '../comun/componentes/cuotas/cuotas.component';
 import { VerPartidoComponent } from './partidos/ver-partido.component';
-import { MensajeComponent } from './mensajes/mensaje/mensaje.component';
-
 import {NgxPaginationModule} from 'ngx-pagination';
+import { TransaccionesComponent } from './opciones/transacciones/transacciones.component';
+import { OpcionesModule } from './opciones/opciones.module';
 
 @NgModule({
   imports: [
@@ -63,7 +56,8 @@ import {NgxPaginationModule} from 'ngx-pagination';
     BrowserAnimationsModule,
     MalihuScrollbarModule.forRoot(),
     SweetAlert2Module.forRoot(),
-    NgxPaginationModule
+    NgxPaginationModule,
+    OpcionesModule
   ],
   declarations: [
     NacionalidadesComponent,
@@ -88,25 +82,18 @@ import {NgxPaginationModule} from 'ngx-pagination';
     NuevoStudComponent,
     NuevoCarreraComponent,
     NuevaInscripcionComponent,
-    HistorialComponent,
     ResultadosComponent,
-    DepositoComponent,
-    BancosComponent,
-    MiCuentaComponent,
-    PromocionesComponent,
-    MensajesComponent,
     PartidoComponent,
     UsuariosComponent,
     NoticiasComponent,
     EstadisticasComponent,
-    AdmDepositosComponent,
     ChangelogComponent,
     MenuCaballosComponent,
     CarreraComponent,
     VerCarreraComponent,
     CuotasComponent,
     VerPartidoComponent,
-    MensajeComponent
+    TransaccionesComponent
   ],
   exports: [MenuCaballosComponent, CuotasComponent]
 })

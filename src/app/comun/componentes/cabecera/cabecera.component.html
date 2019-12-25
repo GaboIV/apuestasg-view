@@ -1,6 +1,6 @@
 <div class="encabezado">
 
-    <div class="version">v0.13b</div>
+    <div class="version">v0.15b</div>
 
     <div class="fila1_enc">
 
@@ -53,7 +53,29 @@
                     </div>
                     <div class='second_session'>
                         <div class='saldo_ss'>
-                            <div class='sdo_grl_ss'>Bs. {{ _sesionUsuario.usuario.player.available | number:'1.2-2' }}</div> <i class='fas fa-angle-down igriega'></i>
+                            <div class='sdo_grl_ss' style="cursor: pointer;" (click)="toglevermenuuser()">Bs. {{ _sesionUsuario.usuario.player.available | number:'1.2-2' }}</div> <i class='fas fa-angle-down igriega' *ngIf="vermenuuser == false" (click)="toglevermenuuser()"></i>
+
+                                <i class='fas fa-angle-up igriega' *ngIf="vermenuuser == true" (click)="toglevermenuuser()"></i>
+                            <div class="op_saldo" *ngIf="vermenuuser == true" (click)="toglevermenuuser()">
+                                <div class="menu_users" routerLink="/historial">
+                                    <div style="width: 35%">En juego: </div>
+                                    <div style="width: 65%">Bs. {{ _sesionUsuario.usuario.player.risk | number:'1.2-2' }}</div>
+                                </div>                                
+                                <div class="menu_users" [routerLink]="['/deposito']">
+                                    <div style="width: 35%">Disponible: </div>
+                                    <div style="width: 65%">Bs. {{ _sesionUsuario.usuario.player.available | number:'1.2-2' }}</div>
+                                </div>
+                                <div class="menu_users">
+                                    <div style="width: 35%">Puntos: </div>
+                                    <div style="width: 65%">Bs. {{ _sesionUsuario.usuario.player.risk | number:'1.2-2' }}</div>
+                                </div>
+                                <div class="menu_users">
+                                    <div style="width: 100%"> <i class="fas fa-stream"></i> Ver todas transacciones</div>
+                                </div>
+                                <div class="menu_users" (click)="recogerSesion()">                                    
+                                    <div style="width: 100%"><i class="fas fa-redo-alt"></i> Actualizar saldos</div>
+                                </div>
+                            </div>
                         </div>
                         <div class='opciones_ss'>
                             <div class='seccion_ss' [routerLink]="['/deposito']">Depósito</div>

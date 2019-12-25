@@ -144,6 +144,7 @@ export class InicioSesionService {
       } else {
         url = URL_AUTH + '/login';
       }
+
       return this.http.post(url, {
         "nick" : usuario,
         "password" : contrasena,

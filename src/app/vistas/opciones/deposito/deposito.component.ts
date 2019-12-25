@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { InicioSesionService } from '../../servicios/inicio-sesion.service';
-import { Pago } from '../../modelos/pago.modelo';
-import { Banco } from '../../modelos/banco.modelo';
-import { Cuenta } from '../../modelos/cuenta.modelo';
+import { InicioSesionService } from '../../../servicios/inicio-sesion.service';
+import { Pago } from '../../../modelos/pago.modelo';
+import { Banco } from '../../../modelos/banco.modelo';
+import { Cuenta } from '../../../modelos/cuenta.modelo';
 import { NgForm } from '@angular/forms';
-import { GeneralesService } from '../../servicios/generales.service';
+import { GeneralesService } from '../../../servicios/generales.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router, ActivatedRoute } from '@angular/router';
-import { UsuarioService } from '../../servicios/usuario.service';
+import { UsuarioService } from '../../../servicios/usuario.service';
 import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-deposito',
   templateUrl: './deposito.component.html',
-  styleUrls: ['../opciones/historial/historial.component.css']
+  styleUrls: ['./deposito.component.css']
 })
 export class DepositoComponent implements OnInit {
 
@@ -74,7 +74,5 @@ export class DepositoComponent implements OnInit {
       ) {
       }
     });
-
-
   }
 }

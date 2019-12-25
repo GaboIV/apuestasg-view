@@ -1,13 +1,3 @@
-.body_histo {
-    padding: 0px;
-    margin: 0px;
-    /*font-family: 'PT-SANS', sans-serif;*/
-    font-size: 1.25em;
-    background-color: #F2F2F2;
-    font-family: 'Roboto Condensed', sans-serif;
-    color: #272727;
-}
-
 .membrete {
     background: #14805E;
     height: 75px;
@@ -50,7 +40,7 @@
 
 .cuerpo_c_r {
     padding: 5px 2px 5px 2px;
-    border-bottom: 1px #808080 solid;
+    /* border-bottom: 1px #808080 solid; */
 }
 
 .cuerpo_c_r p {
@@ -186,27 +176,7 @@
 
 /*EXCLUSIVO HISTORIAL*/
 
-.menu_barra_mem {
-    background: #d61828;
-    height: 36px;
-    padding: 4px 4px 2px 4px;
-}
 
-.btn_deposit {
-    background: #F3D827;
-    border-radius: 2px;
-    border: 1px solid #473C5C;
-    color: #473C5C;
-    display: inline-block;
-    width: 115px;
-    margin-left: 20px;
-    text-align: center;
-    vertical-align: top;
-    margin-right: 25px;
-    -webkit-box-shadow: 0 8px 6px -6px black;
-    -moz-box-shadow: 0 8px 6px -6px black;
-    box-shadow: 0 8px 6px -6px black;
-}
 
 .btn_ver {
     background: #006A4C;
@@ -224,24 +194,7 @@
     box-sizing: border-box;
 }
 
-.tab_menu_mem {
-    box-sizing: border-box;
-    display: inline-block;
-    width: 115px;
-    background: #E0E0E0;
-    border-top-right-radius: 4px;
-    border-top-left-radius: 4px;
-    height: 32px;
-    text-align: center;
-    color: #006D58;
-    font-size: 0.90em;
-    padding-top: 7px;
-    cursor: pointer
-}
 
-.tmm_select {
-    background: white;
-}
 
 .ter_membrete {
     box-sizing: border-box;
@@ -337,10 +290,11 @@ input[type=radio]:checked~label {
 }
 
 .tabla_pend {
-    border: 1px solid #CFCFCF;
+    overflow: hidden;
     width: 100%;
-    border-top-right-radius: 4px;
-    border-top-left-radius: 4px;
+    border-radius: 10px;
+    background: #efefef;
+    padding: 0px;
 }
 
 .tabla_pend .col {
@@ -350,10 +304,19 @@ input[type=radio]:checked~label {
     padding: 8px 2px;
 }
 
+.tabla_pend .indice {
+    background: #152535;
+    color: white;
+    padding: 4px 2px;
+}
+
 .col_nro {
-    width: 5%;
+    width: 8%;
     color: #999999;
     text-align: center;
+    padding-left: 1% !important;
+    /* padding-right: 1% !important; */
+    overflow-wrap: break-word;
 }
 
 .col_sel {
@@ -362,7 +325,7 @@ input[type=radio]:checked~label {
 
 .col_dat {
     text-align: center;
-    width: 15%;
+    width: 12%;
 }
 
 .col_cuo {
@@ -370,11 +333,14 @@ input[type=radio]:checked~label {
     text-align: center;
 }
 
+.col_win {
+    padding-right: 2% !important;
+}
+
 .col_win,
 .col_apo {
     width: 16%;
     text-align: right;
-    padding-right: 10px !important;
 }
 
 .daterio {

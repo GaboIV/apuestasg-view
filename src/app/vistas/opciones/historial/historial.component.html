@@ -1,12 +1,5 @@
 <div class='body_histo'>
-    <div class='menu_barra_mem'>
-        <div class='btn_deposit' style="cursor: pointer" [routerLink]="['/deposito']" routerLinkActive="router-link-active">Depósito</div>
-        <div class='tab_menu_mem' [routerLink]="['/bancos']" routerLinkActive="router-link-active">Bancos</div>
-        <div class='tab_menu_mem' [routerLink]="['/mi-cuenta']" routerLinkActive="router-link-active">Mi cuenta</div>
-        <div class='tab_menu_mem tmm_select' routerLink="/historial/{{_inicioSesion.token}}" routerLinkActive=" router-link-active">Historial</div>
-        <div class='tab_menu_mem' [routerLink]="['/promociones']" routerLinkActive="router-link-active">Promociones</div>
-        <div class='tab_menu_mem' [routerLink]="['/mensajes']" routerLinkActive="router-link-active">Mensajes</div>
-    </div>
+    <app-menu-opciones></app-menu-opciones>
 
     <!-- <div class='ter_membrete'>
         <div class='sem_opc'>Deportes</div>
@@ -70,48 +63,55 @@
         <div class="cuerpo_c_r " *ngFor="let tk of tickets ">
             <div class="forma_comp " style='padding-bottom: 0px; font-size: 0.75em; '>
                 <div class='tabla_pend'>
-                    <div class='col col_nro'>
+                    <div class='col col_nro indice'>
                         #
                     </div>
-                    <div class='col col_sel'>
+                    <div class='col col_sel indice' style="padding-left: 20px;">
                         Selecciones
                     </div>
-                    <div class='col col_dat'>
+                    <div class='col col_dat indice'>
                         Fecha y Hora
                     </div>
-                    <div class='col col_cuo'>
+                    <div class='col col_cuo indice'>
                         Cuota total
                     </div>
-                    <div class='col col_apo' style="text-align: center ">
+                    <div class='col col_apo indice' style="text-align: center ">
                         Apostado
                     </div>
-                    <div class='col col_win'>
+                    <div class='col col_win indice'>
                         A Ganar
                     </div>
 
                     <div class='col col_nro'>
-                        {{tk.id}}
+                        <!-- {{tk.id}} -->
+                        {{tk.code}}
                     </div>
                     <div class='col col_sel'>
-
-                        <div class='daterio'>
+                        <!-- <div class='daterio'>
                             {{tk.correlative}}
-                        </div>
-                        <div class='daterio'>
+                        </div> -->
+                        <!-- <div class='daterio'>
                             {{tk.code}}
-                        </div>
+                        </div> -->
                         <div style="display: inline-block; vertical-align: middle; width: 94%; ">
                             <div class='selecea' *ngFor="let sel of tk.selections ">
                                 <ng-container *ngIf="sel.id_deporte==='27' ">
-                                    <div class='c_sele'>({{sel.id_select.numero}}) {{sel.id_select.id_caballo.nombre}} <span *ngIf="sel.valor !==n ull "> @ {{sel.valor | number:'1.2'}} </span>
+                                    <div class='c_sele'>({{sel.id_select.numero}}) {{sel.id_select.id_caballo.nombre}}
+                                        <span *ngIf="sel.valor !==null "> @ {{sel.valor | number:'1.2'}} </span>
                                         <span class='banner_histo' *ngIf="sel.id_select.status==='0' ">Pendiente</span>
-                                        <span class='banner_histo ganadeivis' *ngIf="sel.id_select.status==='1' ">Ganador</span>
-                                        <span class='banner_histo pendeivis' *ngIf="sel.id_select.status==='2' ">Segundo</span>
-                                        <span class='banner_histo pendeivis' *ngIf="sel.id_select.status==='3' ">Tercero</span>
-                                        <span class='banner_histo pendeivis' *ngIf="sel.id_select.status==='99' ">No figuró</span>
+                                        <span class='banner_histo ganadeivis'
+                                            *ngIf="sel.id_select.status==='1' ">Ganador</span>
+                                        <span class='banner_histo pendeivis'
+                                            *ngIf="sel.id_select.status==='2' ">Segundo</span>
+                                        <span class='banner_histo pendeivis'
+                                            *ngIf="sel.id_select.status==='3' ">Tercero</span>
+                                        <span class='banner_histo pendeivis' *ngIf="sel.id_select.status==='99' ">No
+                                            figuró</span>
                                     </div>
 
-                                    <div class='enc_sele'>Carrera {{sel.id_select.id_carrera.numero}} de {{sel.id_select.id_carrera.id_hipodromo.descripcion}} ({{ sel.id_select.id_carrera.fecha_hora | date:'dd/MM/yyyy'}})</div>
+                                    <div class='enc_sele'>Carrera {{sel.id_select.id_carrera.numero}} de
+                                        {{sel.id_select.id_carrera.id_hipodromo.descripcion}}
+                                        ({{ sel.id_select.id_carrera.fecha_hora | date:'dd/MM/yyyy'}})</div>
                                 </ng-container>
                                 <ng-container *ngIf="sel.id_deporte !=='27' ">
                                     <div class='c_sele'><b>{{sel.team_name}}</b> @ {{sel.value | cuota:'decimal'}}
@@ -120,7 +120,9 @@
                                         <span class='banner_histo' *ngIf="sel.status==='2' ">Descartado</span>
                                         <span class='banner_histo pendeivis' *ngIf="sel.status=== 3 ">Perdedor</span>
                                     </div>
-                                    <div class='enc_sele'>{{sel.game.encuentro}} ({{ sel.game.start | date:'dd/MM/yyyy'}} {{ sel.game.start | date:'shortTime'}})</div>
+                                    <div class='enc_sele'>{{sel.game.encuentro}}
+                                        ({{ sel.game.start | date:'dd/MM/yyyy'}} {{ sel.game.start | date:'shortTime'}})
+                                    </div>
                                 </ng-container>
 
                             </div>
@@ -144,7 +146,7 @@
                         <span *ngIf="tk.towin > 1">Bs. {{ tk.towin | number:'1.2'}}</span><br>
                         <span class='banner_histo ganadeivis' *ngIf="tk.status === 1">Ganado</span>
                     </div>
-                    <div class='separador'></div>
+                    <!-- <div class='separador'></div> -->
                 </div>
             </div>
         </div>

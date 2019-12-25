@@ -213,3 +213,8 @@
         margin-right: 0;
         margin-bottom: 10px;
     }
+
+    #z1_bet .fixed {
+        position: fixed;
+        top: 0px;
+    }

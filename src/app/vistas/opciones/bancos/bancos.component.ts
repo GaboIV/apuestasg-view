@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { GeneralesService } from '../../servicios/generales.service';
-import { Cuenta } from '../../modelos/cuenta.modelo';
 import { InicioSesionService } from 'src/app/servicios/inicio-sesion.service';
+import { Cuenta } from 'src/app/modelos/cuenta.modelo';
+import { GeneralesService } from 'src/app/servicios/generales.service';
 
 @Component({
   selector: 'app-bancos',
   templateUrl: './bancos.component.html',
-  styleUrls: ['./bancos.component.css', '../opciones/historial/historial.component.css']
+  styleUrls: ['./bancos.component.css']
 })
 export class BancosComponent implements OnInit {
 
