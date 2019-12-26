@@ -55,90 +55,63 @@
         </ul>
       </div>
     </div>
-
     <div class="forma_comp " style='padding-bottom: 0px; font-size: 0.75em; '>
       <div class='tabla_pend'>
         <div class='col col_nro indice'>
           #
         </div>
-        <div class='col col_nro indice' style="width: 13%; text-align: left;">
-          Tipo
+        <div class='col col_sel indice' >
+          Documento
         </div>
-        <div class='col col_sel indice' style="padding-left: 20px;">
-          Descripción
+        <div class='col col_sel indice' style="text-align: center">
+          Fecha
         </div>
-        <!-- <div class='col col_dat indice'>
-          ID Ticket
-        </div> -->
         <div class='col col_cuo indice'>
-          Fecha y hora
+          Banco origen
         </div>
-        <div class='col col_win indice' style="text-align: center ">
-          Debe
-        </div>
-        <div class='col col_win indice'>
-          Haber
+        <div class='col col_cuo indice'>
+          Cuenta destino
         </div>
         <div class='col col_win indice'>
-          Saldo
+          Monto
         </div>
-        <div *ngFor="let trans of transactions | paginate: { itemsPerPage: 50, currentPage: pagina, totalItems: total }">
+        <div class='col col_sel indice'>
+          Referencia
+        </div>
+        <div class='col col_sel indice' style="text-align: center;">
+          Estatus
+        </div>
+        <div *ngFor="let pay of pagos | paginate: { itemsPerPage: 50, currentPage: pagina, totalItems: total }">
           <div class='col col_nro'>
-            {{trans.id}}
+            {{pay.code}}
           </div>
-          <div class='col col_nro' style="width: 13%; text-align: left;">
-            {{trans.event.name}}
+          <div class='col col_sel' style="width: 13%; text-align: left;">
+            {{pay.document}}
           </div>
-          <div class='col col_sel' style="padding-left: 20px; text-align: left;">
-            <div *ngIf="trans.event.id == 4">Bono de bienvenida <br>Código: <b>ENTRADA_100K_AG</b></div>
-            <div *ngIf="trans.event.id == 1">Ticket generado <br>Serial: <b>{{trans.ticket_id}}</b></div>
-            <div *ngIf="trans.event.id == 3">Ticket pagado <br>Serial: <b>{{trans.ticket_id}}</b></div>
+          <div class='col col_sel' style="text-align: center">
+            {{ pay.register_date | date:'dd/MM/yyyy'}} <br>
+            {{ pay.register_date | date:'shortTime'}}
           </div>
           <div class='col col_cuo'>
-            {{ trans.created_at | date:'dd/MM/yyyy'}} <br>
-            {{ trans.created_at | date:'shortTime'}}
-          </div>
-          <div class='col col_win' style="text-align: center ">
-            <div *ngIf="trans.event_type_id == 1">Bs. {{trans.amount | number:'1.2'}}</div>
-          </div>
-          <div class='col col_win'>
-            <div *ngIf="[4,3].indexOf(trans?.event_type_id) > -1">Bs. {{trans.amount | number:'1.2'}}</div>
-          </div>
-          <div class='col col_win'>
-            Bs. {{trans.player_balance | number:'1.2'}}
-          </div>
-        </div>
-        <!-- <div>
-          <div class='col col_nro'>
-            10004
-          </div>
-          <div class='col col_nro' style="width: 13%;">
-            Ticket
-          </div>
-          <div class='col col_sel' style="padding-left: 20px;">
-            Ticket de apuesta de 3 selecciones
-          </div>
-          <div class='col col_dat'>
-            34gfg32435
+            {{pay.bank.name}}
           </div>
           <div class='col col_cuo'>
-            25-12-2019 <br>
-            11:30 a.m.
-          </div>
-          <div class='col col_win' style="text-align: center ">
-            Bs. 1,000,000.00
+            {{pay.account.name}} <br>
+            {{pay.account.bank.name}}
           </div>
           <div class='col col_win'>
-            
+            Bs. {{pay.amount | number:'1.2'}}
           </div>
-          <div class='col col_win'>
-            Bs. 1,500,000.03
+          <div class='col col_sel '>
+            {{pay.reference}}
           </div>
-        </div> -->
+          <div class='col col_sel' style="text-align: center;">
+            <div *ngIf="pay.status == 0">Pendiente</div>
+            <div *ngIf="pay.status == 1">Aprobado</div>
+            <div *ngIf="pay.status == 3">Rechazado</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
-<div class="pagination_fixed">
-    <pagination-controls previousLabel="Anterior" nextLabel="Siguiente" maxSize="12" (pageChange)="cargarTransacciones($event)"></pagination-controls>
-</div> 

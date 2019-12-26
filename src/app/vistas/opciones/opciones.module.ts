@@ -12,13 +12,20 @@ import { PromocionesComponent } from './promociones/promociones.component';
 import { MensajeComponent } from './mensajes/mensaje/mensaje.component';
 import { MensajesComponent } from './mensajes/mensajes.component';
 import { PipesModule } from 'src/app/pipes/pipes.module';
+import { OPCIONES_ROUTES } from './opciones.routes';
+import { DepositosComponent } from './deposito/depositos.component';
+import { TransaccionesComponent } from './transacciones/transacciones.component';
+
+import {NgxPaginationModule} from 'ngx-pagination';
 
 @NgModule({
   imports: [
     CommonModule,
     APP_ROUTES,
     FormsModule,
-    PipesModule
+    PipesModule,
+    OPCIONES_ROUTES,
+    NgxPaginationModule
   ],
   declarations: [
     HistorialComponent,
@@ -29,7 +36,9 @@ import { PipesModule } from 'src/app/pipes/pipes.module';
     MiCuentaComponent,
     PromocionesComponent,
     MensajeComponent,
-    MensajesComponent
+    MensajesComponent,
+    DepositosComponent,
+    TransaccionesComponent
   ],
   exports: [
     HistorialComponent,

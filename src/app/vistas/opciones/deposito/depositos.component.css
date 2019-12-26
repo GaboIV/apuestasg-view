@@ -1,0 +1,17 @@
+.col_nro {
+    width: 15% !important;
+}
+
+.col_sel {
+    width: 10% !important;
+    text-align: left;
+}
+
+.col_cuo {
+    width: 15% !important;
+    text-align: left !important;
+}
+
+.col_win {
+    width: 15% !important;
+}

@@ -44,6 +44,8 @@ import { MiCuentaComponent } from './vistas/opciones/mi-cuenta/mi-cuenta.compone
 import { PromocionesComponent } from './vistas/opciones/promociones/promociones.component';
 import { MensajesComponent } from './vistas/opciones/mensajes/mensajes.component';
 import { MensajeComponent } from './vistas/opciones/mensajes/mensaje/mensaje.component';
+import { DepositosComponent } from './vistas/opciones/deposito/depositos.component';
+import { TransaccionesComponent } from './vistas/opciones/transacciones/transacciones.component';
 const appRoutes: Routes = [
   { path: 'importantes/:id_categoria', component: ImportantesComponent },
   { path: 'equipos', component: EquiposComponent, canActivate: [AdminGuardGuard] },
@@ -72,6 +74,8 @@ const appRoutes: Routes = [
   { path: 'partidos', component: PartidosComponent, canActivate: [AdminGuardGuard]},
   { path: 'registro', component: RegistroComponent },
   { path: 'historial', component: HistorialComponent },
+  { path: 'depositos', component: DepositosComponent },
+  { path: 'transacciones', component: TransaccionesComponent },
   { path: 'mensajes', component: MensajesComponent },
   { path: 'activacion/:cod_act', component: ActivacionComponent },
   { path: 'deposito', component: DepositoComponent },

@@ -42,7 +42,6 @@ import { VerCarreraComponent } from './carreras/ver-carrera.component';
 import { CuotasComponent } from '../comun/componentes/cuotas/cuotas.component';
 import { VerPartidoComponent } from './partidos/ver-partido.component';
 import {NgxPaginationModule} from 'ngx-pagination';
-import { TransaccionesComponent } from './opciones/transacciones/transacciones.component';
 import { OpcionesModule } from './opciones/opciones.module';
 
 @NgModule({
@@ -92,8 +91,7 @@ import { OpcionesModule } from './opciones/opciones.module';
     CarreraComponent,
     VerCarreraComponent,
     CuotasComponent,
-    VerPartidoComponent,
-    TransaccionesComponent
+    VerPartidoComponent
   ],
   exports: [MenuCaballosComponent, CuotasComponent]
 })

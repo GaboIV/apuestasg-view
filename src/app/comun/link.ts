@@ -23,6 +23,7 @@ export const URL_REGISTRO = URL_INICIAL + 'auth/register';
 export const URL_RESULTADOS = URL_INICIAL + 'results';
 export const URL_SELECCION = URL_INICIAL + 'player/selections';
 export const URL_TICKET = URL_INICIAL + 'player/ticket';
+export const URL_TRANSACCION = URL_INICIAL + 'player/transactions';
 
 export const URL_CABALLOS = URL_INICIAL + 'bzbk/public/index.php/caballos';
 export const URL_JINETES = URL_INICIAL + 'bzbk/public/index.php/jinetes';

@@ -122,6 +122,7 @@ export class ImportantesComponent implements OnInit {
     $(() => {
       $(window).scroll(function () {
         const ancho = $('.zona_cuota').width();
+        const alto = $('.central_bet').height();
 
         if ($(this).scrollTop() > 137) {
           $('.zona_cuota').addClass('fixed');
@@ -136,14 +137,35 @@ export class ImportantesComponent implements OnInit {
         const z1_wid = $('#z1_bet').height();
         const ancho1 = $('#z1_bet').width();
 
-        if (win_wid > z1_wid) {
+        console.log($(this).scrollTop(), ($(window).height() - 137));
+
+
+        if (($(this).scrollTop() >= 137) && (win_wid > z1_wid)) {
+          $('#z1_bet').addClass('fixed');
+          $('#z1_bet').width(ancho1);
+        // } else if ($(this).scrollTop() > ($(window).height() - 137)) {
+        //   $('#z1_bet').addClass('fixedbottom');
+        //   $('#z1_bet').width(ancho1);
+        // } 
+        } else {
+          $('#z1_bet').removeClass('fixed');
+          $('#z1_bet').removeClass('fixedbottom');
+        }
+
+
+        const z2_wid = $('#z2_bet').height();
+        const ancho2 = $('#z2_bet').width();
+
+        if (win_wid > z2_wid) {
           if ($(this).scrollTop() > 137) {
-            $('#z1_bet').addClass('fixed');
-            $('#z1_bet').width(ancho1);
+            $('#z2_bet').addClass('fixed');
+            $('#z2_bet').width(ancho2);
           } else {
-            $('#z1_bet').removeClass('fixed');
+            $('#z2_bet').removeClass('fixed');
           }
         }
+
+        // $('.central_bet').height(alto);
       });
     });
   }

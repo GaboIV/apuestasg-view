@@ -4,7 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { 
   URL_JUGADORES, 
   URL_REGISTRO,
-  URL_DEPOSITO
+  URL_DEPOSITO,
+  URL_TRANSACCION
   } from '../comun/link';
 import { map } from 'rxjs/operators';
 import { Pago } from '../modelos/pago.modelo';
@@ -19,6 +20,28 @@ export class UsuarioService {
     private http: HttpClient,
     public _loginService: InicioSesionService,
   ) { }
+
+  obtenertransacciones (page: number) {
+    const url = URL_TRANSACCION + "?page=" + page;
+
+    return this.http.get( url, this._loginService.httpOptions )
+      .pipe(map( (resp: any) => {
+        const res = resp;
+        return res;
+      })
+    );
+  }
+
+  obtenerpagos (page: number) {
+    const url = URL_JUGADORES + "/pays?page=" + page;
+
+    return this.http.get( url, this._loginService.httpOptions )
+      .pipe(map( (resp: any) => {
+        const res = resp;
+        return res;
+      })
+    );
+  }
 
   crearUsuario(usuario) {
     const url = URL_REGISTRO;
