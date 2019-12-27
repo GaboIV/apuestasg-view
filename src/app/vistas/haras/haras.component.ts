@@ -37,7 +37,7 @@ export class HarasComponent implements OnInit {
     this.harias = [];
     if ( descripcion !== '') {
       const busqueda = new RegExp(descripcion, 'i');
-      const harias = this.haras.filter( hara => busqueda.test( hara.descripcion ) );
+      const harias = this.haras.filter( hara => busqueda.test( hara.name ) );
       this.harias = harias;
     }
   }

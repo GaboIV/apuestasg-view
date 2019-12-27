@@ -22,7 +22,7 @@ export class NuevoCaballoComponent implements OnInit {
   registro = false;
   padrillosui: any;
   madrillasui: any;
-  harasui: any;
+  haras: any;
   caballosui: any;
 
   caballos: Caballo[] = [];
@@ -44,10 +44,10 @@ export class NuevoCaballoComponent implements OnInit {
 
 
   enviarDatos() {
-    this.caballo.nombre = $('#nombre_hrs').val();
-    this.caballo.padre = $('#padre_hrs').val();
-    this.caballo.madre = $('#madre_hrs').val();
-    this.caballo.id_haras = $('#haras_hrs').val();
+    this.caballo.name = $('#nombre_hrs').val();
+    this.caballo.father_id = $('#padre_hrs').val();
+    this.caballo.mother_id = $('#madre_hrs').val();
+    this.caballo.haras_id = $('#haras_hrs').val();
 
     this._caballosService.crearCaballo( this.caballo )
     .subscribe( res => {
@@ -58,28 +58,28 @@ export class NuevoCaballoComponent implements OnInit {
         });
         this.caballos = JSON.parse( localStorage.getItem('caballos') );
         this.caballos.push( res.caballo );
-        this.caballos.sort((a, b) => (a.nombre > b.nombre) ? 1 : ((b.nombre > a.nombre) ? -1 : 0));
+        this.caballos.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
         localStorage.setItem('caballos', JSON.stringify(this.caballos) );
 
         this.caballosui = JSON.parse( localStorage.getItem('caballosui') );
-        this.caballosui.push( res.caballo.nombre );
+        this.caballosui.push( res.caballo.name );
         this.caballosui.sort((a, b) => (a > b) ? 1 : ((b > a) ? -1 : 0));
         localStorage.setItem('caballosui', JSON.stringify(this.caballosui) );
 
         this.padrillosui = JSON.parse( localStorage.getItem('padrillosui') );
-        this.padrillosui.push( res.caballo.padre.nombre );
+        this.padrillosui.push( res.caballo.father.name );
         this.padrillosui.sort((a, b) => (a > b) ? 1 : ((b > a) ? -1 : 0));
         localStorage.setItem('padrillosui', JSON.stringify(this.padrillosui) );
 
         this.madrillasui = JSON.parse( localStorage.getItem('madrillasui') );
-        this.madrillasui.push( res.caballo.madre.nombre );
+        this.madrillasui.push( res.caballo.mother.name );
         this.madrillasui.sort((a, b) => (a > b) ? 1 : ((b > a) ? -1 : 0));
         localStorage.setItem('madrillasui', JSON.stringify(this.madrillasui) );
 
-        this.harasui = JSON.parse( localStorage.getItem('harasui') );
-        this.harasui.push( res.caballo.id_haras.descripcion );
-        this.harasui.sort((a, b) => (a > b) ? 1 : ((b > a) ? -1 : 0));
-        localStorage.setItem('harasui', JSON.stringify(this.harasui) );
+        this.haras = JSON.parse( localStorage.getItem('haras') );
+        this.haras.push( res.caballo.haras.descripcion );
+        this.haras.sort((a, b) => (a > b) ? 1 : ((b > a) ? -1 : 0));
+        localStorage.setItem('haras', JSON.stringify(this.haras) );
 
         this.router.navigate(['/caballos']);
       } else {
@@ -89,22 +89,22 @@ export class NuevoCaballoComponent implements OnInit {
   }
 
   cargarHarasUI( dato ) {
-    if ( localStorage.getItem('harasui') !== null ) {
-      this.harasui = JSON.parse( localStorage.getItem('harasui') );
+    if ( localStorage.getItem('haras') !== null ) {
+      this.haras = JSON.parse( localStorage.getItem('harasui') );
       $(() => {
         $( '#haras_hrs' ).autocomplete({
-            source: this.harasui
+            source: this.haras
         });
       });
     } else {
-      this._caballosService.cargarHarasUI()
-      .subscribe( harasui => {
+      this._caballosService.cargarHaras()
+      .subscribe( haras => {
         $('#act_har').removeClass('fa-spin');
-        this.harasui = harasui;
-        localStorage.setItem('harasui', JSON.stringify(harasui) );
+        this.haras = haras;
+        localStorage.setItem('harasui', JSON.stringify(haras) );
         $(() => {
           $( '#haras_hrs' ).autocomplete({
-              source: harasui
+              source: haras
           });
         });
       });

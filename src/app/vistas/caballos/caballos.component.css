@@ -17,3 +17,41 @@
 .upd_act:hover {
     color: #ffdf1b;
 }
+
+.botonoes div {
+    background: #14805E;
+    color: #EFEFEF;
+    display: inline-block;
+    width: 100%;
+    margin-top: 10px;
+    text-align: left;
+    vertical-align: middle;
+    height: 26px;
+    padding: 4px 8px;
+    box-sizing: border-box;
+}
+
+.botonoes i {
+    height: 80%;
+}
+
+.botonoes div:hover {
+    color: #ffdf1b;
+    cursor: pointer;
+}
+
+.botonoes,
+.cuerpo_ {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.botonoes {
+    width: 100%;
+    text-align: right;
+}
+
+.cuerpo_ {
+    width: 70%;
+    text-align: left;
+}

@@ -4,10 +4,10 @@
     <div class="caption_hrs">Agregar un haras</div>
     <div class="c_planilla_hrs">
         <form name="invfrm" id="invfrm" action="" method="post" enctype="multipart/form-data">
-            <div class="codigo_planilla">Nombre:</div><input type="text" id="name_hrs" name="name_hrs" class="ipt_planilla_hrs" style="text-transform: capitalize;" [(ngModel)]="haras.descripcion">
+            <div class="codigo_planilla">Nombre:</div><input type="text" id="name_hrs" name="name_hrs" class="ipt_planilla_hrs" style="text-transform: capitalize;" [(ngModel)]="haras.name">
 
             <div class="codigo_planilla">Ubicación:</div>
-            <input name="nacionalidad" id="nacionalidad" class="ipt_planilla_hrs" [(ngModel)]="haras.ubicacion">
+            <input name="nacionalidad" id="nacionalidad" class="ipt_planilla_hrs" [(ngModel)]="haras.ubication">
 
             <div class="mensajeError" *ngIf="mostrarError === true">Haras ya existente</div>
 

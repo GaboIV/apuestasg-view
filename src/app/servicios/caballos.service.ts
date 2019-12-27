@@ -19,6 +19,7 @@ import { Studs } from '../modelos/studs';
 import { Hipodromo } from '../modelos/hipodromo';
 import { Carrera } from '../modelos/carrera';
 import { Inscripcion } from '../modelos/inscripcion';
+import { InicioSesionService } from './inicio-sesion.service';
 
 @Injectable({
   providedIn: 'root'
@@ -38,15 +39,16 @@ export class CaballosService {
 
   constructor(
     private http: HttpClient,
+    public _loginService: InicioSesionService,
   ) { }
 
-  cargarCaballos() {
-    const url = URL_CABALLOS + '/ver/todos';
+  cargarCaballos(page: number) {
+    const url = URL_CABALLOS + "?page=" + page;
 
-    return this.http.get( url )
+    return this.http.get( url, this._loginService.httpOptions )
       .pipe(map ( (resp: any) => {
         if ( resp.status === 'correcto') {
-          this.act_caballos = resp.actualizacion;
+          this.act_caballos = resp;
         }
         return resp;
       }));
@@ -64,16 +66,16 @@ export class CaballosService {
   cargarPadrillosUI() {
     const url = URL_CABALLOS + '/padrillosui';
 
-    return this.http.get( url )
+    return this.http.get( url, this._loginService.httpOptions )
       .pipe(map ( (resp: any) => {
-        return resp.padrillosui;
+        return resp;
       }));
   }
 
   agregarMadrilla ( nombre, caballo ) {
-    const url = URL_CABALLOS + '/madrilla/agregar';
+    const url = URL_CABALLOS + '/madrillas';
 
-    return this.http.post( url, {nombre, caballo} )
+    return this.http.post( url, { name: nombre, horse: caballo }, this._loginService.httpOptions )
     .pipe(map( (resp: any) => {
       const res = resp;
       return res;
@@ -81,9 +83,9 @@ export class CaballosService {
   }
 
   agregarPadrillo ( nombre, caballo ) {
-    const url = URL_CABALLOS + '/padrillo/agregar';
+    const url = URL_CABALLOS + '/padrillos';
 
-    return this.http.post( url, {nombre, caballo} )
+    return this.http.post( url, { name : nombre, horse : caballo }, this._loginService.httpOptions )
     .pipe(map( (resp: any) => {
       const res = resp;
       return res;
@@ -93,18 +95,9 @@ export class CaballosService {
   cargarMadrillasUI() {
     const url = URL_CABALLOS + '/madrillasui';
 
-    return this.http.get( url )
+    return this.http.get( url, this._loginService.httpOptions )
       .pipe(map ( (resp: any) => {
-        return resp.madrillasui;
-      }));
-  }
-
-  cargarHarasUI() {
-    const url = URL_CABALLOS + '/harasui';
-
-    return this.http.get( url )
-      .pipe(map ( (resp: any) => {
-        return resp.harasui;
+        return resp;
       }));
   }
 
@@ -145,9 +138,9 @@ export class CaballosService {
   }
 
   cargarHaras() {
-    const url = URL_HARAS + '/ver/todos';
+    const url = URL_CABALLOS + '/haras';
 
-    return this.http.get( url )
+    return this.http.get( url, this._loginService.httpOptions )
       .pipe(map ( (resp: any) => {
         return resp;
       }));
@@ -301,6 +294,21 @@ export class CaballosService {
     const url = URL_CABALLOS + '/actualizar';
 
     return this.http.post( url, caballo )
+      .pipe(map( (resp: any) => {
+        const res = resp;
+        return res;
+      })
+    );
+  }
+
+  modificarDatoCaballo(id, value, parameter) {
+    const url = URL_CABALLOS + '/' + id;
+    
+    var key = parameter;
+    var obj = {};
+    obj[key] = value;
+
+    return this.http.put( url, obj, this._loginService.httpOptions )
       .pipe(map( (resp: any) => {
         const res = resp;
         return res;

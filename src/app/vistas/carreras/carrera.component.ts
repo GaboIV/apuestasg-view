@@ -77,7 +77,7 @@ export class CarreraComponent implements OnInit {
     if ( localStorage.getItem('caballos') !== null ) {
       this.caballos = JSON.parse( localStorage.getItem('caballos') );
     } else {
-      this._caballoService.cargarCaballos()
+      this._caballoService.cargarCaballos(1)
       .subscribe( resp => {
         if ( resp.status === 'correcto') {
           this.caballos = resp.caballos;
@@ -123,7 +123,7 @@ export class CarreraComponent implements OnInit {
     this.caballios = [];
     if ( descripcion !== '') {
       const busqueda = new RegExp(descripcion, 'i');
-      const caballios = this.caballos.filter( caballos => busqueda.test( caballos.nombre ) );
+      const caballios = this.caballos.filter( caballos => busqueda.test( caballos.name ) );
       this.caballios = caballios;
     }
 

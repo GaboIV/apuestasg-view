@@ -1,16 +1,19 @@
 export class Caballo {
 
     constructor(
-        public id_caballo?: string,
-        public nombre?: string,
-        public codigo?: string,
-        public sexo?: any,
-        public tipo_caballo?: any,
-        public padre?: any,
-        public madre?: any,
-        public abuelo?: any,
-        public nacimiento?: string,
-        public id_haras?: any,
+        public id?: string,
+        public name?: string,
+        public code?: string,
+        public sex?: any,
+        public breed?: any,
+        public father_id?: any,
+        public father?: any,
+        public mother_id?: any,
+        public mother?: any,
+        public grandpa?: any,
+        public birthday?: string,
+        public haras_id?: any,
+        public haras?: any,
         public edad?: string
     ) { }
 }

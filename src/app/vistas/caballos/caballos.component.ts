@@ -6,6 +6,8 @@ import { ToastrService } from 'ngx-toastr';
 import { Haras } from 'src/app/modelos/haras';
 import swal from 'sweetalert2';
 
+declare var $: any;
+
 @Component({
   selector: 'app-caballos',
   templateUrl: './caballos.component.html',
@@ -35,6 +37,7 @@ export class CaballosComponent implements OnInit {
   ins_pad: any;
   ins_mad: any;
 
+  total = 0;
   constructor(
     public router: Router,
     public activatedRoute: ActivatedRoute,
@@ -44,7 +47,7 @@ export class CaballosComponent implements OnInit {
 
   ngOnInit() {
     this.caballosStorage();
-    this.cargarCaballosUI();
+    // this.cargarCaballosUI();
 
     if ( localStorage.getItem('haras') !== null ) {
       this.haras = JSON.parse( localStorage.getItem('haras') );
@@ -54,7 +57,7 @@ export class CaballosComponent implements OnInit {
         if ( resp.status === 'correcto') {
           this.haras = resp.haras;
           localStorage.setItem('haras', JSON.stringify(resp.haras) );
-          localStorage.setItem('act_haras', JSON.stringify(resp.actualizacion) );
+          localStorage.setItem('act_haras', JSON.stringify(resp.time) );
           this._caballoService.act_haras = resp.actualizacion;
         }
       });
@@ -72,45 +75,47 @@ export class CaballosComponent implements OnInit {
 
     if ( localStorage.getItem('padrillosui') !== null ) {
       this.padrillos = JSON.parse( localStorage.getItem('padrillosui') );
-      this._caballoService.cargarPadrillosUI()
-      .subscribe( resp => {
-          this.padrillos = resp;
-          localStorage.setItem('padrillosui', JSON.stringify(resp) );
-      });
+      // this._caballoService.cargarPadrillosUI()
+      // .subscribe( resp => {
+      //     this.padrillos = resp;
+      //     localStorage.setItem('padrillosui', JSON.stringify(resp) );
+      // });
     } else {
       this._caballoService.cargarPadrillosUI()
       .subscribe( resp => {
-          this.padrillos = resp;
-          localStorage.setItem('padrillosui', JSON.stringify(resp) );
+          this.padrillos = resp.padrillosui;
+          localStorage.setItem('padrillosui', JSON.stringify(resp.padrillosui) );
       });
     }
 
     if ( localStorage.getItem('madrillasui') !== null ) {
       this.madrillas = JSON.parse( localStorage.getItem('madrillasui') );
-      this._caballoService.cargarMadrillasUI()
-      .subscribe( resp => {
-          this.madrillas = resp;
-          localStorage.setItem('madrillasui', JSON.stringify(resp) );
-      });
+      // this._caballoService.cargarMadrillasUI()
+      // .subscribe( resp => {
+      //     this.madrillas = resp;
+      //     localStorage.setItem('madrillasui', JSON.stringify(resp) );
+      // });
     } else {
       this._caballoService.cargarMadrillasUI()
       .subscribe( resp => {
-          this.madrillas = resp;
-          localStorage.setItem('madrillasui', JSON.stringify(resp) );
+          this.madrillas = resp.madrillasui;
+          localStorage.setItem('madrillasui', JSON.stringify(resp.madrillasui) );
       });
     }
   }
 
-  cargarCaballos() {
+  cargarCaballos(page: number) {
     $('#spinact').addClass(' fa-spin ');
-    this._caballoService.cargarCaballos()
+    this._caballoService.cargarCaballos(page)
     .subscribe( resp => {
       if ( resp.status === 'correcto') {
-        this.caballos = resp.caballos;
+        this.caballos = resp.horses.data;
+        this.total = resp.horses.total;
+        this.pagina = resp.horses.current_page;
         $('#spinact').removeClass('fa-spin');
-        localStorage.setItem('caballos', JSON.stringify(resp.caballos) );
-        localStorage.setItem('act_caballos', JSON.stringify(resp.actualizacion) );
-        this._caballoService.act_caballos = resp.actualizacion;
+        localStorage.setItem('caballos', JSON.stringify(resp.horses.data) );
+        localStorage.setItem('act_caballos', JSON.stringify(resp.time) );
+        this._caballoService.act_caballos = resp.time;
       }
     });
   }
@@ -139,7 +144,7 @@ export class CaballosComponent implements OnInit {
 
     if ( nombre !== '') {
       const busqueda = new RegExp(nombre, 'i');
-      const caballio = this.caballos.filter( caballo => busqueda.test( caballo.nombre ) );
+      const caballio = this.caballos.filter( caballo => busqueda.test( caballo.name ) );
       this.caballio = caballio;
     }
 
@@ -150,11 +155,8 @@ export class CaballosComponent implements OnInit {
     this._caballoService.actualizarCaballo( caballo )
     .subscribe( resp => {
       if ( resp.status === 'correcto') {
-          caballo.edad = resp.edad;
-          const foundIndex = this.caballos.findIndex( x => x.id_caballo === caballo.id_caballo);
-          this.caballos[foundIndex] = caballo;
-
-          localStorage.setItem('caballos', JSON.stringify(this.caballos) );
+          
+          
 
           this.toastr.success('Correcto', resp.mensaje, {
             timeOut: 3000,
@@ -165,6 +167,35 @@ export class CaballosComponent implements OnInit {
     });
   }
 
+  modificarDato (caballo, value, parameter, sp_parameter = '') {
+    if (value != caballo[parameter] && (value != '' || caballo[parameter] != null) ) {
+      this._caballoService.modificarDatoCaballo(caballo.id, value, parameter)
+      .subscribe(res => {
+        if (res.status == 'success') {
+          caballo.edad = res.horse.edad;
+
+          const foundIndex = this.caballos.findIndex( x => x.id == caballo.id);
+          this.caballos[foundIndex] = res.horse;
+
+          localStorage.setItem('caballos', JSON.stringify(this.caballos) );
+
+          caballo[parameter] = value;
+          const toast = swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 2000
+          });
+          toast({
+            type: res.status,
+            title: 'Se modificó el campo ' + sp_parameter + 'correctamente'
+          });
+        }
+      });
+    }
+  }
+
+
   revisarMadre ( dato, caballo: Caballo ) {
     setTimeout(() => {
       if ( this.ins_mad !== '') {
@@ -172,8 +203,7 @@ export class CaballosComponent implements OnInit {
         this.ins_pad = '';
         this.ins_mad = '';
 
-        const foundIndex = this.madrillas.findIndex( x => x.nombre === dato );
-        console.log( foundIndex);
+        const foundIndex = this.madrillas.findIndex( x => x.name === dato );
 
         if ( foundIndex === -1) {
           const swalWithBootstrapButtons = swal.mixin({});
@@ -193,7 +223,7 @@ export class CaballosComponent implements OnInit {
                 console.log( resp );
                 if (resp.status === 'success') {
                   this.madrillas.push( resp.madre );
-                  this.madrillas.sort((a, b) => (a.nombre > b.nombre) ? 1 : ((b.nombre > a.nombre) ? -1 : 0));
+                  this.madrillas.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
                   localStorage.setItem('madrillasui', JSON.stringify(this.madrillas) );
 
                   const toast = swal.mixin({
@@ -206,15 +236,6 @@ export class CaballosComponent implements OnInit {
                     type: resp.status,
                     title: resp.mstatus
                   });
-
-                  caballo.madre = resp.madre;
-
-                  const foundIndex2 = this.caballos.findIndex( x => x.id_caballo === caballo.id_caballo);
-                  this.caballos[foundIndex2] = caballo;
-                  localStorage.setItem('caballos', JSON.stringify(this.caballos));
-                }
-                if ( resp.status === 'existe') {
-                  swal ('Partido existente', resp.mensaje, 'info');
                 }
               });
             } else if (
@@ -234,7 +255,7 @@ export class CaballosComponent implements OnInit {
         this.ins_pad = '';
         this.ins_mad = '';
 
-        const foundIndex = this.padrillos.findIndex( x => x.nombre === dato );
+        const foundIndex = this.padrillos.findIndex( x => x.name === dato );
 
         if ( foundIndex === -1) {
           const swalWithBootstrapButtons = swal.mixin({});
@@ -254,7 +275,7 @@ export class CaballosComponent implements OnInit {
                 console.log( resp );
                 if (resp.status === 'success') {
                   this.padrillos.push( resp.padre );
-                  this.padrillos.sort((a, b) => (a.nombre > b.nombre) ? 1 : ((b.nombre > a.nombre) ? -1 : 0));
+                  this.padrillos.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
                   localStorage.setItem('padrillosui', JSON.stringify(this.padrillos) );
 
                   const toast = swal.mixin({
@@ -268,15 +289,12 @@ export class CaballosComponent implements OnInit {
                     title: resp.mstatus
                   });
 
-                  caballo.padre = resp.padre;
+                  caballo.father = resp.padre;
 
-                  const foundIndex2 = this.caballos.findIndex( x => x.id_caballo === caballo.id_caballo);
+                  const foundIndex2 = this.caballos.findIndex( x => x.id === caballo.id);
                   this.caballos[foundIndex2] = caballo;
                   localStorage.setItem('caballos', JSON.stringify(this.caballos));
 
-                }
-                if ( resp.status === 'existe') {
-                  swal ('Partido existente', resp.mensaje, 'info');
                 }
               });
             } else if (
@@ -300,7 +318,7 @@ export class CaballosComponent implements OnInit {
 
     if ( descripcion !== '') {
       const busqueda = new RegExp(descripcion, 'i');
-      const harass = this.haras.filter( haras => busqueda.test( haras.descripcion ) );
+      const harass = this.haras.filter( haras => busqueda.test( haras.name ) );
       this.harass = harass;
     }
 
@@ -308,7 +326,7 @@ export class CaballosComponent implements OnInit {
   }
 
   selHar ( caballo, haras, id_ins ) {
-    caballo.id_haras = haras;
+    caballo.haras = haras;
     $('#bhar-' + id_ins).hide(100);
 
     $('#hr-' + id_ins).html(haras.descripcion);
@@ -317,7 +335,7 @@ export class CaballosComponent implements OnInit {
     this.ins_pad = '';
     this.ins_mad = '';
 
-    this.actualizarCaballo( caballo );
+    this.modificarDato( caballo, haras.id, 'haras_id', 'haras ');
   }
 
 
@@ -332,7 +350,7 @@ export class CaballosComponent implements OnInit {
 
     if ( descripcion !== '') {
       const busqueda = new RegExp(descripcion, 'i');
-      const padrillosui = this.padrillos.filter( padrillos => busqueda.test( padrillos.nombre ) );
+      const padrillosui = this.padrillos.filter( padrillos => busqueda.test( padrillos.name ) );
       this.padrillosui = padrillosui;
     }
 
@@ -340,16 +358,15 @@ export class CaballosComponent implements OnInit {
   }
 
   selPad ( caballo, padre, id_ins ) {
-    caballo.padre = padre;
+    caballo.father = padre;
     $('#bhar-' + id_ins).hide(100);
-
     $('#pd-' + id_ins).html(padre.nombre);
 
     this.ins_har = '';
     this.ins_pad = '';
     this.ins_mad = '';
 
-    this.actualizarCaballo( caballo );
+    this.modificarDato( caballo, padre.id, 'father_id', 'padre ');
   }
 
   buscarMadrillas ( descripcion, id_ins, index ) {
@@ -364,7 +381,7 @@ export class CaballosComponent implements OnInit {
 
     if ( descripcion !== '') {
       const busqueda = new RegExp(descripcion, 'i');
-      const madrillasui = this.madrillas.filter( madrillas => busqueda.test( madrillas.nombre ) );
+      const madrillasui = this.madrillas.filter( madrillas => busqueda.test( madrillas.name ) );
       this.madrillasui = madrillasui;
     }
 
@@ -372,7 +389,7 @@ export class CaballosComponent implements OnInit {
   }
 
   selMad ( caballo, madre, id_ins ) {
-    caballo.madre = madre;
+    caballo.mother = madre;
     $('#bhar-' + id_ins).hide(100);
 
     $('#md-' + id_ins).html(madre.nombre);
@@ -381,6 +398,61 @@ export class CaballosComponent implements OnInit {
     this.ins_pad = '';
     this.ins_mad = '';
 
-    this.actualizarCaballo( caballo );
+    this.modificarDato( caballo, madre.id, 'mother_id', 'madre');
+  }
+
+  cargarMadrillasUI( dato ) {
+    if ( dato === 'borrar') {
+      $('#act_yeg').addClass(' fa-spin ');
+      localStorage.removeItem('madrillasui');
+    }
+
+    if ( localStorage.getItem('madrillasui') !== null ) {
+      this.madrillasui = JSON.parse( localStorage.getItem('madrillasui') );
+    } else {
+      this._caballoService.cargarMadrillasUI()
+      .subscribe( resp => {
+        this.madrillas = resp.madrillasui;
+        $('#act_yeg').removeClass('fa-spin');
+        localStorage.setItem('madrillasui', JSON.stringify(resp.madrillasui) );
+      });
+    }
+  }
+
+  cargarPadrillosUI( dato ) {
+    if ( dato === 'borrar') {
+      $('#act_pad').addClass(' fa-spin ');
+      localStorage.removeItem('padrillosui');
+    }
+
+    if ( localStorage.getItem('padrillosui') !== null ) {
+      this.padrillosui = JSON.parse( localStorage.getItem('padrillosui') );
+    } else {
+      this._caballoService.cargarPadrillosUI()
+      .subscribe( resp => {
+        this.padrillos = resp.padrillosui;
+        $('#act_pad').removeClass('fa-spin');
+        localStorage.setItem('padrillosui', JSON.stringify(resp.padrillosui) );
+      });
+    }
+  }
+
+  cargarHaras( dato ) {
+    if ( dato === 'borrar') {
+      $('#act_har').addClass(' fa-spin ');
+      localStorage.removeItem('haras');
+    }
+
+    if ( localStorage.getItem('haras') !== null ) {
+      this.haras = JSON.parse( localStorage.getItem('haras') );
+    } else {
+      this._caballoService.cargarHaras()
+      .subscribe( resp => {
+        $('#act_har').removeClass('fa-spin');
+        this.haras = resp.haras;
+        localStorage.setItem('haras', JSON.stringify(resp.haras) );
+        localStorage.setItem('act_haras', JSON.stringify(resp.time) );
+      });
+    }
   }
 }

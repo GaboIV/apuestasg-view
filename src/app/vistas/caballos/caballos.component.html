@@ -5,31 +5,46 @@
         <div class="upd_act" routerLink="/nuevoCaballo">
             <i class="far fa-plus-square" style="font-size: 3em;"></i><br>Agregar Caballo
         </div>
-        <div class="upd_act" (click)="cargarCaballos()">
+        <div class="upd_act" (click)="cargarCaballos(1)">
             <i id="spinact" class="fas fa-sync" style="font-size: 3em;"></i><br>Actualizar lista
         </div>
 
     </div>
 
+    <div class='cada_hrs' style="text-align: center;">
+        Base de datos local:
+        <div class="botonoes">
+            <div (click)="cargarMadrillasUI('borrar')"><i class="fas fa-sync" id="act_yeg"></i>&nbsp;&nbsp;&nbsp;Actualizar yeguas madre</div>
+            <div (click)="cargarPadrillosUI('borrar')"><i class="fas fa-sync" id="act_pad"></i>&nbsp;&nbsp;&nbsp;Actualizar padrillos</div>
+            <div (click)="cargarHaras('borrar')"><i class="fas fa-sync" id="act_har"></i>&nbsp;&nbsp;&nbsp;Actualizar haras</div>
+        </div>
+
+    </div>
+
     <ng-container *ngIf="caballio?.length === 0">
-        <div class='cada_hrs' *ngFor="let caballo of caballos; let i = index">
-            <div class='name_hrs' contenteditable="true" [textContent]="caballo.nombre" style="width: 100%;" id="N_{{caballo.id_caballo}}" (input)="caballo.nombre=$event.target.textContent" (blur)="actualizarCaballo( caballo )">{{caballo.nombre}}</div><br>
+        <div class='cada_hrs' *ngFor="let caballo of caballos | paginate: { itemsPerPage: 50, currentPage: pagina, totalItems: total }; let i = index">
+            <div class='name_hrs' #name contenteditable="true" [textContent]="caballo.name" style="width: 100%;" (blur)="modificarDato(caballo, name.innerText, 'name', 'nombre ')">
+                {{caballo.name}}
+            </div>
+            <br>
             <div class='des_hrs'>{{caballo.sexo}} de {{caballo.edad}}</div>
-            <div class='fecha_hrs' contenteditable="true" [textContent]="caballo.nacimiento" (input)="caballo.nacimiento=$event.target.textContent" (blur)="actualizarCaballo( caballo )">{{caballo.nacimiento}}</div>
+            <div #birthday class='fecha_hrs' contenteditable="true" [textContent]="caballo.birthday" (blur)="modificarDato( caballo, birthday.innerText, 'birthday', 'fehca de nacimiento ' )">
+                {{caballo.birthday}}
+            </div>
             <div class='d_padre_hrs'>Padre: </div>
-            <div class='padre_hrs' contenteditable="true" (keyup)="buscarPadrillos( $event.target.textContent, caballo.id_caballo, i )" id="pd-{{caballo.id_caballo}}" tabindex="0" (blur)="revisarPadre( $event.target.textContent, caballo )"><span *ngIf="caballo.padre?.nombre !== undefined">{{caballo.padre.nombre}}</span></div>
-            <div *ngIf="ins_pad === caballo.id_caballo" class="busc_div bpad" id="bpad-{{caballo.id_caballo}}" style="display: none; margin: 0px; margin-left: 30%; width: 70%;">
-                <div *ngFor="let pads of padrillosui | slice: 0:12" (click)="selPad(caballo, pads, caballo.id_caballo)">{{pads.nombre}}</div>
+            <div class='padre_hrs' contenteditable="true" (keyup)="buscarPadrillos( $event.target.textContent, caballo.id, i )" id="pd-{{caballo.id}}" tabindex="0" (blur)="revisarPadre( $event.target.textContent, caballo )"><span *ngIf="caballo.father?.name !== undefined">{{caballo.father?.name}}</span></div>
+            <div *ngIf="ins_pad === caballo.id" class="busc_div bpad" id="bpad-{{caballo.id}}" style="display: none; margin: 0px; margin-left: 30%; width: 70%;">
+                <div *ngFor="let pads of padrillosui | slice: 0:12" (click)="selPad(caballo, pads, caballo.id)">{{pads.name}}</div>
             </div>
             <div class='d_padre_hrs'>Madre: </div>
-            <div class='padre_hrs' contenteditable="true" (keyup)="buscarMadrillas( $event.target.textContent, caballo.id_caballo, i )" id="md-{{caballo.id_caballo}}" tabindex="0" (blur)="revisarMadre( $event.target.textContent, caballo )"><span *ngIf="caballo.madre?.nombre !== undefined">{{caballo.madre.nombre}}</span></div>
-            <div *ngIf="ins_mad === caballo.id_caballo" class="busc_div bmad" id="bmad-{{caballo.id_caballo}}" style="display:; margin: 0px; margin-left: 30%; width: 70%;">
-                <div *ngFor="let mads of madrillasui | slice: 0:12" (click)="selMad(caballo, mads, caballo.id_caballo)">{{mads.nombre}}</div>
+            <div class='padre_hrs' contenteditable="true" (keyup)="buscarMadrillas( $event.target.textContent, caballo.id, i )" id="md-{{caballo.id}}" tabindex="0" (blur)="revisarMadre( $event.target.textContent, caballo )"><span *ngIf="caballo.mother?.name !== undefined">{{caballo.mother?.name}}</span></div>
+            <div *ngIf="ins_mad === caballo.id" class="busc_div bmad" id="bmad-{{caballo.id}}" style="display:; margin: 0px; margin-left: 30%; width: 70%;">
+                <div *ngFor="let mads of madrillasui | slice: 0:12" (click)="selMad(caballo, mads, caballo.id)">{{mads.name}}</div>
             </div>
             <div class='d_padre_hrs'>Haras: </div>
-            <div class='padre_hrs' contenteditable="true" (keyup)="buscarHaras( $event.target.textContent, caballo.id_caballo, i )" id="hr-{{caballo.id_caballo}}"><span *ngIf="caballo.id_haras?.descripcion !== undefined">{{caballo.id_haras.descripcion}}</span></div>
-            <div *ngIf="ins_har === caballo.id_caballo" class="busc_div bhar" id="bhar-{{caballo.id_caballo}}" style="display: none; margin: 0px; margin-left: 30%; width: 70%;">
-                <div *ngFor="let hars of harass | slice: 0:12" (click)="selHar(caballo, hars, caballo.id_caballo)">{{hars.descripcion}}</div>
+            <div class='padre_hrs' contenteditable="true" (keyup)="buscarHaras( $event.target.textContent, caballo.id, i )" id="hr-{{caballo.id}}"><span *ngIf="caballo.haras?.name !== undefined">{{caballo.haras?.name}}</span></div>
+            <div *ngIf="ins_har === caballo.id" class="busc_div bhar" id="bhar-{{caballo.id}}" style="display: none; margin: 0px; margin-left: 30%; width: 70%;">
+                <div *ngFor="let hars of harass | slice: 0:12" (click)="selHar(caballo, hars, caballo.id)">{{hars.name}}</div>
             </div>
         </div>
     </ng-container>
@@ -56,9 +71,8 @@
             </div>
         </div>
     </ng-container>
-
-
-
-
-
 </div>
+
+<div class="pagination_fixed">
+    <pagination-controls previousLabel="Anterior" nextLabel="Siguiente" maxSize="12" (pageChange)="cargarCaballos($event)"></pagination-controls>
+</div>   

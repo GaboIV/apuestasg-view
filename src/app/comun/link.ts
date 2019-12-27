@@ -8,6 +8,7 @@ export const URL_ACCOUNT = URL_INICIAL + 'accounts';
 export const URL_ACTUALIZACIONES = URL_INICIAL + 'updates';
 export const URL_AUTH = URL_INICIAL + 'auth';
 export const URL_BANK = URL_INICIAL + 'banks';
+export const URL_CABALLOS = URL_INICIAL + 'horses';
 export const URL_CHANGELOG = URL_INICIAL + 'changelogs';
 export const URL_DEPORTES = URL_INICIAL + 'categories';
 export const URL_DEPOSITO = URL_INICIAL + 'pays';
@@ -25,7 +26,6 @@ export const URL_SELECCION = URL_INICIAL + 'player/selections';
 export const URL_TICKET = URL_INICIAL + 'player/ticket';
 export const URL_TRANSACCION = URL_INICIAL + 'player/transactions';
 
-export const URL_CABALLOS = URL_INICIAL + 'bzbk/public/index.php/caballos';
 export const URL_JINETES = URL_INICIAL + 'bzbk/public/index.php/jinetes';
 export const URL_ENTRENADORES = URL_INICIAL + 'bzbk/public/index.php/entrenadores';
 export const URL_HARAS = URL_INICIAL + 'bzbk/public/index.php/haras';
