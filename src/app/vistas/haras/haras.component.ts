@@ -3,6 +3,7 @@ import { Haras } from '../../modelos/haras';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CaballosService } from '../../servicios/caballos.service';
 import { ToastrService } from 'ngx-toastr';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-haras',
@@ -13,6 +14,10 @@ export class HarasComponent implements OnInit {
 
   haras: Haras[] = [];
   harias: Haras[] = [];
+
+  criterio = 'todos';
+  pagina = 1;
+  total = 50;
 
   constructor(
     public router: Router,
@@ -28,6 +33,7 @@ export class HarasComponent implements OnInit {
   harasStorage () {
     if ( localStorage.getItem('haras') !== null ) {
       this.haras = JSON.parse( localStorage.getItem('haras') );
+      this.total = JSON.parse( localStorage.getItem('total_haras') );
     } else {
       console.log ( 'No hay haras' );
     }
@@ -43,16 +49,30 @@ export class HarasComponent implements OnInit {
   }
 
   cargarHaras() {
+    const toast = swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 20000
+    });
+    toast({
+      type: 'info',
+      title: 'Cargando haras'
+    });
+
     $('#spinact').addClass(' fa-spin ');
-      this._caballoService.cargarHaras()
-      .subscribe( resp => {
-        if ( resp.status === 'correcto') {
-          this.haras = resp.haras;
-          $('#spinact').removeClass('fa-spin');
-          localStorage.setItem('haras', JSON.stringify(resp.haras) );
-          localStorage.setItem('act_haras', JSON.stringify(resp.actualizacion) );
-          this._caballoService.act_haras = resp.actualizacion;
-        }
+
+    this._caballoService.cargarHaras()
+    .subscribe( resp => {
+      if ( resp.status === 'correcto') {
+        this.haras = resp.haras;
+        // this.total = resp.jockeys.total;
+        // this.pagina = resp.jockeys.current_page;
+        $('#spinact').removeClass('fa-spin');
+        localStorage.setItem('haras', JSON.stringify(resp.haras) );
+        localStorage.setItem('act_haras', JSON.stringify(resp.time) );
+        this._caballoService.act_haras = resp.time;
+      }
     });
   }
 }

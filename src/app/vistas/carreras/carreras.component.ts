@@ -21,27 +21,15 @@ export class CarrerasComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.carreras = JSON.parse( localStorage.getItem('carreras') );
+    this.carreras = JSON.parse( localStorage.getItem('carreras'));
     this.cargarCarreras();
-
-    this.hipodromos = JSON.parse( localStorage.getItem('hipodromos') );
-    this.cargarHipodromos();
   }
 
   cargarCarreras() {
     this._caballoService.cargarCarreras('todas')
-          .subscribe( resp => {
-            this.carreras = resp.carreras;
-            localStorage.setItem('carreras', JSON.stringify(resp.carreras) );
-          } );
+    .subscribe( resp => {
+      this.carreras = resp.carreras.data;
+      localStorage.setItem('carreras', JSON.stringify(resp.carreras.data) );
+    } );
   }
-
-  cargarHipodromos() {
-    this._caballoService.cargarHipodromos()
-          .subscribe( hipodromos => {
-            this.hipodromos = hipodromos;
-            localStorage.setItem('hipodromos', JSON.stringify(hipodromos) );
-          } );
-  }
-
 }

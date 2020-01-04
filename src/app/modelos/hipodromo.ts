@@ -1,10 +1,10 @@
 export class Hipodromo {
 
     constructor(
-        public id_hipodromo?: string,
-        public descripcion?: string,
-        public acro?: string,
-        public ubicacion?: string,
-        public img?: string
+        public id?: string,
+        public name?: string,
+        public acro_2?: string,
+        public ubication?: string,
+        public image?: string
     ) { }
 }

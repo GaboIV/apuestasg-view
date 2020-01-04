@@ -16,18 +16,22 @@
     </div>
 
     <ng-container *ngIf="harias?.length === 0">
-        <div class='cada_hrs' style="height: 75px;" *ngFor="let hara of haras">
-            <div class='name_hrs'>{{hara.descripcion}}</div><br>
+        <div class='cada_hrs' style="height: 75px;" *ngFor="let hara of haras | paginate: { itemsPerPage: 47, currentPage: pagina }">
+            <div class='name_hrs'>{{hara.name}}</div><br>
             <div class='d_padre_hrs'>Ubicación: </div>
-            <div class='padre_hrs'>{{hara.ubicacion}}</div>
+            <div class='padre_hrs'>{{hara.ubication}}</div>
         </div>
     </ng-container>
 
     <ng-container *ngIf="harias?.length > 0">
-        <div class='cada_hrs' style="height: 75px;" *ngFor="let hara of harias">
-            <div class='name_hrs'>{{hara.descripcion}}</div><br>
+        <div class='cada_hrs' style="height: 75px;" *ngFor="let hara of harias | paginate: { itemsPerPage: 47, currentPage: pagina }">
+            <div class='name_hrs'>{{hara.name}}</div><br>
             <div class='d_padre_hrs'>Ubicación: </div>
-            <div class='padre_hrs'>{{hara.ubicacion}}</div>
+            <div class='padre_hrs'>{{hara.ubication}}</div>
         </div>
     </ng-container>
 </div>
+
+<div class="pagination_fixed">
+    <pagination-controls previousLabel="Anterior" nextLabel="Siguiente" maxSize="12" (pageChange)="pagina = $event"></pagination-controls>
+</div>   

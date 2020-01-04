@@ -3,6 +3,7 @@ import { Hipodromo } from '../../modelos/hipodromo';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CaballosService } from '../../servicios/caballos.service';
 import { ToastrService } from 'ngx-toastr';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-hipodromos',
@@ -18,6 +19,9 @@ export class HipodromosComponent implements OnInit {
   hipos: Hipodromo[] = [];
 
   nuevo = null;
+
+  criterio = 'todos';
+  pagina = 1;
 
   constructor(
     public router: Router,
@@ -39,25 +43,38 @@ export class HipodromosComponent implements OnInit {
   }
 
   cargarHipodromos() {
+    const toast = swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 20000
+    });
+    toast({
+      type: 'info',
+      title: 'Cargando hipódromos'
+    });
+
     $('#spinact').addClass(' fa-spin ');
+
     this._caballoService.cargarHipodromos()
     .subscribe( resp => {
       if ( resp.status === 'correcto') {
         this.hipodromos = resp.hipodromos;
+
         $('#spinact').removeClass('fa-spin');
         localStorage.setItem('hipodromos', JSON.stringify(resp.hipodromos) );
-        localStorage.setItem('act_hipodromos', JSON.stringify(resp.actualizacion) );
-        this._caballoService.act_hipodromos = resp.actualizacion;
+        localStorage.setItem('act_hipodromos', JSON.stringify(resp.time) );
+        this._caballoService.act_hipodromos = resp.time;
       }
     });
   }
 
-  buscarHipodromo ( descripcion ) {
+  buscarHipodromo ( name ) {
     this.hipos = [];
 
-    if ( descripcion !== '') {
-      const busqueda = new RegExp(descripcion, 'i');
-      const hipos = this.hipodromos.filter( hipodromos => busqueda.test( hipodromos.descripcion ) );
+    if ( name !== '') {
+      const busqueda = new RegExp(name, 'i');
+      const hipos = this.hipodromos.filter( hipodromos => busqueda.test( hipodromos.name ) );
       this.hipos = hipos;
     }
   }
@@ -71,7 +88,6 @@ export class HipodromosComponent implements OnInit {
   }
 
   enviarDatos() {
-    console.log( this.hipodromo );
     this._caballoService.crearHipodromo( this.hipodromo )
     .subscribe( res => {
       if (res.status === 'correcto') {
@@ -81,7 +97,7 @@ export class HipodromosComponent implements OnInit {
         });
         this.hipodromos = JSON.parse( localStorage.getItem('hipodromos') );
         this.hipodromos.push( res.hipodromo );
-        this.hipodromos.sort((a, b) => (a.descripcion > b.descripcion) ? 1 : ((b.descripcion > a.descripcion) ? -1 : 0));
+        this.hipodromos.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
         localStorage.setItem('hipodromos', JSON.stringify(this.hipodromos) );
         this.nuevo = null;
       } else {

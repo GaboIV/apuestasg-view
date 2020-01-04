@@ -6,23 +6,23 @@
         <i class="far fa-plus-square" style="font-size: 3em;"></i><br>Agregar Carrera
     </div>
     <div class='cada_hrs' style="height: 210px;" *ngFor="let carrera of carreras">
-        <div class='numero_hrs' [routerLink]="['/carrera', carrera.id_carrera ]" [queryParams]="{zona:'inscripciones'}" style="cursor: pointer">
-            <div class='nro_cen'>{{carrera.numero}}</div>
-            <div class='nro_jan' *ngIf="carrera.valida !== '0'">{{carrera.valida}}ª vál.</div>
-            <div class='nro_jan' *ngIf="carrera.valida === '0'">No vál.</div>
+        <div class='numero_hrs' [routerLink]="['/carrera', carrera.id ]" [queryParams]="{zona:'inscripciones'}" style="cursor: pointer">
+            <div class='nro_cen'>{{carrera.number}}</div>
+            <div class='nro_jan' *ngIf="carrera.valid !== 0">{{carrera.valid}}ª vál.</div>
+            <div class='nro_jan' *ngIf="carrera.valid === 0">No vál.</div>
         </div>
         <div class='datos_num_hrs'>
-            <div class='title_hrs'>{{carrera.titulo}}</div>
-            <div class='title_hrs'>CÓD: {{carrera.codigo}}</div>
+            <div class='title_hrs' style="font-size: 0.55em;">{{carrera.title}}</div>
+            <div class='title_hrs'>CÓD: {{carrera.code}}</div>
         </div>
-        <div class='desc_car'>{{carrera.descripcion}}</div>
+        <div class='desc_car'>{{carrera.description}}</div>
         <div class='d_padre_hrs'>Hipodromo: </div>
-        <div class='padre_hrs'>{{carrera.id_hipodromo.descripcion}} </div>
+        <div class='padre_hrs'>{{carrera.racecourse.name}} </div>
         <div class='d_padre_hrs'>Distancia: </div>
-        <div class='padre_hrs'>{{carrera.distancia}}</div>
+        <div class='padre_hrs'>{{carrera.distance}}</div>
         <div class='d_padre_hrs'>Fecha: </div>
-        <div class='padre_hrs'>{{carrera.fecha_hora | date:'d/MM/yyyy'}}</div>
+        <div class='padre_hrs'>{{carrera.date | date:'d/MM/yyyy'}}</div>
         <div class='d_padre_hrs'>Hora: </div>
-        <div class='padre_hrs'>{{ carrera.fecha_hora | date:'shortTime'}}</div>
+        <div class='padre_hrs'>{{ carrera.date | date:'shortTime'}}</div>
     </div>
 </div>

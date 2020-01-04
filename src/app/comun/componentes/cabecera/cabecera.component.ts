@@ -18,6 +18,7 @@ export class CabeceraComponent implements OnInit {
   token = '';
   usuario: Usuario;
   vermenuuser = false;
+  esperando = false;
 
   constructor(
     public _generalesService: GeneralesService,
@@ -61,10 +62,15 @@ export class CabeceraComponent implements OnInit {
   }
 
   loginUsuario( event ) {
+    this._sesionUsuario.esperandologion = true;
     event.preventDefault();
     const tarjeta = event.target;
     const usuario = tarjeta.querySelector('#usuario').value;
     const contrasena = tarjeta.querySelector('#contrasena').value;
+    if (usuario == '' || contrasena == '') {
+      this._sesionUsuario.esperandologion = false;
+      return;
+    }
     this._sesionUsuario.obtenerUsuario( usuario, contrasena, 'contrasena')
     .subscribe( res => {
       if (res.access_token) {
@@ -73,6 +79,7 @@ export class CabeceraComponent implements OnInit {
         this._sesionUsuario.usuario = res.user;
         this._sesionUsuario.guardarUsuario(res.user.id, res.access_token, res.user.nick);
         this._sesionUsuario.obtenerSelecciones().subscribe();
+        this._sesionUsuario.esperandologion = false;
       }
     });
   }

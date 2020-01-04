@@ -1,7 +1,7 @@
 <app-menu-caballos></app-menu-caballos>
 <div>
     <div class='cada_hrs pan_hrs' style="text-align: center;">
-        <input type="text" placeholder="Buscar un ejemplar" (keyup)="buscarCaballo( $event.target.value )" class="inpiut"><br><br>
+        <input #caja type="text" placeholder="Buscar un ejemplar" (keyup.enter)="buscarElemento( caja.value )" class="inpiut"><button (click)="buscarElemento( caja.value )" class="inpiut_button"><i class="fas fa-search" style="font-size: 1em !important;"></i></button><br><br>
         <div class="upd_act" routerLink="/nuevoCaballo">
             <i class="far fa-plus-square" style="font-size: 3em;"></i><br>Agregar Caballo
         </div>

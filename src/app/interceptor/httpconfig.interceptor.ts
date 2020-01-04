@@ -24,6 +24,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
     return next.handle(request)
       .pipe(
         catchError((error: HttpErrorResponse) => {
+          HttpErrorInterceptor.LoginService.esperandologion = false;
           HttpErrorInterceptor.LoginService.loading = false;
           let errorMessage = '';
           let message = 'Sesión expirada';

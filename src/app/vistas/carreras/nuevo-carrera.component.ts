@@ -53,7 +53,7 @@ export class NuevoCarreraComponent implements OnInit {
     $('.cod_hrs').keyup( () => {
       const acro = $('#hipodromo_car').val();
       let arra: any;
-      arra = this.hipodromos.find(hipodromo => hipodromo.id_hipodromo === acro );
+      arra = this.hipodromos.find(hipodromo => hipodromo.id === acro );
       arra = arra.acro;
       const nro_gral = $('#nro_gral').val();
       const nro_carrera = $('#nro_carrera').val();
@@ -67,7 +67,7 @@ export class NuevoCarreraComponent implements OnInit {
     $('.hipodromo_car').change( () => {
       const acro = $('#hipodromo_car').val();
       let arra: any;
-      arra = this.hipodromos.find(hipodromo => hipodromo.id_hipodromo === acro );
+      arra = this.hipodromos.find(hipodromo => hipodromo.id === acro );
       arra = arra.acro;
       const nro_gral = $('#nro_gral').val();
       const nro_carrera = $('#nro_carrera').val();

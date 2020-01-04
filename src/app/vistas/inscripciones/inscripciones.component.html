@@ -6,33 +6,34 @@
 
         <div class='hipo_lista' *ngIf="carrera.div">{{carrera.div}}</div>
 
-        <div class='linea_carrera spin' (click)="abrirCarrera(carrera.id_carrera)" id="carr_{{carrera.id_carrera}}">
-            <div class=" normal_tt" id="tt_{{carrera.id_carrera}}">Carrera nro. {{carrera.numero}}</div>
-            <span class='anuncio_carr' *ngIf="carrera.valida !=='0' ">{{carrera.valida}}ª válida</span>
-            <span class='anuncio_carr' *ngIf="carrera.valida==='0' ">No válida</span>
-            <span class='anuncio_carr'>{{carrera.distancia}} mts.</span>
-            <span class='anuncio_carr'>{{carrera.fecha_hora | date:'shortTime'}}</span>
+        <div class='linea_carrera spin' (click)="abrirCarrera(carrera.id)" id="carr_{{carrera.id}}">
+            <div class=" normal_tt" id="tt_{{carrera.id}}">Carrera nro. {{carrera.number}}</div>
+            <span class='anuncio_carr' *ngIf="carrera.valid !=='0' ">{{carrera.valid}}ª válida</span>
+            <span class='anuncio_carr' *ngIf="carrera.valid ==='0' ">No válida</span>
+            <span class='anuncio_carr'>{{carrera.distance}} mts.</span>
+            <span class='anuncio_carr'>{{carrera.date | date:'shortTime'}}</span>
             <span class='anuncio_carr ejs_inscritos'>{{carrera.inscripcion}}</span>
-            <span class='add_ins' id='mas_{{carrera.id_carrera}}' [routerLink]="['/nuevaInscripcion', carrera.codigo ]">+</span>
+            <span class='add_ins' id='mas_{{carrera.id}}' [routerLink]="['/nuevaInscripcion', carrera.code ]">+</span>
         </div>
-        <div style="display: none;" id="{{carrera.id_carrera}}_id">
-            <div class='cab_inscrito' *ngFor="let ins of carrera.inscritos">
+        <div style="display: none;" id="{{carrera.id}}_id">
+            <div class='cab_inscrito' *ngFor="let ins of carrera.inscriptions">
                 <div class='nro_puerta'>
-                    <div class='num_par'>{{ins.numero}}</div>
-                    <div class='pue_par'>{{ins.puesto}}</div>
+                    <div class='num_par'>{{ins.number}}</div>
+                    <div class='pue_par'>{{ins.position}}</div>
                 </div>
-                <div class='jersey_u'><img [src]="ins.id_stud.id_stud + '.png' | imagen: 'stud' " height=50px></div>
+                <div class='jersey_u' *ngIf="ins.stud"><img [src]="ins.stud.image | imagen: 'stud' " height=50px></div>
+                <div class='jersey_u' *ngIf="!ins.stud"><img [src]="'noimage.png' | imagen: 'stud' " height=50px></div>
                 <div class='datos_pr'>
-                    <div class='nomb_cab'>{{ins.id_caballo.nombre}}</div>
-                    <div class='jin_cab'>{{ins.id_jinete.nombre}} - {{ins.id_entrenador.nombre}}</div>
-                </div>
-                <div class='datos_pr'>
-                    <div class='jin_cab nopad'>Peso: {{ins.peso}}</div>
-                    <div class='jin_cab'><span>Stud: {{ins.id_stud.descripcion}}</span><span *ngIf="ins.id_stud2.descripcion !=='' "> / {{ins.id_stud2.descripcion}}</span></div>
+                    <div class='nomb_cab'>{{ins.horse.name}}</div>
+                    <div class='jin_cab'>{{ins.jockey?.name}} - {{ins.trainer?.name}}</div>
                 </div>
                 <div class='datos_pr'>
-                    <div class='jin_cab nopad'>Pedigree: {{ins.id_caballo.padre.nombre}} en {{ins.id_caballo.madre.nombre}}</div>
-                    <div class='jin_cab'>Haras: <span></span>{{ins.id_caballo.id_haras.descripcion}}</div>
+                    <div class='jin_cab nopad'>Peso: {{ins.weight}}</div>
+                    <div class='jin_cab'><span>Stud: {{ins.stud?.name}}</span></div>
+                </div>
+                <div class='datos_pr'>
+                    <div class='jin_cab nopad'>Pedigree: {{ins.horse?.father?.name}} en {{ins.horse?.mother?.name}}</div>
+                    <div class='jin_cab'>Haras: <span></span>{{ins.horse?.haras?.name}}</div>
                 </div>
             </div>
         </div>

@@ -23,6 +23,7 @@ export class CaballosComponent implements OnInit {
   desactivar = 'disabled';
   caballio: Caballo[] = [];
   caballosui: any;
+  criterio = 'todos';
 
   haras: Haras[] = [];
   harass: Haras[] = [];
@@ -52,23 +53,23 @@ export class CaballosComponent implements OnInit {
     if ( localStorage.getItem('haras') !== null ) {
       this.haras = JSON.parse( localStorage.getItem('haras') );
 
-      this._caballoService.cargarHaras()
-      .subscribe( resp => {
-        if ( resp.status === 'correcto') {
-          this.haras = resp.haras;
-          localStorage.setItem('haras', JSON.stringify(resp.haras) );
-          localStorage.setItem('act_haras', JSON.stringify(resp.time) );
-          this._caballoService.act_haras = resp.actualizacion;
-        }
-      });
+      // this._caballoService.cargarHaras()
+      // .subscribe( resp => {
+      //   if ( resp.status === 'correcto') {
+      //     this.haras = resp.haras;
+      //     localStorage.setItem('haras', JSON.stringify(resp.haras) );
+      //     localStorage.setItem('act_haras', JSON.stringify(resp.time) );
+      //     this._caballoService.act_haras = resp.time;
+      //   }
+      // });
     } else {
       this._caballoService.cargarHaras()
       .subscribe( resp => {
         if ( resp.status === 'correcto') {
           this.haras = resp.haras;
           localStorage.setItem('haras', JSON.stringify(resp.haras) );
-          localStorage.setItem('act_haras', JSON.stringify(resp.actualizacion) );
-          this._caballoService.act_haras = resp.actualizacion;
+          localStorage.setItem('act_haras', JSON.stringify(resp.time) );
+          this._caballoService.act_haras = resp.time;
         }
       });
     }
@@ -104,9 +105,23 @@ export class CaballosComponent implements OnInit {
     }
   }
 
-  cargarCaballos(page: number) {
+  cargarCaballos(page: number, criterios: string = this.criterio) {
+    this.criterio = criterios;
+
+    const toast = swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 20000
+    });
+    toast({
+      type: 'info',
+      title: 'Cargando caballos'
+    });
+
     $('#spinact').addClass(' fa-spin ');
-    this._caballoService.cargarCaballos(page)
+
+    this._caballoService.cargarCaballos(page, criterios)
     .subscribe( resp => {
       if ( resp.status === 'correcto') {
         this.caballos = resp.horses.data;
@@ -115,14 +130,25 @@ export class CaballosComponent implements OnInit {
         $('#spinact').removeClass('fa-spin');
         localStorage.setItem('caballos', JSON.stringify(resp.horses.data) );
         localStorage.setItem('act_caballos', JSON.stringify(resp.time) );
+        localStorage.setItem('total_caballos', JSON.stringify(resp.horses.total) );
         this._caballoService.act_caballos = resp.time;
+        swal.close();
       }
     });
+  }
+
+  buscarElemento(valor: string) {
+    if (valor === '') {
+      valor = 'todos';
+    }
+
+    this.cargarCaballos(1, valor);
   }
 
   caballosStorage () {
     if ( localStorage.getItem('caballos') !== null ) {
       this.caballos = JSON.parse( localStorage.getItem('caballos') );
+      this.total = JSON.parse( localStorage.getItem('total_caballos') );
     } else {
       console.log ( 'No hay caballos' );
     }
@@ -139,17 +165,17 @@ export class CaballosComponent implements OnInit {
     }
   }
 
-  buscarCaballo ( nombre ) {
-    this.caballio = [];
+  // buscarCaballo ( nombre ) {
+  //   this.caballio = [];
 
-    if ( nombre !== '') {
-      const busqueda = new RegExp(nombre, 'i');
-      const caballio = this.caballos.filter( caballo => busqueda.test( caballo.name ) );
-      this.caballio = caballio;
-    }
+  //   if ( nombre !== '') {
+  //     const busqueda = new RegExp(nombre, 'i');
+  //     const caballio = this.caballos.filter( caballo => busqueda.test( caballo.name ) );
+  //     this.caballio = caballio;
+  //   }
 
-    console.log( this.caballio );
-  }
+  //   console.log( this.caballio );
+  // }
 
   actualizarCaballo( caballo: Caballo) {
     this._caballoService.actualizarCaballo( caballo )
@@ -329,7 +355,7 @@ export class CaballosComponent implements OnInit {
     caballo.haras = haras;
     $('#bhar-' + id_ins).hide(100);
 
-    $('#hr-' + id_ins).html(haras.descripcion);
+    $('#hr-' + id_ins).html(haras.name);
 
     this.ins_har = '';
     this.ins_pad = '';

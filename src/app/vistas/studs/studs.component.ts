@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { CaballosService } from '../../servicios/caballos.service';
 import { GeneralesService } from '../../servicios/generales.service';
 import { ToastrService } from 'ngx-toastr';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-studs',
@@ -18,6 +19,10 @@ export class StudsComponent implements OnInit {
   resultado: any;
 
   studis: Studs[] = [];
+
+  criterio = 'todos';
+  pagina = 1;
+  total = 0;
 
   constructor(
     public router: Router,
@@ -34,21 +39,42 @@ export class StudsComponent implements OnInit {
   studsStorage () {
     if ( localStorage.getItem('studs') !== null ) {
       this.studs = JSON.parse( localStorage.getItem('studs') );
+      this.total = JSON.parse( localStorage.getItem('total_studs') );
     } else {
       console.log ( 'No hay studs' );
     }
   }
 
-  cargarStuds() {
+  cargarStuds(page: number, criterios: string = this.criterio) {
+    this.criterio = criterios;
+
+    const toast = swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 20000
+    });
+    toast({
+      type: 'info',
+      title: 'Cargando studs'
+    });
+
     $('#spinact').addClass(' fa-spin ');
-    this._caballoService.cargarStuds()
+
+    this._caballoService.cargarStuds(page, criterios)
     .subscribe( resp => {
       if ( resp.status === 'correcto') {
-        this.studs = resp.studs;
+        this.studs = resp.studs.data;
+        this.total = resp.studs.total;
+        this.pagina = resp.studs.current_page;
+
         $('#spinact').removeClass('fa-spin');
-        localStorage.setItem('studs', JSON.stringify(resp.studs) );
-        localStorage.setItem('act_studs', JSON.stringify(resp.actualizacion) );
-        this._caballoService.act_studs = resp.actualizacion;
+        localStorage.setItem('studs', JSON.stringify(resp.studs.data) );
+        localStorage.setItem('act_studs', JSON.stringify(resp.time) );
+        localStorage.setItem('total_studs', JSON.stringify(resp.studs.total) );
+        this._caballoService.act_studs = resp.time;
+
+        swal.close();
       }
     });
   }
@@ -92,4 +118,11 @@ export class StudsComponent implements OnInit {
     });
   }
 
+  buscarElemento(valor: string) {
+    if (valor === '') {
+      valor = 'todos';
+    }
+
+    this.cargarStuds(1, valor);
+  }
 }

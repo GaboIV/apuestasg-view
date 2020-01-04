@@ -62,7 +62,7 @@ export class CarreraComponent implements OnInit {
     if ( localStorage.getItem('studs') !== null ) {
       this.studs = JSON.parse( localStorage.getItem('studs') );
     } else {
-      this._caballoService.cargarStuds()
+      this._caballoService.cargarStuds(1, 'todos')
       .subscribe( resp => {
         if ( resp.status === 'correcto') {
           this.studs = resp.studs;
@@ -77,7 +77,7 @@ export class CarreraComponent implements OnInit {
     if ( localStorage.getItem('caballos') !== null ) {
       this.caballos = JSON.parse( localStorage.getItem('caballos') );
     } else {
-      this._caballoService.cargarCaballos(1)
+      this._caballoService.cargarCaballos(1, 'todos')
       .subscribe( resp => {
         if ( resp.status === 'correcto') {
           this.caballos = resp.caballos;
@@ -91,7 +91,7 @@ export class CarreraComponent implements OnInit {
     if ( localStorage.getItem('jinetes') !== null ) {
       this.jinetes = JSON.parse( localStorage.getItem('jinetes') );
     } else {
-      this._caballoService.cargarJinetes()
+      this._caballoService.cargarJinetes(1, 'todos')
       .subscribe( resp => {
         if ( resp.status === 'correcto') {
           this.jinetes = resp.jinetes;
@@ -105,7 +105,7 @@ export class CarreraComponent implements OnInit {
     if ( localStorage.getItem('entrenadores') !== null ) {
       this.entrenadores = JSON.parse( localStorage.getItem('entrenadores') );
     } else {
-      this._caballoService.cargarEntrenadores()
+      this._caballoService.cargarEntrenadores(1, 'todos')
     .subscribe( resp => {
       if ( resp.status === 'correcto') {
         this.entrenadores = resp.entrenadores;

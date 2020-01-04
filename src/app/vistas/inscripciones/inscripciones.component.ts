@@ -34,16 +34,16 @@ export class InscripcionesComponent implements OnInit {
     this.cargarCarreras();
 
     this.hipodromos = JSON.parse( localStorage.getItem('hipodromos') );
-    this.cargarHipodromos();
-    this.cargarCaballosUI();
+    // this.cargarHipodromos();
+    // this.cargarCaballosUI();
   }
 
   cargarCarreras() {
-    this._caballoService.cargarCarreras('todas')
-          .subscribe( resp => {
-            this.carreras = resp.carreras;
-            localStorage.setItem('carreras', JSON.stringify(resp.carreras) );
-          } );
+    this._caballoService.cargarCarreras('todas?inscriptions=1')
+    .subscribe( resp => {
+      this.carreras = resp.carreras;
+      localStorage.setItem('carreras', JSON.stringify(resp.carreras) );
+    });
   }
 
   cargarHipodromos() {

@@ -2,49 +2,53 @@
 <div>
     <div class='cada_hrs pan_hrs' style="text-align: center; height: 75px;">
         <div style="width: 50%; display: inline-block; vertical-align: middle">
-            <input type="text" placeholder="Buscar un stud" (keyup)="buscarStud( $event.target.value )" class="inpiut">
+            <input type="text" #caja placeholder="Buscar" (keyup.enter)="buscarElemento( caja.value )" class="inpiut"><button (click)="buscarElemento( caja.value )" class="inpiut_button"><i class="fas fa-search" style="font-size: 1em !important;"></i></button>
         </div>
         <div style="width: 50%; display: inline-block; vertical-align: middle; text-align: left;">
             <div style="margin-bottom: 5px;" routerLink="/nuevoStud" class="update">
                 <i class="far fa-plus-square" style="font-size: 1.7em; vertical-align: sub; padding-right: 6px;"></i>Agregar
             </div>
-            <div class="update" (click)="cargarStuds()">
+            <div class="update" (click)="cargarStuds(1, 'todos')">
                 <i id="spinact" class="fas fa-sync" style="font-size: 1.5em; vertical-align: sub; padding-right: 6px;"></i>Actualizar
             </div>
         </div>
     </div>
 
     <ng-container *ngIf="studis?.length === 0">
-        <div class='cada_hrs' style="height: 75px; " *ngFor="let stud of studs ">
+        <div class='cada_hrs' style="height: 75px; " *ngFor="let stud of studs | paginate: { itemsPerPage: 50, currentPage: pagina, totalItems: total }; let i = index">
             <div class='imagen_stud'>
                 <label style="cursor: pointer; position: relative; height: 60px; ">
-                    <img [src]="stud.img | imagen: 'stud' " alt=" " height="50px; ">
+                    <img [src]="stud.image | imagen: 'stud' " alt=" " height="50px; ">
                     <br>
                     <input type="file" name="imagenSubir " (change)="subirImagen($event, stud) " style="display: none ">
                 </label>
             </div>
             <div style="display: inline-block; width: 80%; vertical-align: top; ">
-                <div class='name_hrs' contenteditable="true" [textContent]="stud.descripcion" style="width: 100%;" (input)="stud.descripcion=$event.target.textContent" (blur)="actualizarStud( stud )">{{stud.descripcion}}</div><br>
+                <div class='name_hrs' contenteditable="true" [textContent]="stud.name" style="width: 100%;" (input)="stud.name=$event.target.textContent" (blur)="actualizarStud( stud )">{{stud.name}}</div><br>
                 <div class='d_padre_hrs'>Ubicación: </div>
-                <div class='padre_hrs'>{{stud.ubicacion}}</div>
+                <div class='padre_hrs'>{{stud.ubication}}</div>
             </div>
         </div>
     </ng-container>
 
     <ng-container *ngIf="studis?.length > 0">
-        <div class='cada_hrs' style=" height: 75px;" *ngFor=" let stud of studis ">
+        <div class='cada_hrs' style=" height: 75px;" *ngFor=" let stud of studis | paginate: { itemsPerPage: 50, currentPage: pagina, totalItems: total }; let i = index">
             <div class='imagen_stud'>
                 <label style="cursor: pointer; position: relative; height: 60px; ">
-                    <img [src]="stud.img | imagen: 'stud' " alt=" " height="50px; ">
+                    <img [src]="stud.image | imagen: 'stud' " alt=" " height="50px; ">
                     <br>
                     <input type="file" name="imagenSubir " (change)="subirImagen($event, stud) " style="display: none ">
                 </label>
             </div>
             <div style="display: inline-block; width: 80%; vertical-align: top; ">
-                <div class='name_hrs' contenteditable="true" [textContent]="stud.descripcion" style="width: 100%;" (input)="stud.descripcion=$event.target.textContent" (blur)="actualizarStud( stud )">{{stud.descripcion}}</div><br>
+                <div class='name_hrs' contenteditable="true" [textContent]="stud.name" style="width: 100%;" (input)="stud.name=$event.target.textContent" (blur)="actualizarStud( stud )">{{stud.name}}</div><br>
                 <div class='d_padre_hrs'>Ubicación: </div>
-                <div class='padre_hrs'>{{stud.ubicacion}}</div>
+                <div class='padre_hrs'>{{stud.ubication}}</div>
             </div>
         </div>
     </ng-container>
 </div>
+
+<div class="pagination_fixed">
+    <pagination-controls previousLabel="Anterior" nextLabel="Siguiente" maxSize="12" (pageChange)="cargarStuds($event)"></pagination-controls>
+</div>   

@@ -27,6 +27,8 @@ export class InicioSesionService {
   countries = JSON.parse(localStorage.getItem('countries'));
   categories = JSON.parse(localStorage.getItem('categories'));
 
+  esperandologion = false;
+
   wines = ''; montos: any; public apostado = 0;
 
   menuT: any = [

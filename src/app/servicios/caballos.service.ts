@@ -42,8 +42,8 @@ export class CaballosService {
     public _loginService: InicioSesionService,
   ) { }
 
-  cargarCaballos(page: number) {
-    const url = URL_CABALLOS + "?page=" + page;
+  cargarCaballos(page: number, criterio) {
+    const url = URL_CABALLOS + "?page=" + page + '&criterio=' + criterio;
 
     return this.http.get( url, this._loginService.httpOptions )
       .pipe(map ( (resp: any) => {
@@ -101,42 +101,24 @@ export class CaballosService {
       }));
   }
 
-  cargarJinetes() {
-    const url = URL_JINETES + '/ver/todos';
+  cargarJinetes(page: number, criterio) {
+    const url = URL_JINETES + "?page=" + page + '&criterio=' + criterio;
 
-    return this.http.get( url )
+    return this.http.get( url, this._loginService.httpOptions )
       .pipe(map ( (resp: any) => {
         return resp;
       }));
   }
 
-  cargarJinetesUI() {
-    const url = URL_CABALLOS + '/jinetesui';
+  cargarEntrenadores(page: number, criterio) {
+    const url = URL_ENTRENADORES + "?page=" + page + '&criterio=' + criterio;
 
-    return this.http.get( url )
-      .pipe(map ( (resp: any) => {
-        return resp.jinetesui;
-      }));
-  }
-
-  cargarEntrenadores() {
-    const url = URL_ENTRENADORES + '/ver/todos';
-
-    return this.http.get( url )
+    return this.http.get( url, this._loginService.httpOptions )
       .pipe(map ( (resp: any) => {
         return resp;
       }));
   }
-
-  cargarEntrenadoresUI() {
-    const url = URL_CABALLOS + '/entrenadoresui';
-
-    return this.http.get( url )
-      .pipe(map ( (resp: any) => {
-        return resp.entrenadoresui;
-      }));
-  }
-
+  
   cargarHaras() {
     const url = URL_CABALLOS + '/haras';
 
@@ -146,10 +128,10 @@ export class CaballosService {
       }));
   }
 
-  cargarStuds() {
-    const url = URL_STUDS + '/ver/todos';
+  cargarStuds(page: number, criterio) {
+    const url = URL_STUDS + "?page=" + page + '&criterio=' + criterio;
 
-    return this.http.get( url )
+    return this.http.get( url, this._loginService.httpOptions )
       .pipe(map ( (resp: any) => {
         return resp;
       }));
@@ -165,23 +147,20 @@ export class CaballosService {
   }
 
   cargarHipodromos() {
-    const url = URL_HIPODROMOS + '/ver/todos';
+    const url = URL_HIPODROMOS;
 
-    return this.http.get( url )
+    return this.http.get( url, this._loginService.httpOptions )
       .pipe(map ( (resp: any) => {
         return resp;
       }));
   }
 
   cargarCarreras(dato: string) {
-    const url = URL_CARRERAS + '/ver/' + dato;
+    const url = URL_CARRERAS + '/' + dato;
 
-    return this.http.get( url )
+    return this.http.get( url, this._loginService.httpOptions )
       .pipe(map ( (resp: any) => {
-        if ( resp.carreras) {
-          this.carreras = resp.carreras;
-          console.log( this.carreras );
-        }
+        console.log(resp);
         return resp;
       }));
   }

@@ -94,7 +94,7 @@ export class NuevaInscripcionComponent implements OnInit {
         });
       });
     } else {
-      this._caballosService.cargarJinetesUI()
+      this._caballosService.cargarJinetes(1, 'todos')
       .subscribe( jinetesui => {
         $(() => {
           $( '#jinete_ipt' ).autocomplete({
@@ -114,7 +114,7 @@ export class NuevaInscripcionComponent implements OnInit {
         });
       });
     } else {
-      this._caballosService.cargarEntrenadoresUI()
+      this._caballosService.cargarEntrenadores(1, 'todos')
       .subscribe( entrenadoresui => {
         $(() => {
           $( '#entrenador_ipt' ).autocomplete({

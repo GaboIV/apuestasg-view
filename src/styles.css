@@ -1964,7 +1964,7 @@ cuerpo {
 .imagen_stud {
     display: inline-block;
     vertical-align: top;
-    padding-right: 15px;
+    text-align: center;
     width: 20%;
 }
 

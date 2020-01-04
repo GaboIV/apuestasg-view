@@ -137,7 +137,7 @@ export class ImportantesComponent implements OnInit {
         const z1_wid = $('#z1_bet').height();
         const ancho1 = $('#z1_bet').width();
 
-        console.log($(this).scrollTop(), ($(window).height() - 137));
+        // console.log($(this).scrollTop(), ($(window).height() - 137));
 
 
         if (($(this).scrollTop() >= 137) && (win_wid > z1_wid)) {
@@ -330,7 +330,6 @@ export class ImportantesComponent implements OnInit {
   verifyRadio(value = this.radio, id = this.id) {
     if (this.radio != value) {
       this.radio = value;
-      console.log(value);
       this.solohoy(this.id, value);
     }
   }
