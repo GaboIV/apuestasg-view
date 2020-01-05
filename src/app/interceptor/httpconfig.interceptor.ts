@@ -38,17 +38,17 @@ export class HttpErrorInterceptor implements HttpInterceptor {
             if (errorMessage === 'undefined') {
               errorMessage = `${error.error.message}`;
             }
-
-            if (errorMessage === 'Undefined offset: 2' || errorMessage === 'Undefined offset: 1') {
-              errorMessage = "Error en los datos enviados. Posiblemente las coordenadas de ubicación."
-            }
-
-            if (errorMessage.indexOf("file_get_contents") == 0) {
-              errorMessage = "Error en los datos enviados. Posiblemente las coordenadas de ubicación."
-            }
           }
 
           if (error.status === 401) {
+
+            const tokenr = localStorage.getItem('token')
+
+            if (tokenr != null) {
+              message = 'Sesión expirada';
+            } else {
+              message = 'Debe iniciar sesión para realizar esta acción';
+            };
            
             localStorage.removeItem('token');
             localStorage.removeItem('menu');
@@ -99,12 +99,28 @@ export class HttpErrorInterceptor implements HttpInterceptor {
             HttpErrorInterceptor.LoginService.code = '';
             HttpErrorInterceptor.LoginService.type = 'admin';
 
+            HttpErrorInterceptor.LoginService.esperando = false;
+
             this.router.navigate(['/importantes/1']);
-            swal({
-              type: 'error',
-              title: 'Error:',
-              text: message
-            })            
+
+            if (tokenr != null) {
+              swal({
+                type: 'error',
+                title: 'Error:',
+                text: message
+              });  
+            } else {
+              const toast = swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 2000
+              });
+              toast ({
+                type: 'warning',
+                title: message
+              });
+            }                       
           } else {
             swal({
               type: 'error',

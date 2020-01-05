@@ -57,18 +57,18 @@
                 <div *ngFor="let sel of _inicioSesion.selecciones">
                     <div class='tkt_body'>
                         <div class="equis_tkt desseleccion" id="epry-577" (click)="removerSel(sel.id_seleccion)">x</div>
-                        <div class='nom_apostado'>({{sel.id_select.numero}}) {{sel.id_select.id_caballo.nombre}}</div>
+                        <div class='nom_apostado'>({{sel.numero}}) {{sel.horse}}</div>
                         <div class='carr_apostado'>
-                            Carrera {{sel.id_select.id_carrera.numero}} de {{sel.id_select.id_carrera.id_hipodromo.descripcion}} ({{ sel.id_select.id_carrera.fecha_hora | date:'dd/MM/yyyy'}})
+                            Carrera {{sel.carrera}} de {{sel.hipodromo}} ({{ sel.fecha_hora | date:'dd/MM/yyyy'}})
                         </div>
                         <div class='carr_apostado'>
                             <input placeholder='imp.' type='text' class='monto_apostado amt' (keyup)="query()" name='monto_apostado' [(ngModel)]="_inicioSesion.montoapuesta">
-                            <select class="select_horse_win" id="{{sel.id_seleccion}}">
+                            <select class="select_horse_win" id="{{sel.id}}">
                                     <option value="1">Ganador</option>
                                     <option value="2">Placé</option>
                                 </select>
                         </div>
-                        <div class='carr_apostado'>Máx. Bs. 5.000,00 (Ganancias según dividendo)</div>
+                        <div class='carr_apostado'>Máx. Bs. 5.000.000,00 (Ganancias según dividendo)</div>
                     </div>
                 </div>
                 <div class='tkt_apostar' (click)="apostar()" *ngIf="_inicioSesion.selecciones?.length > 0">
@@ -82,10 +82,10 @@
                         <div class='ttl_tk'>{{tk.cod_seguridad}}</div>
                     </div>
                     <div class="ttlhr">
-                        <div class="ttl_hr">Carr. {{tk.selecciones.id_select.id_carrera.numero}}</div>
+                        <div class="ttl_hr">Carr. {{tk.selecciones.inscripcion.carrera.number}}</div>
                         <div class="ttl2_hr">
-                            <div>{{ tk.selecciones.id_select.id_carrera.fecha_hora | date:'dd/MM/yyyy'}} {{ tk.selecciones.id_select.id_carrera.fecha_hora | date:'shortTime'}} </div>
-                            <div class='ttl_hipo'>{{tk.selecciones.id_select.id_carrera.id_hipodromo.descripcion}}</div>
+                            <div>{{ tk.selecciones.inscripcion.carrera.date | date:'dd/MM/yyyy'}} {{ tk.selecciones.inscripcion.carrera.date | date:'shortTime'}} </div>
+                            <div class='ttl_hipo'>{{tk.selecciones.inscripcion.hipodromo.name}}</div>
                         </div>
                     </div>
                     <div class='separador1_tk'></div>
@@ -94,7 +94,7 @@
                         <div style="width: 40%; text-align: right">Bs. {{tk.monto}}</div>
                     </div>
                     <div class="hr_r2">
-                        {{tk.selecciones.id_select.numero}} - {{tk.selecciones.id_select.id_caballo.nombre}}
+                        {{tk.selecciones.inscripcion.number}} - {{tk.selecciones.inscripcion.horse.name}}
                     </div>
                     <div class='separador1_tk'></div>
                     <div class="hr_r3">

@@ -31,7 +31,6 @@ export class PartidosService {
 
     return this.http.get( url, this._loginService.httpOptions )
       .pipe(map ( (resp: any) => {
-        console.log(resp);
         return resp.games;
       }));
   }
@@ -44,7 +43,6 @@ export class PartidosService {
 
     return this.http.get( url, this._loginService.httpOptions )
       .pipe(map ( (resp: any) => {
-        console.log(resp);
         return resp.game;
       }));
   }

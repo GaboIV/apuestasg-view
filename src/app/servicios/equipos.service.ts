@@ -26,8 +26,6 @@ export class EquiposService {
     //   url = URL_EQUIPOS + '/ver/' + pagina + '/todos/' + '/' + liga;
     // }
 
-    console.log(criterio);
-
     url = URL_EQUIPOS + '?page=' + pagina + '&criterio=' + criterio;
 
     return this.http.get( url, this._loginService.httpOptions )

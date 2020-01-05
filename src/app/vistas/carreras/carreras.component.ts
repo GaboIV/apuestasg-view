@@ -28,8 +28,8 @@ export class CarrerasComponent implements OnInit {
   cargarCarreras() {
     this._caballoService.cargarCarreras('todas')
     .subscribe( resp => {
-      this.carreras = resp.carreras.data;
-      localStorage.setItem('carreras', JSON.stringify(resp.carreras.data) );
+      this.carreras = resp.carreras;
+      localStorage.setItem('carreras', JSON.stringify(resp.carreras) );
     } );
   }
 }

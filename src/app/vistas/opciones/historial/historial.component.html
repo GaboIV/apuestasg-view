@@ -95,25 +95,25 @@
                         </div> -->
                         <div style="display: inline-block; vertical-align: middle; width: 94%; ">
                             <div class='selecea' *ngFor="let sel of tk.selections ">
-                                <ng-container *ngIf="sel.id_deporte==='27' ">
-                                    <div class='c_sele'>({{sel.id_select.numero}}) {{sel.id_select.id_caballo.nombre}}
-                                        <span *ngIf="sel.valor !==null "> @ {{sel.valor | number:'1.2'}} </span>
-                                        <span class='banner_histo' *ngIf="sel.id_select.status==='0' ">Pendiente</span>
+                                <ng-container *ngIf="sel.category_id == '7' ">
+                                    <div class='c_sele'>({{sel.inscription.number}}) {{sel.inscription.horse.name}}
+                                        <span *ngIf="sel.value != 1"> @ {{sel.value | number:'1.2'}} </span>
+                                        <span class='banner_histo' *ngIf="sel.inscription.status == 0">Pendiente</span>
                                         <span class='banner_histo ganadeivis'
-                                            *ngIf="sel.id_select.status==='1' ">Ganador</span>
+                                            *ngIf="sel.inscription.status == 1">Ganador</span>
                                         <span class='banner_histo pendeivis'
-                                            *ngIf="sel.id_select.status==='2' ">Segundo</span>
+                                            *ngIf="sel.inscription.status == 2">Segundo</span>
                                         <span class='banner_histo pendeivis'
-                                            *ngIf="sel.id_select.status==='3' ">Tercero</span>
-                                        <span class='banner_histo pendeivis' *ngIf="sel.id_select.status==='99' ">No
+                                            *ngIf="sel.inscription.status == 3">Tercero</span>
+                                        <span class='banner_histo pendeivis' *ngIf="sel.inscription.status == 99">No
                                             figuró</span>
                                     </div>
 
-                                    <div class='enc_sele'>Carrera {{sel.id_select.id_carrera.numero}} de
-                                        {{sel.id_select.id_carrera.id_hipodromo.descripcion}}
-                                        ({{ sel.id_select.id_carrera.fecha_hora | date:'dd/MM/yyyy'}})</div>
+                                    <div class='enc_sele'>Carrera {{sel.career.number}} de
+                                        {{sel.career.racecourse.name}}
+                                        ({{ sel.career.date | date:'dd/MM/yyyy'}})</div>
                                 </ng-container>
-                                <ng-container *ngIf="sel.id_deporte !=='27' ">
+                                <ng-container *ngIf="sel.category_id != '7' ">
                                     <div class='c_sele'><b>{{sel.team_name}}</b> @ {{sel.value | cuota:'decimal'}}
                                         <span class='banner_histo' *ngIf="sel.status === 0 ">Pendiente</span>
                                         <span class='banner_histo ganadeivis' *ngIf="sel.status === 1 ">Ganador</span>
@@ -141,7 +141,7 @@
                         <span class='banner_histo pendeivis' *ngIf="tk.status === 3">Perdido</span>
                     </div>
                     <div class='col col_win'>
-                        <span *ngIf="tk.towin === 1 && tk.status === 0">Ganancias según dividendo</span>
+                        <span *ngIf="tk.towin == 0 && tk.status === 0">Ganancias según dividendo</span>
                         <span *ngIf="tk.towin === 1 && tk.status === 3">---</span>
                         <span *ngIf="tk.towin > 1">Bs. {{ tk.towin | number:'1.2'}}</span><br>
                         <span class='banner_histo ganadeivis' *ngIf="tk.status === 1">Ganado</span>

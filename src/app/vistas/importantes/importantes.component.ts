@@ -35,7 +35,7 @@ export class ImportantesComponent implements OnInit {
   dias_carr = [];
   destacados: Partido;
   carreras: Carrera;
-  id: string;
+  id: any;
   liga_temp = 0;
   juegos: any = [];
   usuario: any;
@@ -60,38 +60,26 @@ export class ImportantesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.cargarCategoriasJuegos();  
+    this.esperando = true;
+
     this.route.queryParams
-      .subscribe(params => {
-        this.dia_c = params.dia;
-        this.carrera_c = params.carrera;
-      });
+    .subscribe(params => {
+      this.dia_c = params.dia;
+      this.carrera_c = params.carrera;
+
+      if (params.pantalla == 'principal') {
+        this.solohoy(1);
+      }
+    });
 
     this.route.params
-      .subscribe(parametros => {
-        this.id = parametros['id_categoria'];
-        $('.ep_cada_cat').removeClass('seleccionadosport');
-        $('#temp-' + this.id).addClass(' seleccionadosport ');
-        $('.spin_cat').removeClass('iconosport');
-        $('#spin-' + this.id).addClass(' iconosport ');
-        if (parametros['id_categoria'] === '7') {
-          this.esperando = true;
-          this._caballoService.cargarCarreras('todas')
-            .subscribe(resp => {
-              this.esperando = false;
-              this.carreras = resp.carreras;
-              this.dias_carr = resp.dias;
-              this.partidos = null;
-
-              if (this.dia_c === undefined || this.carrera_c === undefined) {
-                // tslint:disable-next-line:max-line-length
-                this.router.navigate(['/importantes/27'], { queryParams: { 'dia': this.dias_carr[0].dia, 'carrera': this.carreras[0].numero } });
-              }
-            });
-        } else {
-          this.esperando = true;   
-          this.cargarCategoriasJuegos();  
-        }
-      });
+    .subscribe(parametros => {
+      this.id = parametros['id_categoria']; 
+              
+      $('.ep_cada_cat').removeClass('seleccionadosport');
+      $('#temp-' + this.id).addClass(' seleccionadosport ');
+    });
     $('.mensaje_cp').hide();
     this.cargarDestacados();
 
@@ -298,13 +286,19 @@ export class ImportantesComponent implements OnInit {
 
   solohoy(id, radio = this.radio) {
     this.id = id;
-    if (this.id === '27') {
+    if (this.id == 7) {
       this.esperando = true;
-      this._caballoService.cargarCarreras('hoy')
+      this._caballoService.cargarCarreras('todas?inscriptions=1')
         .subscribe(resp => {
           this.esperando = false;
           this.carreras = resp.carreras;
+          this.dias_carr = resp.dias;
           this.partidos = null;
+
+          if (this.dia_c == undefined || this.carrera_c == undefined) {
+            // tslint:disable-next-line:max-line-length
+            this.router.navigate(['/importantes/7'], { queryParams: { 'dia': this.dias_carr[0].dia, 'carrera': this.carreras[0].number } });
+          }
         });
     } else {
       this.esperando = true;
@@ -313,6 +307,7 @@ export class ImportantesComponent implements OnInit {
           this.esperando = false;
           this.partidos = resp.juegos;
           this.carreras = null;
+          this.router.navigate(['/importantes/' + this.id]);
         });
     }
   }

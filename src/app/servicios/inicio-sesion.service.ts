@@ -185,7 +185,7 @@ export class InicioSesionService {
           this.selecciones = [];
           this.selecciones2 = resp.selecciones;
           this.cuota = resp.quot;
-        } else if ( resp.tipo === '27') {
+        } else if ( resp.tipo === '7') {
           this.selecciones2 = [];
           this.selecciones = resp.selecciones;
         } else if ( resp.tipo === '') {
@@ -202,12 +202,14 @@ export class InicioSesionService {
     this.esperando = true;
     this.ticketes = null;
     this.ticketes2 = null;
-    const url = URL_SELECCION + '/agregarh/' + id_apuesta;
+    const url = URL_SELECCION + '/addhipism';
 
-    return this.http.post( url, usuario )
+    return this.http.post( url, {
+      "bet_id" : id_apuesta
+    }, this.httpOptions )
       .pipe(map( (resp: any) => {
         const res = resp;
-        this.selecciones = resp.selecciones;
+        this.selecciones = resp.selections;
 
         this.esperando = false;
 
@@ -304,23 +306,8 @@ export class InicioSesionService {
 
   enviarTicket( montos: string ) {
     this.esperando = true;
-    const url = URL_TICKET + '/add';
+    const url = URL_TICKET + '/addhipism';
     const id_usuario = this.usuario.id;
-
-    if (isNaN(this.aganar) == true) {
-      const toast = swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 2000
-      });
-      toast({
-        type: 'warning',
-        title: 'Debes ingresar un aporte válido'
-      });
-      this.esperando = false;
-      return;
-    }
 
     return this.http.post( url, { montos, id_usuario }, this.httpOptions )
       .pipe(map( (resp: any) => {

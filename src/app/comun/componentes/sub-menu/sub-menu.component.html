@@ -4,7 +4,7 @@
 
     </div>
 
-    <div routerLink="/importantes/1" style="cursor: pointer;" class="ico_now">
+    <div [routerLink]="['/importantes/1' ]" [queryParams]="{pantalla: 'principal'}" style="cursor: pointer;" class="ico_now">
         <i class="fa fa-home" aria-hidden="true"></i>
         <span id="toolOpt2" style="font-size: 0.8em; margin-left: 10px;">Ir a Página Principal</span>
     </div>

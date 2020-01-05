@@ -98,15 +98,15 @@ export class CuotasComponent implements OnInit {
     this._inicioSesion.obtenerSelecciones()
     .subscribe( resp => {
       if ( resp.selecciones ) {
-        if ( resp.tipo === '2x') {
+        if ( resp.tipo == '2x') {
           this.selecciones = [];
           this.selecciones2 = resp.selecciones;
           this.cuota = resp.quot;
           this.cambioApuesta();
-        } else if ( resp.tipo === '27') {
+        } else if ( resp.tipo == '7') {
           this.selecciones2 = [];
           this.selecciones = resp.selecciones;
-        } else if ( resp.tipo === '') {
+        } else if ( resp.tipo == '') {
           this.selecciones = [];
           this.selecciones2 = [];
         }
@@ -188,6 +188,7 @@ export class CuotasComponent implements OnInit {
     });
 
     this.query();
+    console.log(this.montos);
     this._inicioSesion.enviarTicket( this.montos )
     .subscribe( resp => {
 

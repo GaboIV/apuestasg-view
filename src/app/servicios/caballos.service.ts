@@ -160,7 +160,6 @@ export class CaballosService {
 
     return this.http.get( url, this._loginService.httpOptions )
       .pipe(map ( (resp: any) => {
-        console.log(resp);
         return resp;
       }));
   }
