@@ -65,10 +65,10 @@
                             <input placeholder='imp.' type='text' class='monto_apostado amt' (keyup)="query()" name='monto_apostado' [(ngModel)]="_inicioSesion.montoapuesta">
                             <select class="select_horse_win" id="{{sel.id}}">
                                     <option value="1">Ganador</option>
-                                    <option value="2">Placé</option>
+                                    <!-- <option value="2">Placé</option> -->
                                 </select>
                         </div>
-                        <div class='carr_apostado'>Máx. Bs. 5.000.000,00 (Ganancias según dividendo)</div>
+                        <div class='carr_apostado'>Máx. Bs. 5.000.000,00</div>
                     </div>
                 </div>
                 <div class='tkt_apostar' (click)="apostar()" *ngIf="_inicioSesion.selecciones?.length > 0">

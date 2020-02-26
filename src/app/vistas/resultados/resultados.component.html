@@ -47,34 +47,34 @@
         </ng-container>
 
         <ng-container *ngIf="carreras?.length > 0">
-            <div *ngFor="let carr of carreras" class="parts_rl" id="{{carr.id_carrera}}">
+            <div *ngFor="let carr of carreras" class="parts_rl" id="{{carr.id}}">
                 <div class="titulo_rl">
-                    {{carr.fecha_hora}} - Carrera {{carr.numero}}
+                    {{carr.date}} - Carrera {{carr.number}}
                 </div>
                 <div class="equipos_rl carreras_rl">
                     <div class="equipo_rl caballo_rl">
-                        <select name="" id="{{carr.id_carrera}}cab1" class="cab_rl" [disabled]="carr.cuadro[0].ejemplar !== null">
+                        <select name="" id="{{carr.id}}cab1" class="cab_rl" [disabled]="carr.cuadro[0].ejemplar !== null">
                             <option value="0">Selecciona al 1er lugar</option>
-                            <option *ngFor="let cab of carr.caballos " [selected]="cab.id_inscripcion === carr.cuadro[0].ejemplar" value={{cab.id_inscripcion}}>{{ cab.nombre }}</option>              
+                            <option *ngFor="let cab of carr.inscriptions " [selected]="cab.id == carr.cuadro[0].ejemplar" value={{cab.id}}>{{ cab.horse.name }}</option>              
                         </select>
-                        <div class="caja_rl" id="{{carr.id_carrera}}div1" contenteditable="true"><span *ngIf="carr.cuadro?.length > 0" class="cab_rl">{{ carr.cuadro[0].cuota }}</span></div>
+                        <div class="caja_rl" id="{{carr.id}}div1" contenteditable="true"><span *ngIf="carr.cuadro?.length > 0" class="cab_rl">{{ carr.cuadro[0].cuota }}</span></div>
                     </div>
                     <div class="equipo_rl caballo_rl">
-                        <select name="" id="{{carr.id_carrera}}cab2" class="cab_rl" [disabled]="carr.cuadro[1].ejemplar !== null">
+                        <select name="" id="{{carr.id}}cab2" class="cab_rl" [disabled]="carr.cuadro[1].ejemplar !== null">
                             <option value="0">Selecciona al 2do lugar</option>
-                            <option *ngFor="let cab of carr.caballos " [selected]="cab.id_inscripcion === carr.cuadro[1].ejemplar" value={{cab.id_inscripcion}}>{{ cab.nombre }}</option>              
+                            <option *ngFor="let cab of carr.inscriptions " [selected]="cab.id == carr.cuadro[1].ejemplar" value={{cab.id}}>{{ cab.horse.name }}</option>              
                         </select>
-                        <div class="caja_rl" id="{{carr.id_carrera}}div2" contenteditable="true"><span *ngIf="carr.cuadro?.length > 0" class="cab_rl">{{ carr.cuadro[1].cuota }}</span></div>
+                        <div class="caja_rl" id="{{carr.id}}div2" contenteditable="true"><span *ngIf="carr.cuadro?.length > 0" class="cab_rl">{{ carr.cuadro[1].cuota }}</span></div>
                     </div>
                     <div class="equipo_rl">
-                        <select name="" id="{{carr.id_carrera}}cab3" class="cab_rl" [disabled]="carr.cuadro[2].ejemplar !== null">
+                        <select name="" id="{{carr.id}}cab3" class="cab_rl" [disabled]="carr.cuadro[2].ejemplar !== null">
                             <option value="0">Selecciona 3er lugar</option>
-                            <option *ngFor="let cab of carr.caballos " [selected]="cab.id_inscripcion === carr.cuadro[2].ejemplar" value={{cab.id_inscripcion}}>{{ cab.nombre }}</option> 
+                            <option *ngFor="let cab of carr.inscriptions " [selected]="cab.id == carr.cuadro[2].ejemplar" value={{cab.id}}>{{ cab.horse.name }}</option> 
                         </select>
-                        <div class="caja_rl" id="{{carr.id_carrera}}div3" contenteditable="true"><span *ngIf="carr.cuadro?.length > 0" class="cab_rl">{{ carr.cuadro[2].cuota }}</span></div>
+                        <div class="caja_rl" id="{{carr.id}}div3" contenteditable="true"><span *ngIf="carr.cuadro?.length > 0" class="cab_rl">{{ carr.cuadro[2].cuota }}</span></div>
                     </div>
                 </div>
-                <div class="boton_rl btn_cab" (click)="enviarCB(carr.id_carrera)">
+                <div class="boton_rl btn_cab" (click)="enviarCB(carr.id, carr)">
                     <i class="far fa-check-square"></i>
                 </div>
             </div>

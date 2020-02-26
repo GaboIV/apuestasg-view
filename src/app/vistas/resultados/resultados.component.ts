@@ -55,13 +55,11 @@ export class ResultadosComponent implements OnInit {
       .subscribe( carreras => this.carreras = carreras );
   }
 
-  enviarRL( id_partido, id_categoria, id_ta, partido:any ) {
+  enviarRL( id_partido, id_categoria, id_ta, partido: any ) {
     const valor1 = $('#RL0' + id_partido).text();
     const valor2 = $('#RL1' + id_partido).text();
 
     const resultado = valor1 + '!' + valor2;
-
-    console.log(id_partido, id_categoria, id_ta, resultado);
 
     this._partidosService.enviarRL( id_partido, id_categoria, id_ta, resultado)
     .subscribe( resp => {
@@ -82,7 +80,7 @@ export class ResultadosComponent implements OnInit {
     } );
   }
 
-  enviarCB ( id_carrera ) {
+  enviarCB ( id_carrera, carrera ) {
     const cab1 = $('#' + id_carrera + 'cab1').val();
     const cab2 = $('#' + id_carrera + 'cab2').val();
     const cab3 = $('#' + id_carrera + 'cab3').val();
@@ -95,8 +93,21 @@ export class ResultadosComponent implements OnInit {
 
     this._partidosService.enviarCB( id_carrera, dato )
     .subscribe( resp => {
-      console.log( resp );
-    } );
+      if (resp.status == 'correcto'){
+        const toast = swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 2000
+        });
+        toast({
+          type: 'success',
+          title: 'Se agregó el resultado correctamente'
+        });
+
+        carrera.status = 3;
+      }
+    });
   }
 
   changeCountry() {
@@ -118,11 +129,21 @@ export class ResultadosComponent implements OnInit {
   }
 
   filtrarPartidos(pagina) {
-    this._partidosService.filtrarPartidosResult(pagina, this.category_id, this.country_id, this.start, this.criterio)
+    if (this.category_id != 7) {
+      this._partidosService.filtrarPartidosResult(pagina, this.category_id, this.country_id, this.start, this.criterio)
       .subscribe(resp => {
         console.log(resp);
         this.partidos = resp.games.data
       });
+    } else {
+      this._partidosService.filtrarCarrerasResult(this.category_id, this.start, null)
+      .subscribe(resp => {
+        console.log(resp);
+        this.partidos = [];
+        this.carreras = resp.carreras
+      });
+    }
+    
   }
 
 }

@@ -1,5 +1,9 @@
-export const URL_INICIAL = 'http://api.apuestasg.com.ve/api/';
+// export const URL_INICIAL = 'http://api.apuestasg.com.ve/api/';
+// export const URL_A_FUNC = 'http://agac.apuestasg.com.ve/php/funciones';
+
+export const URL_INICIAL = 'http://apuestasg.2kool4u.net/api/';
 export const URL_A_FUNC = 'http://agac.apuestasg.com.ve/php/funciones';
+
 
 // export const URL_INICIAL = 'http://localhost/apuestasg-backend/public/api/';
 // export const URL_A_FUNC = 'http://localhost/apuestasg-scrap/php/funciones';

@@ -65,8 +65,15 @@ export class ImportantesComponent implements OnInit {
 
     this.route.queryParams
     .subscribe(params => {
-      this.dia_c = params.dia;
-      this.carrera_c = params.carrera;
+      if (this.dia_c != params.dia) {
+        this.dia_c = params.dia;
+        this.carrera_c = '1';
+      } else {
+        this.dia_c = params.dia;
+        this.carrera_c = params.carrera;
+      }
+      
+      
 
       if (params.pantalla == 'principal') {
         this.solohoy(1);

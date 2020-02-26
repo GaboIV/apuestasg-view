@@ -2673,6 +2673,10 @@ thead tr {
     color: #ffdf1b !important;
 }
 
+.cc_select .cc_cuadro {
+    background: #ffdf1b !important;
+}
+
 .cc_cuadro {
     height: 11px;
     width: 11px;

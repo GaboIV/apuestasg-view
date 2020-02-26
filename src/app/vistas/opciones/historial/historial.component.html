@@ -97,7 +97,8 @@
                             <div class='selecea' *ngFor="let sel of tk.selections ">
                                 <ng-container *ngIf="sel.category_id == '7' ">
                                     <div class='c_sele'>({{sel.inscription.number}}) {{sel.inscription.horse.name}}
-                                        <span *ngIf="sel.value != 1"> @ {{sel.value | number:'1.2'}} </span>
+                                        <span *ngIf="sel.value != 1 && sel.inscription.odd == null"> @ {{sel.value | number:'1.2'}} </span>
+                                        <span *ngIf="sel.inscription.odd != null"> @ Bs. {{sel.inscription.odd | number:'1.2'}} </span>
                                         <span class='banner_histo' *ngIf="sel.inscription.status == 0">Pendiente</span>
                                         <span class='banner_histo ganadeivis'
                                             *ngIf="sel.inscription.status == 1">Ganador</span>
@@ -134,7 +135,8 @@
                     <div class='col col_cuo'>
                         <span *ngIf="tk.towin === 1 && tk.status === 0 ">Cuota según dividendo</span>
                         <span *ngIf="tk.towin === 1 && tk.status === 3 ">---</span>
-                        <span *ngIf="tk.towin > 1">{{tk.quot | number:'1.2'}}</span>
+                        <span *ngIf="tk.towin > 1 && tk.selections[0].category_id != '7'">{{tk.quot | number:'1.2'}}</span>
+                        <span *ngIf="tk.towin > 1 && tk.selections[0].category_id == '7'">{{tk.selections[0].value | number:'1.2'}}</span>
                     </div>
                     <div class='col col_apo' style="text-align: center">
                         Bs. {{tk.amount | number:'1.2'}} <br>

@@ -3,7 +3,7 @@
         <div style="width: 100%; height: 100%; text-align: center; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 3; background: #0021695e;"
             *ngIf="esperando === true">
         </div>
-        <div style="width: 100%; height: 100px; text-align: center; position: absolute; top: 20%; left: 50%; transform: translate(-50%, -50%); z-index: 4;"
+        <div style="width: 100%; height: 100px; text-align: center; position: absolute; top: 80px; left: 50%; transform: translate(-50%, -50%); z-index: 4;"
             *ngIf="esperando === true"><img style="width: 17%;" src="../assets/iconos/pro.svg"></div>
         <div class="banner_nuevo" *ngIf="_inicioSesion.estatus === 'noSesion'">
             <img src="../../../assets/misc/banner_nuevo.jpg" width="100%" height="100%">
@@ -90,14 +90,14 @@
                         height=17px></div>
                 <div class="renglon_gris">
                     <div class="rg_menu" *ngFor="let dia of dias_carr" [routerLink]="['/importantes', '7' ]"
-                        [queryParams]="{dia: dia.dia }" [class.rg_select]="dia_c === dia.dia">{{dia.dia}}</div>
+                        [queryParams]="{dia: dia.dia }" [class.rg_select]="dia_c == dia.dia">{{dia.dia}}</div>
                 </div>
                 <div class="carr_c1" malihu-scrollbar [scrollbarOptions]="scrollbarOptions">
                     <div *ngFor="let carrera of carreras" [routerLink]="['/importantes', '7' ]"
                         [queryParams]="{dia: carrera.dia, carrera: carrera.number }"
                         style="display: inline-block; outline: none;">
-                        <div *ngIf="carrera.dia === dia_c" class="cc_menu"
-                            [class.cc_select]="carrera_c === carrera.number">
+                        <div *ngIf="carrera.dia == dia_c" class="cc_menu"
+                            [class.cc_select]="carrera_c == carrera.number">
                             <div class="cc_numero">{{carrera.number}}</div>
                             <div class="cc_cuadro"></div>
                             <div class="cc_hora">{{ carrera.date | date:'shortTime'}}</div>

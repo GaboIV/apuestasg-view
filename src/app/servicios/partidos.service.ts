@@ -65,6 +65,15 @@ export class PartidosService {
       }));
   }
 
+  filtrarCarrerasResult(category_id, start, id: null) {
+    let url = URL_RESULTADOS + '/careersByFilters';
+
+    return this.http.post( url, { category_id: category_id, start: start, id: id }, this._loginService.httpOptions )
+      .pipe(map ( (resp: any) => {
+        return resp;
+      }));
+  }
+
   cargarDestacados() {
     const url = URL_INICIAL + 'showgamesoutstanding';
     return this.http.get( url )
@@ -147,9 +156,9 @@ export class PartidosService {
   }
 
   enviarCB ( id_carrera, resultado ) {
-    const url = URL_RESULTADOS + '/agregar2';
+    const url = URL_RESULTADOS + 'hipism';
 
-    return this.http.post( url, {id_carrera, resultado} )
+    return this.http.post( url, { game_id : id_carrera, bet_type_id : '99', category_id : '7', result : resultado }, this._loginService.httpOptions )
       .pipe(map( (resp: any) => {
         const res = resp;
         return res;
