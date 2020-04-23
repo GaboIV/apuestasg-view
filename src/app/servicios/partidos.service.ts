@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { URL_PARTIDOS, URL_SELECCION, URL_RESULTADOS, URL_INICIAL } from '../comun/link';
+import { URL_PARTIDOS, URL_SELECCION, URL_RESULTADOS, URL_INICIAL, URL_PUBLIC } from '../comun/link';
 import { map } from 'rxjs/operators';
 import { Partido } from '../modelos/partido';
 import { InicioSesionService } from './inicio-sesion.service';
@@ -75,7 +75,7 @@ export class PartidosService {
   }
 
   cargarDestacados() {
-    const url = URL_INICIAL + 'showgamesoutstanding';
+    const url = URL_PUBLIC + 'showgamesoutstanding';
     return this.http.get( url )
       .pipe(map ( (resp: any) => {
         return resp.outstanding;
@@ -83,7 +83,7 @@ export class PartidosService {
   }
 
   partidosPorCategoria ( id: string, dato: string, equipo: string ) {
-    let url = URL_INICIAL + 'showgames/' + id;
+    let url = URL_PUBLIC + 'showgames/' + id;
 
     if (dato == '24' || dato == 'today') {
       url = url + "?radio=" + dato
@@ -209,7 +209,7 @@ export class PartidosService {
   }
 
   partidosPorBusqueda ( id: string, dato: string, equipo: string ) {
-    const url = URL_PARTIDOS + '/byName?page=1'
+    const url = URL_PUBLIC + 'games/byName?page=1'
 
     return this.http.post( url, { name : equipo }, this._loginService.httpOptions )
       .pipe(map ( (resp: any) => {

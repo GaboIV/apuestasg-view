@@ -144,7 +144,7 @@ export class InicioSesionService {
         contrasena = 'XyX_cuirrten_WeR_2364';
         usuario = 'XyX_cuirrply_WeR_2364';
       } else {
-        url = URL_AUTH + '/login';
+        url = URL_AUTH + 'login';
       }
 
       return this.http.post(url, {

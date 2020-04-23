@@ -18,7 +18,7 @@
         <div class='cada_hrs' style="height: 75px; " *ngFor="let stud of studs | paginate: { itemsPerPage: 50, currentPage: pagina, totalItems: total }; let i = index">
             <div class='imagen_stud'>
                 <label style="cursor: pointer; position: relative; height: 60px; ">
-                    <img [src]="stud.image | imagen: 'stud' " alt=" " height="50px; ">
+                    <img [src]="stud.image " alt=" " height="50px; ">
                     <br>
                     <input type="file" name="imagenSubir " (change)="subirImagen($event, stud) " style="display: none ">
                 </label>

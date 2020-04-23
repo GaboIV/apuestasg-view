@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GeneralesService } from '../../servicios/generales.service';
 import { Pago } from '../../modelos/pago.modelo';
+import { UsuarioService } from 'src/app/servicios/usuario.service';
 
 @Component({
   selector: 'app-adm-depositos',
@@ -12,7 +13,8 @@ export class AdmDepositosComponent implements OnInit {
   pagos: Pago;
 
   constructor(
-    public _generalesService: GeneralesService
+    public _generalesService: GeneralesService,
+    public _usuariosService: UsuarioService
   ) { }
 
   ngOnInit() {
@@ -20,9 +22,9 @@ export class AdmDepositosComponent implements OnInit {
   }
 
   cargarPagos () {
-    this._generalesService.cargarPagos()
+    this._usuariosService.obtenerpagos(1)
     .subscribe( resp => {
-      this.pagos = resp;
+      this.pagos = resp.pays.data;
     });
   }
 

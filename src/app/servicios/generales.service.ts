@@ -8,7 +8,8 @@ import {
   URL_IMAGEN, 
   URL_INICIAL, 
   URL_ACCOUNT,
-  URL_BANK
+  URL_BANK,
+  URL_PUBLIC
   } from '../comun/link';
 import { Pago } from '../modelos/pago.modelo';
 import { InicioSesionService } from './inicio-sesion.service';
@@ -42,7 +43,7 @@ export class GeneralesService {
   }
 
   cargarCategoriasJuegos() {
-    const url = URL_INICIAL + 'showgamesbycategory';
+    const url = URL_PUBLIC + 'showgamesbycategory';
 
     return this.http.get( url )
       .pipe(map ( (resp: any) => {
@@ -91,7 +92,7 @@ export class GeneralesService {
   }
 
   cargarPagos ( ) {
-    const url = URL_DEPOSITO + '/pagos';
+    const url = URL_DEPOSITO + '';
 
     return this.http.get( url )
       .pipe(map ( (resp: any) => {

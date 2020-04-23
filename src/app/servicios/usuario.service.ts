@@ -33,7 +33,7 @@ export class UsuarioService {
   }
 
   obtenerpagos (page: number) {
-    const url = URL_JUGADORES + "/pays?page=" + page;
+    const url = URL_DEPOSITO + "?page=" + page;
 
     return this.http.get( url, this._loginService.httpOptions )
       .pipe(map( (resp: any) => {
