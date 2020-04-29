@@ -8,7 +8,8 @@ import {
   URL_HIPODROMOS,
   URL_CARRERAS,
   URL_INSCRIPCION,
-  URL_SELECCION } from '../comun/link';
+  URL_SELECCION, 
+  URL_PUBLIC} from '../comun/link';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Caballo } from '../modelos/caballos';
@@ -156,7 +157,7 @@ export class CaballosService {
   }
 
   cargarCarreras(dato: string) {
-    const url = URL_CARRERAS + '/' + dato;
+    const url = URL_PUBLIC + 'careers/' + dato;
 
     return this.http.get( url, this._loginService.httpOptions )
       .pipe(map ( (resp: any) => {

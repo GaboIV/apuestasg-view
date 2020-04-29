@@ -46,6 +46,7 @@ export class ImportantesComponent implements OnInit {
 
   dia_c = '';
   carrera_c = '';
+  hip_c = '';
 
   esperando = false;
 
@@ -72,6 +73,8 @@ export class ImportantesComponent implements OnInit {
         this.dia_c = params.dia;
         this.carrera_c = params.carrera;
       }
+
+      this.hip_c = params.hipodromo ? params.hipodromo : 'nada';
       
       
 
@@ -300,11 +303,12 @@ export class ImportantesComponent implements OnInit {
           this.esperando = false;
           this.carreras = resp.carreras;
           this.dias_carr = resp.dias;
+          console.log(this.dias_carr);
           this.partidos = null;
 
           if (this.dia_c == undefined || this.carrera_c == undefined) {
             // tslint:disable-next-line:max-line-length
-            this.router.navigate(['/importantes/7'], { queryParams: { 'dia': this.dias_carr[0].dia, 'carrera': this.carreras[0].number } });
+            this.router.navigate(['/importantes/7'], { queryParams: { 'dia': this.dias_carr[0].dia, 'hipodromo': this.dias_carr['hip'], 'carrera': this.carreras[0].number } });
           }
         });
     } else {
