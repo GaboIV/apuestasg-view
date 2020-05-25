@@ -4,6 +4,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { CaballosService } from '../../servicios/caballos.service';
 import { ToastrService } from 'ngx-toastr';
 import swal from 'sweetalert2';
+import { NacionalidadesService } from 'src/app/servicios/servicios.indice';
+import { Nacionalidad } from 'src/app/modelos/nacionalidad';
 
 @Component({
   selector: 'app-hipodromos',
@@ -13,12 +15,14 @@ import swal from 'sweetalert2';
 export class HipodromosComponent implements OnInit {
 
   hipodromos: Hipodromo[] = [];
-
+  nacionalidades: Nacionalidad[];
   hipodromo: Hipodromo = new Hipodromo('', '', '', '', '');
 
   hipos: Hipodromo[] = [];
 
   nuevo = null;
+
+  currentDate = new Date();
 
   criterio = 'todos';
   pagina = 1;
@@ -27,11 +31,18 @@ export class HipodromosComponent implements OnInit {
     public router: Router,
     public activatedRoute: ActivatedRoute,
     public _caballoService: CaballosService,
+    public _nacionalidadesService: NacionalidadesService,
     private toastr: ToastrService
   ) { }
 
   ngOnInit() {
     this.hipodromosStorage();
+    // this.cargarNacionalidades();
+  }
+
+  cargarNacionalidades() {
+    this._nacionalidadesService.cargarNacionalidades()
+          .subscribe( nacionalidades => this.nacionalidades = nacionalidades );
   }
 
   hipodromosStorage () {
@@ -60,6 +71,8 @@ export class HipodromosComponent implements OnInit {
     .subscribe( resp => {
       if ( resp.status === 'correcto') {
         this.hipodromos = resp.hipodromos;
+
+        console.log(this.hipodromos);
 
         $('#spinact').removeClass('fa-spin');
         localStorage.setItem('hipodromos', JSON.stringify(resp.hipodromos) );
@@ -106,6 +119,27 @@ export class HipodromosComponent implements OnInit {
     });
   }
 
+  syncRacecourse (racecoru, event) {
+    const toast = swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 20000
+    });
+    toast({
+      type: 'info',
+      title: 'Sincronizando datos'
+    });
 
+    let evento = event.split('-');
+    let date = evento[1] + "-" + evento[2] + "-" + evento[0];
 
+    console.log(date);
+    
+    this._caballoService.syncCareers(racecoru.id, date)
+    .subscribe( resp => {
+      console.log(resp);
+      swal ('Datos sincronizados', resp, 'success');
+    })
+  }
 }

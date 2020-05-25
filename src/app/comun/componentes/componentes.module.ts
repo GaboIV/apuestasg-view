@@ -6,6 +6,7 @@ import { MenuComponent } from './menu/menu.component';
 import { SubMenuComponent } from './sub-menu/sub-menu.component';
 import { RouterModule } from '@angular/router';
 import { PipesModule } from '../../pipes/pipes.module';
+import { PieComponent } from './pie/pie.component';
 
 @NgModule({
   imports: [
@@ -13,7 +14,7 @@ import { PipesModule } from '../../pipes/pipes.module';
     RouterModule,
     PipesModule
     ],
-  declarations: [CabeceraComponent, SubMenuComponent],
-  exports: [CabeceraComponent, SubMenuComponent]
+  declarations: [CabeceraComponent, SubMenuComponent, PieComponent],
+  exports: [CabeceraComponent, SubMenuComponent, PieComponent]
 })
 export class ComponentesModule { }

@@ -87,65 +87,87 @@
                     </div>
                 </div>
             </div>
-            <div class="juegos_principales_zb1" *ngIf="carreras !== [] && carreras !== undefined && carreras !== null">
-                <div class='title_ap_fav bajo_verde_green' style="min-height: 32px;">
-                    <select name="fdfs" id="fsdf" class="solo_hoy" [(ngModel)]="hip_c">
+            <div class="juegos_principales_zb1" *ngIf="racecourses !== [] && racecourses !== undefined && racecourses !== null">
+                <div class='racecourses_active' style="min-height: 37px;">
+                    <!-- <select name="fdfs" id="fsdf" class="solo_hoy" [(ngModel)]="racecourse" style="cursor: pointer; font-size: 1em;">
                         <option [value]="list.hip" *ngFor="let list of dias_carr">
                             {{list.hip}}
                         </option>
-                    </select>
+                    </select> -->
+                    <ng-container *ngFor="let rce of racecourses">
+                        <div class="div_racecourse" [ngStyle]="{background: (rce.id == racecourse) ? 'yellow' : 'white'}" (click)="getCareers(rce.id)">
+                            <div style="width: 20%; display: inline-block; vertical-align: 8px;">
+                                <img style="width: 90%;" [src]="rce.country_image" alt="">
+                            </div>
+                            <div class="card_careers">
+                                {{rce.name}} <br>
+                                <span class="solo_hoy" style="font-size: 0.8em; padding: 2px 4px; cursor: pointer;">
+                                    5ta en 5 m
+                                </span>
+                            </div>
+                        </div>
+                    </ng-container>
+
+                    <!-- <div *ngIf="racecourses.length > 3" class="div_plus_button">
+                        +
+                    </div> -->
                 </div>
                 <div class="renglon_gris">
-                    <div class="rg_menu" *ngFor="let dia of dias_carr" [routerLink]="['/importantes', '7' ]"
+                    <ng-container *ngFor="let dia of dias_carr">
+                        <div class="rg_menu" *ngIf="dia.hip == racecourse"  [routerLink]="['/importantes', '7' ]"
                         [queryParams]="{dia: dia.dia, hipodromo: dia.hip }" [class.rg_select]="dia_c == dia.dia">{{dia.dia}}</div>
+                    </ng-container >                    
                 </div>
                 <div class="carr_c1" malihu-scrollbar [scrollbarOptions]="scrollbarOptions">
                     <div *ngFor="let carrera of carreras" [routerLink]="['/importantes', '7' ]"
-                        [queryParams]="{dia: carrera.dia, hipodromo: carrera.racecourse.name, carrera: carrera.number }"
+                        [queryParams]="{dia: carrera.dia, hipodromo: carrera.racecourse.id, carrera: carrera.number }"
                         style="display: inline-block; outline: none;">
-                        <div *ngIf="carrera.dia == dia_c && carrera.racecourse.name == hip_c" class="cc_menu"
+                        <!-- {{carrera.dia}} - {{dia_c}} <br> {{carrera.racecourse.id}} - {{racecourse}} <br> -->
+                        <div *ngIf="carrera.dia == dia_c && carrera.racecourse.id == racecourse" class="cc_menu"
                             [class.cc_select]="carrera_c == carrera.number">
                             <div class="cc_numero">{{carrera.number}}</div>
                             <div class="cc_cuadro"></div>
-                            <div class="cc_hora">{{ carrera.date + " " + carrera.time | date:'shortTime'}}</div>
+                            <div class="cc_hora">{{ carrera.posttime | date:'shortTime'}}</div>
                         </div>
                     </div>
                 </div>
                 <ng-container *ngFor="let carrera of carreras">
                     <ng-container *ngIf="carrera.number == carrera_c && carrera.dia == dia_c">
-                        <div style="background: #404040">
+                        <div style="background: #0D2C49; padding: 4px; font-size: 1.1em;">
                             <div class='carrera_disp'>Carrera {{carrera.number}} - 
                                 <!-- <span *ngIf="carrera.valid == 0¿nu">No
                                     vál.</span> <span *ngIf="carrera.valid != null">{{carrera.valid}}ª vál.</span> - -->
-                                {{carrera.distance}} mts. - {{ carrera.date + " " + carrera.time | date:'shortTime'}}
+                                {{carrera.distance}} mts. - {{ carrera.posttime | date:'shortTime'}}
                                 <span *ngIf="carrera.tittle">- {{carrera.tittle}}</span>
-                                <span style="color: #ccc; font-size: 1em;" *ngIf="carrera.description"> -
+                                <span style="color: #042a51; font-size: 1em;" *ngIf="carrera.description"> -
                                     {{carrera.description}}</span>
+                                <span *ngIf="carrera.surface">- {{carrera.surface}}</span>
                             </div>
                             <div class="expandir" style="vertical-align: middle"
                                 [routerLink]="['/verCarrera', carrera.id]" [queryParams]="{carrera: carrera}">
-                                <i class="fas fa-expand"></i> <br> Expandir
+                                Expandir
                             </div>
                         </div>
 
-                        <div class='cab_inscrito' *ngFor="let ins of carrera.inscriptions">
+                        <div class='cab_inscrito' [ngStyle]="{background: (i % 2) ? '#f7f7f7' : 'white'}" *ngFor="let ins of carrera.inscriptions; index as i;">
                             <div class='nro_puerta'>
-                                <div class='num_par'>{{ins.number}}</div>
-                                <div class='pue_par'>{{ins.position}}</div>
+                                <div class='num_par' style="width: 25px; border-radius: 2px;" [ngStyle]="{background: '#' + colors[i]}">{{ins.number}}</div>
+                                <div class='pue_par'>PP {{ins.position}}</div>
                             </div>
                             <div class='jersey_u'>
-                                <img *ngIf="ins.stud !== null" [src]="ins.stud.image | imagen: 'stud' " height=42px>
-                                <img *ngIf="ins.stud === null" [src]="'noimage.png' | imagen: 'stud' " height=42px>
+                                <img *ngIf="ins.stud" [src]="ins.stud.image | imagen: 'stud' " height=42px>
+                                <img *ngIf="!ins.stud && !ins.horse.jacket_url" [src]="'noimage.png' | imagen: 'stud' " height=42px>
+                                <img *ngIf="!ins.stud && ins.horse.jacket_url" [src]="ins.horse.jacket_url" style="margin-top: 5px;" height=26px>
                             </div>
                             <div class='datos_pr' style="width: 40%;">
                                 <div class='nomb_cab' *ngIf="ins.horse.name !== ''">{{ins.horse.name}}
                                 </div>
                                 <div class='jin_cab' style="color: #999999;">
-                                    <span *ngIf="ins.jockey !== null" style="color: #efefef;">{{ins.jockey.name}}</span>
+                                    <span *ngIf="ins.jockey !== null" style="color: #042a51;">{{ins.jockey.name}}</span>
                                     <span *ngIf="ins.jockey === null">Sin información <i
-                                            class="fas fa-info-circle"></i></span> /
+                                            class="fas fa-info-circle"></i></span> |
                                     <span *ngIf="ins.trainer !== null"
-                                        style="color: #efefef;">{{ins.trainer.name}}</span>
+                                        style="color: #042a51;">{{ins.trainer.name}}</span>
                                     <span *ngIf="ins.trainer === null">Sin información <i
                                             class="fas fa-info-circle"></i></span></div>
                             </div>
@@ -154,12 +176,17 @@
                                 <div class='jin_cab'>Edad:
                                     <span *ngIf="ins.horse.edad === '0'" style="color: #999999;"> Sin información
                                         <i class="fas fa-info-circle"></i> </span>
-                                    <span *ngIf="ins.horse.edad !== '0'" style="color: #efefef;">
+                                    <span *ngIf="ins.horse.edad !== '0'" style="color: #042a51;">
                                         {{ins.horse.edad }} </span></div>
                             </div>
-                            <div *ngIf="ins.status !== '2'" (click)="seleccionh( ins.id )" class='a_ganar'
-                                id='pry_cab-$id_inscripcion'>A<br>Ganar</div>
-                            <div *ngIf="ins.status === '2'" style="font-size: 2.3em;" class='a_ganar a_g_r'>R</div>
+                            <div *ngIf="ins.status != '2' && (ins.odd != null && ins.odd != 0)" (click)="seleccionh( ins.id )" class='a_ganar' style="padding-top: 15px; font-size: 1.25em;" id='pry_cab-$id_inscripcion'>  
+                                <span>{{ins.odd}}</span>   
+                            </div>
+
+                            <div *ngIf="ins.status != '2' && (ins.odd == null || ins.odd == 0)" (click)="seleccionh( ins.id )" class='a_ganar' id='pry_cab-$id_inscripcion'>
+                                <span *ngIf="ins.odd == null || ins.odd == 0">A<br>Ganar</span>     
+                            </div>
+                            <div *ngIf="ins.status == '2'" style="font-size: 2.3em; color: red" class='a_ganar a_g_r'>R</div>
                         </div>
                     </ng-container>
                 </ng-container>
@@ -212,3 +239,5 @@
         <app-cuotas></app-cuotas>
     </div>
 </div>
+
+<!-- <app-pie></app-pie> -->

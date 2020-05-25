@@ -223,3 +223,40 @@
         position: fixed;
         bottom: 0px;
     }
+
+    .div_racecourse {
+        cursor: default;
+        display: inline-block;
+        width: 31%;
+        text-align: center;
+        padding: 4px 4px 2px 4px;
+        border-width: 2px;
+        color: #fff;
+        margin: 4px 1%;
+        background: white;
+        color: #00093b;
+        border-radius: 4px;
+        transition: -webkit-transform .2s;
+        transition: transform .2s;
+        transition: transform .2s, -webkit-transform .2s;
+        cursor: pointer;
+    }
+
+    .div_racecourse div {
+        cursor: pointer;
+    }
+
+    .div_racecourse:hover {
+        transform: scale(1.04);
+    }
+
+    .div_plus_button {
+        width: 4%;
+        color: red;
+        background: white;
+    }
+
+    .racecourses_active {
+        border-bottom: 1px #0B244A solid;
+        background: #0D2C49;
+    }

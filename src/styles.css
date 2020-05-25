@@ -440,10 +440,11 @@ cuerpo {
     vertical-align: top;
     width: 180px;
     background: #333333;
-    left: 0;
-    position: fixed;
-    top: 0px;
-    z-index: 1;
+    /* left: 0; */
+    /* position: absolute; */
+    /* top: 0px; */
+    /* z-index: 1; */
+    display: inline-block;
 }
 
 .barra_div_izq {
@@ -459,10 +460,14 @@ cuerpo {
 
 .central_bet {
     box-sizing: border-box;
-    position: absolute;
-    padding-left: 180px;
+    /* position: absolute; */
+    /* padding-left: 180px; */
     width: 100%;
-    top: 107px;
+    /* top: 107px; */
+    display: inline-block;
+    /* width: 100%; */
+    margin-left: -180px;
+        padding-left: 180px;
 }
 
 @media only screen and (max-width: 1100px) {
@@ -471,12 +476,21 @@ cuerpo {
     }
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 1023px) {
+    .barra_lateral_izq {
+        display: none;
+    }
+
     .central_bet {
         margin-left: 0px;
+        padding-left: 0px;
     }
-    .menu_enc {
-        display: none;
+}
+
+@media only screen and (min-width: 1024px) {
+    .central_bet {
+        margin-left: -180px;
+        padding-left: 180px;
     }
 }
 
@@ -488,7 +502,7 @@ cuerpo {
 }
 
 .zona_cuota {
-    border-right: 1px solid #373737;
+    /* border-right: 1px solid #373737; */
     display: inline-block;
     width: 77%;
     background: #585858;
@@ -620,7 +634,7 @@ cuerpo {
 }
 
 .zona_bet {
-    border-right: 1px solid #373737;
+    /* border-right: 1px solid #373737; */
     display: inline-block;
     width: 100%;
     background: #172435;
@@ -1840,8 +1854,8 @@ cuerpo {
     table-layout: fixed;
     width: 100%;
     height: 45px;
-    background-color: #666;
-    border-bottom: 1px solid #707070;
+    background-color: #fff;
+    
     font-size: 0.9em;
     margin-right: 0px !important;
 }
@@ -1863,8 +1877,8 @@ cuerpo {
 
 .pue_par {
     padding-top: 0px;
-    color: #ccc;
-    font-size: 0.8em;
+    color: #0D2C49;
+    font-size: 0.7em;
 }
 
 .jersey_u {
@@ -1887,14 +1901,16 @@ cuerpo {
 
 .nomb_cab {
     line-height: 19px;
-    color: #fff;
+    color: #152535;
     font-size: 1.05em;
+    font-weight: 600;
 }
 
 .jin_cab {
     padding-top: 0px;
-    color: #ccc;
+    color: #042a51;
     font-size: 0.8em;
+    letter-spacing: -0.5px;
 }
 
 .nopad {
@@ -1921,14 +1937,14 @@ cuerpo {
 }
 
 .carrera_disp {
-    background: #404040;
+    background: #0D2C49;
     font-size: 0.8em;
-    color: #FFD946;
+    color: white;
     padding: 5px 10px;
     display: inline-block;
     width: 86%;
     vertical-align: middle;
-    border-right: 1px solid #666;
+    border-right: 1px solid #FFEB3B;
 }
 
 .expandir {
@@ -1949,20 +1965,22 @@ cuerpo {
 }
 
 .a_ganar {
-    height: 45px;
+    height: 48px;
+    width: 54px;
     vertical-align: top;
     display: inline-block;
     float: right;
     text-align: center;
     padding: 5px 10px;
-    color: #ccc;
+    color: #ffdf1b;
     cursor: pointer;
-    background-color: #5e5e5e;
+    font-weight: bold;
+    background-color: #0D2C49;
 }
 
 .a_ganar:hover {
-    color: #ffdf1b;
-    background: #414141;
+    color: #444;
+    background: #ffdf1b;
 }
 
 .imagen_stud {
@@ -2722,4 +2740,15 @@ thead tr {
     background-color: #fff;
     font-family: 'Roboto Condensed', sans-serif;
     color: #272727;
+}
+
+.card_careers {
+    width: 80%;
+    display: inline-block;
+    text-align: left;
+    padding-left: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 39px;
 }

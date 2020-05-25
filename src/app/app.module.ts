@@ -22,7 +22,6 @@ import { PipesModule } from './pipes/pipes.module';
 import { VistasModule } from './vistas/vistas.module';
 import { MenuComponent } from './comun/componentes/menu/menu.component';
 import { LigasComponent } from './vistas/ligas/ligas.component';
-import { CuotasComponent } from './comun/componentes/cuotas/cuotas.component';
 import { ToastrModule } from 'ngx-toastr';
 import { AgregarPartidoComponent } from './vistas/partidos/agregar-partido.component';
 import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';

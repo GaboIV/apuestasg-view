@@ -1,0 +1,48 @@
+.footerMainLinks {
+    background: #0D2C49;
+    /* border-top: 3px solid #172435; */
+    padding-right: 2px;
+    box-shadow: 0px 0 5px rgba(0, 0, 0, 0.8);
+    position: relative;
+    text-align: center;
+    padding-left: 5% !important;
+}
+
+.footerTextBoxWarper {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.site-map-group-list {
+    text-align: left;
+    list-style-type: square;
+    padding-left: 0px;
+}
+
+.site-map-group {
+    text-align: left;
+}
+
+.footerTextBoxWarper {
+    width: 17%;
+}
+
+.footerMainLinks {
+    padding: 33px 15px;
+}
+
+.site-map-group-title {
+    color: aliceblue;
+    text-transform: uppercase;
+}
+
+ul li {
+    /* background: #cce5ff; */
+    margin: 7px 0px;
+    color: whitesmoke;
+    list-style-position: inside;
+  }
+
+  a {
+    color: white;
+  }

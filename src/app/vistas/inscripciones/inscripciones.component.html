@@ -22,7 +22,9 @@
                     <div class='pue_par'>{{ins.position}}</div>
                 </div>
                 <div class='jersey_u' *ngIf="ins.stud"><img [src]="ins.stud.image | imagen: 'stud' " height=50px></div>
-                <div class='jersey_u' *ngIf="!ins.stud"><img [src]="'noimage.png' | imagen: 'stud' " height=50px></div>
+                <div class='jersey_u' *ngIf="!ins.stud && ins.horse.jacket_url"><img [src]="ins.horse.jacket_url" height=50px></div>
+                <div class='jersey_u' *ngIf="!ins.stud && !ins.horse.jacket_url"><img [src]="'noimage.png' | imagen: 'stud' " height=50px></div>
+                <input type="text" (click)="$event.target.select()" [value]="ins.horse.jacket_url" (change)="changeJacketUrl(ins.horse, $event.target.value)">
                 <div class='datos_pr'>
                     <div class='nomb_cab'>{{ins.horse.name}}</div>
                     <div class='jin_cab'>{{ins.jockey?.name}} - {{ins.trainer?.name}}</div>

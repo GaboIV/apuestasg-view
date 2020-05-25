@@ -1,0 +1,19 @@
+
+.padre_hrs {
+    width: 30px;
+    font-size: 0.8em;
+}
+
+.d_text-area {
+    width: 15%;
+    display: inline-block;
+}
+
+.date_input {
+    width: 65%;
+    background: white;
+    display: inline-block;
+    color: #444;
+
+    text-align: center;
+}

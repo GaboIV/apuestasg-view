@@ -85,6 +85,12 @@ export class InscripcionesComponent implements OnInit {
     });
   }
 
-
+  changeJacketUrl (horse, jacket_url) {
+    this._caballoService.changeJacketUrl(horse.id, jacket_url).subscribe(
+      resp => {
+        horse.jacket_url = resp.horse.jacket_url
+      }
+    )
+  }
 
 }

@@ -165,6 +165,15 @@ export class CaballosService {
       }));
   }
 
+  indexRacecoruseActive() {
+    const url = URL_PUBLIC + 'racecourses';
+
+    return this.http.get( url, this._loginService.httpOptions )
+      .pipe(map ( (resp: any) => {
+        return resp;
+      }));
+  }
+
   cargarUnaCarreras(dato: string) {
     const url = URL_CARRERAS + '/ver/' + dato;
 
@@ -349,5 +358,27 @@ export class CaballosService {
         return res;
       })
     );
+  }
+
+  changeJacketUrl(id, value) {
+    const url = URL_CABALLOS + '/horses/jacket_url/' + id;
+    
+    return this.http.patch( url, { jacket_url: value }, this._loginService.httpOptions)
+      .pipe(map( (resp: any) => {
+        const res = resp;
+        return res;
+      })
+    );
+  }
+
+  syncCareers(id, date) {
+    const url = URL_CABALLOS + '/racecourses/' + id + "/sync/" + date;
+
+    console.log(url);
+
+    return this.http.post( url, [], this._loginService.httpOptions )
+      .pipe(map ( (resp: any) => {
+        return resp;
+      }));
   }
 }

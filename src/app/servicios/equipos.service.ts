@@ -20,13 +20,15 @@ export class EquiposService {
 
     let url = '';
 
-    // if (criterio !== null) {
-    //   url = URL_EQUIPOS + '/ver/' + pagina + '/' + criterio + '/' + liga;
-    // } else {
-    //   url = URL_EQUIPOS + '/ver/' + pagina + '/todos/' + '/' + liga;
-    // }
+    if (criterio !== null) {
+      url = URL_EQUIPOS + '?page=' + pagina + '&criterio=' + criterio;
+    } else {
+      url = URL_EQUIPOS + '?page=' + pagina;
+    }
 
-    url = URL_EQUIPOS + '?page=' + pagina + '&criterio=' + criterio;
+    // url = 'http://159.65.187.236:3000/api/products/3';
+
+    console.log(url);
 
     return this.http.get( url, this._loginService.httpOptions )
       .pipe(map ( (resp: any) => {

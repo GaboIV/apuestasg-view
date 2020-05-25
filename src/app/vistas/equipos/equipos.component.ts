@@ -55,6 +55,7 @@ export class EquiposComponent implements OnInit {
     this._equipoService.cargarEquipos(pagina, criterio, liga)
       .subscribe(equipos => {
         this.equipos = equipos.data
+        console.log(equipos);
         this.total = equipos.total;
         this.pagina = equipos.current_page;
         swal.close();

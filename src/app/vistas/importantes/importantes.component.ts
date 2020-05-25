@@ -27,6 +27,8 @@ export class ImportantesComponent implements OnInit {
   public anchoTabla: any;
   public apostado = 0;
 
+  colors = ['FE0000', '0000FE', '006837', '28ABE3', '4caf50', '93268F', '000000', '808080', 'F15A25', '8C6238', 'FBB03B', '00FF01', '8CC63E', 'C1282D', '23B574', '00FFFF', '2E3192', 'ED1E79', '4D4D4D', 'F15A25', 'FE0000', '0000FE', 'FBB03B', '2E3192', 'FE0000', '0000FE', 'FDEE21', '23B574', 'FE0000', '0000FE', 'FE0000', 'F15A25', 'FE0000', '0000FE', '0000FE', '8C6238', 'FE0000', '0000FE', '006837', 'FE0000'];
+
   public scrollbarOptions = { axis: 'x', theme: 'light', alwaysShowScrollbar: 1 };
   public scrollbarOptions2 = { theme: 'dark-2', alwaysShowScrollbar: 1, scrollbarPosition: 'inside' };
 
@@ -39,6 +41,10 @@ export class ImportantesComponent implements OnInit {
   liga_temp = 0;
   juegos: any = [];
   usuario: any;
+
+  racecourses: any;
+
+  racecourse: number;
 
   mstatus = null;
 
@@ -72,11 +78,7 @@ export class ImportantesComponent implements OnInit {
       } else {
         this.dia_c = params.dia;
         this.carrera_c = params.carrera;
-      }
-
-      this.hip_c = params.hipodromo ? params.hipodromo : 'nada';
-      
-      
+      }    
 
       if (params.pantalla == 'principal') {
         this.solohoy(1);
@@ -117,55 +119,55 @@ export class ImportantesComponent implements OnInit {
   }
 
   scroll_cuot() {
-    $(() => {
-      $(window).scroll(function () {
-        const ancho = $('.zona_cuota').width();
-        const alto = $('.central_bet').height();
+    // $(() => {
+    //   $(window).scroll(function () {
+    //     const ancho = $('.zona_cuota').width();
+    //     const alto = $('.central_bet').height();
 
-        if ($(this).scrollTop() > 137) {
-          $('.zona_cuota').addClass('fixed');
-          $('.zona_cuota').removeClass('unfixed');
-          $('.zona_cuota').width(ancho);
-        } else {
-          $('.zona_cuota').removeClass('fixed');
-          $('.zona_cuota').addClass('unfixed');
-        }
+    //     if ($(this).scrollTop() > 137) {
+    //       $('.zona_cuota').addClass('fixed');
+    //       $('.zona_cuota').removeClass('unfixed');
+    //       $('.zona_cuota').width(ancho);
+    //     } else {
+    //       $('.zona_cuota').removeClass('fixed');
+    //       $('.zona_cuota').addClass('unfixed');
+    //     }
 
-        const win_wid = $(window).height();
-        const z1_wid = $('#z1_bet').height();
-        const ancho1 = $('#z1_bet').width();
+    //     const win_wid = $(window).height();
+    //     const z1_wid = $('#z1_bet').height();
+    //     const ancho1 = $('#z1_bet').width();
 
-        // console.log($(this).scrollTop(), ($(window).height() - 137));
-
-
-        if (($(this).scrollTop() >= 137) && (win_wid > z1_wid)) {
-          $('#z1_bet').addClass('fixed');
-          $('#z1_bet').width(ancho1);
-        // } else if ($(this).scrollTop() > ($(window).height() - 137)) {
-        //   $('#z1_bet').addClass('fixedbottom');
-        //   $('#z1_bet').width(ancho1);
-        // } 
-        } else {
-          $('#z1_bet').removeClass('fixed');
-          $('#z1_bet').removeClass('fixedbottom');
-        }
+    //     // console.log($(this).scrollTop(), ($(window).height() - 137));
 
 
-        const z2_wid = $('#z2_bet').height();
-        const ancho2 = $('#z2_bet').width();
+    //     if (($(this).scrollTop() >= 137) && (win_wid > z1_wid)) {
+    //       $('#z1_bet').addClass('fixed');
+    //       $('#z1_bet').width(ancho1);
+    //     // } else if ($(this).scrollTop() > ($(window).height() - 137)) {
+    //     //   $('#z1_bet').addClass('fixedbottom');
+    //     //   $('#z1_bet').width(ancho1);
+    //     // } 
+    //     } else {
+    //       $('#z1_bet').removeClass('fixed');
+    //       $('#z1_bet').removeClass('fixedbottom');
+    //     }
 
-        if (win_wid > z2_wid) {
-          if ($(this).scrollTop() > 137) {
-            $('#z2_bet').addClass('fixed');
-            $('#z2_bet').width(ancho2);
-          } else {
-            $('#z2_bet').removeClass('fixed');
-          }
-        }
 
-        // $('.central_bet').height(alto);
-      });
-    });
+    //     const z2_wid = $('#z2_bet').height();
+    //     const ancho2 = $('#z2_bet').width();
+
+    //     if (win_wid > z2_wid) {
+    //       if ($(this).scrollTop() > 137) {
+    //         $('#z2_bet').addClass('fixed');
+    //         $('#z2_bet').width(ancho2);
+    //       } else {
+    //         $('#z2_bet').removeClass('fixed');
+    //       }
+    //     }
+
+    //     // $('.central_bet').height(alto);
+    //   });
+    // });
   }
 
   check(id_liga) {
@@ -298,17 +300,22 @@ export class ImportantesComponent implements OnInit {
     this.id = id;
     if (this.id == 7) {
       this.esperando = true;
-      this._caballoService.cargarCarreras('todas?inscriptions=1')
+      this._caballoService.indexRacecoruseActive()
         .subscribe(resp => {
-          this.esperando = false;
-          this.carreras = resp.carreras;
-          this.dias_carr = resp.dias;
-          console.log(this.dias_carr);
-          this.partidos = null;
+          // this.carreras = resp.carreras;
+          // this.dias_carr = resp.dias;
+          // this.partidos = null;
 
-          if (this.dia_c == undefined || this.carrera_c == undefined) {
-            // tslint:disable-next-line:max-line-length
-            this.router.navigate(['/importantes/7'], { queryParams: { 'dia': this.dias_carr[0].dia, 'hipodromo': this.dias_carr['hip'], 'carrera': this.carreras[0].number } });
+          // if (this.dia_c == undefined || this.carrera_c == undefined) {
+          //   // tslint:disable-next-line:max-line-length
+          //   this.router.navigate(['/importantes/7'], { queryParams: { 'dia': this.dias_carr[0].dia, 'hipodromo': this.dias_carr['hip'], 'carrera': this.carreras[0].number } });
+          // }
+          this.racecourses = resp.data;    
+          
+          if (this.racecourses.length > 0) {
+            this.getCareers(this.racecourses[0].id);
+          } else {
+            this.esperando = false;
           }
         });
     } else {
@@ -318,9 +325,37 @@ export class ImportantesComponent implements OnInit {
           this.esperando = false;
           this.partidos = resp.juegos;
           this.carreras = null;
+          this.racecourses = null;
           this.router.navigate(['/importantes/' + this.id]);
         });
     }
+  }
+
+  getCareers(racecourse: any) {
+    this.esperando = true;
+    this._caballoService.cargarCarreras(racecourse)
+      .subscribe(resp => {
+        this.esperando = false;
+
+        this.racecourse = racecourse;
+
+        // console.log(this.racecourse);
+
+        this.router.navigate(['/importantes/7'], { queryParams: { 'dia': resp.dias[0].dia, 'hipodromo': resp.dias[0]['hip'], 'carrera': resp.carreras[0].number } });
+
+        this.dias_carr = resp.dias;
+        this.partidos = null;  
+
+        this.dia_c = resp.dias[0].dia;
+
+        // console.log(this.dia_c, this.racecourse);
+        this.carrera_c = resp.carreras[0].number;
+
+        this.carreras = resp.carreras;
+        // tslint:disable-next-line:max-line-length    
+            
+        
+      });
   }
 
   buscarEquipo(forma) {

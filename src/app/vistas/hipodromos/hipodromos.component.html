@@ -16,11 +16,17 @@
 
     <ng-container *ngIf="hipos?.length === 0">
         <div class='cada_hrs' style="height: 95px;" *ngFor="let hipo of hipodromos | paginate: { itemsPerPage: 47, currentPage: pagina }">
-            <div class='name_hrs'>{{hipo.name}}</div><br>
+            <div class='name_hrs' style="width: 100%;">{{hipo.name}} <img style="height: 20px;" [src]="hipo.image" alt=""> <div class='padre_hrs' style="float: right; width: auto;">{{hipo.acro}}</div></div><br>
+            <!-- <div style="width: 100%;">
+                <div class='d_text-area'>URL: </div>
+                <textarea name="url" style="width: 85%;">{{hipo.url}}</textarea>
+            </div><br> -->
             <div class='d_padre_hrs'>Ubicación: </div>
-            <div class='padre_hrs'>{{hipo.ubication}}</div>
-            <div class='d_padre_hrs'>Acro: </div>
-            <div class='padre_hrs'>{{hipo.acro_2}}</div>
+            <select class="form-control" [(ngModel)]="hipo.location" name="speacts1">
+                <option *ngFor="let country of nacionalidades;" value={{country.id}}>{{country.name}}</option>
+            </select>
+            <br>
+            <input type="date" #date value="{{currentDate | date:'yyyy-MM-dd'}}" class="date_input"> <button style="width: 35%;" (click)="syncRacecourse(hipo, date.value)">Sincronizar</button>
         </div>
     </ng-container>
 
