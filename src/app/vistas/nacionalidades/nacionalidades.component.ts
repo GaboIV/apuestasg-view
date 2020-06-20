@@ -33,7 +33,10 @@ export class NacionalidadesComponent implements OnInit {
 
   cargarNacionalidades() {
     this._nacionalidadesService.cargarNacionalidades()
-          .subscribe( nacionalidades => this.nacionalidades = nacionalidades );
+    .subscribe( nacionalidades => {
+      this.nacionalidades = nacionalidades 
+      console.log(this.nacionalidades);
+    });
   }
 
   cambiarEdit() {
@@ -61,6 +64,15 @@ export class NacionalidadesComponent implements OnInit {
       valor = 'todos';
     }
     console.log( valor );
+  }
+
+  changeImageLink (pais){
+    this._generalesService.modificarDatoPais(pais.id, pais.image_link, 'image_link')
+      .subscribe(resp => {
+        if (resp.status == 'success') {
+          pais.image_link = pais.image_link;
+        }
+      });
   }
 
 }

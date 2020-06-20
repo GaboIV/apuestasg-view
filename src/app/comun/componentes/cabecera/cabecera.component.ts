@@ -26,6 +26,8 @@ export class CabeceraComponent implements OnInit {
     public _subMenuService: SubMenuService
   ) {
     setInterval(() => { this.actualizarHora(); }, 1000);
+
+    setInterval(() => { this.recibirHora(); }, 150000);
   }
 
   ngOnInit() {
@@ -36,29 +38,15 @@ export class CabeceraComponent implements OnInit {
 
   recibirHora() {
     this._generalesService.recibirHora()
-          .subscribe( fecha => this.fecha = fecha );
+          .subscribe( fecha => this.fecha = fecha * 1000 );
   }
 
   actualizarHora() {
     const date = new Date( this.fecha );
     date.setSeconds(date.getSeconds() + 1);
-    this.hora = this.formatAMPM( date );
+
     this.fecha = date;
     this._generalesService.fecha = this.fecha;
-  }
-
-  formatAMPM(date) {
-    let hours = date.getHours();
-    let minutes = date.getMinutes();
-    let seconds = date.getSeconds();
-    const ampm = hours >= 12 ? 'PM' : 'AM';
-    hours = hours % 12;
-    hours = hours ? hours : 12; // the hour '0' should be '12'
-    hours = hours < 10 ? '0' + hours : hours;
-    minutes = minutes < 10 ? '0' + minutes : minutes;
-    seconds = seconds < 10 ? '0' + seconds : seconds;
-    const strTime = hours + ':' + minutes + ':' + seconds + ' ' + ampm;
-    return strTime;
   }
 
   loginUsuario( event ) {

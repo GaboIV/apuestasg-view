@@ -1,6 +1,8 @@
-<div class="buscador_it_001"><input #caja type="text" name="search_eq" placeholder="Buscar un equipo" class="search_eq"
-        (keyup)="buscarElemento(caja.value)">
-    <div class="add_lig" routerLink="/agregarLiga">Nueva liga</div>
+<div class="buscador_it_001"><input #caja type="text" name="search_eq" placeholder="Buscar ligas" class="search_eq"
+    (keyup.enter)="buscarElemento(caja.value)">
+
+    <div class="add_lig add_filter" (click)="buscarElemento(caja.value)">Filtrar</div>
+    <div class="add_lig" routerLink="/agregarLiga">+ <span style="font-size: 0.9em;">Agregar liga</span></div>
 </div>
 
 <div class="equipos" id="equipos">
@@ -11,10 +13,10 @@
                     <th>ID</th>
                     <th>Nombre</th>
                     <th>Deporte</th>
-                    <th>Nro. de equipos</th>
+                    <th>Web ID</th>
                     <th>Importancia</th>
                     <th>Imagen</th>
-                    <th>URL</th>
+                    <th>Sincronización</th>
                     <th>Nacionalidad</th>
                 </tr>
             </thead>
@@ -29,9 +31,8 @@
                             <option *ngFor="let deporte of deportes " value={{deporte.id}}>{{ deporte.name }}</option>
                         </select>
                     </td>
-                    <td width="9%" align="center">
-                        <!-- {{liga.equipos}} -->
-                        -
+                    <td width="9%" #name_uk [innerText]="liga.name_uk" (blur)="modificarDato(liga.id, name_uk.innerText, liga, 'name_uk', 'Web ID ')" contenteditable="true" align="center">
+                        {{liga.name_uk}}
                     </td>
                     <td width="9%" #importance [innerText]="liga.importance" (blur)="modificarDato(liga.id, importance.innerText, liga, 'importance', 'importancia ')" contenteditable="true" align="center">
                         <p>{{ liga.importance }}</p>
@@ -43,8 +44,13 @@
                             <input type="file" name="imagenSubir" (change)="subirImagen($event, liga)" style="display: none">
                         </label>                        
                     </td>
-                    <td #url [innerText]="liga.url" (blur)="modificarDato(liga.id, url.innerText, liga, 'url', 'url ')" contenteditable="true" width="20%" >
-                        <p>{{ liga.url }}</p>
+                    <td width="20%" style="text-align: center;">
+                        <!-- <p>{{ liga.url }}</p> -->
+                        Úl. act.: {{liga.updated_at | date}}
+                        <br>
+                        <div class="expandir" style="background: #00488c; height: 25px; padding-top: 5px; width: 50%; margin-top: 5px;" (click)="sync(liga.id)">
+                            <i id="spinact_{{liga.id}}" class="fas fa-sync"></i>&nbsp;&nbsp;Sincronizar
+                        </div>
                     </td>
                     <td width="14%" align="center">
                         <select name="liga" class="ch_slc_nt" [value]="liga.country_id" (change)="modificarDato(liga.id, $event.target.value, liga, 'country_id', 'pais ')">
@@ -99,6 +105,6 @@
         </table>
     </div>
     <div class="pagination_fixed">
-        <pagination-controls previousLabel="Anterior" nextLabel="Siguiente" maxSize="12" (pageChange)="cargarLigas($event, criterio)"></pagination-controls>
+        <pagination-controls previousLabel="Anterior" nextLabel="Siguiente" maxSize="12" (pageChange)="cargarLigas($event, criterio, 'todas')"></pagination-controls>
     </div>
 </div>

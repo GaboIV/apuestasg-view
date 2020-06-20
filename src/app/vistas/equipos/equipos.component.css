@@ -45,3 +45,20 @@
     font-size: 1em;
     background: #d61828;
 }
+
+.botonclear {
+    position: absolute;
+    background: #d61828;
+    padding: 2px 5px;
+    bottom: 4px;
+    right: 7px;
+    height: 24px;
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+    cursor: pointer;
+}
+
+.solo_hoy {
+    margin-right: 22px;
+    color: #FFD537;
+}

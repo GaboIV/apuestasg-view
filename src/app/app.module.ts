@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -16,7 +16,7 @@ import { NoencontradoComponent } from './vistas/noencontrado/noencontrado.compon
 import { APP_ROUTES } from './app.routes';
 import { ServiciosModulo } from './servicios/servicios.modulo';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { CommonModule } from '@angular/common';
+import { CommonModule, registerLocaleData } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PipesModule } from './pipes/pipes.module';
 import { VistasModule } from './vistas/vistas.module';
@@ -26,6 +26,10 @@ import { ToastrModule } from 'ngx-toastr';
 import { AgregarPartidoComponent } from './vistas/partidos/agregar-partido.component';
 import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
 import { HttpErrorInterceptor } from 'src/app/interceptor/httpconfig.interceptor';
+
+import localeEs from '@angular/common/locales/es-AR';
+
+registerLocaleData(localeEs, 'es-VE');
 
 @NgModule({
   declarations: [
@@ -61,7 +65,8 @@ import { HttpErrorInterceptor } from 'src/app/interceptor/httpconfig.interceptor
       provide: HTTP_INTERCEPTORS,
       useClass: HttpErrorInterceptor,
       multi: true
-    }
+    },
+    { provide: LOCALE_ID, useValue: 'es-VE' }
   ],
   bootstrap: [AppComponent],
   exports: [PrincipalComponent]

@@ -43,6 +43,7 @@ import { CuotasComponent } from '../comun/componentes/cuotas/cuotas.component';
 import { VerPartidoComponent } from './partidos/ver-partido.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { OpcionesModule } from './opciones/opciones.module';
+import { MomentModule } from 'ngx-moment';
 
 @NgModule({
   imports: [
@@ -56,7 +57,8 @@ import { OpcionesModule } from './opciones/opciones.module';
     MalihuScrollbarModule.forRoot(),
     SweetAlert2Module.forRoot(),
     NgxPaginationModule,
-    OpcionesModule
+    OpcionesModule,
+    MomentModule
   ],
   declarations: [
     NacionalidadesComponent,
@@ -93,6 +95,6 @@ import { OpcionesModule } from './opciones/opciones.module';
     CuotasComponent,
     VerPartidoComponent
   ],
-  exports: [MenuCaballosComponent, CuotasComponent]
+  exports: [MenuCaballosComponent, CuotasComponent, MomentModule]
 })
 export class VistasModule { }

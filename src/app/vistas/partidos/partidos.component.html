@@ -47,11 +47,11 @@
                 <td width="5%" style="cursor: pointer" align="center" [routerLink]="['/partido', partido.id ]">
                     {{ partido.id }}</td>
                 <td width="15%">
-                    <div class='cada_liga_nt' *ngFor="let equipo of partido.competitors ">{{equipo.team.name}}</div>
+                    <div class='cada_liga_nt' *ngFor="let equipo of partido.teams ">{{equipo.name}}</div>
                 </td>
                 <td width="7%">
-                    <div class='cada_liga_nt' *ngFor="let equipo of partido.competitors ">
-                        {{equipo.odd | cuota:'decimal'}}</div>
+                    <div class='cada_liga_nt' *ngFor="let competitor of partido.competitors[0].data ">
+                        {{competitor.caption}}: {{competitor.quoteFloatValue | number:'1.2-2'}}</div>
                 </td>
                 <td contenteditable="false" width="15%" class="ch_dv_nt">
                     <div class='cada_liga_nt'>{{ partido.start | date:'d/MM/yyyy'}}</div>

@@ -37,10 +37,10 @@
     <table width="100%" id="tabla_equipos">
         <tbody>
             <tr class="par_th_nt" *ngFor="let pais of nacionalidades ">
-                <td width="5%" align="center">{{ pais.id_lista_p }}</td>
+                <td width="5%" align="center">{{ pais.id }}</td>
                 <td width="20%" class="ch_dv_nt">
-                    <p (click)="cambiarEdit()" *ngIf="mostrarEdit === false">{{ pais.nombre }}</p>
-                    <input type="text" [value]="pais.nombre" *ngIf="mostrarEdit === true" [(ngModel)]="pais.nombre" (focusout)="ocultarEdit( pais )">
+                    <p (click)="cambiarEdit()" *ngIf="mostrarEdit === false">{{ pais.name }}</p>
+                    <input type="text" [value]="pais.name" *ngIf="mostrarEdit === true" [(ngModel)]="pais.nombre" (focusout)="ocultarEdit( pais )">
                 </td>
                 <td width="6%" align="center">
                     {{pais.acro_2}}
@@ -51,12 +51,27 @@
                 <td width="16%" align="center">
                     <div class='dep_tab_pai'>No hay ligas asignadas</div>
                 </td>
-                <td width="16%" align="center">
-                    <div class='dep_tab_pai'>No hay equipos asignados</div>
+                <td width="16%" align="center" style="position: relative;">
+                    <label style="cursor: pointer; position: relative; height: 60px;">
+                        <img [src]="pais.image_link" alt="" height="50px;">
+                        <br>
+                        <input type="file" name="imagenSubir" (change)="subirImagen($event, pais)" style="display: none">
+                    </label>
+                    <input class="solo_hoy" type="text" name="image_link" placeholder="Url de imagen" [(ngModel)]="pais.image_link" required minlength="3" (change)="changeImageLink(pais)" >
+                    <div class="botonclear" (click)="pais.image_link = ''">
+                        <i class="fas fa-eraser"></i>
+                    </div>
                 </td>
                 <td width="7%" align="center">
+                    <!-- <label style="cursor: pointer; position: relative; height: 60px;">
+
+                        <img [src]="pais.id + '.png' | imagen:'nacionalidad'" alt="" height="50px;">
+                        <br>
+                        <input type="file" name="imagenSubir" (change)="subirImagen($event, pais)" style="display: none">
+                    </label> -->
+
                     <label style="cursor: pointer; position: relative; height: 60px;">
-                        <img [src]="pais.img | imagen:'nacionalidad'" alt="" height="50px;">
+                        <img [src]="pais.id + '.png' | imagen:'nacionalidad'" alt="" height="50px;">
                         <br>
                         <input type="file" name="imagenSubir" (change)="subirImagen($event, pais)" style="display: none">
                     </label>

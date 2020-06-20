@@ -116,7 +116,7 @@
     
     .img_dest {
         background: green;
-        height: 90px;
+        height: 110px;
         width: 100%;
         /* background: url(../../../assets/banners/1.jpg) no-repeat center center; */
         -webkit-background-size: cover;
@@ -133,9 +133,9 @@
         display: inline-block;
         position: absolute;
         bottom: 7px;
-        margin-left: -9%;
+        margin-left: -11%;
         height: 27%;
-        width: 12%;
+        width: 17%;
         height: auto;
         overflow: hidden;
         border-radius: 50%;
@@ -259,4 +259,35 @@
     .racecourses_active {
         border-bottom: 1px #0B244A solid;
         background: #0D2C49;
+    }
+
+    .nextrace {
+        font-size: 0.8em; 
+        padding: 2px 4px; 
+        cursor: pointer; 
+        display: block; 
+        width: max-content; 
+        margin: 0 0 4px 0;
+    }
+
+    .pitcher {
+        height: auto !important;
+    }
+
+    .pitcher span {
+        font-size: 1.2em;
+    }
+
+    .pitcher .ep_cl_logro {
+        padding-top: 9px;
+        color: #444;
+        height: 30px;
+        display: inline-block;
+        width: 20%;
+        font-size: 1.4em;
+        text-align: center;
+    }
+
+    .pitcher .ep_cl_name {
+        padding-left: 50px;
     }

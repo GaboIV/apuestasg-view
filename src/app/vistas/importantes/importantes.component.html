@@ -29,7 +29,7 @@
                 <form name="invfrm" (ngSubmit)="buscarEquipo(f.value)" #f="ngForm" ngNativeValidate
                     style="display: inline-block; vertical-align: middle; float: right; padding-right: 10px;">
                     <input class="solo_hoy" type="text" name="busqueda" placeholder="Busque un equipo" ngModel required
-                        #busqueda="ngModel">
+                        #busqueda="ngModel" minlength="3">
                 </form>
             </div>
             <div class="title_ap_fav" style="padding: 0px; height: 100px;" malihu-scrollbar
@@ -58,14 +58,35 @@
                     <div>
                         <div class='banda_fecha' *ngIf="game.manana">Mañana, {{ game.start | date:'d/MM/yyyy'}}</div>
                         <div class='ep_cada_partido'>
-                            <span>{{game.encuentro}} {{ game.start | date:'d/MM/yyyy'}} -
-                                {{ game.start | date:'shortTime'}}</span>
+                            <span>{{game.encuentro}} | {{ game.start | date:'d/MM/yyyy'}} | {{ game.start | date:'h:mm a'}}</span>
                         </div>
                         <div class="expandir" [routerLink]="['/verPartido', game.id]" [queryParams]="{partido: game}"
                             style="background: #00488c; height: 30px; padding-top: 7px;">
                             <i class="fas fa-expand"></i>&nbsp;Ampliar
                         </div>
-                        <div *ngFor="let competitor of game.competitors" class="gen_imp_eq"
+                        <ng-container *ngFor="let type of game.competitors">
+                            <ng-container *ngIf="type.bet_type_id == 1">
+                                <div *ngFor="let item of type.data; index as i;" class="gen_imp_eq"
+                                    [class.eq_tres_emp]="type.data.length == 3 && item.caption == 'X'"
+                                    [class.eq_tres]="type.data.length == 3 && item.caption != 'X'"
+                                    [class.eq_dos]="type.data.length == 2"
+                                    [class.pitcher]="(game.league.category_id == '4')"
+                                    (click)="selecciond( type.id, item.caption, game.league.category_id )">
+                                    <div [class]="game.league.category_id | importantes:item.caption ">
+                                        <img *ngIf="item.caption != 'X'" [src]="game.teams[item.caption - 1].image_url" height=125% class='ep_logo'>
+                                        <span *ngIf="item.caption != 'X'">{{game.teams[item.caption - 1].name}}</span>
+                                        <span *ngIf="item.caption == 'X'">Empate</span>
+                                        <div class="div_span" *ngIf="(game.league.category_id == '4' ) && game.teams[item.caption - 1].country_id != '0'">{{game.teams[item.caption - 1]?.country?.name}} <img [src]="game.teams[item.caption - 1].country_id + '.png' | imagen:'nacionalidad'" height=12px>
+                                        </div>
+                                        <!-- <div class="div_span" *ngIf="(game.category_id === '4' || game.category_id === '9') && equipo.nacionalidad === '0'">Sin información <i class="fas fa-info-circle"></i> </div>
+                                        <div class="pitcher_eq" *ngIf="(game.category_id === '22') && equipo.pitcher !== false">{{equipo.pitcher.nombre}} ({{equipo.pitcher.era}}) </div>
+                                        <div class="pitcher_eq" style="display: none" *ngIf="(game.category_id === '2') && equipo.pitcher === false">Sin información <i class="fas fa-info-circle"></i> </div> -->
+                                    </div>
+                                    <div class='ep_cl_logro'>{{item.quoteFloatValue | number : '1.2-2'}}</div>
+                                </div>
+                            </ng-container>
+                        </ng-container>
+                        <!-- <div *ngFor="let competitor of game.competitors" class="gen_imp_eq"
                             [class.eq_tres_emp]="game.competitors.length == 3 && competitor.team_id == 1"
                             [class.eq_tres]="game.competitors.length == 3 && competitor.team_id != 1"
                             [class.eq_dos]="game.competitors.length == 2"
@@ -74,16 +95,10 @@
                                     *ngIf="competitor.team.name !== 'Empate'"
                                     [src]="competitor.team.image | imagen:'equipo'" height=125%
                                     class='ep_logo'>{{competitor.team.name}}<br>
-                                <!-- Agregar para partidos internacionales -->
-                                <!-- <div class="div_span" *ngIf="(partido.category_id === '24' || partido.category_id === '29') && equipo.nacionalidad !== '0'">{{equipo.pais}} <img [src]="equipo.nacionalidad + '.png' | imagen:'nacionalidad'" height=12px></div> -->
-                                <!-- <div class="div_span" *ngIf="(partido.category_id === '24' || partido.category_id === '29') && equipo.nacionalidad === '0'">Sin información <i class="fas fa-info-circle"></i> </div> -->
-                                <!--  -->
-                                <!-- <div class="pitcher_eq" *ngIf="(partido.category_id === '22') && equipo.pitcher !== false">{{equipo.pitcher.nombre}} ({{equipo.pitcher.era}}) </div>
-                            <div class="pitcher_eq" style="display: none" *ngIf="(partido.category_id === '22') && equipo.pitcher === false">Sin información <i class="fas fa-info-circle"></i> </div> -->
                             </div>
                             <div class='ep_cl_logro'>{{competitor.odd | cuota:'decimal'}}</div>
 
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -101,9 +116,11 @@
                             </div>
                             <div class="card_careers">
                                 {{rce.name}} <br>
-                                <span class="solo_hoy" style="font-size: 0.8em; padding: 2px 4px; cursor: pointer;">
-                                    5ta en 5 m
-                                </span>
+                                <ng-container *ngFor="let r_car of rce.careers">
+                                    <span *ngIf="(r_car.posttime_unix * 1000) > _generalesService.fecha" class="solo_hoy nextrace">
+                                        {{r_car.number}}ª en {{ r_car.posttime | amDifference: _generalesService.fecha : 'minutes'}} min.
+                                    </span>
+                                </ng-container>                                
                             </div>
                         </div>
                     </ng-container>
@@ -123,7 +140,7 @@
                         [queryParams]="{dia: carrera.dia, hipodromo: carrera.racecourse.id, carrera: carrera.number }"
                         style="display: inline-block; outline: none;">
                         <!-- {{carrera.dia}} - {{dia_c}} <br> {{carrera.racecourse.id}} - {{racecourse}} <br> -->
-                        <div *ngIf="carrera.dia == dia_c && carrera.racecourse.id == racecourse" class="cc_menu"
+                        <div *ngIf="carrera.dia == dia_c && carrera.racecourse.id == racecourse && (carrera.posttime_unix * 1000) > _generalesService.fecha" class="cc_menu"
                             [class.cc_select]="carrera_c == carrera.number">
                             <div class="cc_numero">{{carrera.number}}</div>
                             <div class="cc_cuadro"></div>
@@ -137,7 +154,13 @@
                             <div class='carrera_disp'>Carrera {{carrera.number}} - 
                                 <!-- <span *ngIf="carrera.valid == 0¿nu">No
                                     vál.</span> <span *ngIf="carrera.valid != null">{{carrera.valid}}ª vál.</span> - -->
-                                {{carrera.distance}} mts. - {{ carrera.posttime | date:'shortTime'}}
+
+                                {{carrera.distance}} mts. 
+                                - 
+                                {{ carrera.posttime | date:'shortTime'}} 
+                                - 
+                                en {{ carrera.posttime | amDifference: _generalesService.fecha : 'minutes'}} minutos 
+
                                 <span *ngIf="carrera.tittle">- {{carrera.tittle}}</span>
                                 <span style="color: #042a51; font-size: 1em;" *ngIf="carrera.description"> -
                                     {{carrera.description}}</span>
@@ -202,17 +225,17 @@
                         *ngIf="dest.image !== 'noimage.png'">
                     <div *ngIf="dest.image == 'noimage.png'" class="img_dest"
                         [ngStyle]="{'background': 'url(../../assets/vallas/' + dest.league.category_id + '.jpg) no-repeat center center'}">
-                        <ng-container *ngFor="let equipo of dest.competitors; let i = index">
+                        <ng-container *ngFor="let equipo of dest.teams; let i = index">
                             <span class="versus" [class.letra_color]="dest.league.category_id === 4" *ngIf="i === 1"> VS
                             </span>
-                            <img *ngIf="equipo.team.name != 'Empate'" [src]="equipo.team.image | imagen:'equipo'"
+                            <img *ngIf="equipo.name != 'Empate'" [src]="equipo.image_url"
                                 class='ep_logo' style="position: static;"
                                 [class.redondo]="dest.league.category_id === 4">
                             <!-- <div class="img_dest_country">
                                 <img *ngIf="dest.league.category_id === 4" class="img_int_country" [src]="equipo.team.country_id + '.png' | imagen:'nacionalidad'" height=16px name=image_country>
                             </div> -->
-                            <img *ngIf="dest.league.category_id === 4" class="img_dest_country"
-                                [src]="equipo.team.country_id + '.png' | imagen:'nacionalidad'" height=16px
+                            <img *ngIf="dest.league.category_id === 4 && equipo.country?.image_link" class="img_dest_country"
+                                [src]="equipo.country.image_link" height=16px
                                 name=image_country>
 
                         </ng-container>
@@ -224,13 +247,18 @@
                     </div>
                     <div class='ep_descripcion_ta'>{{ dest.start | date:'d/MM/yyyy'}} -
                         {{ dest.start | date:'shortTime'}}</div>
-                    <div class='ep_cada_logo destacado_odd' *ngFor="let equipo of dest.competitors"
-                        (click)="selecciond( equipo.id, dest.league.category_id )">
-                        <img *ngIf="equipo.team.name != 'Empate'" class="destacado_img"
-                            [src]="equipo.team.image | imagen:'equipo'" height=125%>
-                        <div class='ep_cl_name destacado_name'>{{equipo.team.name}}</div>
-                        <div class='ep_cl_logro destacado_cuota'>{{equipo.odd | cuota:'decimal'}}</div>
-                    </div>
+                    <ng-container *ngFor="let competitor of dest.competitors">
+                        <ng-container *ngIf="competitor.bet_type.name == 'standard'">
+                            <div class='ep_cada_logo destacado_odd' *ngFor="let item of competitor.data"
+                            (click)="selecciond( competitor.id, item.caption, dest.league.category_id )">
+                                <img *ngIf="item.caption != 'X'" class="destacado_img"
+                                    [src]="dest.teams[item.caption - 1].image_url" height=125%>
+                                <div *ngIf="item.caption != 'X'" class='ep_cl_name destacado_name'>{{dest.teams[item.caption - 1].name}}</div>
+                                <div *ngIf="item.caption == 'X'" class='ep_cl_name destacado_name'>Empate</div>
+                                <div class='ep_cl_logro destacado_cuota'>{{item.quoteFloatValue | number:'1.2-2'}}</div>
+                            </div>
+                        </ng-container>
+                    </ng-container>                    
                 </ng-container>
             </div>
         </div>

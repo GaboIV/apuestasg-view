@@ -271,7 +271,7 @@ export class ImportantesComponent implements OnInit {
       });
   }
 
-  selecciond(id_apuesta, id_categoria) {
+  selecciond(id_apuesta, id_item, id_categoria) {
     const toast = swal.mixin({
       toast: true,
       position: 'top-end'
@@ -281,7 +281,7 @@ export class ImportantesComponent implements OnInit {
       title: 'Enviando datos'
     });
 
-    this._inicioSesion.selecciond(id_apuesta, id_categoria, this._inicioSesion.usuario.id)
+    this._inicioSesion.selecciond(id_apuesta, id_item, id_categoria, this._inicioSesion.usuario.id)
       .subscribe(resp => {
         const toast = swal.mixin({
           toast: true,

@@ -43,12 +43,12 @@ export class LigasComponent implements OnInit {
   ngOnInit() {
     this.ligas = JSON.parse(localStorage.getItem('ligas'));
 
-    this.cargarLigas(this.pagina, 'todas');
+    this.cargarLigas(this.pagina, 'todas', 'todas');
     this.cargarNacionalidades();
     this.cargarDeportes();
   }
 
-  cargarLigas(pagina, criterio) {
+  cargarLigas(pagina, criterio, liga) {
     this.criterio = criterio;
     const toast = swal.mixin({
       toast: true,
@@ -60,7 +60,7 @@ export class LigasComponent implements OnInit {
       type: 'info',
       title: 'Cargando ligas'
     });
-    this._ligasService.cargarLigas(pagina, criterio)
+    this._ligasService.cargarLigas(pagina, criterio, liga)
       .subscribe(ligas => {
         this.ligas = ligas.data;
         this.total = ligas.total;
@@ -105,7 +105,7 @@ export class LigasComponent implements OnInit {
   cambiarPagina(valor: string) {
     if (valor === 'a') {
       this.pagina = this.pagina + 1;
-      this.cargarLigas(this.pagina, 'todas');
+      this.cargarLigas(this.pagina, 'todas', 'todas');
 
       if (this.pagina !== 1) {
         this.desactivar = 'color_grey';
@@ -114,7 +114,7 @@ export class LigasComponent implements OnInit {
 
     if (valor === 'b' && this.pagina > 1) {
       this.pagina = this.pagina - 1;
-      this.cargarLigas(this.pagina, 'todas');
+      this.cargarLigas(this.pagina, 'todas', 'todas');
 
       if (this.pagina === 1) {
         this.desactivar = 'disabled';
@@ -144,14 +144,22 @@ export class LigasComponent implements OnInit {
   }
 
   buscarElemento(valor: string) {
-    this.liguias = [];
-
-    if (valor !== '') {
-      const busqueda = new RegExp(valor, 'i');
-      const liguias = this.ligas.filter(ligas => busqueda.test(ligas.name));
-
-      this.liguias = liguias;
+    if (valor === '') {
+      valor = 'todas';
     }
+
+    this.cargarLigas(this.pagina, valor, 'todas');
+  }
+
+  sync(id) {
+
+    $('#spinact_' + id).addClass(' fa-spin ');
+
+    this._ligasService.sync(id)
+    .subscribe( resp => {      
+        $('#spinact_' + id).removeClass('fa-spin');
+        console.log(resp);
+    });
   }
 
 }

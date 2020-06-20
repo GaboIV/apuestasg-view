@@ -9,7 +9,8 @@ import {
   URL_INICIAL, 
   URL_ACCOUNT,
   URL_BANK,
-  URL_PUBLIC
+  URL_PUBLIC,
+  URL_NACIONALIDADES
   } from '../comun/link';
 import { Pago } from '../modelos/pago.modelo';
 import { InicioSesionService } from './inicio-sesion.service';
@@ -135,6 +136,21 @@ export class GeneralesService {
     const url = URL_DEPOSITO + '/pago/actualizar';
 
     return this.http.post( url, { id_pago, estatus } )
+      .pipe(map( (resp: any) => {
+        const res = resp;
+        return res;
+      })
+    );
+  }
+
+  modificarDatoPais(id, value, parameter) {
+    const url = URL_NACIONALIDADES + '/' + id;
+    
+    var key = parameter;
+    var obj = {};
+    obj[key] = value;
+
+    return this.http.put( url, obj, this._loginService.httpOptions )
       .pipe(map( (resp: any) => {
         const res = resp;
         return res;

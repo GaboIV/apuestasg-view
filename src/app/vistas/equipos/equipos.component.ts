@@ -2,11 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { EquiposService, NacionalidadesService } from '../../servicios/servicios.indice';
 import { Equipo } from '../../modelos/equipos';
-import { HttpClient } from '@angular/common/http';
 import { Nacionalidad } from '../../modelos/nacionalidad';
 import { GeneralesService } from '../../servicios/generales.service';
 import { Liga } from '../../modelos/ligas';
-import { URL_A_FUNC } from '../../comun/link';
 import swal from 'sweetalert2';
 
 @Component({
@@ -55,7 +53,6 @@ export class EquiposComponent implements OnInit {
     this._equipoService.cargarEquipos(pagina, criterio, liga)
       .subscribe(equipos => {
         this.equipos = equipos.data
-        console.log(equipos);
         this.total = equipos.total;
         this.pagina = equipos.current_page;
         swal.close();
@@ -128,4 +125,12 @@ export class EquiposComponent implements OnInit {
     this.cargarEquipos(1, 'todos', liga.id);
   }
 
+  changeImageLink (team){
+    this._equipoService.modificarDatoEquipo(team.id, team.image_link, 'image_link')
+      .subscribe(resp => {
+        if (resp.status == 'success') {
+          team.image_url = team.image_link;
+        }
+      });
+  }
 }

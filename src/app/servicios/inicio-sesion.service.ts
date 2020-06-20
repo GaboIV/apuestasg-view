@@ -218,7 +218,7 @@ export class InicioSesionService {
     );
   }
 
-  selecciond ( id_apuesta, id_categoria, id_usuario ) {
+  selecciond ( id_apuesta, id_item, id_categoria, id_usuario ) {
     this.esperando = true;
     this.ticketes = null;
     this.ticketes2 = null;
@@ -226,6 +226,7 @@ export class InicioSesionService {
 
     return this.http.post( url, {
       "bet_id" : id_apuesta,
+      "item_id" : id_item,
       "category_id" : id_categoria
     }, this.httpOptions )
       .pipe(map( (resp: any) => {

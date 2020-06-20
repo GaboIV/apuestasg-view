@@ -11,7 +11,7 @@ export class ImportantesPipe implements PipeTransform {
 
     switch ( categoria ) {
       case '21':
-          if ( nombre === 'Empate') {
+          if ( nombre === 'X') {
             clase = 'ep_cl_name ep_empate';
           } else {
             clase = 'ep_cl_name';
@@ -19,7 +19,7 @@ export class ImportantesPipe implements PipeTransform {
       break;
 
       case '22':
-        if ( nombre === 'Empate') {
+        if ( nombre === 'X') {
           clase = 'ep_cl_name ep_empate';
         } else {
           clase = 'ep_cl_name';

@@ -39,3 +39,20 @@
     min-height: 52px;
     font-size: 14px;
 }
+
+.botonclear {
+    position: absolute;
+    background: #d61828;
+    padding: 3px 5px;
+    bottom: 1px;
+    right: 21px;
+    height: 24px;
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+    cursor: pointer;
+}
+
+.solo_hoy {
+    margin-right: 22px;
+    color: #FFD537;
+}

@@ -17,10 +17,14 @@ export class LigasService {
     public _loginService: InicioSesionService,
   ) { }
 
-  cargarLigas(page: any, words: string) {
+  cargarLigas(pagina: number, criterio: string, liga: string) {
       let url = ""; 
-      
-      url = URL_LIGAS + '?page=' + page;       
+
+      if (criterio !== null) {
+        url = URL_LIGAS + '?page=' + pagina + '&criterio=' + criterio;
+      } else {
+        url = URL_LIGAS + '?page=' + pagina;
+      }   
 
       return this.http.get( url, this._loginService.httpOptions )
       .pipe(map ( (resp: any) => {
@@ -81,5 +85,14 @@ export class LigasService {
         return resp;
       })
     );
+  }
+
+  sync(id) {
+    const url = URL_LIGAS + "/" + id + "/sync";
+
+    return this.http.post( url, {}, this._loginService.httpOptions  )
+    .pipe(map ( (resp: any) => {
+      return resp;
+    }));
   }
 }

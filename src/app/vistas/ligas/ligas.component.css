@@ -34,3 +34,17 @@
 .trthnt_ciudad {
     width: 14%;
 }
+
+.add_lig {
+    margin-right: 15px;
+    width: auto;
+    padding: 1px 15px;
+    font-size: 1.3em;
+}
+
+.add_filter {
+    width: auto;
+    padding: 1px 10px;
+    font-size: 1.3em;
+    background: #d61828;
+}

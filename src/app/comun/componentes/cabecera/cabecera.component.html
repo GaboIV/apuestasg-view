@@ -13,11 +13,11 @@
 
             <div class="">Deportes</div>
 
-            <div>Apuestas en vivo</div>
+            <!-- <div>Apuestas en vivo</div>
 
-            <div>Animalitos</div>
+            <div>Animalitos</div> -->
 
-            <div>Póker</div>
+            <div>Carreras de caballos</div>
 
         </div>
         <div class="lado opciones_enc">
@@ -48,8 +48,8 @@
                         <div class='salir_ss'>
                             <i class='fas fa-power-off' (click)="logout()" [routerLink]="['/importantes/1']"></i>
                         </div>
-                        <div class='msj_ss' [routerLink]="['/mensajes']">
-                            <i class='far fa-envelope' style='margin-right: 5px; vertical-align: middle; '></i>2
+                        <div class='msj_ss' [routerLink]="['/mensajes']" style="text-align: center;">
+                            <i class='far fa-envelope' style='margin-right: 5px; vertical-align: middle; '></i>2 mensajes
                         </div>
                     </div>
                     <div class='second_session'>
@@ -94,7 +94,7 @@
 
         <div class="lado col_1">
 
-            <div id="hora_local">{{hora}}</div>
+            <div id="hora_local">{{_generalesService.fecha | date:'medium'}}</div>
 
         </div>
         <div class="lado col_2">
