@@ -2462,6 +2462,14 @@ thead tr {
     font-size: 15px;
     margin: auto;
     border-radius: 4px;
+    background: white;
+    text-align: center;
+    color: #444;
+}
+
+div .ch_slc_nt {
+    padding-top: 3px;
+    margin-bottom: 2px;
 }
 
 .par_th_nt:hover {

@@ -31,9 +31,18 @@
                             <option *ngFor="let deporte of deportes " value={{deporte.id}}>{{ deporte.name }}</option>
                         </select>
                     </td>
-                    <td width="9%" #name_uk [innerText]="liga.name_uk" (blur)="modificarDato(liga.id, name_uk.innerText, liga, 'name_uk', 'Web ID ')" contenteditable="true" align="center">
-                        {{liga.name_uk}}
+                    <td width="9%" align="center">
+                        <ng-container *ngIf="liga.name_uk.length > 0">
+                            <div name="name_uk" class="ch_slc_nt" *ngFor="let name_uk of liga.name_uk">
+                                {{name_uk}}
+                                <div class="equis_ch_slc" (click)="dettach_name_uk(liga, name_uk)">X</div>
+                            </div>
+                        </ng-container>
+                        <div class="expandir" style="background: #00488c; height: 22px; padding-top: 4px; width: 30%; margin-top: 5px;" (click)="attach_name_uk(liga, name_uk)"><i class="fas fa-plus"></i></div>
                     </td>
+                    <!-- <td width="9%" #name_uk [innerText]="liga.name_uk" (blur)="modificarDato(liga.id, name_uk.innerText, liga, 'name_uk', 'Web ID ')" contenteditable="true" align="center">
+                        {{liga.name_uk}}
+                    </td> -->
                     <td width="9%" #importance [innerText]="liga.importance" (blur)="modificarDato(liga.id, importance.innerText, liga, 'importance', 'importancia ')" contenteditable="true" align="center">
                         <p>{{ liga.importance }}</p>
                     </td>

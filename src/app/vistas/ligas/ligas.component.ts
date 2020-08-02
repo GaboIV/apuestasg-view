@@ -162,4 +162,73 @@ export class LigasComponent implements OnInit {
     });
   }
 
+  dettach_name_uk (liga: Liga, name_uk) {
+    swal({
+      title: '¿Estás seguro de eliminar el sub-identificador ' + name_uk + '?',
+      text: "",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#cfcfcf',
+      confirmButtonText: 'Sí, cerrar',
+      cancelButtonText: '<span style="color: #444">Cancelar</span>'
+    }).then((result) => {
+      if (result.value) {
+        const Toast = swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 15000
+        });
+        Toast({
+          type: 'info',
+          title: 'Eliminando sub-identificador'
+        });
+        this._ligasService.dettach_name_uk(liga, name_uk)
+        .subscribe( resp => {
+            liga.name_uk = resp.league.name_uk;
+        });
+      }
+    }) 
+
+    // this._ligasService.dettach_name_uk(liga, name_uk)
+    // .subscribe( resp => {
+    //     liga.name_uk = resp.league.name_uk;
+    // });
+  }
+
+  attach_name_uk (liga: Liga, name_uk) {
+    swal({
+      title: 'Escriba el nuevo sub-identificador de la liga',
+      input: 'number',
+      inputAttributes: {
+        autocapitalize: 'off'
+      },
+      showCancelButton: true,
+      confirmButtonText: 'Guardar',
+      showLoaderOnConfirm: true,
+      preConfirm: (name_uk) => {
+        return this._ligasService.attach_name_uk(liga, name_uk)
+                .subscribe( resp => {
+                    liga.name_uk = resp.league.name_uk;
+                    swal.close();
+                });
+      },
+      allowOutsideClick: () => !swal.isLoading()
+    }).then((result) => {
+      if (result.value) {
+        const Toast = swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 15000
+        });
+        Toast({
+          type: 'info',
+          title: 'Agregando sub-identificador'
+        });
+      }
+    })
+  }
+
 }

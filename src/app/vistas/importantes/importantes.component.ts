@@ -27,6 +27,8 @@ export class ImportantesComponent implements OnInit {
   public anchoTabla: any;
   public apostado = 0;
 
+  game_selected: any = null;
+
   colors = ['FE0000', '0000FE', '006837', '28ABE3', '4caf50', '93268F', '000000', '808080', 'F15A25', '8C6238', 'FBB03B', '00FF01', '8CC63E', 'C1282D', '23B574', '00FFFF', '2E3192', 'ED1E79', '4D4D4D', 'F15A25', 'FE0000', '0000FE', 'FBB03B', '2E3192', 'FE0000', '0000FE', 'FDEE21', '23B574', 'FE0000', '0000FE', 'FE0000', 'F15A25', 'FE0000', '0000FE', '0000FE', '8C6238', 'FE0000', '0000FE', '006837', 'FE0000'];
 
   public scrollbarOptions = { axis: 'x', theme: 'light', alwaysShowScrollbar: 1 };
@@ -80,9 +82,9 @@ export class ImportantesComponent implements OnInit {
         this.carrera_c = params.carrera;
       }    
 
-      if (params.pantalla == 'principal') {
-        this.solohoy(1);
-      }
+      // if (params.pantalla == 'principal') {
+      //   this.solohoy(1);
+      // }
     });
 
     this.route.params

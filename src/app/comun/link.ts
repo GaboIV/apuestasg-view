@@ -1,4 +1,4 @@
-export const URL_INICIAL = 'https://api.apuestasg.net.ve/api/';
+export const URL_INICIAL = 'https://api.apuestasg.win/api/';
 export const URL_A_FUNC = 'http://agsw.apuestasg.win/php/funciones';
 
 // export const URL_INICIAL = 'http://apuestasg.2kool4u.net/api/';

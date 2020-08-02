@@ -291,3 +291,18 @@
     .pitcher .ep_cl_name {
         padding-left: 50px;
     }
+
+    .game { 
+        padding: 12.5px 15px 0 15px;
+    }
+
+    .border_game {
+        border: 1.5px solid #0D2C49;
+        border-radius: 3px;
+        overflow: hidden;
+    }
+
+    .border_game .ep_cada_partido {
+        color: white !important;
+        background-color: #0D2C49;
+    }

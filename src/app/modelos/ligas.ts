@@ -9,6 +9,7 @@ export class Liga {
         public country_id?: number,
         public id?: string,
         public img?: string,
-        public equipos?: number
+        public equipos?: number,
+        public name_uk?: any
     ) { }
 }

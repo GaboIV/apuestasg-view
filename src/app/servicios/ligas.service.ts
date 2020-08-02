@@ -95,4 +95,22 @@ export class LigasService {
       return resp;
     }));
   }
+
+  attach_name_uk(liga: Liga, name_uk) {
+    const url = URL_LIGAS + "/" + liga.id + "/attach";
+
+    return this.http.patch( url, { name_uk: name_uk }, this._loginService.httpOptions  )
+    .pipe(map ( (resp: any) => {
+      return resp;
+    }));
+  }
+
+  dettach_name_uk(liga: Liga, name_uk) {
+    const url = URL_LIGAS + "/" + liga.id + "/dettach";
+
+    return this.http.patch( url, { name_uk: name_uk }, this._loginService.httpOptions  )
+    .pipe(map ( (resp: any) => {
+      return resp;
+    }));
+  }
 }
