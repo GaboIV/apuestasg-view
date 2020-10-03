@@ -1477,7 +1477,7 @@ cuerpo {
 
 .barra_nav_hrs {
     height: 43px;
-    background-color: #14805E;
+    background-color: #0D2C49;
 }
 
 .c_m_hrs {
@@ -1486,8 +1486,8 @@ cuerpo {
     text-align: center;
     overflow: hidden;
     height: 43px;
-    border-right: 1px solid #189670;
-    border-bottom: 1px solid #189670;
+    border-right: 1px solid #152535;
+    border-bottom: 1px solid #152535;
     color: #e8e8e8;
     padding-top: 6px;
     cursor: pointer;
@@ -2077,7 +2077,7 @@ cuerpo {
 
 .tkt_apostar span {
     line-height: 29px;
-    font-size: 16px;
+    font-size: 1.2em;
     color: #272727;
 }
 
@@ -2194,7 +2194,7 @@ cuerpo {
     background: #FFF;
     border: dotted 1px #272727;
     margin: 4px;
-    font-size: 0.9em;
+    font-size: 1em;
     color: #272727;
     padding: 6px;
     line-height: 1;

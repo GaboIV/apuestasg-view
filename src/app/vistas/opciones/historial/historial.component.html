@@ -116,10 +116,10 @@
                                 </ng-container>
                                 <ng-container *ngIf="sel.category_id != '7' ">
                                     <div class='c_sele'><b>{{sel.team_name}}</b> @ {{sel.value | cuota:'decimal'}}
-                                        <span class='banner_histo' *ngIf="sel.status === 0 ">Pendiente</span>
-                                        <span class='banner_histo ganadeivis' *ngIf="sel.status === 1 ">Ganador</span>
-                                        <span class='banner_histo' *ngIf="sel.status==='2' ">Descartado</span>
-                                        <span class='banner_histo pendeivis' *ngIf="sel.status=== 3 ">Perdedor</span>
+                                        <span class='banner_histo' *ngIf="sel.status == 0 ">Pendiente</span>
+                                        <span class='banner_histo ganadeivis' *ngIf="sel.status == 1 ">Ganador</span>
+                                        <span class='banner_histo' *ngIf="sel.status=='2' ">Descartado</span>
+                                        <span class='banner_histo pendeivis' *ngIf="sel.status== 3 ">Perdedor</span>
                                     </div>
                                     <div class='enc_sele'>{{sel.game.encuentro}}
                                         ({{ sel.game.start | date:'dd/MM/yyyy'}} {{ sel.game.start | date:'shortTime'}})

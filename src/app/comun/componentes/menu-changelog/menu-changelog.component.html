@@ -1,0 +1,9 @@
+<div class="total_hrs">
+  <div class="barra_nav_hrs">
+    <ng-container *ngFor="let item of options">
+      <div class="c_m_hrs" [routerLink]="[item.route]" routerLinkActive="activadisimo" >
+        <div>{{item.name}}</div>
+      </div>
+    </ng-container>    
+  </div>
+</div>

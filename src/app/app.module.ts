@@ -28,6 +28,7 @@ import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
 import { HttpErrorInterceptor } from 'src/app/interceptor/httpconfig.interceptor';
 
 import localeEs from '@angular/common/locales/es-AR';
+import { MenuChangelogComponent } from './comun/componentes/menu-changelog/menu-changelog.component';
 
 registerLocaleData(localeEs, 'es-VE');
 

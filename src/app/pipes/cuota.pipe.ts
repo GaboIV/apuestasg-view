@@ -20,9 +20,9 @@ export class CuotaPipe implements PipeTransform {
           let res;
 
           if ( datos[1] ) {
-            res = (datos[0] / datos[1]) + 1 ;
+            res = (datos[0] / datos[1]);
           } else {
-            res = (datos[0] * 1) + 1;
+            res = (datos[0] * 1);
           }
 
           const res2 = res.toFixed(2);

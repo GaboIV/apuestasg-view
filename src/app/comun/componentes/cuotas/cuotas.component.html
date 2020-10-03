@@ -23,7 +23,7 @@
                             </div>
 
                             <div class="tkt_can_all tkt_import" style="text-align: right; border-top: solid 1px #aaa;">
-                                <div>Total a ganar: <span id="aganarsolo">Bs.
+                                <div style="font-size: 1em;">Total a ganar: <span id="aganarsolo">Bs.
                                         {{ _inicioSesion.aganar | number:'1.2-2'}}</span></div>
                             </div>
                             <div class="tkt_apostar" (click)="apostard()">
@@ -51,8 +51,8 @@
                             (keyup)="_inicioSesion.cambioApuesta( $event.target.value )">
                         <div>Cuota: {{ _inicioSesion.cuota | number:'1.2-2'}}</div>
                     </div>
-                    <div class="tkt_can_all tkt_import" style="text-align: right; border-top: solid 1px #aaa;">
-                        <div>Total a ganar: <span id="aganarsolo">Bs. {{ _inicioSesion.aganar | number:'1.2-2'}}</span>
+                    <div class="tkt_can_all tkt_import" style="text-align: right; border-top: solid 1px #aaa; font-weight: bold;">
+                        <div style="font-size: 1em;">Total a ganar: <span id="aganarsolo">Bs. {{ _inicioSesion.aganar | number:'1.2-2'}}</span>
                         </div>
                     </div>
                     <div class="tkt_apostar" (click)="apostard()">
@@ -100,7 +100,7 @@
                     </div>
                     <div class='separador1_tk'></div>
                     <div class="hr_r1">
-                        <div style="width: 60%; text-align: left">Bs. {{tk.monto}} a ganar</div>
+                        <div style="width: 60%; text-align: left">Bs. {{tk.monto}}</div>
                         <div style="width: 40%; text-align: right">Bs. {{tk.monto}}</div>
                     </div>
                     <div class="hr_r2">
@@ -137,21 +137,21 @@
                             <div class="text_encuentro">{{sel.encuentro}}</div>
                             <div style="float: right; ">{{ sel.fecha_inicio | date:'shortTime'}}</div>
                         </div>
-                        <div class="equipo_sel_tk">{{sel.equipo}} a ganar
-                            <div style="float: right; ">{{sel.dividendo | cuota:'decimal'}}</div>
+                        <div class="equipo_sel_tk">{{sel.equipo}}
+                            <div style="float: right;  font-weight: bold;">{{sel.dividendo}}</div>
                         </div>
                     </div>
 
                     <div class="separador2_tk"></div>
                     <div class="cada_sel_tk" style="padding: 10px 0;">
                         <div class="encuentro_sel_tk">Importe de Apuesta:
-                            <div style="float: right; ">Bs. {{ tk2.monto | number:'1.2-2'}}</div>
+                            <div style="float: right;  font-weight: bold;">Bs. {{ tk2.monto | number:'1.2-2'}}</div>
                         </div>
                         <div class="encuentro_sel_tk">Cuota Total:
-                            <div style="float: right; ">{{ tk2.cuota | number:'1.2-2'}}</div>
+                            <div style="float: right;  font-weight: bold;">{{ tk2.cuota | number:'1.2-2'}}</div>
                         </div>
                         <div class="equipo_sel_tk">Ganancia Posible:
-                            <div style="float: right; ">Bs. {{ tk2.a_ganar | number:'1.2-2'}}</div>
+                            <div style="float: right;  font-weight: bold;">Bs. {{ tk2.a_ganar | number:'1.2-2'}}</div>
                         </div>
                     </div>
                     <div class="separador2_tk"></div>

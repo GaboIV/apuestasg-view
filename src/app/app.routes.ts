@@ -86,7 +86,7 @@ const appRoutes: Routes = [
   { path: 'noticias', component: NoticiasComponent },
   { path: 'estadisticas', component: EstadisticasComponent },
   { path: 'adm-depositos', component: AdmDepositosComponent },
-  { path: 'changelog', component: ChangelogComponent, canActivate: [AdminGuardGuard]},
+  { path: 'tareas-pendientes', component: ChangelogComponent, canActivate: [AdminGuardGuard]},
   { path: 'partido/:id_partido', component: PartidoComponent, canActivate: [AdminGuardGuard] },
   { path: 'carrera/:id_carrera', component: CarreraComponent, canActivate: [AdminGuardGuard] },
   { path: 'verCarrera/:id_carrera', component: VerCarreraComponent },

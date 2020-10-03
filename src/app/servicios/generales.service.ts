@@ -111,9 +111,9 @@ export class GeneralesService {
   }
 
   agregarTarea(tarea, id_usuario) {
-    const url = URL_CHANGELOG + '/agregar';
+    const url = URL_CHANGELOG;
 
-    return this.http.post( url, {tarea, id_usuario} )
+    return this.http.post( url, {text: tarea, user_id: id_usuario}, this._loginService.httpOptions )
       .pipe(map( (resp: any) => {
         const res = resp;
         return res;

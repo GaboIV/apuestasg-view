@@ -1,10 +1,6 @@
+<app-menu-changelog></app-menu-changelog>
+
 <div class='body_histo'>
-    <div class='menu_barra_mem'>
-        <!-- <div class='btn_deposit' style="cursor: pointer"></div> -->
-        <div class='tab_menu_mem' [routerLink]="['/changelog']" [queryParams]="{zona:'tareas'}" routerLinkActive="tmm_select">Changelog</div>
-        <div class='tab_menu_mem' [routerLink]="['/changelog']" [queryParams]="{zona:'agregarTarea'}" routerLinkActive="tmm_select"><i class="far fa-calendar-plus"></i> Añadir tarea</div>
-        <div class='tab_menu_mem' [routerLink]="['/changelog']" [queryParams]="{zona:'modificarTarea'}" routerLinkActive="tmm_select">Modificar tarea</div>
-    </div>
     <ng-container *ngIf="zona === 'tareas'">
         <div style="padding: 15px;" *ngFor="let cl of changelogs">
             <div class="idiv">

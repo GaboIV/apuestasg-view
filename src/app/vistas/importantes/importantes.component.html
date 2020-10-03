@@ -67,7 +67,7 @@
                         </div> -->
                         <div class="expandir" style="background: #00488c; height: 30px; padding-top: 7px;"
                             (click)="game_selected = game">
-                            <i class="fas fa-expand"></i>&nbsp;Ampliar |
+                            <i class="fas fa-expand"></i>&nbsp;Ampliar
                         </div>
                         <ng-container *ngFor="let type of game.competitors">
                             <ng-container *ngIf="type.bet_type_id == 1">
@@ -184,7 +184,7 @@
                             </div>
                             <div class="expandir" style="vertical-align: middle"
                                 [routerLink]="['/verCarrera', carrera.id]" [queryParams]="{carrera: carrera}">
-                                Expandir
+                                Ampliar
                             </div>
                         </div>
 

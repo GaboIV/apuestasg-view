@@ -44,6 +44,7 @@ import { VerPartidoComponent } from './partidos/ver-partido.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { OpcionesModule } from './opciones/opciones.module';
 import { MomentModule } from 'ngx-moment';
+import { MenuChangelogComponent } from '../comun/componentes/menu-changelog/menu-changelog.component';
 
 @NgModule({
   imports: [
@@ -90,11 +91,12 @@ import { MomentModule } from 'ngx-moment';
     EstadisticasComponent,
     ChangelogComponent,
     MenuCaballosComponent,
+    MenuChangelogComponent,
     CarreraComponent,
     VerCarreraComponent,
     CuotasComponent,
     VerPartidoComponent
   ],
-  exports: [MenuCaballosComponent, CuotasComponent, MomentModule]
+  exports: [MenuCaballosComponent, MenuChangelogComponent, CuotasComponent, MomentModule]
 })
 export class VistasModule { }

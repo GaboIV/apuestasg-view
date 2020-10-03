@@ -23,7 +23,7 @@ export class HistorialComponent implements OnInit {
   cargarTicketes( estatus ) {
     this._inicioSesion.cargarTickets( estatus )
     .subscribe( ticketes => {
-      this.tickets = ticketes;
+      this.tickets = ticketes.data;
     } );
   }
 }

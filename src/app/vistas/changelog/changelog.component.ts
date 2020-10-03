@@ -31,15 +31,15 @@ export class ChangelogComponent implements OnInit {
       this.changelogs = resp.changelogs;
     });
 
-    this.route.queryParams
-    .subscribe(params => {
-      this.zona = params.zona;
-    });
+    // this.route.queryParams
+    // .subscribe(params => {
+    //   this.zona = params.zona;
+    // });
 
-    if ( this.zona === undefined) {
-        this.router.navigate(['/changelog'], { queryParams: { zona: 'tareas' } });
-        this.zona = 'tareas';
-    }
+    // if ( this.zona === undefined) {
+    //     this.router.navigate(['/changelog'], { queryParams: { zona: 'tareas' } });
+    //     this.zona = 'tareas';
+    // }
   }
 
   enviarTarea () {

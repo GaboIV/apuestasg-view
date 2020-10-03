@@ -23,7 +23,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request)
       .pipe(
-        retry(2),
+        retry(0),
         catchError((error: HttpErrorResponse) => {
           HttpErrorInterceptor.LoginService.esperandologion = false;
           HttpErrorInterceptor.LoginService.loading = false;
