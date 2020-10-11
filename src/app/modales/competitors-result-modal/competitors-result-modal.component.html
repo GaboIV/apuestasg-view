@@ -1,0 +1,32 @@
+<form ngNativeValidate #f="ngForm" (ngSubmit)="updateResult(f)">
+  <div *ngFor="let competitor of game.competitors; let j = index;" style="width: 200px; display: inline-block; margin-right: 10px;">
+    <ng-container *ngIf="competitor.data">
+      <table class="table_game" style="margin-bottom: 10px;">
+        <tr>
+          <td>
+            Apuesta: {{competitor.code}}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <table class="table_game">
+              <tr>
+                <td *ngFor="let option of competitor.data; let i = index;">
+                  <input [(ngModel)]="competitor.winner" type="radio" [checked]="option.caption === competitor.winner"  id="option-{{competitor.id}}-{{option.caption}}" name="{{competitor.id}}" [value]="option.caption"> {{option.caption}}
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </ng-container>
+  </div>
+  <br><br>
+  <div style="margin: 0 auto;">
+    <input required [(ngModel)]="game.result" type="text" id="result" name="result">
+    <button type="submit">
+      Save
+    </button>
+  </div>
+  
+</form>

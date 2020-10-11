@@ -122,20 +122,22 @@
             </ng-container>
             <ng-container *ngIf="_inicioSesion.ticketes2 !== null">
                 <div class="tk_generado" *ngFor="let tk2 of _inicioSesion.ticketes2">
-                    <div class="ttl_tk"><b>www.ApuestasG.com.ve</b></div>
+                    <div>
+                        <img src="../../../../assets/iconos/logo_bz_80.png" height="34px">
+                    </div>
                     <div class="ttl_tk">Ticket de apuesta</div>
-                    <div class="ttl_tk">Identificador: {{tk2.cod_seguridad}}</div>
+                    <div class="ttl_tk">Identificador: {{tk2.cod_seguridad | uppercase}}</div>
                     <div class="ttl_tk">Número de ticket: {{tk2.correlativo}}</div>
                     <div class="ttl_tk">Fecha y hora: {{ tk2.fecha_hora | date:'dd/MM/yyyy'}}
                         {{ tk2.fecha_hora | date:'shortTime'}}</div>
                     <div class="separador1_tk"></div>
                     <div class="cada_sel_tk" *ngFor="let sel of tk2.selecciones">
                         <div class="encuentro_sel_tk">{{sel.liga}}
-                            <div style="float: right; ">{{ sel.fecha_inicio | date:'dd/MM/yyyy'}} </div>
+                            <div style="float: right; ">{{ sel.start | date:'dd/MM/yyyy'}} </div>
                         </div>
                         <div class="encuentro_sel_tk">
                             <div class="text_encuentro">{{sel.encuentro}}</div>
-                            <div style="float: right; ">{{ sel.fecha_inicio | date:'shortTime'}}</div>
+                            <div style="float: right; ">{{ sel.start | date:'shortTime'}}</div>
                         </div>
                         <div class="equipo_sel_tk">{{sel.equipo}}
                             <div style="float: right;  font-weight: bold;">{{sel.dividendo}}</div>

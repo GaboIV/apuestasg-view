@@ -6,6 +6,9 @@ import { PartidosService } from '../../servicios/partidos.service';
 import { NacionalidadesService } from '../../servicios/servicios.indice';
 import { LigasService } from 'src/app/servicios/ligas.service';
 import swal from 'sweetalert2';
+import { ModalService } from 'src/app/servicios/modal.service';
+import { SamplemodalComponent } from 'src/app/modales/samplemodal/samplemodal.component';
+import { CompetitorsResultModalComponent } from 'src/app/modales/competitors-result-modal/competitors-result-modal.component';
 
 @Component({
   selector: 'app-resultados',
@@ -20,9 +23,9 @@ export class ResultadosComponent implements OnInit {
   carreras: any = [];
   nacionalidades: Nacionalidad[];
 
-  category_id = 0;
-  country_id = 0;
-  start = 0;
+  category_id = 2;
+  country_id = 226;
+  start = "2020-10-09";
 
   criterio = 'todos';
 
@@ -31,6 +34,7 @@ export class ResultadosComponent implements OnInit {
     public _partidosService: PartidosService,
     public _nacionalidadesService: NacionalidadesService,
     public _ligasService: LigasService,
+    public _modalService: ModalService
   ) { }
 
   ngOnInit() {
@@ -140,10 +144,39 @@ export class ResultadosComponent implements OnInit {
       .subscribe(resp => {
         console.log(resp);
         this.partidos = [];
+        console.log(this.partidos);
         this.carreras = resp.carreras
       });
     }
     
+  }
+
+  showModal(): void {
+    this._modalService.showModal(SamplemodalComponent, {
+      allowOverlayClick: true,
+      showCloseButton: false,
+      data: {
+        modalTitle: 'This is the sample modal'
+      }
+    });
+  }
+
+  openModalCompetitors(game): void {
+    this._modalService.showModal(CompetitorsResultModalComponent, {
+      allowOverlayClick: true,
+      showCloseButton: false,
+      data: {
+        game: game
+      }
+    });
+  }
+
+  arrayOne(n: number): any[] {
+    return Array(n);
+  }
+
+  calc_result (event:any, i, id) {
+    console.log(event, i, id);
   }
 
 }

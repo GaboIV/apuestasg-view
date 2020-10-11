@@ -155,6 +155,17 @@ export class PartidosService {
     );
   }
 
+  enviarResult ( id_partido, data ) {
+    const url = URL_RESULTADOS;
+
+    return this.http.post( url, { game_id : id_partido, data : data }, this._loginService.httpOptions )
+      .pipe(map( (resp: any) => {
+        const res = resp;
+        return res;
+      })
+    );
+  }
+
   enviarCB ( id_carrera, resultado ) {
     const url = URL_RESULTADOS + 'hipism';
 

@@ -132,15 +132,17 @@
     .img_dest_country {
         display: inline-block;
         position: absolute;
-        bottom: 7px;
-        margin-left: -11%;
-        height: 27%;
-        width: 17%;
+        bottom: 12px;
+        margin-left: -6.5%;
+        /* height: 27%; */
+        width: 9.4%;
         height: auto;
         overflow: hidden;
         border-radius: 50%;
         padding: 0;
         padding: -5px;
+        -webkit-filter: drop-shadow(8px 8px 10px #efefef);
+        filter: drop-shadow(8px 8px 10px#efefef);
     }
 
     .img_int_country {

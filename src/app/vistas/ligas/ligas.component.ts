@@ -200,7 +200,7 @@ export class LigasComponent implements OnInit {
   attach_name_uk (liga: Liga, name_uk) {
     swal({
       title: 'Escriba el nuevo sub-identificador de la liga',
-      input: 'number',
+      input: 'text',
       inputAttributes: {
         autocapitalize: 'off'
       },

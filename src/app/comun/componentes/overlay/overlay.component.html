@@ -1,0 +1,5 @@
+<div #overlay class="overlay"></div>
+<ng-template appModalContent></ng-template>
+<button #closeButton *ngIf="showCloseButton" (click)="closeModal($event)" class="close-button">
+  <span aria-hidden="true">X</span>
+</button>

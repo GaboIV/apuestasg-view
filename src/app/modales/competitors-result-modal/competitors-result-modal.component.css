@@ -1,0 +1,25 @@
+:host {
+    background-color: #fff;
+    z-index: 1;
+    width: 85%;
+    padding: 10px;
+    text-align: center;
+  }
+
+
+.table_game {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    border-collapse:collapse;
+}
+td > div {
+    padding: 0;
+    margin: 0;
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+.table_game, .table_game td, .table_game div {
+    border:1px solid #999;
+}

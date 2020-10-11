@@ -29,6 +29,7 @@ import { HttpErrorInterceptor } from 'src/app/interceptor/httpconfig.interceptor
 
 import localeEs from '@angular/common/locales/es-AR';
 import { MenuChangelogComponent } from './comun/componentes/menu-changelog/menu-changelog.component';
+import { CompetitorsResultModalComponent } from './modales/competitors-result-modal/competitors-result-modal.component';
 
 registerLocaleData(localeEs, 'es-VE');
 
@@ -42,7 +43,8 @@ registerLocaleData(localeEs, 'es-VE');
     NoencontradoComponent,
     MenuComponent,
     LigasComponent,
-    AgregarPartidoComponent
+    AgregarPartidoComponent,
+    CompetitorsResultModalComponent,
   ],
   imports: [
     CommonModule,

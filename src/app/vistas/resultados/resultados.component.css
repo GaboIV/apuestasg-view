@@ -125,3 +125,47 @@
     background: #14ff00 !important;
     border: none;
 }
+
+.table_container {
+    width: 30%;
+    display: inline-block;
+    margin: 5px;
+}
+
+.table_game {
+    background: #fcfcfc;
+    color: #444;
+}
+
+.table_teams {
+    width: 100%;
+}
+
+.table_game {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    border-collapse:collapse;
+}
+td > div {
+    padding: 0;
+    margin: 0;
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+.table_teams, .table_teams td, .table_teams div {
+    border:1px solid #999;
+}
+
+.td_division {
+    width: 25px;
+    height: 30px;
+}
+
+.td_tresult {
+    width: 30px;
+    height: 30px;
+    font-weight: bold;
+    border: 2px solid #0048a2 !important;
+}

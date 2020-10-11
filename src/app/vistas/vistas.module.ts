@@ -45,6 +45,10 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import { OpcionesModule } from './opciones/opciones.module';
 import { MomentModule } from 'ngx-moment';
 import { MenuChangelogComponent } from '../comun/componentes/menu-changelog/menu-changelog.component';
+import { ModalContentDirective } from '../directivas/modal.directive';
+import { OverlayComponent } from '../comun/componentes/overlay/overlay.component';
+import { SamplemodalComponent } from '../modales/samplemodal/samplemodal.component';
+import { CompetitorsResultModalComponent } from '../modales/competitors-result-modal/competitors-result-modal.component';
 
 @NgModule({
   imports: [
@@ -95,8 +99,16 @@ import { MenuChangelogComponent } from '../comun/componentes/menu-changelog/menu
     CarreraComponent,
     VerCarreraComponent,
     CuotasComponent,
-    VerPartidoComponent
+    VerPartidoComponent,
+    ModalContentDirective,
+    OverlayComponent,
+    SamplemodalComponent,
   ],
-  exports: [MenuCaballosComponent, MenuChangelogComponent, CuotasComponent, MomentModule]
+  exports: [MenuCaballosComponent, MenuChangelogComponent, CuotasComponent, MomentModule],
+  entryComponents: [
+    OverlayComponent,
+    SamplemodalComponent,
+    CompetitorsResultModalComponent
+  ]
 })
 export class VistasModule { }

@@ -22,17 +22,20 @@
         </select>
         
         <div class="add_lig add_filter" (click)="filtrarPartidos(1)">Filtrar</div>
+
+        <div class="add_lig add_filter" (click)="showModal()">Modal</div>
     </div>
 
     <div style="text-align: center">
-        <ng-container *ngIf="partidos?.length > 0">
+        <!-- <ng-container *ngIf="partidos?.length > 0">
             <div *ngFor="let part of partidos;" [class.ready]='part.status == 3' class="parts_rl" id="{{part.id}}">
                 <div class="titulo_rl">
                     {{part.start}}
                 </div>
                 <div class="equipos_rl">   
-                    <div *ngFor="let eq of part.competitors; let i = index" class="equipo_rl">
-                        <div class="name_rl">{{eq.team.name}}</div>
+                    <div *ngFor="let eq of part.teams; let i = index" class="equipo_rl">
+                        <div class="name_rl">{{eq.name}}</div>
+                        <div class="caja_rl" *ngFor="let item of arrayOne(8); let i = index;" contenteditable="true">{{eq.result}}</div>
                         <div class="caja_rl" id="RL{{i}}{{part.id}}" contenteditable="true">{{eq.result}}</div>
                     </div>
                 </div>
@@ -43,6 +46,38 @@
                 <div class="boton_rl" (click)="enviarRL(part.id, part.league.category_id, part.competitors[0].bet_type_id, part)" *ngIf='part.status != 3'>
                     <i class="far fa-check-square"></i>
                 </div>
+            </div>
+        </ng-container> -->
+
+        <ng-container *ngIf="partidos?.length > 0" >
+            <div *ngFor="let part of partidos;" class="table_container" (dblclick)="openModalCompetitors(part)" >
+                <table class="table_game">
+                    <tr>
+                        <td>{{part.start}}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <table class="table_teams" >
+                                <tr *ngFor="let eq of part.teams; let i = index">
+                                    <td >{{eq.name}}</td>
+                                    <td *ngFor="let item of arrayOne(part?.league?.match_structure?.division_number); let j = index;" #division [textContent]="" contenteditable="true" class="td_division"  (blur)="calc_result($event.target.textContent, j, part.id)"></td>
+                                    <td class="td_tresult" id="RL{{i}}{{part.id}}">{{eq.result}}</td>
+                                </tr>
+                            </table>
+                        </td>                    
+                    </tr>
+    
+                    <tr *ngIf='part.status == 3'>
+                        <td>
+                            <i class="fas fa-file-invoice-dollar"></i>
+                        </td>
+                        
+                    </tr>
+    
+                    <!-- <div class="boton_rl" (click)="enviarRL(part.id, part.league.category_id, part.competitors[0].bet_type_id, part)" *ngIf='part.status != 3'>
+                        <i class="far fa-check-square"></i>
+                    </div> -->
+                </table>
             </div>
         </ng-container>
 
