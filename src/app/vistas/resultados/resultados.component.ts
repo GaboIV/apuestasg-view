@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
 import { Nacionalidad } from '../../modelos/nacionalidad';
 import { DeportesService } from '../../servicios/deportes.service';
 import { Deporte } from '../../modelos/deporte';
@@ -9,6 +9,7 @@ import swal from 'sweetalert2';
 import { ModalService } from 'src/app/servicios/modal.service';
 import { SamplemodalComponent } from 'src/app/modales/samplemodal/samplemodal.component';
 import { CompetitorsResultModalComponent } from 'src/app/modales/competitors-result-modal/competitors-result-modal.component';
+import { equal } from 'assert';
 
 @Component({
   selector: 'app-resultados',
@@ -23,9 +24,9 @@ export class ResultadosComponent implements OnInit {
   carreras: any = [];
   nacionalidades: Nacionalidad[];
 
-  category_id = 2;
-  country_id = 226;
-  start = "2020-10-09";
+  category_id = 1;
+  country_id = 31;
+  start = "2020-10-18";
 
   criterio = 'todos';
 
@@ -34,7 +35,9 @@ export class ResultadosComponent implements OnInit {
     public _partidosService: PartidosService,
     public _nacionalidadesService: NacionalidadesService,
     public _ligasService: LigasService,
-    public _modalService: ModalService
+    public _modalService: ModalService,
+    private renderer: Renderer2, 
+    private elem: ElementRef
   ) { }
 
   ngOnInit() {
@@ -136,15 +139,24 @@ export class ResultadosComponent implements OnInit {
     if (this.category_id != 7) {
       this._partidosService.filtrarPartidosResult(pagina, this.category_id, this.country_id, this.start, this.criterio)
       .subscribe(resp => {
-        console.log(resp);
         this.partidos = resp.games.data
+
+        this.partidos.forEach(game => {
+          for (let index = 0; index < game.teams.length; index++) {
+            const team = game.teams[index];
+
+            team.result = 0;
+
+            game.sections.result.forEach(result => {
+              team.result += parseInt(result[index]);
+            });            
+          }
+        });
       });
     } else {
       this._partidosService.filtrarCarrerasResult(this.category_id, this.start, null)
       .subscribe(resp => {
-        console.log(resp);
         this.partidos = [];
-        console.log(this.partidos);
         this.carreras = resp.carreras
       });
     }
@@ -175,8 +187,47 @@ export class ResultadosComponent implements OnInit {
     return Array(n);
   }
 
-  calc_result (event:any, i, id) {
-    console.log(event, i, id);
+  calc_result (event:any, team, id) {
+    let result_team: number = 0;
+    let elements = this.elem.nativeElement.querySelectorAll('.result_section_' + team.id + '_' + id);
+
+    elements.forEach(input => {
+      if (! isNaN(parseInt(input.innerHTML))) {
+        result_team = result_team + parseInt(input.innerHTML);
+      }
+    });
+
+    team.result = result_team;
+  }
+
+  swalResultSend (game) {
+    let result_sections = [];
+
+    for (let index = 0; index < game.league.match_structure.division_number; index++) {
+      let result_section: any = [];
+
+      game.teams.forEach(team => {
+        result_section.push($('#' + team.id + "_" + game.id + "_" + (index + 1)).text());
+      });  
+
+      result_sections[index] = result_section;    
+    }  
+    
+    this._partidosService.sendSectionsResult( game.id, result_sections)
+    .subscribe( resp => {
+      if (resp.status == 'correcto'){
+          const toast = swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 2000
+          });
+          toast({
+            type: 'success',
+            title: 'Se agregó el resultado correctamente'
+          });
+        }
+    } );
   }
 
 }

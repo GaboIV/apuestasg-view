@@ -227,4 +227,15 @@ export class PartidosService {
         return resp;
       }));
   }
+
+  sendSectionsResult ( id_partido, data ) {
+    const url = URL_RESULTADOS;
+
+    return this.http.post( url, { game_id : id_partido, data : data }, this._loginService.httpOptions )
+      .pipe(map( (resp: any) => {
+        const res = resp;
+        return res;
+      })
+    );
+  }
 }
