@@ -145,11 +145,13 @@ export class ResultadosComponent implements OnInit {
           for (let index = 0; index < game.teams.length; index++) {
             const team = game.teams[index];
 
-            team.result = 0;
+            if (!!game.sections) {
+              team.result = 0;
 
-            game.sections.result.forEach(result => {
-              team.result += parseInt(result[index]);
-            });            
+              game.sections.result.forEach(result => {
+                team.result += parseInt(result[index]);
+              }); 
+            }                       
           }
         });
       });
