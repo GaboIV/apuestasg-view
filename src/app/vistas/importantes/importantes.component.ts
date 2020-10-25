@@ -10,6 +10,14 @@ import { Usuario } from '../../modelos/usuario';
 import * as $ from 'jquery';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import swal from 'sweetalert2';
+import { environment } from 'src/environments/environment';
+import Echo from 'laravel-echo';
+
+declare global {
+  interface Window {
+    Echo: any;
+  }
+}
 
 @Component({
   selector: 'app-importantes',
@@ -105,6 +113,21 @@ export class ImportantesComponent implements OnInit {
     $('#spin-' + this.id).addClass(' iconosport ');
 
     this.scroll_cuot();
+
+    let config_broadcaster = environment.optionsWebsocketsEcho;
+    config_broadcaster['auth'] = {
+      headers:
+      {
+          'Authorization': 'Bearer ' + localStorage.getItem('token')
+      }
+    };
+
+    window.Echo = new Echo(config_broadcaster);
+
+    window.Echo.private('notifications')
+      .listen('UserSessionChanged', data => {
+        console.log(data);
+      });
   }
 
   deleteFile() {

@@ -3,7 +3,28 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  // optionsWebsocketsEcho: {
+  //   authEndpoint: "http://127.0.0.1:8000/laravel-websockets/auth",
+  //   broadcaster: 'pusher',
+  //   key: 'ASDASD2121',
+  //   wsHost: '127.0.0.1',
+  //   wsPort: 6001,
+  //   disableStats: true,
+  //   encrypted: false,
+  //   enabledTransports: ['ws']
+  // },
+  optionsWebsocketsEcho: {
+    authEndpoint: "https://api.apuestasg.win/broadcasting/auth",
+    broadcaster: 'pusher',
+    key: 'ASDASD2121',
+    wsHost: 'ws.apuestasg.win',
+    wsPort: 80,
+    wssPort: 443,
+    disableStats: true,
+    encrypted: true,
+    enabledTransports: ['ws', 'wss']
+  },
 };
 
 /*
