@@ -126,7 +126,12 @@ export class ImportantesComponent implements OnInit {
 
     window.Echo.private('notifications')
       .listen('UserSessionChanged', data => {
-        console.log(data);
+        console.log("notifications", data);
+      });
+
+    window.Echo.channel('datagame')
+      .listen('GameOddChanged', data => {
+        console.log("datagame", data);
       });
   }
 

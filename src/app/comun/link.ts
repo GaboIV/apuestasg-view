@@ -1,11 +1,10 @@
-export const URL_INICIAL = 'https://api.apuestasg.win/api/';
+import { environment } from "src/environments/environment";
+
+export const URL_INICIAL = environment.url;
 export const URL_A_FUNC = 'http://agsw.apuestasg.win/php/funciones';
 
 // export const URL_INICIAL = 'http://apuestasg.2kool4u.net/api/';
 // export const URL_A_FUNC = 'http://agac.apuestasg.com.ve/php/funciones';
-
-// export const URL_INICIAL = 'http://localhost/apuestasg-backend/public/api/';
-// export const URL_A_FUNC = 'http://localhost/apuestasg-scrap/php/funciones';
 
 export const URL_ADMIN = URL_INICIAL + 'admin/';
 

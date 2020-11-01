@@ -30,6 +30,7 @@ import { HttpErrorInterceptor } from 'src/app/interceptor/httpconfig.interceptor
 import localeEs from '@angular/common/locales/es-AR';
 import { MenuChangelogComponent } from './comun/componentes/menu-changelog/menu-changelog.component';
 import { CompetitorsResultModalComponent } from './modales/competitors-result-modal/competitors-result-modal.component';
+import { BaseModalComponent } from './comun/componentes/overlay/base_modal.component';
 
 registerLocaleData(localeEs, 'es-VE');
 
@@ -45,6 +46,7 @@ registerLocaleData(localeEs, 'es-VE');
     LigasComponent,
     AgregarPartidoComponent,
     CompetitorsResultModalComponent,
+    BaseModalComponent
   ],
   imports: [
     CommonModule,
@@ -61,7 +63,7 @@ registerLocaleData(localeEs, 'es-VE');
     MalihuScrollbarModule.forRoot(),
     ToastrModule.forRoot(),
     SweetAlert2Module.forRoot(),
-    NgxPaginationModule
+    NgxPaginationModule,
   ],
   providers: [
     {

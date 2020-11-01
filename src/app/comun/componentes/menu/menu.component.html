@@ -5,266 +5,50 @@
     </div>
 </div> -->
 <ng-container id="menuBarra">
-    <div malihu-scrollbar [scrollbarOptions]="scrollbarOptions" >
-        <div class="brr_izq_menu" style="background: #00488c; color: #E8E8EE;">
-
+    <div malihu-scrollbar [scrollbarOptions]="scrollbarOptions">
+        <div class="brr_izq_menu start">
             Inicio
-
         </div>
 
-        <div class="brr_izq_menu">
+        <!-- <div class="brr_izq_menu" *ngFor="let category of categories">
 
-            Apuestas en <span>Directo</span>
+            {{category.name}}
 
-        </div>
+        </div> -->
 
-        <div class="brr_izq_menu">
+        <div id="pagine_10" class="submenu" *ngFor="let category of categories">
 
-            Baloncesto
-
-        </div>
-
-        <div class="brr_izq_menu">
-
-            Balonmano
-
-        </div>
-
-        <div class="brr_izq_menu">
-
-            Béisbol
-
-        </div>
-
-        <div class="brr_izq_menu">
-
-            Boxeo
-
-        </div>
-
-        <div class="brr_izq_menu">
-
-            Carreras de caballos
-
-        </div>
-
-        <div class="brr_izq_menu">
-
-            Carreras de galgos
-
-        </div>
-
-        <div class="brr_izq_menu">
-
-            Ciclismo
-
-        </div>
-
-        <div class="brr_izq_menu">
-
-            Dardos
-
-        </div>
-
-        <div id="pagine_10" class="brr_izq_menu submenu ">
-
-            <div>Deportes de Invierno</div>
-            <div class="submenu_flecha"><span class="flecha_enc">&#9660;</span></div>
-
-        </div>
-
-        <div id="submenu_10" class="brr_izq_submenu">
-
-            <div class="brr_izq_menu">
-
-                Biatlón
-
+            <div [ngClass]="category.collapse ? 'brr_izq_menu selected' : 'brr_izq_menu'" (click)="collapse(category)">
+                <div>
+                    <div style="display: inline-block; width: auto; vertical-align: top;">
+                        <img [src]="category?.image" class="icon" alt="">
+                    </div>
+                    <div class="category_title">
+                        {{category.name}}
+                    </div>
+                </div>
+                <div class="submenu_flecha"><span class="flecha_enc"><i class="fas fa-angle-down"></i></span></div>
             </div>
 
-            <div class="brr_izq_menu">
-
-                Esquí de fondo
-
+            <div style="display: none;" [ngClass]="category.collapse ? 'visible' : ''">
+                <ng-container *ngFor="let country of category.countries">
+                    <div [ngClass]="country.collapse ? 'subsubmenu subsubmenu_selected' : 'subsubmenu'" (click)="collapse(country)">
+                        <img [src]="country?.image" class="icon" alt="">
+                        {{country.name}}
+                        <div class="submenu_flecha">
+                            <span class="flecha_enc"><i class="fas fa-angle-down"></i></span>
+                        </div>
+                    </div>
+                    <div *ngIf="country.collapse">
+                        <div *ngFor="let league of country?.leagues" class="leagues_menu"  (click)="checked(league)">
+                            <input type="checkbox" [checked]="league.checked">
+                            <div class="title_league">
+                                {{league.name}}
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
             </div>
-
-            <div class="brr_izq_menu">
-
-                Saltos de esquí
-
-            </div>
-
-        </div>
-
-        <div class="brr_izq_menu ">
-
-            Deportes electrónicos
-
-        </div>
-
-        <div id="pagine_12" class="brr_izq_menu submenu ">
-
-            <div>Especiales</div>
-            <div class="submenu_flecha"><span class="flecha_enc">&#9660;</span></div>
-
-        </div>
-
-        <div id="submenu_12" class="brr_izq_submenu">
-
-            <div class="brr_izq_menu">
-
-                Australia
-
-            </div>
-
-            <div class="brr_izq_menu">
-
-                Globales
-
-            </div>
-
-            <div class="brr_izq_menu">
-
-                América del Norte
-
-            </div>
-
-            <div class="brr_izq_menu">
-
-                Dinamarca
-
-            </div>
-
-            <div class="brr_izq_menu">
-
-                Italia
-
-            </div>
-
-            <div class="brr_izq_menu">
-
-                Reino Unido
-
-            </div>
-
-            <div class="brr_izq_menu">
-
-                Suecia
-
-            </div>
-
-        </div>
-
-        <div class="brr_izq_menu ">
-
-            Financieros
-
-        </div>
-
-        <div class="brr_izq_menu ">
-
-            Fórmula 1
-
-        </div>
-
-        <div class="brr_izq_menu ">
-
-            Fútbol
-
-        </div>
-
-        <div class="brr_izq_menu ">
-
-            Fútbol Américano
-
-        </div>
-
-        <div class="brr_izq_menu ">
-
-            Golf
-
-        </div>
-
-        <div class="brr_izq_menu ">
-
-            Hockey sobre hielo
-
-        </div>
-
-        <div class="brr_izq_menu ">
-
-            Lotería
-
-        </div>
-
-        <div id="pagine_20" class="brr_izq_menu submenu ">
-
-            <div>Motor</div>
-            <div class="submenu_flecha"><span class="flecha_enc">&#9660;</span></div>
-
-        </div>
-
-        <div id="submenu_20" class="brr_izq_submenu">
-
-            <div class="brr_izq_menu">
-
-                Motociclismo
-
-            </div>
-
-            <div class="brr_izq_menu">
-
-                Súpercars
-
-            </div>
-
-            <div class="brr_izq_menu">
-
-                Náscar
-
-            </div>
-
-            <div class="brr_izq_menu">
-
-                Rally
-
-            </div>
-
-        </div>
-
-        <div class="brr_izq_menu ">
-
-            Rugby League
-
-        </div>
-
-        <div class="brr_izq_menu ">
-
-            Rugby Union
-
-        </div>
-
-        <div class="brr_izq_menu ">
-
-            Snooker
-
-        </div>
-
-        <div class="brr_izq_menu ">
-
-            Speedway
-
-        </div>
-
-        <div class="brr_izq_menu ">
-
-            Tenis
-
-        </div>
-
-        <div class="brr_izq_menu ">
-
-            Voleibol
-
         </div>
     </div>
 </ng-container>

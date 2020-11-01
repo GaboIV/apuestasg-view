@@ -157,4 +157,13 @@ export class GeneralesService {
       })
     );
   }
+
+  getCategorySidebar() {
+    const url = URL_PUBLIC + 'sidebar';
+
+    return this.http.get( url )
+      .pipe(map ( (resp: any) => {
+        return resp;
+      }));
+  }
 }
