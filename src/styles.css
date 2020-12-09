@@ -516,60 +516,6 @@ cuerpo {
     width: 100%;
 }
 
-.brr_izq_menu {
-    background: #152535;
-    padding-left: 7px;
-    font-size: 1em;
-    color: #ffffff;
-    height: 35px;
-    padding-top: 7px;
-    cursor: pointer;
-    font-weight: 100;
-}
-
-.brr_izq_menu:hover {
-    background: #01488A;
-    color: #E8E8EE;
-}
-
-.brr_izq_menu span {
-    color: #ffdf1b;
-}
-
-.brr_izq_menu_slc {
-    background: #414141;
-    height: 30px;
-    border-right: 3px #FFDF1B solid;
-}
-
-.brr_izq_menu_slc:hover {
-    background: #414141;
-    height: 30px;
-}
-
-.brr_izq_submenu {
-    display: none;
-}
-
-.brr_izq_submenu>.brr_izq_menu {
-    padding-left: 26px;
-    background: #3A3A3A;
-}
-
-.brr_izq_menu div {
-    display: inline-block;
-    width: 85%;
-}
-
-.brr_izq_menu .submenu_flecha {
-    width: 15%;
-    text-align: right;
-    padding-right: 8px;
-}
-
-.submenu_flecha .flecha_enc {
-    color: #E8E8EE !important;
-}
 
 .main_nav {
     height: 30px;

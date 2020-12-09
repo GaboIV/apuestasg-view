@@ -20,7 +20,7 @@
         </thead>
         <tbody>
             <tr class="par_th_nt" *ngFor="let equipo of equipos | paginate: { itemsPerPage: 50, currentPage: pagina, totalItems: total }">
-            
+
                 <td width="5%" align="center">{{ equipo.id }}</td>
                 <td width="15%">{{ equipo.name_id }}</td>
                 <td #name [innerText]="equipo.name" (blur)="modificarDato(equipo.id, name.innerText, equipo, 'name', 'nombre ')" contenteditable="true" width="15%">
@@ -40,11 +40,11 @@
                         <br>
                         <input type="file" name="imagenSubir" (change)="subirImagen($event, equipo)" style="display: none">
                     </label>
-                    <input class="solo_hoy" type="text" name="image_link" placeholder="Url de imagen" [(ngModel)]="equipo.image_link" required minlength="3" (change)="changeImageLink(equipo)" >
+                    <input class="solo_hoy" type="text" name="image_link" placeholder="Url de imagen" [(ngModel)]="equipo.image_link" required minlength="3" (change)="changeImageLink(equipo)">
                     <div class="botonclear" (click)="equipo.image_link = ''">
                         <i class="fas fa-eraser"></i>
                     </div>
-                    
+
                 </td>
                 <td contenteditable="true" width="16%" [innerText]="equipo.stadium" #stadium (blur)="modificarDato(equipo.id, stadium.innerText, equipo, 'stadium', 'estadio ')">
                     <p *ngIf="mostrarEdit === false" style="cursor:pointer">{{ equipo.stadium }}
@@ -63,5 +63,5 @@
 
     <div class="pagination_fixed">
         <pagination-controls previousLabel="Anterior" nextLabel="Siguiente" maxSize="12" (pageChange)="cargarEquipos($event, criterio, 'todas')"></pagination-controls>
-    </div>    
+    </div>
 </div>

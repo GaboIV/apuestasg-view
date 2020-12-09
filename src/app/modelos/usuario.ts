@@ -1,4 +1,4 @@
-import { Jugador } from "./jugador";
+import { Player } from "./player";
 
 export class Usuario {
 
@@ -8,7 +8,7 @@ export class Usuario {
         public email?: string,
         public status?: number,
         public attemps?: string,
-        public player?: Jugador,
+        public player?: Player,
         public password?: string,
         public code_security?: number,
         public created_at?: string,

@@ -308,3 +308,125 @@
         color: white !important;
         background-color: #0D2C49;
     }
+
+    .leagues_selected {
+        width: 75%;
+        background: red;
+        display: inline-block;
+    }
+
+    .category_bar, .league_bar {
+        background: #f2f2f2;
+        color: #444;
+        padding: 7px;
+        font-size: 1.15em;
+    }
+
+    .category_bar img {
+        color: black;
+        vertical-align: bottom;
+        margin-right: 5px;
+        height: 24px;
+    }
+
+    .category_bar span {
+        font-size: 1.15em;
+    }
+
+    .league_bar {
+        border-bottom: 1px solid #444;
+    }
+
+    /* HOLA */
+
+    .league_body {
+        background: white;
+    }
+
+    .game_selected {
+        margin-right:auto;
+        margin-left:0px;
+        color: #444;
+    }
+
+    game_selected:hover {
+        background: #dedede;
+    }
+
+    .date_game {
+        font-size: 11px;
+        font-weight: 600;
+        padding: 8px 16px;
+        top: auto;
+        position: static;
+        z-index: 0;
+        background: #fff;
+        padding-bottom: 4px;
+        margin-top: auto;
+        text-transform: capitalize;
+        color: #444;
+    }
+
+    .starttime_game {
+        line-height: 1.38;
+        margin-top: 10px;
+        height: 36px;
+
+        text-align: left;
+        min-width: 72px;
+        padding-left: 16px;
+        color: #717171;
+    }
+
+    .odd-button {
+        flex: 1;
+        border: 1px solid #cacaca;
+        border-radius: 4px;
+        background-color: #f0f0f0;
+        height: 35px;
+        cursor: pointer;
+        text-align: center;
+        line-height: 35px;
+        box-sizing: border-box;
+        font-size: 15px;
+        font-weight: 600;
+        font-family: Source Sans Pro,sans-serif;
+        margin: 0 2px;
+        overflow: hidden;
+    }
+
+    .odd-group {
+        display: inline-block;
+        width: 100%;
+    }
+
+    .odd-button-three {
+        width: 30%;
+    }
+
+    .odd-button-two {
+        width: 45%;
+    }
+
+    .select_change {
+        flex: 1;
+        border: 1px solid #cacaca;
+        border-radius: 4px;
+        background-color: #f0f0f0;
+        height: 35px;
+        cursor: pointer;
+        text-align: center;
+        line-height: 35px;
+        box-sizing: border-box;
+        font-size: 15px;
+        font-weight: 600;
+        font-family: Source Sans Pro,sans-serif;
+        margin: 0 2px;
+        overflow: hidden;
+        width: 27%;
+        display: inline-block;
+    }
+
+    .table_td_width td {
+        width: 10%;
+    }

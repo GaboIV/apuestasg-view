@@ -12,6 +12,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import swal from 'sweetalert2';
 import { environment } from 'src/environments/environment';
 import Echo from 'laravel-echo';
+import { DatePipe } from '@angular/common';
 
 declare global {
   interface Window {
@@ -22,7 +23,8 @@ declare global {
 @Component({
   selector: 'app-importantes',
   templateUrl: './importantes.component.html',
-  styleUrls: ['./importantes.component.css']
+  styleUrls: ['./importantes.component.css'],
+  providers: [DatePipe]
 })
 export class ImportantesComponent implements OnInit {
 
@@ -73,7 +75,8 @@ export class ImportantesComponent implements OnInit {
     public _generalesService: GeneralesService,
     public _caballoService: CaballosService,
     public _inicioSesion: InicioSesionService,
-    public sanitizer: DomSanitizer
+    public sanitizer: DomSanitizer,
+    private datePipe: DatePipe
   ) { }
 
   ngOnInit() {
@@ -404,4 +407,30 @@ export class ImportantesComponent implements OnInit {
       this.solohoy(this.id, value);
     }
   }
+
+  handleUrlParameters() {
+    this.router.navigate([], {
+      queryParams: {
+        newOrdNum: '123'
+      },
+      queryParamsHandling: 'merge',
+    });
+  }
+
+  changeSelected (options, value) {
+    console.log(options, value);
+
+    options.forEach(item => {
+      if (item.id == value) {
+        item.selected = true;
+      } else {
+        item.selected = false;
+      }
+    });
+  }
+
+  sameDates(date1, date2): boolean {
+    return this.datePipe.transform(date1, 'dd-MM-yyyy') === 
+             this.datePipe.transform(date2, 'dd-MM-yyyy');
+ }
 }

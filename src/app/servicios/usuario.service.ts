@@ -5,7 +5,8 @@ import {
   URL_JUGADORES, 
   URL_REGISTRO,
   URL_DEPOSITO,
-  URL_TRANSACCION
+  URL_TRANSACCION,
+  URL_PLAYERS
   } from '../comun/link';
 import { map } from 'rxjs/operators';
 import { Pago } from '../modelos/pago.modelo';
@@ -93,6 +94,17 @@ export class UsuarioService {
     pago.register_date = pago.register_date + " " + pago.registro;
 
     return this.http.post( url, pago, this._loginService.httpOptions )
+      .pipe(map( (resp: any) => {
+        const res = resp;
+        return res;
+      })
+    );
+  }
+
+  getAll(page: number = 1) {
+    const url = URL_PLAYERS;
+
+    return this.http.get( url, this._loginService.httpOptions )
       .pipe(map( (resp: any) => {
         const res = resp;
         return res;

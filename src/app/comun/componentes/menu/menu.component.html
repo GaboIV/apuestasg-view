@@ -27,20 +27,21 @@
                         {{category.name}}
                     </div>
                 </div>
-                <div class="submenu_flecha"><span class="flecha_enc"><i class="fas fa-angle-down"></i></span></div>
+                <div class="submenu_flecha">
+                    <span class="flecha_enc"><i class="fas fa-angle-down"></i></span>
+                </div>
             </div>
 
             <div style="display: none;" [ngClass]="category.collapse ? 'visible' : ''">
                 <ng-container *ngFor="let country of category.countries">
                     <div [ngClass]="country.collapse ? 'subsubmenu subsubmenu_selected' : 'subsubmenu'" (click)="collapse(country)">
-                        <img [src]="country?.image" class="icon" alt="">
-                        {{country.name}}
+                        <img [src]="country?.image" class="icon" alt=""> {{country.name}}
                         <div class="submenu_flecha">
                             <span class="flecha_enc"><i class="fas fa-angle-down"></i></span>
                         </div>
                     </div>
                     <div *ngIf="country.collapse">
-                        <div *ngFor="let league of country?.leagues" class="leagues_menu"  (click)="checked(league)">
+                        <div *ngFor="let league of country?.leagues" class="leagues_menu" (click)="checked(league)">
                             <input type="checkbox" [checked]="league.checked">
                             <div class="title_league">
                                 {{league.name}}

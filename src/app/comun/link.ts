@@ -31,6 +31,7 @@ export const URL_NACIONALIDADES = URL_ADMIN + 'countries';
 export const URL_RESULTADOS = URL_ADMIN + 'results';
 export const URL_STUDS = URL_ADMIN + 'studs';
 export const URL_PARTIDOS = URL_ADMIN + 'games';
+export const URL_PLAYERS = URL_ADMIN + 'players';
 
 export const URL_TICKET = URL_PLAYER + 'ticket';
 export const URL_DEPOSITO = URL_PLAYER + 'pays';

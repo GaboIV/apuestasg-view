@@ -1,3 +1,37 @@
-<p>
-  usuarios works!
-</p>
+<div class="buscador_it_001">
+    <input #caja type="text" name="search_eq" placeholder="Buscar un equipo" class="search_eq">
+    <div class="add_lig add_filter">Filtrar</div>
+</div>
+
+<div class="equipos">
+    <table width="100%" class="tabla_equipos">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Documento</th>
+                <th>Nombre</th>
+                <th>Teléfono</th>
+                <th>Disponible</th>
+                <th>En juego</th>
+                <th>Puntos</th>
+                <th>Fecha de creación</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="par_th_nt" *ngFor="let player of users | paginate: { itemsPerPage: 15, currentPage: pagina, totalItems: total }" style="text-align: center;" id="user-{{ player.id }}" (click)="changeClass(player)">
+                <td width="5%" align="center">{{ player.id }}</td>
+                <td width="15%">{{ player.document_type }} {{ player.document_number }}</td>
+                <td width="20%">{{ player.name }} {{ player.lastname }}</td>
+                <td width="15%">{{ player.phone }}</td>
+                <td width="10%">Bs. {{ player.available | number:'1.2-2' }}</td>
+                <td width="10%">Bs. {{ player.risk | number:'1.2-2' }}</td>
+                <td width="10%">{{ player.points | number:'1.2-2' }}</td>
+                <td width="15%">{{ player.created_at }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="pagination_fixed">
+        <pagination-controls previousLabel="Anterior" nextLabel="Siguiente" maxSize="12" (pageChange)="getUsers($event)"></pagination-controls>
+    </div>
+</div>

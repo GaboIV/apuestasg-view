@@ -1,5 +1,5 @@
 <div class="zona_bet" style="position: relative">
-    <div class="div_zb_1 zb_lado" style="position: relative">
+    <div class="div_zb_1 zb_lado" style="position: relative" *ngIf="_generalesService.leaguesCount == 0">
         <div style="width: 100%; height: 100%; text-align: center; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 3; background: #0021695e;"
             *ngIf="esperando === true">
         </div>
@@ -240,8 +240,10 @@
             </div>
         </div>
     </div>
-    <div class="div_zb_2 zb_lado">
-        <div id="z2_bet" style="background-color: #cfcfcf; padding-bottom: 12.5px; margin-bottom: 2px; border: 2px solid #ffdf1b" *ngIf="game_selected">
+    <div class="div_zb_2 zb_lado" *ngIf="_generalesService.leaguesCount == 0">
+        <div id="z2_bet"
+            style="background-color: #cfcfcf; padding-bottom: 12.5px; margin-bottom: 2px; border: 2px solid #ffdf1b"
+            *ngIf="game_selected">
             <div class="title_ap_fav bajo_verde_green" align="center">{{game_selected.encuentro}}</div>
             <div *ngIf="game_selected.image == 'noimage.png'" class="img_dest"
                 [ngStyle]="{'background': 'url(../../assets/vallas/' + game_selected.league.category_id + '.jpg) no-repeat center center'}">
@@ -318,18 +320,19 @@
                 <div class="game" *ngIf="type.bet_type_id == 7">
                     <div class="border_game">
                         <div>
-                            <div class="ep_cada_partido" style="width: 100%; text-align: center;">¿Marcarán ambos equipos?
+                            <div class="ep_cada_partido" style="width: 100%; text-align: center;">¿Marcarán ambos
+                                equipos?
                             </div>
                         </div>
                         <div>
-                            <ng-container  *ngFor="let item of type.data; index as i;">
+                            <ng-container *ngFor="let item of type.data; index as i;">
                                 <div class="gen_imp_eq eq_dos" *ngIf="item.caption == 'J'">
                                     <div class="ep_cl_name" style="padding-left: 0; text-align: center;">
                                         <span>Sí</span>
                                     </div>
                                     <div class='ep_cl_logro'>{{item.quoteFloatValue | number : '1.2-2'}}</div>
                                 </div>
-        
+
                                 <div class="gen_imp_eq eq_dos" *ngIf="item.caption == 'N'">
                                     <div class="ep_cl_name" style="padding-left: 0; text-align: center;">
                                         <span>No</span>
@@ -343,18 +346,19 @@
                 <div class="game" *ngIf="type.bet_type_id == 4 && type.code == '2.5'">
                     <div class="border_game">
                         <div>
-                            <div class="ep_cada_partido" style="width: 100%; text-align: center;">Más / Menos cantidad de
+                            <div class="ep_cada_partido" style="width: 100%; text-align: center;">Más / Menos cantidad
+                                de
                                 goles</div>
                         </div>
                         <div style="background: #efefef; color: #444; font-size: 0.7em;">
                             <div style="display: inline-block; width: 33.33%;">
-                                
+
                             </div>
                             <div style="display: inline-block; width: 66.67%;">
                                 <div style="display: inline-block; width: 50%; text-align: center;">
                                     Más
                                 </div>
-    
+
                                 <div style="display: inline-block; width: 50%; text-align: center;">
                                     Menos
                                 </div>
@@ -367,12 +371,14 @@
                                 </div>
                             </div>
                             <div class="amount_goals2" style="display: inline-block; width: 66.67%;">
-                                <ng-container  *ngFor="let item of type.data; index as i;">
-                                    <div class="gen_imp_eq eq_dos" *ngIf="item.caption == '+'" style="text-align: center;">
+                                <ng-container *ngFor="let item of type.data; index as i;">
+                                    <div class="gen_imp_eq eq_dos" *ngIf="item.caption == '+'"
+                                        style="text-align: center;">
                                         <div class='ep_cl_logro'>{{item.quoteFloatValue | number : '1.2-2'}}</div>
                                     </div>
-        
-                                    <div class="gen_imp_eq eq_dos" *ngIf="item.caption == '-'" style="text-align: center;">
+
+                                    <div class="gen_imp_eq eq_dos" *ngIf="item.caption == '-'"
+                                        style="text-align: center;">
                                         <div class='ep_cl_logro'>{{item.quoteFloatValue | number : '1.2-2'}}</div>
                                     </div>
                                 </ng-container>
@@ -413,7 +419,7 @@
                     </div>
                 </div>
             </ng-container>
-            
+
             <!-- <div class="game">
                 <div class="border_game">
                     <div>
@@ -516,6 +522,88 @@
                 </ng-container>
             </div>
         </div>
+    </div>
+    <div *ngIf="_generalesService.leaguesCount > 0" class="leagues_selected">
+        <ng-container *ngFor="let category of _generalesService.leaguesSelected">
+            <div>
+                <div class="category_bar">
+                    <img [src]="category.image" alt="">
+                    <div style="display: inline-block;">
+                        {{category.name}}
+                    </div>
+                </div>
+
+                <ng-container *ngFor="let league of category.leagues">
+                    <div class="league_bar">
+                        <span class="text_league_bar">
+                            {{league.name}}
+                        </span>
+                    </div>
+                    <div class="league_body">
+                        <div style="border-bottom: 1px solid #dedede;" *ngFor="let game of league.games; let i = index">
+                            <ng-container *ngIf="i > 0">
+                                <div class="date_game" *ngIf="! sameDates(league.games[i - 1].start, game.start)">
+                                    {{game.start | date:'EEEE, dd.LL' }}
+                                </div>
+                            </ng-container>
+                            <ng-container *ngIf="i == 0">
+                                <div class="date_game">
+                                    {{game.start | date:'EEEE, dd.LL' }}
+                                </div>
+                            </ng-container>
+                            <table class="game_selected" style="width: 100%; table-layout: fixed;">
+                                <tr>
+                                    <td class="starttime_game" style="width: 6%;">
+                                        {{game.start | date:'shortTime'}}
+                                    </td>
+                                    <td style="width: 25%;">
+                                        <table style="display: inline;">
+                                            <tr *ngFor="let team of game.teams">
+                                                <td>{{team.name}}</td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <div class="table_td_width">
+                                        <td *ngFor="let option of game.options">                                       
+                                            <ng-container *ngIf="option.length == 1">
+                                                <div class="odd-group">
+                                                    <ng-container *ngFor="let item of option">
+                                                        <button [class.odd-button-three]="item.data.length == 3" class="odd-button" *ngFor="let quot of item.data">
+                                                            <span>{{quot.quoteFloatValue | number : '1.2-2'}}</span>
+                                                        </button>
+                                                    </ng-container>
+                                                </div>
+                                            </ng-container>
+    
+                                            <ng-container *ngIf="option.length > 1"> 
+                                                <select class="select_change" name="quot_selected" (change)="changeSelected(option, $event.target.value)">
+                                                    <option *ngFor="let item of option; let i = index" [value]="item.id">
+                                                        {{item.code}}
+                                                    </option>
+                                                </select>
+    
+                                                <div class="odd-group" style="width: 70%; display: inline-block; vertical-align: bottom;">
+                                                    <ng-container *ngFor="let item of option">
+                                                        <ng-container *ngIf="item.selected">
+                                                            <button 
+                                                            [class.odd-button-three]="item.data.length == 3"
+                                                            [class.odd-button-two]="item.data.length == 2"
+                                                            class="odd-button" *ngFor="let quot of item.data">
+                                                                <span>{{quot.quoteFloatValue | number : '1.2-2'}}</span>
+                                                            </button>
+                                                        </ng-container>
+                                                    </ng-container>
+                                                </div>                                            
+                                            </ng-container>
+                                        </td>
+                                    </div>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+        </ng-container>
     </div>
     <div class="zona_cuota">
         <app-cuotas></app-cuotas>

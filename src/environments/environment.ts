@@ -14,8 +14,9 @@ export const environment = {
     encrypted: false,
     enabledTransports: ['ws']
   },
-  url: "http://localhost/apuestasg-backend/public" + '/api/',
-  functions: 'http://agsw.apuestasg.win/php/funciones'
+  url: 'https://api.apuestasg.win' + "/api/"
+  // url: "http://localhost/apuestasg-backend/public" + '/api/',
+  // functions: 'http://agsw.apuestasg.win/php/funciones'
 };
 
 /*

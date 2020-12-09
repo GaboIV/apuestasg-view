@@ -1,0 +1,9 @@
+.tabla_equipos td {
+    padding: 8px 8px;
+    font-weight: 100;
+}
+
+.add_user {
+    background: #00790f !important;
+    transition: all ease 500ms;
+}

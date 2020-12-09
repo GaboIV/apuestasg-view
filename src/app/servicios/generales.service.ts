@@ -23,6 +23,9 @@ export class GeneralesService {
   public largoVentana: any;
   public largoCentral: any;
 
+  public leaguesSelected = [];
+  public leaguesCount = 0;
+
   fecha: any;
 
   constructor(
@@ -163,6 +166,29 @@ export class GeneralesService {
 
     return this.http.get( url )
       .pipe(map ( (resp: any) => {
+        return resp;
+      }));
+  }
+
+  getGamesByLeague(league_id) {
+    const url = URL_PUBLIC + 'games/byleague/' + league_id;
+
+    return this.http.get( url )
+      .pipe(map ( (resp: any) => {
+        const categoryIndex = this.leaguesSelected.findIndex(categories => categories.id === resp.category.id);
+
+        if (categoryIndex != -1) {
+          this.leaguesSelected[categoryIndex].leagues.push(resp)
+        } else {
+          this.leaguesSelected.push(
+            {
+              "id": resp.category.id,
+              "name": resp.category.name,
+              "image": resp.category.image,
+              "leagues": [resp]
+            }
+          )
+        }
         return resp;
       }));
   }

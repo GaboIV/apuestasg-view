@@ -63,7 +63,7 @@ registerLocaleData(localeEs, 'es-VE');
     MalihuScrollbarModule.forRoot(),
     ToastrModule.forRoot(),
     SweetAlert2Module.forRoot(),
-    NgxPaginationModule,
+    NgxPaginationModule
   ],
   providers: [
     {
