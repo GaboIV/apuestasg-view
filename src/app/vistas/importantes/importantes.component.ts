@@ -80,31 +80,31 @@ export class ImportantesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.cargarCategoriasJuegos();  
+    this.cargarCategoriasJuegos();
     this.esperando = true;
 
     this.route.queryParams
-    .subscribe(params => {
-      if (this.dia_c != params.dia) {
-        this.dia_c = params.dia;
-        this.carrera_c = '1';
-      } else {
-        this.dia_c = params.dia;
-        this.carrera_c = params.carrera;
-      }    
+      .subscribe(params => {
+        if (this.dia_c != params.dia) {
+          this.dia_c = params.dia;
+          this.carrera_c = '1';
+        } else {
+          this.dia_c = params.dia;
+          this.carrera_c = params.carrera;
+        }
 
-      // if (params.pantalla == 'principal') {
-      //   this.solohoy(1);
-      // }
-    });
+        // if (params.pantalla == 'principal') {
+        //   this.solohoy(1);
+        // }
+      });
 
     this.route.params
-    .subscribe(parametros => {
-      this.id = parametros['id_categoria']; 
-              
-      $('.ep_cada_cat').removeClass('seleccionadosport');
-      $('#temp-' + this.id).addClass(' seleccionadosport ');
-    });
+      .subscribe(parametros => {
+        this.id = parametros['id_categoria'];
+
+        $('.ep_cada_cat').removeClass('seleccionadosport');
+        $('#temp-' + this.id).addClass(' seleccionadosport ');
+      });
     $('.mensaje_cp').hide();
     this.cargarDestacados();
 
@@ -121,7 +121,7 @@ export class ImportantesComponent implements OnInit {
     config_broadcaster['auth'] = {
       headers:
       {
-          'Authorization': 'Bearer ' + localStorage.getItem('token')
+        'Authorization': 'Bearer ' + localStorage.getItem('token')
       }
     };
 
@@ -266,14 +266,13 @@ export class ImportantesComponent implements OnInit {
   cargarCategoriasJuegos() {
     if (this.juegos.length == 0) {
       this._generalesService.cargarCategoriasJuegos()
-      .subscribe(resp => {
-        this.juegos = resp.categories;
-        this.solohoy(this.id);
-      });
+        .subscribe(resp => {
+          this.juegos = resp.categories;
+          this.solohoy(this.id);
+        });
     } else {
       this.solohoy(this.id);
     }
-    
   }
 
   seleccionh(id_apuesta) {
@@ -343,8 +342,8 @@ export class ImportantesComponent implements OnInit {
           //   // tslint:disable-next-line:max-line-length
           //   this.router.navigate(['/importantes/7'], { queryParams: { 'dia': this.dias_carr[0].dia, 'hipodromo': this.dias_carr['hip'], 'carrera': this.carreras[0].number } });
           // }
-          this.racecourses = resp.data;    
-          
+          this.racecourses = resp.data;
+
           if (this.racecourses.length > 0) {
             this.getCareers(this.racecourses[0].id);
           } else {
@@ -359,7 +358,7 @@ export class ImportantesComponent implements OnInit {
           this.partidos = resp.juegos;
           this.carreras = null;
           this.racecourses = null;
-          this.router.navigate(['/importantes/' + this.id]);
+          // this.router.navigate(['/importantes/' + this.id]);
         });
     }
   }
@@ -377,7 +376,7 @@ export class ImportantesComponent implements OnInit {
         this.router.navigate(['/importantes/7'], { queryParams: { 'dia': resp.dias[0].dia, 'hipodromo': resp.dias[0]['hip'], 'carrera': resp.carreras[0].number } });
 
         this.dias_carr = resp.dias;
-        this.partidos = null;  
+        this.partidos = null;
 
         this.dia_c = resp.dias[0].dia;
 
@@ -386,8 +385,8 @@ export class ImportantesComponent implements OnInit {
 
         this.carreras = resp.carreras;
         // tslint:disable-next-line:max-line-length    
-            
-        
+
+
       });
   }
 
@@ -417,7 +416,7 @@ export class ImportantesComponent implements OnInit {
     });
   }
 
-  changeSelected (options, value) {
+  changeSelected(options, value) {
     console.log(options, value);
 
     options.forEach(item => {
@@ -430,7 +429,7 @@ export class ImportantesComponent implements OnInit {
   }
 
   sameDates(date1, date2): boolean {
-    return this.datePipe.transform(date1, 'dd-MM-yyyy') === 
-             this.datePipe.transform(date2, 'dd-MM-yyyy');
- }
+    return this.datePipe.transform(date1, 'dd-MM-yyyy') ===
+      this.datePipe.transform(date2, 'dd-MM-yyyy');
+  }
 }

@@ -24,7 +24,6 @@ export class PartidosComponent implements OnInit {
   partidos: Partido[];
   nacionalidades: Nacionalidad[];
   resultado: any;
-  today: Date = new Date('2016-01-16T16:00:00');
   selectedFile: File;
   mostrarEdit = false;
   pagina = 1;
@@ -33,9 +32,11 @@ export class PartidosComponent implements OnInit {
   deportes: Deporte[];
   ligas: any = [];
 
+  dateThan = true;
+
   category_id = 0;
   country_id = 0;
-  start = 0;
+  start = null;
 
   total = 0;
 
@@ -90,8 +91,9 @@ export class PartidosComponent implements OnInit {
       type: 'info',
       title: 'Cargando partidos'
     });
+
     if (criterio == 'busquueeddaa') {
-       this._partidosService.filtrarPartidos(pagina, this.category_id, this.country_id, this.start, this.criterio)
+      this._partidosService.filtrarPartidos(pagina, this.category_id, this.country_id, this.start, this.criterio, this.dateThan)
         .subscribe(resp => {
           this.pagina = resp.games.current_page;
           this.partidos = resp.games.data;
@@ -108,7 +110,7 @@ export class PartidosComponent implements OnInit {
           swal.close();
         });
     }
-    
+
   }
 
   subirImagen(event, partido) {
@@ -173,18 +175,18 @@ export class PartidosComponent implements OnInit {
   changeCountry() {
     this.ligas = null;
     this._ligasService.seleccionDeportePais(this.category_id, this.country_id)
-    .subscribe(resp => {
-      this.ligas = resp.ligas;
-    });
+      .subscribe(resp => {
+        this.ligas = resp.ligas;
+      });
   }
 
   changeCategory() {
     if (this.country_id != 0) {
       this.ligas = null;
       this._ligasService.seleccionDeportePais(this.category_id, this.country_id)
-      .subscribe(resp => {
-        this.ligas = resp.ligas;
-      });
-    }    
+        .subscribe(resp => {
+          this.ligas = resp.ligas;
+        });
+    }
   }
 }

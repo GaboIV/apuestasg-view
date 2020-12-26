@@ -32,7 +32,7 @@
                         </select>
                     </td>
                     <td width="9%" align="center">
-                        <ng-container *ngIf="liga.name_uk.length > 0">
+                        <ng-container *ngIf="liga.name_uk && liga.name_uk.length > 0">
                             <div name="name_uk" class="ch_slc_nt" *ngFor="let name_uk of liga.name_uk">
                                 {{name_uk}}
                                 <div class="equis_ch_slc" (click)="dettach_name_uk(liga, name_uk)">X</div>
