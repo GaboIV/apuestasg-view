@@ -1,6 +1,6 @@
 <div class="equipos">
     <div class="buscador_it_001">
-        <input type="text" name="search_eq" placeholder="Buscar un equipo" class="search_eq" [(ngModel)]="criterio">
+        <input type="text" name="search_eq" placeholder="Buscar un equipo" class="search_eq" [(ngModel)]="criterio" (keyup.enter)="cargarPartidos('1', 'busquueeddaa')">
 
         <div class="add_lig" routerLink="/agregarPartido">+</div>
 

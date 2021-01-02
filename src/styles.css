@@ -2708,3 +2708,12 @@ div .ch_slc_nt {
     text-overflow: ellipsis;
     height: 39px;
 }
+
+.pagination_fixed {
+    /* box-shadow: 0 0 10px white; */
+    padding: 7px;
+    position: fixed;
+    bottom: 0px;
+    right: 10px;
+    z-index: 1;
+}

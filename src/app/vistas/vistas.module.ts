@@ -49,6 +49,8 @@ import { ModalContentDirective } from '../directivas/modal.directive';
 import { OverlayComponent } from '../comun/componentes/overlay/overlay.component';
 import { SamplemodalComponent } from '../modales/samplemodal/samplemodal.component';
 import { CompetitorsResultModalComponent } from '../modales/competitors-result-modal/competitors-result-modal.component';
+import { TareasCanceladasComponent } from './changelog/tareas-canceladas/tareas-canceladas.component';
+import { TareasVerificadasComponent } from './changelog/tareas-verificadas/tareas-verificadas.component';
 
 @NgModule({
   imports: [
@@ -103,6 +105,8 @@ import { CompetitorsResultModalComponent } from '../modales/competitors-result-m
     ModalContentDirective,
     OverlayComponent,
     SamplemodalComponent,
+    TareasCanceladasComponent,
+    TareasVerificadasComponent,
   ],
   exports: [MenuCaballosComponent, MenuChangelogComponent, CuotasComponent, MomentModule],
   entryComponents: [

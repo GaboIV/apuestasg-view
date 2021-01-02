@@ -46,6 +46,8 @@ import { MensajesComponent } from './vistas/opciones/mensajes/mensajes.component
 import { MensajeComponent } from './vistas/opciones/mensajes/mensaje/mensaje.component';
 import { DepositosComponent } from './vistas/opciones/deposito/depositos.component';
 import { TransaccionesComponent } from './vistas/opciones/transacciones/transacciones.component';
+import { TareasCanceladasComponent } from './vistas/changelog/tareas-canceladas/tareas-canceladas.component';
+import { TareasVerificadasComponent } from './vistas/changelog/tareas-verificadas/tareas-verificadas.component';
 const appRoutes: Routes = [
   { path: 'importantes/:id_categoria', component: ImportantesComponent },
   { path: 'equipos', component: EquiposComponent, canActivate: [AdminGuardGuard] },
@@ -87,6 +89,8 @@ const appRoutes: Routes = [
   { path: 'estadisticas', component: EstadisticasComponent },
   { path: 'adm-depositos', component: AdmDepositosComponent },
   { path: 'tareas-pendientes', component: ChangelogComponent, canActivate: [AdminGuardGuard]},
+  { path: 'tareas-canceladas', component: TareasCanceladasComponent, canActivate: [AdminGuardGuard]},
+  { path: 'tareas-verificadas', component: TareasVerificadasComponent, canActivate: [AdminGuardGuard]},
   { path: 'partido/:id_partido', component: PartidoComponent, canActivate: [AdminGuardGuard] },
   { path: 'carrera/:id_carrera', component: CarreraComponent, canActivate: [AdminGuardGuard] },
   { path: 'verCarrera/:id_carrera', component: VerCarreraComponent },

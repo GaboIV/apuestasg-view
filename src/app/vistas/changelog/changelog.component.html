@@ -1,7 +1,7 @@
 <app-menu-changelog></app-menu-changelog>
 
 <div class='body_histo'>
-    <ng-container *ngIf="zona === 'tareas'">
+    <ng-container *ngIf="zona === 'changelogs'">
         <div style="padding: 15px;" *ngFor="let cl of changelogs">
             <div class="idiv">
                 <i class="far fa-clock" *ngIf="cl.status === 0" (click)="verEstatus(cl.id)"></i>

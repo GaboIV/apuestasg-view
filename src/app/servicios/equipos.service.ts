@@ -26,9 +26,9 @@ export class EquiposService {
       url = URL_EQUIPOS + '?page=' + pagina;
     }
 
-    // url = 'http://159.65.187.236:3000/api/products/3';
-
-    console.log(url);
+    if (liga) {
+      url += "&league_id=" + liga;
+    }
 
     return this.http.get( url, this._loginService.httpOptions )
       .pipe(map ( (resp: any) => {

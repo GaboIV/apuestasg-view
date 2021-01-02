@@ -43,22 +43,22 @@ export class ChangelogComponent implements OnInit {
   }
 
   enviarTarea () {
-    this._generalesService.agregarTarea( this.nuevaTarea, this._inicioSesion.usuario.id)
-    .subscribe( resp => {
-      if ( resp.status === 'correcto') {
-        this.changelogs = resp.changelogs;
-          this.toastr.success('Correcto', 'Se agregó la tarea:  ' + this.nuevaTarea , {
-            timeOut: 3000,
-            positionClass: 'toast-bottom-right'
-          });
-          const navigationExtras: NavigationExtras = {
-            queryParams: { 'zona': 'tareas' }
-          };
-          this.router.navigate(['/changelog'], navigationExtras );
+    // this._generalesService.agregarTarea( this.nuevaTarea, this._inicioSesion.usuario.id)
+    // .subscribe( resp => {
+    //   if ( resp.status === 'correcto') {
+    //     this.changelogs = resp.changelogs;
+    //       this.toastr.success('Correcto', 'Se agregó la tarea:  ' + this.nuevaTarea , {
+    //         timeOut: 3000,
+    //         positionClass: 'toast-bottom-right'
+    //       });
+    //       const navigationExtras: NavigationExtras = {
+    //         queryParams: { 'zona': 'tareas' }
+    //       };
+    //       this.router.navigate(['/changelog'], navigationExtras );
 
-          this.toastr.info('<div><input></div>');
-      }
-    });
+    //       this.toastr.info('<div><input></div>');
+    //   }
+    // });
   }
 
   verEstatus ( estatus ) {

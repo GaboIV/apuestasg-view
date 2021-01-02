@@ -40,6 +40,11 @@ export class EquiposComponent implements OnInit {
 
   cargarEquipos(pagina, criterio, liga) {
     this.criterio = criterio;
+
+    if (liga) {
+      this.liga = liga;
+    }
+
     const toast = swal.mixin({
       toast: true,
       position: 'top-end',
@@ -50,13 +55,14 @@ export class EquiposComponent implements OnInit {
       type: 'info',
       title: 'Cargando equipos'
     });
-    this._equipoService.cargarEquipos(pagina, criterio, liga)
+
+    this._equipoService.cargarEquipos(pagina, criterio, this.liga)
       .subscribe(equipos => {
         this.equipos = equipos.data
         this.total = equipos.total;
         this.pagina = equipos.current_page;
         swal.close();
-      });      
+      });
   }
 
   cargarNacionalidades() {
@@ -91,33 +97,33 @@ export class EquiposComponent implements OnInit {
       valor = 'todos';
     }
 
-    this.cargarEquipos(this.pagina, valor, 'todas');
+    this.cargarEquipos(1, valor, 'todas');
   }
 
-  pageChanged (page) {
+  pageChanged(page) {
     this.pagina = page;
 
   }
 
-  modificarDato (id, value, equipo, parameter, sp_parameter = '') {
-    if (value != equipo[parameter] && (value != '' || equipo[parameter] != null) ) {
+  modificarDato(id, value, equipo, parameter, sp_parameter = '') {
+    if (value != equipo[parameter] && (value != '' || equipo[parameter] != null)) {
       this._equipoService.modificarDatoEquipo(id, value, parameter)
-      .subscribe(res => {
-        console.log(res);
-        if (res.status == 'success') {
-          equipo[parameter] = value;
-          const toast = swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 2000
-          });
-          toast({
-            type: res.status,
-            title: 'Se modificó el campo ' + sp_parameter + 'correctamente'
-          });
-        }
-      });
+        .subscribe(res => {
+          console.log(res);
+          if (res.status == 'success') {
+            equipo[parameter] = value;
+            const toast = swal.mixin({
+              toast: true,
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 2000
+            });
+            toast({
+              type: res.status,
+              title: 'Se modificó el campo ' + sp_parameter + 'correctamente'
+            });
+          }
+        });
     }
   }
 
@@ -125,7 +131,7 @@ export class EquiposComponent implements OnInit {
     this.cargarEquipos(1, 'todos', liga.id);
   }
 
-  changeImageLink (team){
+  changeImageLink(team) {
     this._equipoService.modificarDatoEquipo(team.id, team.image_link, 'image_link')
       .subscribe(resp => {
         if (resp.status == 'success') {
