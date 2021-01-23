@@ -712,7 +712,7 @@ cuerpo {
     background-color: #172435;
     font-size: 1em;
     line-height: 29px;
-    min-height: 29px;
+    min-height: 35px;
     color: #e4e4e4;
     padding: 0 0px;
     cursor: default;
@@ -740,7 +740,9 @@ cuerpo {
 }
 
 .sub_title_cupon {
-    height: 30px;
+    height: 35px;
+    padding-top: 3px;
+    font-size: 1.1em;
     border-bottom: 2px solid #ffdf1b;
     width: 20%;
     text-align: center;
@@ -765,12 +767,39 @@ cuerpo {
 
 .solo_hoy {
     background: #172435;
-    padding: 4px 8px;
+    padding: 4px 36px 4px 12px;
     border-radius: 4px;
     cursor: text;
     outline: none;
     border: none;
+    height: 32px;
+    width: 100%;
+    margin-top: 1px;
     color: white;
+    font-size: 0.95em;
+}
+
+.solo_hoy:focus {
+    border-color: #4dabf7;
+    outline: none;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,0.0125), 0 0 8px rgba(34,139,230,0.5);
+}
+
+.button-reset {
+    opacity: 1;
+    transition: opacity .15s ease-in;
+    top: 50%;
+    transform: translateY(-50%);
+    position: absolute;
+    background: rgba(0,0,0,0);
+    border: none;
+    cursor: pointer;
+    font-family: fa5-proxima-nova,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    margin: 0;
+    padding: 0;
+    transition: all .1s ease-in;
+    right: 1.4rem;
+
 }
 
 .solo_hoy::placeholder {

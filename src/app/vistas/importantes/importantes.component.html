@@ -18,18 +18,22 @@
         </div>
         <div id="z1_bet">
             <div class="title_ap_fav bajo_verde_green">
-                <label>
+                <!-- <label>
                     <input (click)="verifyRadio('24')" type="radio" id="cbox1" name="gender" checked> Próximas 24 horas
                     &nbsp;&nbsp;&nbsp;
-                </label>
-                <label>
+                </label> -->
+                <div (click)="verifyRadio('24')" [class.title_selected]="radio === '24'" class="sub_title_cupon" style="border-color: #f0f0f0; width: 23%; display: inline-block; font-size: 1em; margin-right: 1%; cursor: pointer;">Próximas 24 horas</div>
+                <!-- <label>
                     <input (click)="verifyRadio('today')" type="radio" id="cbox2" name="gender"> Sólo hoy
                     &nbsp;&nbsp;&nbsp;
-                </label>
+                </label> -->
+                <div (click)="verifyRadio('today')" [class.title_selected]="radio === 'today'" class="sub_title_cupon" style="border-color: #f0f0f0; width: 13%; display: inline-block; font-size: 1em; cursor: pointer;">Sólo hoy</div>
+
                 <form name="invfrm" (ngSubmit)="buscarEquipo(f.value)" #f="ngForm" ngNativeValidate
-                    style="display: inline-block; vertical-align: middle; float: right; padding-right: 10px;">
+                    style="display: inline-block; vertical-align: middle; float: right; padding-right: 10px; width: 40%; position: relative;">
                     <input class="solo_hoy" type="text" name="busqueda" placeholder="Busque un equipo" ngModel required
                         #busqueda="ngModel" minlength="3">
+                    <div class="button-reset"><i class="fas fa-search"></i> <span class="sr-only">¡Buscar!</span></div>
                 </form>
             </div>
             <div class="title_ap_fav" style="padding: 0px; height: 100px;" malihu-scrollbar
@@ -61,10 +65,6 @@
                             <span>{{game.encuentro}} | {{ game.start | date:'d/MM/yyyy'}} |
                                 {{ game.start | date:'h:mm a'}}</span>
                         </div>
-                        <!-- <div class="expandir" [routerLink]="['/verPartido', game.id]" [queryParams]="{partido: game}"
-                            style="background: #00488c; height: 30px; padding-top: 7px;">
-                            <i class="fas fa-expand"></i>&nbsp;Ampliar
-                        </div> -->
                         <div class="expandir" style="background: #00488c; height: 30px; padding-top: 7px;"
                             (click)="game_selected = game">
                             <i class="fas fa-expand"></i>&nbsp;Ampliar
@@ -88,38 +88,17 @@
                                                 [src]="game.teams[item.caption - 1].country_id + '.png' | imagen:'nacionalidad'"
                                                 height=12px>
                                         </div>
-                                        <!-- <div class="div_span" *ngIf="(game.category_id === '4' || game.category_id === '9') && equipo.nacionalidad === '0'">Sin información <i class="fas fa-info-circle"></i> </div>
-                                        <div class="pitcher_eq" *ngIf="(game.category_id === '22') && equipo.pitcher !== false">{{equipo.pitcher.nombre}} ({{equipo.pitcher.era}}) </div>
-                                        <div class="pitcher_eq" style="display: none" *ngIf="(game.category_id === '2') && equipo.pitcher === false">Sin información <i class="fas fa-info-circle"></i> </div> -->
                                     </div>
                                     <div class='ep_cl_logro'>{{item.quoteFloatValue | number : '1.2-2'}}</div>
                                 </div>
                             </ng-container>
                         </ng-container>
-                        <!-- <div *ngFor="let competitor of game.competitors" class="gen_imp_eq"
-                            [class.eq_tres_emp]="game.competitors.length == 3 && competitor.team_id == 1"
-                            [class.eq_tres]="game.competitors.length == 3 && competitor.team_id != 1"
-                            [class.eq_dos]="game.competitors.length == 2"
-                            (click)="selecciond( competitor.id, game.league.category_id )">
-                            <div [class]="game.league.category_id | importantes:competitor.team.name "><img
-                                    *ngIf="competitor.team.name !== 'Empate'"
-                                    [src]="competitor.team.image | imagen:'equipo'" height=125%
-                                    class='ep_logo'>{{competitor.team.name}}<br>
-                            </div>
-                            <div class='ep_cl_logro'>{{competitor.odd | cuota:'decimal'}}</div>
-
-                        </div> -->
                     </div>
                 </div>
             </div>
             <div class="juegos_principales_zb1"
                 *ngIf="racecourses !== [] && racecourses !== undefined && racecourses !== null">
                 <div class='racecourses_active' style="min-height: 37px;">
-                    <!-- <select name="fdfs" id="fsdf" class="solo_hoy" [(ngModel)]="racecourse" style="cursor: pointer; font-size: 1em;">
-                        <option [value]="list.hip" *ngFor="let list of dias_carr">
-                            {{list.hip}}
-                        </option>
-                    </select> -->
                     <ng-container *ngFor="let rce of racecourses">
                         <div class="div_racecourse"
                             [ngStyle]="{background: (rce.id == racecourse) ? 'yellow' : 'white'}"
@@ -139,10 +118,6 @@
                             </div>
                         </div>
                     </ng-container>
-
-                    <!-- <div *ngIf="racecourses.length > 3" class="div_plus_button">
-                        +
-                    </div> -->
                 </div>
                 <div class="renglon_gris">
                     <ng-container *ngFor="let dia of dias_carr">
@@ -212,7 +187,8 @@
                                     <span *ngIf="ins.trainer !== null"
                                         style="color: #042a51;">{{ins.trainer.name}}</span>
                                     <span *ngIf="ins.trainer === null">Sin información <i
-                                            class="fas fa-info-circle"></i></span></div>
+                                            class="fas fa-info-circle"></i></span>
+                                </div>
                             </div>
                             <div class='datos_pr' style="width: 25%;">
                                 <div class='nomb_cab nopad'>Peso: {{ins.weight}} kgs.</div>
@@ -220,7 +196,8 @@
                                     <span *ngIf="ins.horse.edad === '0'" style="color: #999999;"> Sin información
                                         <i class="fas fa-info-circle"></i> </span>
                                     <span *ngIf="ins.horse.edad !== '0'" style="color: #042a51;">
-                                        {{ins.horse.edad }} </span></div>
+                                        {{ins.horse.edad }} </span>
+                                </div>
                             </div>
                             <div *ngIf="ins.status != '2' && (ins.odd != null && ins.odd != 0)"
                                 (click)="seleccionh( ins.id )" class='a_ganar'
@@ -384,101 +361,14 @@
                                 </ng-container>
                             </div>
                         </div>
-                        <!-- <div>
-                            <div class="amount_goals" style="display: inline-block; width: 33.33%;">
-                                <div class="gen_imp_eq eq_dos" style="width: 100%;">
-                                    <div style="width: 100%; text-align: center;" class="ep_cl_logro">1.5</div>
-                                </div>
-                            </div>
-                            <div class="amount_goals2" style="display: inline-block; width: 66.67%;">
-                                <div class="gen_imp_eq eq_dos">
-                                    <div style="width: 100%; text-align: center;" class="ep_cl_logro">1,25</div>
-                                </div>
-    
-                                <div class="gen_imp_eq eq_dos">
-                                    <div style="width: 100%; text-align: center;" class="ep_cl_logro">3,40</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="amount_goals" style="display: inline-block; width: 33.33%;">
-                                <div class="gen_imp_eq eq_dos" style="width: 100%;">
-                                    <div style="width: 100%; text-align: center;" class="ep_cl_logro">2.5</div>
-                                </div>
-                            </div>
-                            <div class="amount_goals2" style="display: inline-block; width: 66.67%;">
-                                <div class="gen_imp_eq eq_dos">
-                                    <div style="width: 100%; text-align: center;" class="ep_cl_logro">1,25</div>
-                                </div>
-    
-                                <div class="gen_imp_eq eq_dos">
-                                    <div style="width: 100%; text-align: center;" class="ep_cl_logro">3,40</div>
-                                </div>
-                            </div>
-                        </div> -->
                     </div>
                 </div>
             </ng-container>
-
-            <!-- <div class="game">
-                <div class="border_game">
-                    <div>
-                        <div class="ep_cada_partido" style="width: 100%; text-align: center;">Más / Menos cantidad de
-                            goles</div>
-                    </div>
-                    <div>
-                        <div class="amount_goals" style="display: inline-block; width: 33.33%;">
-                            <div class="gen_imp_eq eq_dos" style="width: 100%;">
-                                <div style="width: 100%; text-align: center;" class="ep_cl_logro">0.5</div>
-                            </div>
-                        </div>
-                        <div class="amount_goals2" style="display: inline-block; width: 66.67%;">
-                            <div class="gen_imp_eq eq_dos">
-                                <div style="width: 100%; text-align: center;" class="ep_cl_logro">1,25</div>
-                            </div>
-
-                            <div class="gen_imp_eq eq_dos">
-                                <div style="width: 100%; text-align: center;" class="ep_cl_logro">3,40</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="amount_goals" style="display: inline-block; width: 33.33%;">
-                            <div class="gen_imp_eq eq_dos" style="width: 100%;">
-                                <div style="width: 100%; text-align: center;" class="ep_cl_logro">1.5</div>
-                            </div>
-                        </div>
-                        <div class="amount_goals2" style="display: inline-block; width: 66.67%;">
-                            <div class="gen_imp_eq eq_dos">
-                                <div style="width: 100%; text-align: center;" class="ep_cl_logro">1,25</div>
-                            </div>
-
-                            <div class="gen_imp_eq eq_dos">
-                                <div style="width: 100%; text-align: center;" class="ep_cl_logro">3,40</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="amount_goals" style="display: inline-block; width: 33.33%;">
-                            <div class="gen_imp_eq eq_dos" style="width: 100%;">
-                                <div style="width: 100%; text-align: center;" class="ep_cl_logro">2.5</div>
-                            </div>
-                        </div>
-                        <div class="amount_goals2" style="display: inline-block; width: 66.67%;">
-                            <div class="gen_imp_eq eq_dos">
-                                <div style="width: 100%; text-align: center;" class="ep_cl_logro">1,25</div>
-                            </div>
-
-                            <div class="gen_imp_eq eq_dos">
-                                <div style="width: 100%; text-align: center;" class="ep_cl_logro">3,40</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
         </div>
         <div id="z2_bet">
-            <div class="title_ap_fav bajo_verde_green">Apuestas destacadas</div>
+            <div style="background-color: #0D2C49;" class="title_cuota">
+                <div class="sub_title_cupon" style="width: 45%; padding-top: 7px;">Apuestas destacadas</div>
+            </div>
             <div *ngFor="let dest of destacados">
                 <ng-container *ngIf="dest.competitors">
                     <img [src]="dest.image | imagen:'partido'" width=100% class='img_dtcd'
@@ -490,9 +380,6 @@
                             </span>
                             <img *ngIf="equipo.name != 'Empate'" [src]="equipo.image_url" class='ep_logo'
                                 style="position: static;" [class.redondo]="dest.league.category_id === 4">
-                            <!-- <div class="img_dest_country">
-                                <img *ngIf="dest.league.category_id === 4" class="img_int_country" [src]="equipo.team.country_id + '.png' | imagen:'nacionalidad'" height=16px name=image_country>
-                            </div> -->
                             <img *ngIf="dest.league.category_id === 4 && equipo.country?.image_link"
                                 class="img_dest_country" [src]="equipo.country.image_link" height=16px
                                 name=image_country>
@@ -501,7 +388,6 @@
                     </div>
                     <div class='titulo_destacado'>
                         <span class='liga_dtcd'>{{dest.league.name}}</span>
-                        <!-- <span class='equipos_dtcd'>{{dest.titulo}}</span> -->
                         <span class='equipos_dtcd'>{{dest.encuentro}}</span>
                     </div>
                     <div class='ep_descripcion_ta'>{{ dest.start | date:'d/MM/yyyy'}} -
@@ -564,36 +450,39 @@
                                         </table>
                                     </td>
                                     <div class="table_td_width">
-                                        <td *ngFor="let option of game.options">                                       
+                                        <td *ngFor="let option of game.options">
                                             <ng-container *ngIf="option.length == 1">
                                                 <div class="odd-group">
                                                     <ng-container *ngFor="let item of option">
-                                                        <button [class.odd-button-three]="item.data.length == 3" class="odd-button" *ngFor="let quot of item.data">
+                                                        <button [class.odd-button-three]="item.data.length == 3"
+                                                            class="odd-button" *ngFor="let quot of item.data">
                                                             <span>{{quot.quoteFloatValue | number : '1.2-2'}}</span>
                                                         </button>
                                                     </ng-container>
                                                 </div>
                                             </ng-container>
-    
-                                            <ng-container *ngIf="option.length > 1"> 
-                                                <select class="select_change" name="quot_selected" (change)="changeSelected(option, $event.target.value)">
-                                                    <option *ngFor="let item of option; let i = index" [value]="item.id">
+
+                                            <ng-container *ngIf="option.length > 1">
+                                                <select class="select_change" name="quot_selected"
+                                                    (change)="changeSelected(option, $event.target.value)">
+                                                    <option *ngFor="let item of option; let i = index"
+                                                        [value]="item.id">
                                                         {{item.code}}
                                                     </option>
                                                 </select>
-    
-                                                <div class="odd-group" style="width: 70%; display: inline-block; vertical-align: bottom;">
+
+                                                <div class="odd-group"
+                                                    style="width: 70%; display: inline-block; vertical-align: bottom;">
                                                     <ng-container *ngFor="let item of option">
                                                         <ng-container *ngIf="item.selected">
-                                                            <button 
-                                                            [class.odd-button-three]="item.data.length == 3"
-                                                            [class.odd-button-two]="item.data.length == 2"
-                                                            class="odd-button" *ngFor="let quot of item.data">
+                                                            <button [class.odd-button-three]="item.data.length == 3"
+                                                                [class.odd-button-two]="item.data.length == 2"
+                                                                class="odd-button" *ngFor="let quot of item.data">
                                                                 <span>{{quot.quoteFloatValue | number : '1.2-2'}}</span>
                                                             </button>
                                                         </ng-container>
                                                     </ng-container>
-                                                </div>                                            
+                                                </div>
                                             </ng-container>
                                         </td>
                                     </div>
@@ -609,5 +498,3 @@
         <app-cuotas></app-cuotas>
     </div>
 </div>
-
-<!-- <app-pie></app-pie> -->

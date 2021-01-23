@@ -430,3 +430,8 @@
     .table_td_width td {
         width: 10%;
     }
+
+    .title_selected {
+        border-color: #ffdf1b !important;
+        color: #ffdf1b;
+    }
