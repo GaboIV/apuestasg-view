@@ -121,21 +121,18 @@ export class ImportantesComponent implements OnInit {
     config_broadcaster['auth'] = {
       headers:
       {
-        'Authorization': 'Bearer ' + localStorage.getItem('token')
+          'Authorization': 'Bearer ' + this._inicioSesion.token
       }
     };
 
     window.Echo = new Echo(config_broadcaster);
 
-    window.Echo.private('notifications')
-      .listen('UserSessionChanged', data => {
-        console.log("notifications", data);
-      });
+    console.log(window.Echo);
 
-    window.Echo.channel('datagame')
-      .listen('GameOddChanged', data => {
-        console.log("datagame", data);
-      });
+    console.log(window.Echo.private('notifications')
+      .listen('UserSessionChanged', data => {
+        console.log("errores");
+      }));
   }
 
   deleteFile() {
@@ -179,7 +176,7 @@ export class ImportantesComponent implements OnInit {
     //     // } else if ($(this).scrollTop() > ($(window).height() - 137)) {
     //     //   $('#z1_bet').addClass('fixedbottom');
     //     //   $('#z1_bet').width(ancho1);
-    //     // } 
+    //     // }
     //     } else {
     //       $('#z1_bet').removeClass('fixed');
     //       $('#z1_bet').removeClass('fixedbottom');
@@ -384,7 +381,7 @@ export class ImportantesComponent implements OnInit {
         this.carrera_c = resp.carreras[0].number;
 
         this.carreras = resp.carreras;
-        // tslint:disable-next-line:max-line-length    
+        // tslint:disable-next-line:max-line-length
 
 
       });

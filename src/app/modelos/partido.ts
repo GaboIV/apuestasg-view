@@ -14,7 +14,8 @@ export class Partido {
         public created_at?: Date,
         public updated_at?: Date,
         public teams?: any,
+        public odds?: any,
+        public category_id?: any,
         public descripcion?: any,
-        public category_id?: any
     ) { }
 }

@@ -51,7 +51,6 @@ export class AgregarPartidoComponent implements OnInit {
     .subscribe( deportes => {
       this.deportes = deportes;
       this.depor = deportes;
-      console.log(deportes);
     });
   }
 
@@ -94,33 +93,33 @@ export class AgregarPartidoComponent implements OnInit {
     this.partido.teams[0] = $('#ipt_eq1').val();
     this.partido.teams[1] = $('#ipt_eq2').val();
     if ( this.tipoCuota === '2' ) {
-      this.partido.descripcion[0] = $('#div_e1').val();
-      this.partido.descripcion[1] = $('#div_e2').val();
+      this.partido.odds[0] = $('#div_e1').val();
+      this.partido.odds[1] = $('#div_e2').val();
     }
 
     if ( this.tipoCuota === '1') {
-      this.partido.descripcion[0] = this.partido.descripcion[3];
-      this.partido.descripcion[1] = this.partido.descripcion[4];
+      this.partido.odds[0] = this.partido.odds[3];
+      this.partido.odds[1] = this.partido.odds[4];
     }
 
     if ($('#ipt_eq3').val() !== '' ) {
       this.partido.teams[2] = $('#ipt_eq3').val();
 
       if ( this.tipoCuota === '2' ) {
-        this.partido.descripcion[2] = $('#div_e3').val();
+        this.partido.odds[2] = $('#div_e3').val();
       }
 
       if ( this.tipoCuota === '1' ) {
-        this.partido.descripcion[2] = this.partido.descripcion[5];
+        this.partido.odds[2] = this.partido.odds[5];
       }
     }
-    
+
     const swalWithBootstrapButtons = swal.mixin({});
 
     swalWithBootstrapButtons({
       title: '¿Deseas enviar estos datos?',
       // tslint:disable-next-line:max-line-length
-      html: 'Equipo 1: ' + this.partido.teams[0] + ' (' + this.partido.descripcion[0] + ')<br> Equipo 2: ' + this.partido.teams[1] + ' (' + this.partido.descripcion[1] + ')<br> Equipo 3: ' + this.partido.teams[2] + ' (' + this.partido.descripcion[2] + ')',
+      html: 'Equipo 1: ' + this.partido.teams[0] + ' (' + this.partido.odds[0] + ')<br> Equipo 2: ' + this.partido.teams[1] + ' (' + this.partido.descripcion[1] + ')<br> Equipo 3: ' + this.partido.teams[2] + ' (' + this.partido.descripcion[2] + ')',
       type: 'question',
       showCancelButton: true,
       confirmButtonText: 'Sí, enviar',
@@ -137,7 +136,7 @@ export class AgregarPartidoComponent implements OnInit {
               'success'
             );
             this.partido.teams = [];
-            this.partido.descripcion = [];
+            this.partido.odds = [];
           }
 
           if ( resp.status === 'existe') {
@@ -169,7 +168,7 @@ export class AgregarPartidoComponent implements OnInit {
       const res2 = res.toFixed(2);
       const ni = i + 3;
 
-      this.partido.descripcion[ni] = res2;
+      this.partido.odds[ni] = res2;
     }
 
     if ( this.tipoCuota === '1') {
@@ -188,7 +187,7 @@ export class AgregarPartidoComponent implements OnInit {
 
       const ni = i + 3;
 
-      this.partido.descripcion[ni] = fraq;
+      this.partido.odds[ni] = fraq;
     }
   }
 
