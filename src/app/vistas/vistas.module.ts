@@ -51,6 +51,7 @@ import { SamplemodalComponent } from '../modales/samplemodal/samplemodal.compone
 import { CompetitorsResultModalComponent } from '../modales/competitors-result-modal/competitors-result-modal.component';
 import { TareasCanceladasComponent } from './changelog/tareas-canceladas/tareas-canceladas.component';
 import { TareasVerificadasComponent } from './changelog/tareas-verificadas/tareas-verificadas.component';
+import { WinHourlyComponent } from '../modales/winhourly/winhourlymodal.component';
 
 @NgModule({
   imports: [
@@ -107,12 +108,14 @@ import { TareasVerificadasComponent } from './changelog/tareas-verificadas/tarea
     SamplemodalComponent,
     TareasCanceladasComponent,
     TareasVerificadasComponent,
+    WinHourlyComponent
   ],
   exports: [MenuCaballosComponent, MenuChangelogComponent, CuotasComponent, MomentModule],
   entryComponents: [
     OverlayComponent,
     SamplemodalComponent,
-    CompetitorsResultModalComponent
+    CompetitorsResultModalComponent,
+    WinHourlyComponent
   ]
 })
 export class VistasModule { }

@@ -4,6 +4,9 @@ import { InicioSesionService } from '../../../servicios/inicio-sesion.service';
 import { Usuario } from '../../../modelos/usuario';
 import { SubMenuService } from '../../../servicios/sub-menu.service';
 import swal from 'sweetalert2';
+import { ModalService } from 'src/app/servicios/modal.service';
+import { SamplemodalComponent } from 'src/app/modales/samplemodal/samplemodal.component';
+import { WinHourlyComponent } from 'src/app/modales/winhourly/winhourlymodal.component';
 
 
 @Component({
@@ -23,7 +26,8 @@ export class CabeceraComponent implements OnInit {
   constructor(
     public _generalesService: GeneralesService,
     public _sesionUsuario: InicioSesionService,
-    public _subMenuService: SubMenuService
+    public _subMenuService: SubMenuService,
+    public _modalService: ModalService,
   ) {
     setInterval(() => { this.actualizarHora(); }, 15000);
 
@@ -190,5 +194,15 @@ export class CabeceraComponent implements OnInit {
       .subscribe(resp => {
         swal.close();
       });
+  }
+
+  showModal(): void {
+    this._modalService.showModal(WinHourlyComponent, {
+      allowOverlayClick: true,
+      showCloseButton: false,
+      data: {
+        modalTitle: 'This is the sample modal'
+      }
+    });
   }
 }

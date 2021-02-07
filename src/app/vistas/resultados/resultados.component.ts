@@ -36,7 +36,7 @@ export class ResultadosComponent implements OnInit {
     public _nacionalidadesService: NacionalidadesService,
     public _ligasService: LigasService,
     public _modalService: ModalService,
-    private renderer: Renderer2, 
+    private renderer: Renderer2,
     private elem: ElementRef
   ) { }
 
@@ -132,7 +132,7 @@ export class ResultadosComponent implements OnInit {
       .subscribe(resp => {
         this.ligas = resp.ligas;
       });
-    }    
+    }
   }
 
   filtrarPartidos(pagina) {
@@ -150,8 +150,8 @@ export class ResultadosComponent implements OnInit {
 
               game.sections.result.forEach(result => {
                 team.result += parseInt(result[index]);
-              }); 
-            }                       
+              });
+            }
           }
         });
       });
@@ -162,7 +162,7 @@ export class ResultadosComponent implements OnInit {
         this.carreras = resp.carreras
       });
     }
-    
+
   }
 
   showModal(): void {
@@ -210,11 +210,11 @@ export class ResultadosComponent implements OnInit {
 
       game.teams.forEach(team => {
         result_section.push($('#' + team.id + "_" + game.id + "_" + (index + 1)).text());
-      });  
+      });
 
-      result_sections[index] = result_section;    
-    }  
-    
+      result_sections[index] = result_section;
+    }
+
     this._partidosService.sendSectionsResult( game.id, result_sections)
     .subscribe( resp => {
       if (resp.status == 'correcto'){

@@ -32,7 +32,7 @@
                 <div class="titulo_rl">
                     {{part.start}}
                 </div>
-                <div class="equipos_rl">   
+                <div class="equipos_rl">
                     <div *ngFor="let eq of part.teams; let i = index" class="equipo_rl">
                         <div class="name_rl">{{eq.name}}</div>
                         <div class="caja_rl" *ngFor="let item of arrayOne(8); let i = index;" contenteditable="true">{{eq.result}}</div>
