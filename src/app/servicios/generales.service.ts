@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { 
-  URL_FECHA, 
-  URL_DEPOSITO, 
-  URL_CHANGELOG, 
-  URL_IMAGEN, 
-  URL_INICIAL, 
+import {
+  URL_FECHA,
+  URL_DEPOSITO,
+  URL_CHANGELOG,
+  URL_IMAGEN,
+  URL_INICIAL,
   URL_ACCOUNT,
   URL_BANK,
   URL_PUBLIC,
@@ -148,7 +148,7 @@ export class GeneralesService {
 
   modificarDatoPais(id, value, parameter) {
     const url = URL_NACIONALIDADES + '/' + id;
-    
+
     var key = parameter;
     var obj = {};
     obj[key] = value;

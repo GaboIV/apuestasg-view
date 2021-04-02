@@ -1,7 +1,7 @@
     .mCSB_inside>.mCSB_container {
         margin-right: 2px;
     }
-    
+
     .gen_imp_eq {
         /*border-left: 1px solid #6e6e6e;
         border-right: 1px solid #6e6e6e;*/
@@ -14,7 +14,7 @@
         color: #666;
         position: relative;
     }
-    
+
     .gen_imp_eq:hover {
         background: #ffdf1b;
         color: #444;
@@ -24,55 +24,55 @@
         font-weight: bold;
         color: #444;
     }
-    
+
     .eq_dos {
         width: 50%;
     }
-    
+
     .dato_eq {
         padding: 4px 10px 7px 20px;
         height: 47px;
         font-size: 14px;
         overflow: initial;
     }
-    
+
     .dato_eq .ep_cl_name {
         width: 85%;
     }
-    
+
     .dato_eq .ep_cl_logro {
         width: 15%;
         font-size: 1.3em;
         padding-top: 9px;
     }
-    
+
     .eq_tres {
         width: 37.5%;
     }
-    
+
     .eq_tres_emp {
         width: 25% !important;
         border: none;
     }
-    
+
     .ep_logo {
         top: 3px;
         left: 7px;
         height: 80%;
         position: absolute;
     }
-    
+
     .eq_tres_emp .ep_cl_name {
         width: 70%;
         padding-left: 0px;
     }
-    
+
     .dato_eq .pitcher_eq {
         font-size: 0.70em;
         margin-top: -2px;
         display: block !important;
     }
-    
+
     .retirado {
         position: absolute;
         color: #efefef;
@@ -80,17 +80,17 @@
         top: 4px;
         left: -10px;
     }
-    
+
     .a_g_r:hover {
         color: #ccc !important;
         cursor: not-allowed !important;
         background-color: #5e5e5e !important;
     }
-    
+
     .iframe {
         margin-top: -65px;
     }
-    
+
     .tapalogo {
         position: absolute;
         top: 4px;
@@ -102,7 +102,7 @@
         padding-top: 3.5%;
         color: #cdcdcd;
     }
-    
+
     .datetime {
         margin: 0 20px;
         background: #272727;
@@ -113,7 +113,7 @@
         text-align: center;
         color: #cfcfcf;
     }
-    
+
     .img_dest {
         background: green;
         height: 110px;
@@ -160,13 +160,13 @@
         position: absolute;
         right: -25%;
     }
-    
+
     .versus {
         vertical-align: middle;
         font-size: 2.2em;
         font-weight: bold;
     }
-    
+
     .letra {
         display: inline-block;
         width: 20%;
@@ -174,16 +174,16 @@
         font-size: 1em;
         font-weight: bold;
     }
-    
+
     .letra_color {
         color: brown;
     }
-    
+
     .lizq {
         text-align: right;
         padding-right: 10px;
     }
-    
+
     .lder {
         text-align: left;
         padding-left: 10px;
@@ -191,7 +191,7 @@
         overflow: hidden;
         text-overflow: ellipsis;
     }
-    
+
     .img_dest .ep_logo {
         vertical-align: middle;
         -webkit-filter: drop-shadow(8px 8px 10px #efefef);
@@ -199,7 +199,7 @@
         filter: drop-shadow(8px 8px 10px#efefef);
         height: 88%;
     }
-    
+
     /*.redondo {
         border-bottom: 4px solid whitesmoke;
         border-radius: 100px;
@@ -264,11 +264,11 @@
     }
 
     .nextrace {
-        font-size: 0.8em; 
-        padding: 2px 4px; 
-        cursor: pointer; 
-        display: block; 
-        width: max-content; 
+        font-size: 0.8em;
+        padding: 2px 4px;
+        cursor: pointer;
+        display: block;
+        width: max-content;
         margin: 0 0 4px 0;
     }
 
@@ -294,7 +294,7 @@
         padding-left: 50px;
     }
 
-    .game { 
+    .game {
         padding: 12.5px 15px 0 15px;
     }
 
@@ -434,4 +434,10 @@
     .title_selected {
         border-color: #ffdf1b !important;
         color: #ffdf1b;
+    }
+
+    .selected {
+      background: #ffdd00;
+      color: #444;
+      font-weight: bold !important;
     }

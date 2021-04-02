@@ -112,6 +112,8 @@ export class CuotasComponent implements OnInit {
         }
       }
     });
+
+    console.log(this.selecciones);
   }
 
   cambioApuesta () {

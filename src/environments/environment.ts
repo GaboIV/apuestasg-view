@@ -5,26 +5,26 @@
 export const environment = {
   production: false,
   optionsWebsocketsEcho: {
-    authEndpoint: "http://127.0.0.1:8000/broadcasting/auth",
-    broadcaster: 'pusher',
-    key: 'ASDASD2121',
-    wsHost: '127.0.0.1',
-    wsPort: 6001,
-    disableStats: true,
-    encrypted: false,
-    enabledTransports: ['ws']
-    // authEndpoint: "https://websockets.apuestasg.win/broadcasting/auth",
+    // authEndpoint: "http://127.0.0.1:8000/broadcasting/auth",
     // broadcaster: 'pusher',
     // key: 'ASDASD2121',
-    // wsHost: 'websockets.apuestasg.win',
-    // wsPort: 80,
-    // wssPort: 443,
+    // wsHost: '127.0.0.1',
+    // wsPort: 6001,
     // disableStats: true,
-    // encrypted: true,
-    // enabledTransports: ['ws', 'wss']
+    // encrypted: false,
+    // enabledTransports: ['ws']
+    authEndpoint: "https://api.apuestasg.win/broadcasting/auth",
+    broadcaster: 'pusher',
+    key: 'ASDASD2121',
+    wsHost: 'api.apuestasg.win',
+    wsPort: 80,
+    wssPort: 443,
+    disableStats: true,
+    encrypted: true,
+    enabledTransports: ['ws', 'wss']
   },
-  // url: 'https://websockets.apuestasg.win' + "/api/"
-  url: "http://localhost/apuestasg-backend/public" + '/api/',
+  url: 'https://api.apuestasg.win' + "/api/"
+  // url: "http://localhost/apuestasg-backend/public" + '/api/',
   // functions: 'http://agsw.apuestasg.win/php/funciones'
 };
 

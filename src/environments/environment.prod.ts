@@ -9,15 +9,15 @@ export const environment = {
     messagingSenderId: '759187144031'
   },
   optionsWebsocketsEcho: {
-    authEndpoint: "https://websockets.apuestasg.win/broadcasting/auth",
+    authEndpoint: "https://api.apuestasg.win/broadcasting/auth",
     broadcaster: 'pusher',
     key: 'ASDASD2121',
-    wsHost: 'websockets.apuestasg.win',
+    wsHost: 'api.apuestasg.win',
     wsPort: 80,
     wssPort: 443,
     disableStats: true,
     encrypted: true,
     enabledTransports: ['ws', 'wss']
   },
-  url: 'https://websockets.apuestasg.win' + "/api/"
+  url: 'https://api.apuestasg.win' + "/api/"
 };

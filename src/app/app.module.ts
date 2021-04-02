@@ -31,6 +31,8 @@ import localeEs from '@angular/common/locales/es-AR';
 import { MenuChangelogComponent } from './comun/componentes/menu-changelog/menu-changelog.component';
 import { CompetitorsResultModalComponent } from './modales/competitors-result-modal/competitors-result-modal.component';
 import { BaseModalComponent } from './comun/componentes/overlay/base_modal.component';
+import { MomentModule } from 'ngx-moment';
+import 'moment/locale/es';
 
 registerLocaleData(localeEs, 'es-VE');
 
@@ -49,6 +51,7 @@ registerLocaleData(localeEs, 'es-VE');
     BaseModalComponent
   ],
   imports: [
+    MomentModule,
     CommonModule,
     HttpClientModule,
     BrowserModule,

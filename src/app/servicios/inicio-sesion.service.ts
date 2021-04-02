@@ -68,11 +68,11 @@ export class InicioSesionService {
 
   estatus = 'noSesion';
   usuario: Usuario = new Usuario(
-    '', 
-    '', 
-    null, 
-    1, 
-    '', 
+    '',
+    '',
+    null,
+    1,
+    '',
     {
     id: '',
     document_type: '',
@@ -94,9 +94,9 @@ export class InicioSesionService {
     ip: '',
     browser: '',
     created_at: '',
-    updated_at: '' 
-    }, 
-    '', 
+    updated_at: ''
+    },
+    '',
     null
   );
 
@@ -130,7 +130,7 @@ export class InicioSesionService {
       let url = '';
 
       if (contrasena == '') {
-        const tokenr = localStorage.getItem('token'); 
+        const tokenr = localStorage.getItem('token');
 
         this.httpOptions = {
           headers: new HttpHeaders({
@@ -234,6 +234,8 @@ export class InicioSesionService {
         if ( resp.selections ) {
             this.selecciones2 = resp.selections;
             this.cuota = resp.quot;
+
+            console.log(this.selecciones2);
 
             this.cambioApuesta( this.montoapuesta );
         }

@@ -129,7 +129,7 @@ export class ImportantesComponent implements OnInit {
 
     console.log(window.Echo);
 
-    console.log(window.Echo.private('notifications')
+    console.log(window.Echo.channel('notifications')
       .listen('UserSessionChanged', data => {
         console.log("errores");
       }));
@@ -428,5 +428,11 @@ export class ImportantesComponent implements OnInit {
   sameDates(date1, date2): boolean {
     return this.datePipe.transform(date1, 'dd-MM-yyyy') ===
       this.datePipe.transform(date2, 'dd-MM-yyyy');
+  }
+
+  isSelected(game, item) {
+    // console.log(game, item);
+
+    return this._inicioSesion.selecciones2.some(e => e.game_id == game && e.select == item);
   }
 }
