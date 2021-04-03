@@ -433,6 +433,10 @@ export class ImportantesComponent implements OnInit {
   isSelected(game, item) {
     // console.log(game, item);
 
-    return this._inicioSesion.selecciones2.some(e => e.game_id == game && e.select == item);
+    if (this._inicioSesion.selecciones2) {
+      return this._inicioSesion.selecciones2.some(e => e.game_id == game && e.select == item);
+    } else {
+      return false;
+    }
   }
 }
