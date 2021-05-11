@@ -74,7 +74,7 @@
               <i class="fas fa-expand"></i>&nbsp;Ampliar
             </div>
             <ng-container *ngFor="let type of game.competitors">
-              <ng-container *ngIf="type.bet_type_id == 1">
+              <ng-container *ngIf="type.bet_type?.name == 'standard'">
                 <div *ngFor="let item of type.data; index as i;" class="gen_imp_eq"
                   [class.eq_tres_emp]="type.data.length == 3 && item.caption == 'X'"
                   [class.eq_tres]="type.data.length == 3 && item.caption != 'X'" [class.eq_dos]="type.data.length == 2"

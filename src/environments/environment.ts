@@ -23,8 +23,8 @@ export const environment = {
     encrypted: true,
     enabledTransports: ['ws', 'wss']
   },
-  url: 'https://api.apuestasg.win' + "/api/"
-  // url: "http://localhost/apuestasg-backend/public" + '/api/',
+  url: 'https://apuestasg.herokuapp.com' + "/api/"
+  // url: "http://localhost/apuestasg-api/public" + '/api/',
   // functions: 'http://agsw.apuestasg.win/php/funciones'
 };
 

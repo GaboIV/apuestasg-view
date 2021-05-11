@@ -19,5 +19,6 @@ export const environment = {
     encrypted: true,
     enabledTransports: ['ws', 'wss']
   },
-  url: 'https://api.apuestasg.win' + "/api/"
+  // url: 'https://api.apuestasg.win' + "/api/"
+  url: 'https://apuestasg.herokuapp.com' + "/api/"
 };

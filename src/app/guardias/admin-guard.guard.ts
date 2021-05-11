@@ -13,7 +13,7 @@ export class AdminGuardGuard implements CanActivate {
   ) { }
 
   canActivate( ) {
-    if ( this._inicioSesion.usuario.status === 1 ) {
+    if ( this._inicioSesion.usuario.status == 1 ) {
       return true;
     } else {
       console.log( 'Bloqueado por el ADMIN GUARD');

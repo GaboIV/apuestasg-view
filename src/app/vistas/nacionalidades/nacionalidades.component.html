@@ -71,10 +71,16 @@
                     </label> -->
 
                     <label style="cursor: pointer; position: relative; height: 60px;">
-                        <img [src]="pais.id + '.png' | imagen:'nacionalidad'" alt="" height="50px;">
+                        <!-- <img [src]="pais.id + '.png' | imagen:'nacionalidad'" alt="" height="50px;"> -->
+                        <img [src]="pais.flag_image_link" alt="" height="50px;">
                         <br>
                         <input type="file" name="imagenSubir" (change)="subirImagen($event, pais)" style="display: none">
                     </label>
+
+                    <input class="solo_hoy" type="text" name="flag_image_link" placeholder="Url de imagen" [(ngModel)]="pais.flag_image_link" required minlength="3" (change)="changeFlagImageLink(pais)" >
+                    <div class="botonclear" (click)="pais.flag_image_link = ''">
+                        <i class="fas fa-eraser"></i>
+                    </div>
                 </td>
                 <td width="7%" align="center">
                     {{pais.importancia}}

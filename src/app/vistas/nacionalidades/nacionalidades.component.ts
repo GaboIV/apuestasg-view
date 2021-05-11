@@ -34,7 +34,7 @@ export class NacionalidadesComponent implements OnInit {
   cargarNacionalidades() {
     this._nacionalidadesService.cargarNacionalidades()
     .subscribe( nacionalidades => {
-      this.nacionalidades = nacionalidades 
+      this.nacionalidades = nacionalidades
       console.log(this.nacionalidades);
     });
   }
@@ -75,4 +75,12 @@ export class NacionalidadesComponent implements OnInit {
       });
   }
 
+  changeFlagImageLink (pais){
+    this._generalesService.modificarDatoPais(pais.id, pais.flag_image_link, 'flag_image_link')
+      .subscribe(resp => {
+        if (resp.status == 'success') {
+          pais.flag_image_link = pais.flag_image_link;
+        }
+      });
+  }
 }

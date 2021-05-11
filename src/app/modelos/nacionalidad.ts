@@ -7,6 +7,7 @@ export class Nacionalidad {
         public nombre?: string,
         public iso31661?: string,
         public importancia?: string,
-        public img?: string
+        public img?: string,
+        public flag_image_link?: string
     ) { }
 }

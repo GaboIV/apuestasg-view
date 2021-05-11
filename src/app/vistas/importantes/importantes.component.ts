@@ -116,23 +116,6 @@ export class ImportantesComponent implements OnInit {
     $('#spin-' + this.id).addClass(' iconosport ');
 
     this.scroll_cuot();
-
-    let config_broadcaster = environment.optionsWebsocketsEcho;
-    config_broadcaster['auth'] = {
-      headers:
-      {
-          'Authorization': 'Bearer ' + this._inicioSesion.token
-      }
-    };
-
-    window.Echo = new Echo(config_broadcaster);
-
-    console.log(window.Echo);
-
-    console.log(window.Echo.channel('notifications')
-      .listen('UserSessionChanged', data => {
-        console.log("errores");
-      }));
   }
 
   deleteFile() {
