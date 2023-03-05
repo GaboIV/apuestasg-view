@@ -12,7 +12,7 @@
                 <b>Historial de cuenta (VEF)</b>
             </div>
             <div class="dato_c_c_r ">
-                Saldo: <span><b>Bs. {{ _inicioSesion.usuario.player.available | number:'1.2-2' }}</b></span>
+                Saldo: <span><b>$ {{ _inicioSesion.usuario.player.available | number:'1.2-2' }}</b></span>
             </div>
         </div>
 
@@ -98,7 +98,7 @@
                                 <ng-container *ngIf="sel.category_id == '7' ">
                                     <div class='c_sele'>({{sel.inscription.number}}) {{sel.inscription.horse.name}}
                                         <span *ngIf="sel.value != 1 && sel.inscription.odd == null"> @ {{sel.value | number:'1.2'}} </span>
-                                        <span *ngIf="sel.inscription.odd != null"> @ Bs. {{sel.inscription.odd | number:'1.2'}} </span>
+                                        <span *ngIf="sel.inscription.odd != null"> @ $ {{sel.inscription.odd | number:'1.2'}} </span>
                                         <span class='banner_histo' *ngIf="sel.inscription.status == 0">Pendiente</span>
                                         <span class='banner_histo ganadeivis'
                                             *ngIf="sel.inscription.status == 1">Ganador</span>
@@ -138,13 +138,13 @@
                         <span *ngIf="tk.towin > 1 && tk.selections[0].category_id == '7'">{{tk.selections[0].value | number:'1.2'}}</span>
                     </div>
                     <div class='col col_apo' style="text-align: center">
-                        Bs. {{tk.amount | number:'1.2'}} <br>
+                        $ {{tk.amount | number:'1.2'}} <br>
                         <span class='banner_histo pendeivis' *ngIf="tk.status === 3">Perdido</span>
                     </div>
                     <div class='col col_win'>
                         <span *ngIf="tk.towin == 0 && tk.status === 0">Ganancias según dividendo</span>
                         <span *ngIf="tk.towin === 1 && tk.status === 3">---</span>
-                        <span *ngIf="tk.towin > 1">Bs. {{ tk.towin | number:'1.2'}}</span><br>
+                        <span *ngIf="tk.towin > 1">$ {{ tk.towin | number:'1.2'}}</span><br>
                         <span class='banner_histo ganadeivis' *ngIf="tk.status === 1">Ganado</span>
                     </div>
                     <!-- <div class='separador'></div> -->

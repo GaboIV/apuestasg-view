@@ -3,20 +3,20 @@
 }
 
 .tr1 {
-    width: 5%;
+    width: 4%;
 }
 
 .tr2 {
-    width: 8%;
+    width: 7%;
 }
 
 .tr3 {
-    width: 10%;
+    width: 9%;
 }
 
 .tr4,
 .tr5 {
-    width: 14%
+    width: 12%
 }
 
 .tr6,
@@ -28,7 +28,7 @@
 }
 
 .tr8 {
-    width: 10%;
+    width: 9%;
 }
 
 .tr9 {
@@ -41,6 +41,8 @@
 
 .status {
     position: relative;
+    display: inline-block;
+    margin: 0 10%;
 }
 
 .aprobado {

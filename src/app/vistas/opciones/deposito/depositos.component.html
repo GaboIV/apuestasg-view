@@ -7,7 +7,7 @@
         <b>Historial de cuenta (VEF)</b>
       </div>
       <div class="dato_c_c_r ">
-        Saldo: <span><b>Bs. {{ _inicioSesion.usuario.player.available | number:'1.2-2' }}</b></span>
+        Saldo: <span><b>$ {{ _inicioSesion.usuario.player.available | number:'1.2-2' }}</b></span>
       </div>
     </div>
 
@@ -100,7 +100,7 @@
             {{pay.account.bank.name}}
           </div>
           <div class='col col_win'>
-            Bs. {{pay.amount | number:'1.2'}}
+            $ {{pay.amount | number:'1.2'}}
           </div>
           <div class='col col_sel '>
             {{pay.reference}}

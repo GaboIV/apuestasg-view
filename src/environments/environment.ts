@@ -13,17 +13,17 @@ export const environment = {
     // disableStats: true,
     // encrypted: false,
     // enabledTransports: ['ws']
-    authEndpoint: "https://api.apuestasg.win/broadcasting/auth",
+    authEndpoint: "https://api.alonsobet.xyz/broadcasting/auth",
     broadcaster: 'pusher',
     key: 'ASDASD2121',
-    wsHost: 'api.apuestasg.win',
+    wsHost: 'api.alonsobet.xyz',
     wsPort: 80,
     wssPort: 443,
     disableStats: true,
     encrypted: true,
     enabledTransports: ['ws', 'wss']
   },
-  url: 'https://apuestasg.herokuapp.com' + "/api/"
+  url: 'http://apuestasg.xd' + "/api/"
   // url: "http://localhost/apuestasg-api/public" + '/api/',
   // functions: 'http://agsw.apuestasg.win/php/funciones'
 };

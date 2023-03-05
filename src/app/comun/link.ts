@@ -34,7 +34,9 @@ export const URL_PARTIDOS = URL_ADMIN + 'games';
 export const URL_PLAYERS = URL_ADMIN + 'players';
 
 export const URL_TICKET = URL_PLAYER + 'ticket';
-export const URL_DEPOSITO = URL_PLAYER + 'pays';
+export const URL_DEPOSITO = URL_PLAYER + 'payments';
+
+export const URL_PAYMENT = URL_ADMIN + 'payments';
 
 
 

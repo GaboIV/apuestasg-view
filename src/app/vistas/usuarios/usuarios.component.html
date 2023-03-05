@@ -23,8 +23,8 @@
                 <td width="15%">{{ player.document_type }} {{ player.document_number }}</td>
                 <td width="20%">{{ player.name }} {{ player.lastname }}</td>
                 <td width="15%">{{ player.phone }}</td>
-                <td width="10%">Bs. {{ player.available | number:'1.2-2' }}</td>
-                <td width="10%">Bs. {{ player.risk | number:'1.2-2' }}</td>
+                <td width="10%">$ {{ player.available | number:'1.2-2' }}</td>
+                <td width="10%">$ {{ player.risk | number:'1.2-2' }}</td>
                 <td width="10%">{{ player.points | number:'1.2-2' }}</td>
                 <td width="15%">{{ player.created_at }}</td>
             </tr>

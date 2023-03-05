@@ -1,88 +1,81 @@
-<div class="buscador_it_001"><input #caja type="text" name="search_eq" placeholder="Buscar un depósito" class="search_eq"></div>
+<div class="buscador_it_001">
+  <input
+    #caja
+    type="text"
+    name="search_eq"
+    placeholder="Buscar un depósito"
+    class="search_eq"
+  />
+</div>
 
 <div class="equipos">
-    <div class=" ">
-        <div class="normal_table " cellspacing="0 " border="0 ">
-            <div class="thead_nt ">
-                <div class="tr_th_nt tr1 ">
-                    ID
-                </div>
-                <div class="tr_th_nt tr2 ">
-                    Cédula
-                </div>
-                <div class="tr_th_nt tr3 ">
-                    Usuario
-                </div>
-                <div class="tr_th_nt tr4 ">
-                    Registro en sistema
-                </div>
-                <div class="tr_th_nt tr5 ">
-                    Fecha de depósito
-                </div>
-                <div class="tr_th_nt tr6 ">
-                    Banco Origen
-                </div>
-                <div class="tr_th_nt tr7 ">
-                    Cuenta Destino
-                </div>
-                <div class="tr_th_nt tr8 ">
-                    Referencia
-                </div>
-                <div class="tr_th_nt tr9 ">
-                    Monto
-                </div>
-                <div class="tr_th_nt tr10 ">
-                    Estatus
-                </div>
-            </div>
-        </div>
+  <div class=" ">
+    <div class="normal_table" cellspacing="0 " border="0 ">
+      <div class="thead_nt">
+        <div class="tr_th_nt tr1">ID</div>
+        <div class="tr_th_nt tr2">Cédula</div>
+        <div class="tr_th_nt tr3">Usuario</div>
+        <div class="tr_th_nt tr4">Registro en sistema</div>
+        <div class="tr_th_nt tr5">Fecha de depósito</div>
+        <div class="tr_th_nt tr6">Banco Origen</div>
+        <div class="tr_th_nt tr7">Cuenta Destino</div>
+        <div class="tr_th_nt tr8">Referencia</div>
+        <div class="tr_th_nt tr9">Monto</div>
+        <div class="tr_th_nt tr9">Estatus</div>
+        <div class="tr_th_nt tr10" style="text-align: center;">Acción</div>
+      </div>
     </div>
-    <div *ngFor="let pago of pagos">
-        <div class="normal_table ">
-            <div class="thead_nt ">
-                <div class="tr_th_nt tr1 par_th_nt">
-                    {{pago.id_pago}}
-                </div>
-                <div class="tr_th_nt tr2 par_th_nt">
-                    {{pago.cedula}}
-                </div>
-                <div class="tr_th_nt tr3 par_th_nt">
-                    {{pago.id_usuario[0].usuario}}
-                </div>
-                <div class="tr_th_nt tr4 par_th_nt">
-                    {{pago.registro}}
-                </div>
-                <div class="tr_th_nt tr5 par_th_nt">
-                    {{pago.fecha_realizada}}
-                </div>
-                <div class="tr_th_nt tr6 par_th_nt">
-                    {{pago.banco_id[0].nombre}}
-                </div>
-                <div class="tr_th_nt tr7 par_th_nt">
-                    {{pago.cuenta_id[0].numero}}
-                </div>
-                <div class="tr_th_nt tr8 par_th_nt">
-                    {{pago.referencia}}
-                </div>
-                <div class="tr_th_nt tr9 par_th_nt">
-                    {{pago.monto}}
-                </div>
-                <div class="tr_th_nt tr10 par_th_nt" style="overflow: initial">
-                    <div *ngIf="pago.estatus === '0'" class="status pendiente">
-                        <i class="fas fa-ellipsis-v"></i>
-                    </div>
-                    <div *ngIf="pago.estatus === '1'" class="status aprobado">
-                        <i class="fas fa-check"></i>
-                    </div>
-                    <div *ngIf="pago.estatus === '2'" class="status rechazado">
-                        X
-                    </div>
-
-                    <div class='cambioS' *ngIf="pago.estatus === '0'">
-                        <div (click)="cambioStatus(pago, '1')">Aprobar</div>
-                        <div (click)="cambioStatus(pago, '2')">Rechazar</div>
-                    </div>
-                </div>
-            </div>
+  </div>
+  <div *ngFor="let payment of payments">
+    <div class="normal_table">
+      <div class="thead_nt">
+        <div class="tr_th_nt tr1 par_th_nt">
+          {{ payment.id }}
         </div>
+        <div class="tr_th_nt tr2 par_th_nt">
+          {{ payment.document }}
+        </div>
+        <div class="tr_th_nt tr3 par_th_nt">
+          {{ payment.player.name }} {{ payment.player.lastname }}
+        </div>
+        <div class="tr_th_nt tr4 par_th_nt">
+          {{ payment.created_at | date: "short" }}
+        </div>
+        <div class="tr_th_nt tr5 par_th_nt">
+          {{ payment.register_date | date: "short" }}
+        </div>
+        <div class="tr_th_nt tr6 par_th_nt">
+          {{ payment.bank.name }}
+        </div>
+        <div class="tr_th_nt tr7 par_th_nt">
+          {{ payment.account.bank.name }} {{ payment.account.number }}
+        </div>
+        <div class="tr_th_nt tr8 par_th_nt">
+          {{ payment.reference }}
+        </div>
+        <div class="tr_th_nt tr9 par_th_nt">
+          {{ payment.amount }}
+        </div>
+        <div class="tr_th_nt tr9 par_th_nt">
+          <span *ngIf="payment.status == '0'">Pendiente</span>
+          <span *ngIf="payment.status == '1'">Aprobado</span>
+          <span *ngIf="payment.status == '2'">Rechazado</span>
+        </div>
+        <div class="tr_th_nt tr10 par_th_nt" style="overflow: initial">
+          <div class="status" (click)="changeStatus(payment, 1)" *ngIf="payment.status == '0'">
+            <i class="fas fa-check"></i>
+          </div>
+          <div class="status" (click)="changeStatus(payment, 2)" *ngIf="payment.status == '0'">
+            <i class="fas fa-times"></i>
+          </div>
+          <div class="status" (click)="changeStatus(payment, 2)" *ngIf="payment.status == '1'">
+            <i class="fas fa-check-square" style="color: green"></i>
+          </div>
+          <div class="status" (click)="changeStatus(payment, 2)" *ngIf="payment.status == '2'">
+            <i class="fas fa-window-close" style="color: red"></i>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
+</div>

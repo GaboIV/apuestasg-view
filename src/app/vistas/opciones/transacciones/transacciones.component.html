@@ -7,7 +7,7 @@
         <b>Historial de cuenta (VEF)</b>
       </div>
       <div class="dato_c_c_r ">
-        Saldo: <span><b>Bs. {{ _inicioSesion.usuario.player.available | number:'1.2-2' }}</b></span>
+        Saldo: <span><b>$ {{ _inicioSesion.usuario.player.available | number:'1.2-2' }}</b></span>
       </div>
     </div>
 
@@ -99,13 +99,13 @@
             {{ trans.created_at | date:'shortTime'}}
           </div>
           <div class='col col_win' style="text-align: center ">
-            <div *ngIf="trans.event_type_id == 1">Bs. {{trans.amount | number:'1.2'}}</div>
+            <div *ngIf="trans.event_type_id == 1">$ {{trans.amount | number:'1.2'}}</div>
           </div>
           <div class='col col_win'>
-            <div *ngIf="[4,3].indexOf(trans?.event_type_id) > -1">Bs. {{trans.amount | number:'1.2'}}</div>
+            <div *ngIf="[4,3].indexOf(trans?.event_type_id) > -1">$ {{trans.amount | number:'1.2'}}</div>
           </div>
           <div class='col col_win'>
-            Bs. {{trans.player_balance | number:'1.2'}}
+            $ {{trans.player_balance | number:'1.2'}}
           </div>
         </div>
         <!-- <div>
@@ -126,13 +126,13 @@
             11:30 a.m.
           </div>
           <div class='col col_win' style="text-align: center ">
-            Bs. 1,000,000.00
+            $ 1,000,000.00
           </div>
           <div class='col col_win'>
-            
+
           </div>
           <div class='col col_win'>
-            Bs. 1,500,000.03
+            $ 1,500,000.03
           </div>
         </div> -->
       </div>
@@ -141,4 +141,4 @@
 </div>
 <div class="pagination_fixed">
     <pagination-controls previousLabel="Anterior" nextLabel="Siguiente" maxSize="12" (pageChange)="cargarTransacciones($event)"></pagination-controls>
-</div> 
+</div>
